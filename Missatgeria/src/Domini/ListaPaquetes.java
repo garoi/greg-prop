@@ -1,20 +1,23 @@
 package Domini;
 import java.util.*;
-//import Paquete.*;
+
 /**
  *
- * @author ivich
+ * @author Marc Garcia Roig
  */
 public class ListaPaquetes {
      ArrayList<Paquete> Lista = new ArrayList<Paquete>();
     
     public ListaPaquetes(){}
     
-    public void AnadirPaquete(Paquete n){
-        Lista.add(n);
-        n.VerDestino();
-        //System.out.println("hola barragan");
+    public void AnadirPaquete(){
+        System.out.println("Quants paquets vols afegir?");
+        Scanner sc = new Scanner(System.in);
+        int NPaquets = sc.nextInt();
+        for (int i = 0; i < NPaquets; ++i) {
+            Paquete p = new Paquete();
+            p.insertarPaquete();
+            Lista.add(p);
+        }
     }
-    
-    
 }

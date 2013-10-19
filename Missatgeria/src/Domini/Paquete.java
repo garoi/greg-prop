@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Domini;
 import java.util.*;
 import java.lang.System;
@@ -11,43 +6,49 @@ import java.lang.System;
  * @author ivich
  */
 public class Paquete {
- private int IDPaquete;
- private int IDCliente;
- private String Destino = new String();
- private String Estado = new String();
- 
- 
- private Paquete(int IDPaquete, int IDCliente, String Destino, String Estado){
-     this.IDPaquete = IDPaquete;
-     this.IDCliente = IDCliente;
-     this.Destino = Destino;
-     this.Estado = Estado;
-     
- }
- public Paquete(){}
- public int ConsultaPaquete(){
-     return IDPaquete;
- }
- public int ConsultaCliente(){
-     return IDCliente;
- }
- public String ConsultaDestino(){
-     return Destino;
- }
- 
- public String ConsultaEstado(){
-     return Estado;
- }
- public void LeerPaquete(int IDCliente){
-     Paquete p;
-     this.IDCliente = IDCliente;
-     Scanner sc = new Scanner(System.in);
-     Destino = sc.next();
+    private int IDPaquete;
+    private int IDCliente;
+    private String Destino;
+    private String Estado;
 
-     
- }
- public void VerDestino(){
-     System.out.println(this.Destino);
- }
- 
+    public int getIDPaquete() {
+        return IDPaquete;
+    }
+
+    private void setIDPaquete(int IDPaquete) {
+        this.IDPaquete = IDPaquete;
+    }
+
+    public int getIDCliente() {
+        return IDCliente;
+    }
+
+    private void setIDCliente(int IDCliente) {
+        this.IDCliente = IDCliente;
+    }
+
+    public String getDestino() {
+        return Destino;
+    }
+
+    private void setDestino(String Destino) {
+        this.Destino = Destino;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    private void setEstado(String Estado) {
+        this.Estado = Estado;
+    }
+    
+    public void insertarPaquete() {
+        Scanner sc = new Scanner(System.in);
+        //String Estado = sc.next(); 
+        /** De momento solo necesitamos el destino*/
+        System.out.println("Entra el desti del paquet");
+        String Destino = sc.next();
+        setDestino(Destino);
+    }
 }

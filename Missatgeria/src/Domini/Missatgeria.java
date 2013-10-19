@@ -10,21 +10,32 @@ public class Missatgeria {
     /**
      * @param args the command line arguments
      */
+    public static void info() {
+        System.out.println("Entra una opcion\n" + "1 = Crear ciudad");
+        System.out.println("2 = Añadir paquetes\n" + "3 = Calculo de la ruta");
+        System.out.println("0 = Cerrar");
+    }
+    
     public static void main(String[] args) {
         ControlDomini cd = new ControlDomini();
         int op;
         Scanner sc = new Scanner(System.in);
+        info();
         op = sc.nextInt();
         while(op != 0){
-            System.out.println("Entra una opcion\n" + "1 = Añadir puntos de la ciudad\n");
-            System.out.println("2 = Añadir paquetes\n" + "3 = Calculo de la ruta\n");
-            System.out.println("0 = Cerrar\n");
-            if (op == 1){       
+            if (op == 1){ 
+                Mapa m = new Mapa();
+                m.CrearCiudad();
+                m.ImprimirCiudad();
             }
             else if (op == 2){
+                ListaPaquetes lp = new ListaPaquetes();
+                lp.AnadirPaquete();
             }
             else if (op == 3) {
             }
+            info();
+            op = sc.nextInt();
         }
     }
 }
