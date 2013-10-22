@@ -4,8 +4,13 @@ grep-prop
 # Proyecto de prop en el que participan:
 - garoi
 - lgarest
+<<<<<<< HEAD
 - ivich123
 - ria13
+=======
+- gili (aqui tu nickname)
+- ria (aqui tu nickname)
+>>>>>>> fbef7d607619d758272883c1cb1927213809a09e
 
 Representa un sistema de gestión de la logística de una empresa de mensajería de una ciudad.
 
@@ -18,4 +23,7 @@ Representa un sistema de gestión de la logística de una empresa de mensajería
 
 # Documentaciones:
 - [Algoritmos útiles](http://goo.gl/4KB0Hk)
+<<<<<<< HEAD
 
+=======
+>>>>>>> fbef7d607619d758272883c1cb1927213809a09e
