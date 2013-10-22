@@ -24,9 +24,9 @@ public class Missatgeria {
         op = sc.nextInt();
         while(op != 0){
             if (op == 1){ 
-                Mapa m = new Mapa();
-                m.CrearCiudad();
-                m.ImprimirCiudad();
+                Ruta r = new Ruta();
+                r.CrearCiudad();
+                r.ImprimirCiudad();
             }
             else if (op == 2){
                 ListaPaquetes lp = new ListaPaquetes();

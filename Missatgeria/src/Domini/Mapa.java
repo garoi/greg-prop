@@ -7,32 +7,40 @@ import java.lang.System;
  * @author Marc Garcia Roig
  */
 public class Mapa {
-    private Map<String , HashMap<String, Integer> > Ciudad = new HashMap();
+    private String[] Nombres;
+    private int[][] Ciudad;
     
+    public String[] getNombres() {
+        return Nombres;
+    }
+
+    public int[][] getCiudad() {
+        return Ciudad;
+    }
+
     public void CrearCiudad(){
         System.out.println("Quants nodes hi ha?");
         Scanner sc = new Scanner(System.in);
         int nodes = sc.nextInt();
+        Ciudad = new int[nodes][nodes];
+        Nombres = new String[nodes];
         for (int i = 0; i < nodes; ++i) {
             System.out.println("Entra el nom del node " + (i+1));
             String NombreNodo = sc.next();
-            System.out.println("Ara tots els nodes adjacents amb la distancia");
-            HashMap<String, Integer> aux = new HashMap();
-            for (int j = 0; j < nodes - 1; ++j) {
-                String NodoAdj = sc.next();
-                int dist = sc.nextInt();
-                aux.put(NodoAdj, dist);
+            Nombres[i] = NombreNodo;
+            System.out.println("Ara les distancies dels node [0....inf]");
+            for (int j = 0; j < nodes; ++j) {
+                Ciudad[i][j] = sc.nextInt();
             }
-            Ciudad.put(NombreNodo, aux);
         }  
     }
     
     public void ImprimirCiudad() {
-        Iterator it = Ciudad.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();
-            System.out.println(e.getKey() + " " + e.getValue());
+        for (int i = 0; i < Ciudad.length; ++i) {
+            for (int j = 0; j < Ciudad.length; ++j) {
+                System.out.print(Ciudad[i][j] + " ");
+            }
+            System.out.println();
         }
     }
-    
 }
