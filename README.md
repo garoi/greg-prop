@@ -6,9 +6,12 @@ grep-prop
 
 Para empezar a trabajar siempre hacer:
 > git pull
+
 Cuando terminéis
 > git add .
+
 > git commit -m 'Comentario de lo que habéis hecho'
+
 > git push origin master
 
 # Proyecto de prop en el que participan:
