@@ -19,6 +19,7 @@ public class Ruta {
     
     public void ImprimirCiudad() {
         m.ImprimirCiudad();
+        kruskal();
     }
     
     /**
@@ -36,6 +37,7 @@ public class Ruta {
             }
         }
         int nodoA, nodoB;
+        nodoA = nodoB = (int)POSITIVE_INFINITY;
         int arcos = 1;
         while (arcos < NumeroNodos) {
             int min = (int)POSITIVE_INFINITY;
@@ -55,14 +57,15 @@ public class Ruta {
                 pertenece[nodoB] = pertenece[nodoA];
                 for(int k = 0; k < NumeroNodos; k++) {
                     if(pertenece[k] == temp) {
+                        System.out.println("OLALALA");
                         pertenece[k] = pertenece[nodoA];
                     }
                 }
                 arcos++;
             }
         }
-        for (int i = 0; i < NumeroNodos; ++i) {
-            for (int j = 0; j < NumeroNodos; ++j) {
+        for (int j = 0; j < NumeroNodos; ++j) {
+            for (int i = 0; i < NumeroNodos; ++i) {
                 System.out.print(arbol[i][j] + " ");
             }
             System.out.println();

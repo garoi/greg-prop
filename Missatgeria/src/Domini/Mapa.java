@@ -36,8 +36,9 @@ public class Mapa {
     }
     
     public void ImprimirCiudad() {
-        for (int i = 0; i < Ciudad.length; ++i) {
-            for (int j = 0; j < Ciudad.length; ++j) {
+        System.out.println("la ciutat es" + Ciudad.length);
+        for (int j = 0; j < Ciudad.length; ++j) {
+            for (int i = 0; i < Ciudad.length; ++i) {
                 System.out.print(Ciudad[i][j] + " ");
             }
             System.out.println();
