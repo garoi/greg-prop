@@ -57,7 +57,6 @@ public class Ruta {
                 pertenece[nodoB] = pertenece[nodoA];
                 for(int k = 0; k < NumeroNodos; k++) {
                     if(pertenece[k] == temp) {
-                        System.out.println("OLALALA");
                         pertenece[k] = pertenece[nodoA];
                     }
                 }
