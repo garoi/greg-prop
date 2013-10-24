@@ -11,6 +11,14 @@ public class Ruta {
     private String[] Nombres;
     private int[][] Ciudad;
     
+    public String[] getNombres() {
+        return Nombres;
+    }
+
+    public int[][] getCiudad() {
+        return Ciudad;
+    }
+    
     public void CrearCiudad() {
         m.CrearCiudad();
         Ciudad = m.getCiudad();
@@ -19,13 +27,13 @@ public class Ruta {
     
     public void ImprimirCiudad() {
         m.ImprimirCiudad();
-        kruskal();
+        MST();
     }
     
     /**
      *Devuelve un arbol de expancion minima
      */
-    public void kruskal() {
+    public void MST() {
         int NumeroNodos = Ciudad.length;
         int[] pertenece = new int[NumeroNodos];
         double[][] arbol = new double[NumeroNodos][NumeroNodos];
@@ -48,6 +56,7 @@ public class Ruta {
                         nodoA = i;
                         nodoB = j;
                     }
+                    if (j == i) arbol[i][j] = arbol[j][i] = 0;
                 }
             }
             if (pertenece[nodoA] != pertenece[nodoB]) {
