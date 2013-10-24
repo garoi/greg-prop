@@ -10,6 +10,8 @@ public class Ruta {
     Mapa m = new Mapa();
     private String[] Nombres;
     private int[][] Ciudad;
+
+    ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
     public String[] getNombres() {
         return Nombres;
@@ -19,7 +21,7 @@ public class Ruta {
         return Ciudad;
     }
     
-    public void CrearCiudad() {
+    public void CrearCiudad() {      
         m.CrearCiudad();
         Ciudad = m.getCiudad();
         Nombres = m.getNombres();
@@ -30,18 +32,32 @@ public class Ruta {
         MST();
     }
     
+    private ArrayList< ArrayList<Pair> > ReconvertirArbol(float[][] arbol){
+        ArrayList< ArrayList<Pair> > MSTKaux = new ArrayList<>();
+        for (int j = 0; j < arbol.length; ++j) {
+            ArrayList<Pair> v = new ArrayList<Pair>();
+            for (int i = 0; i < arbol.length; ++i) {
+                if (arbol[i][j] != POSITIVE_INFINITY) {
+                    v.add(new Pair(j, arbol[i][j]));
+                    MSTKaux.add(v);
+                }
+            }
+        }
+        return MSTKaux;
+    }
+    
     /**
      *Devuelve un arbol de expancion minima
      */
     public void MST() {
         int NumeroNodos = Ciudad.length;
         int[] pertenece = new int[NumeroNodos];
-        double[][] arbol = new double[NumeroNodos][NumeroNodos];
+        float[][] arbol = new float[NumeroNodos][NumeroNodos];
         
         for (int i = 0; i < NumeroNodos; ++i) {
             pertenece[i] = i;
             for (int j = 0; j < NumeroNodos; ++j) {
-                arbol[i][j] = POSITIVE_INFINITY;
+                arbol[i][j] = (float) POSITIVE_INFINITY;
             }
         }
         int nodoA, nodoB;
@@ -78,5 +94,13 @@ public class Ruta {
             }
             System.out.println();
         }
+        MSTK = ReconvertirArbol(arbol);
+        for (int i = 0; i < arbol.length; ++i) {
+            System.out.println(MSTK.get(i));
+            for (int j = 0; j < MSTK.get(i).size(); ++i) {
+                System.out.println(MSTK.get(i).get(j).first + " " + MSTK.get(i).get(j).second);
+            }
+        }
     }
+
 }
