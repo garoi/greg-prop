@@ -98,7 +98,7 @@ public class Ruta {
         for (int i = 0; i < arbol.length; ++i) {
             System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());
             for (int j = 0; j < MSTK.get(i).size(); ++j) {
-                System.out.println(MSTK.get(i).get(j).first + " " + MSTK.get(i).get(j).second);
+                System.out.println(MSTK.get(i).get(j).first() + " " + MSTK.get(i).get(j).second());
             }
         }
     }
