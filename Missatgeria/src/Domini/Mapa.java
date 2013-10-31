@@ -8,13 +8,13 @@ import java.lang.System;
  */
 public class Mapa {
     private String[] Nombres;
-    private int[][] Ciudad;
+    private float[][] Ciudad;
     
     public String[] getNombres() {
         return Nombres;
     }
 
-    public int[][] getCiudad() {
+    public float[][] getCiudad() {
         return Ciudad;
     }
 
@@ -22,7 +22,7 @@ public class Mapa {
         System.out.println("Quants nodes hi ha?");
         Scanner sc = new Scanner(System.in);
         int nodes = sc.nextInt();
-        Ciudad = new int[nodes][nodes];
+        Ciudad = new float[nodes][nodes];
         Nombres = new String[nodes];
         for (int i = 0; i < nodes; ++i) {
             System.out.println("Entra el nom del node " + (i+1));

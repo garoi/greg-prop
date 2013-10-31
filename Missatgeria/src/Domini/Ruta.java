@@ -9,7 +9,7 @@ import java.lang.System;
 public class Ruta {
     Mapa m = new Mapa();
     private String[] Nombres;
-    private int[][] Ciudad;
+    private float[][] Ciudad;
 
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
@@ -17,7 +17,7 @@ public class Ruta {
         return Nombres;
     }
 
-    public int[][] getCiudad() {
+    public float[][] getCiudad() {
         return Ciudad;
     }
     
@@ -64,7 +64,7 @@ public class Ruta {
         nodoA = nodoB = (int)POSITIVE_INFINITY;
         int arcos = 1;
         while (arcos < NumeroNodos) {
-            int min = (int)POSITIVE_INFINITY;
+            float min = (float)POSITIVE_INFINITY;
             for (int i = 0; i < NumeroNodos; ++i) {
                 for (int j = 0; j < NumeroNodos; ++j) {
                     if (min > Ciudad[i][j] && pertenece[i] != pertenece[j]) {

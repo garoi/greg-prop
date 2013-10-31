@@ -1,26 +1,29 @@
 package Domini;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author ivich
+ * @author Marc Garcia Roig xD
  */
 public class ControlDomini {
-    ListaPaquetes lp = new ListaPaquetes();
-    private static ControlDomini instance = null;
-    
-    public static ControlDomini getInstance(){
-        if(instance == null){
-            instance = new ControlDomini();
-        }
-        return instance;
-    }
-    
-    public void anadirPaquete(){
-        lp.AnadirPaquete(null);
-    }
-    
-    public void save(){
+    Mapa m = new Mapa();
+    private String[] Nombres;
+    private float[][] Ciudad;
+    private 
+
+    ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
         
+    public ControlDomini() {
+	InicializarControlDomini();
     }
         
+    private void CrearSubgrafo() {
+            
+    }
+
+    public void InicializarControlDomini() {
+        float[][] Subgrafo;
+        CrearSubgrafo();
+    }
 }
