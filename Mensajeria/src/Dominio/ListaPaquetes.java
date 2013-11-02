@@ -10,14 +10,11 @@ public class ListaPaquetes {
     
     public ListaPaquetes(){}
     
-    public void AnadirPaquete(){
-        System.out.println("Quants paquets vols afegir?");
-        Scanner sc = new Scanner(System.in);
-        int NPaquets = sc.nextInt();
-        for (int i = 0; i < NPaquets; ++i) {
-            Paquete p = new Paquete();
-            p.insertarPaquete();
+    public void AnadirPaquete(Paquete p){
+        System.out.println("ahora añadiremos el paquete a la lista :D");
+        //Scanner sc = new Scanner(System.in);
+        //int NPaquets = sc.nextInt();
             Lista.add(p);
-        }
+            
     }
 }

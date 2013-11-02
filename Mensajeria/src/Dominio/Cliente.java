@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package Dominio;
+import java.util.*;
 
 /**
  *
@@ -13,15 +14,17 @@ public class Cliente {
     private String NombreCliente = new String();
     
     
-    private void AnadirCliente(int IDCliente, String NombreCliente){
+    public void AnadirCliente(int IDCliente){
+        System.out.println("Anadir el nombre del cliente");
         this.IDCliente = IDCliente;
-        this.NombreCliente = NombreCliente;
+        Scanner sc = new Scanner(System.in);
+        NombreCliente = sc.next();
         
     }
     
-    public void InsertarPaquete(){
+    public void AnadirPaquete(){
         Paquete p = new Paquete();
-        p.LeerPaquete(IDCliente);
+        p.InsertarPaquete(IDCliente);
         
     }
     

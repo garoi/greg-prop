@@ -10,7 +10,7 @@ public class Paquete {
     private int IDCliente;
     private String Destino;
     private String Estado;
-
+    private String Origen;
     public int getIDPaquete() {
         return IDPaquete;
     }
@@ -43,12 +43,22 @@ public class Paquete {
         this.Estado = Estado;
     }
     
-    public void insertarPaquete() {
+    private void setOrigen(String origen){
+        origen = Origen;
+    }
+    
+    
+    public void InsertarPaquete(int IDcliente) {
         Scanner sc = new Scanner(System.in);
         //String Estado = sc.next(); 
         /** De momento solo necesitamos el destino*/
+        System.out.println("Entra l'origen del paquet");
+        String origen = sc.next();
+        setOrigen(origen);
         System.out.println("Entra el desti del paquet");
         String Destino = sc.next();
         setDestino(Destino);
+        setIDCliente(IDCliente);
+        
     }
 }

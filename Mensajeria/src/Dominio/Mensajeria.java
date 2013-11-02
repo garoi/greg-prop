@@ -6,7 +6,7 @@ import java.lang.System;
  * @author ivich
  */
 public class Mensajeria {
-
+    
     /**
      * @param args the command line arguments
      */
@@ -17,6 +17,8 @@ public class Mensajeria {
     }
     
     public static void main(String[] args) {
+        int IDclient = 0;
+        boolean operador = false;
         ControlDominio cd = new ControlDominio();
         int op;
         Scanner sc = new Scanner(System.in);
@@ -30,9 +32,21 @@ public class Mensajeria {
             }
             else if (op == 2){
                 ListaPaquetes lp = new ListaPaquetes();
-                lp.AnadirPaquete();
+                Paquete p = new Paquete();
+                p.InsertarPaquete(IDclient);
+                lp.AnadirPaquete(p);
             }
             else if (op == 3) {
+                if(!operador){
+                    Operador oper = new Operador();
+                    oper.LeerOPerador();
+                    operador = true;
+                }
+                else{
+                    Cliente cl = new Cliente();
+                    cl.AnadirCliente(IDclient);
+                    ++IDclient;
+                }
             }
             info();
             op = sc.nextInt();
