@@ -8,26 +8,32 @@ import java.lang.System;
  */
 public class Ruta {
     Mapa m = new Mapa();
-    private String[] Nombres;
-    private float[][] Ciudad;
+    private String[] NombresSubgrafo;
+    private float[][] Subgrafo;
 
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    public String[] getNombres() {
-        return Nombres;
+    //CREADORA
+    public Ruta(float[][] Subgrafo, String[] NombresSubgrafo) {
+        this.NombresSubgrafo = NombresSubgrafo; 
+        this.Subgrafo = Subgrafo;
+    }
+    //CONSULTORAS
+    public String[] getNombresSubgrafo() {
+        return NombresSubgrafo;
     }
 
-    public float[][] getCiudad() {
-        return Ciudad;
+    public float[][] getSubgrafo() {
+        return Subgrafo;
     }
     
-    public void CrearCiudad() {      
+    public void CrearSubgrafo() {      
         m.CrearCiudad();
-        Ciudad = m.getCiudad();
-        Nombres = m.getNombres();
+        Subgrafo = m.getCiudad();
+        NombresSubgrafo = m.getNombres();
     }
     
-    public void ImprimirCiudad() {
+    public void ImprimirSubgrafo() {
         m.ImprimirCiudad();
         MST();
     }
@@ -50,7 +56,7 @@ public class Ruta {
      *Devuelve un arbol de expancion minima
      */
     public void MST() {
-        int NumeroNodos = Ciudad.length;
+        int NumeroNodos = Subgrafo.length;
         int[] pertenece = new int[NumeroNodos];
         float[][] arbol = new float[NumeroNodos][NumeroNodos];
         
@@ -67,8 +73,8 @@ public class Ruta {
             float min = (float)POSITIVE_INFINITY;
             for (int i = 0; i < NumeroNodos; ++i) {
                 for (int j = 0; j < NumeroNodos; ++j) {
-                    if (min > Ciudad[i][j] && pertenece[i] != pertenece[j]) {
-                        min = Ciudad[i][j];
+                    if (min > Subgrafo[i][j] && pertenece[i] != pertenece[j]) {
+                        min = Subgrafo[i][j];
                         nodoA = i;
                         nodoB = j;
                     }
