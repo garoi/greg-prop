@@ -1,4 +1,4 @@
-package Domini;
+package Dominio;
 
 import java.util.ArrayList;
 
@@ -6,20 +6,17 @@ import java.util.ArrayList;
  *
  * @author Marc Garcia Roig xD
  */
-public class ControlDomini {
+public class ControlDominio {
     Mapa m = new Mapa();
     private String[] Nombres;
     private float[][] Ciudad;
-    private 
-
-    ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
         
-    public ControlDomini() {
+    public ControlDominio() {
 	InicializarControlDomini();
     }
         
     private void CrearSubgrafo() {
-            
+        
     }
 
     public void InicializarControlDomini() {

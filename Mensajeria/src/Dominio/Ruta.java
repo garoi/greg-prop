@@ -1,4 +1,4 @@
-package Domini;
+package Dominio;
 import static java.lang.Double.POSITIVE_INFINITY;
 import java.util.*;
 import java.lang.System;

@@ -1,4 +1,4 @@
-package Domini;
+package Dominio;
 import java.util.*;
 import java.lang.System;
 

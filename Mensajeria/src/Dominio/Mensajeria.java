@@ -1,11 +1,11 @@
-package Domini;
+package Dominio;
 import java.util.*;
 import java.lang.System;
 /**
  *
  * @author ivich
  */
-public class Missatgeria {
+public class Mensajeria {
 
     /**
      * @param args the command line arguments
@@ -17,7 +17,7 @@ public class Missatgeria {
     }
     
     public static void main(String[] args) {
-        ControlDomini cd = new ControlDomini();
+        ControlDominio cd = new ControlDominio();
         int op;
         Scanner sc = new Scanner(System.in);
         info();
