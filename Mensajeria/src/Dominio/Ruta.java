@@ -13,9 +13,12 @@ public class Ruta {
 
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    //CREADORA
-    public Ruta(float[][] Subgrafo, String[] NombresSubgrafo) {
-        this.NombresSubgrafo = NombresSubgrafo; 
+    //Modificadoras
+    public void setNombresSubgrafo(String[] NombresSubgrafo) {
+        this.NombresSubgrafo = NombresSubgrafo;
+    }
+
+    public void setSubgrafo(float[][] Subgrafo) {
         this.Subgrafo = Subgrafo;
     }
     //CONSULTORAS
@@ -25,17 +28,6 @@ public class Ruta {
 
     public float[][] getSubgrafo() {
         return Subgrafo;
-    }
-    
-    public void CrearSubgrafo() {      
-        m.CrearCiudad();
-        Subgrafo = m.getCiudad();
-        NombresSubgrafo = m.getNombres();
-    }
-    
-    public void ImprimirSubgrafo() {
-        m.ImprimirCiudad();
-        MST();
     }
     
     private ArrayList< ArrayList<Pair> > ReconvertirArbol(float[][] arbol){
@@ -55,7 +47,7 @@ public class Ruta {
     /**
      *Devuelve un arbol de expancion minima
      */
-    public void MST() {
+    public ArrayList< ArrayList<Pair> > MST() {
         int NumeroNodos = Subgrafo.length;
         int[] pertenece = new int[NumeroNodos];
         float[][] arbol = new float[NumeroNodos][NumeroNodos];
@@ -107,6 +99,7 @@ public class Ruta {
                 System.out.println(MSTK.get(i).get(j).first() + " " + MSTK.get(i).get(j).second());
             }
         }
+        return MSTK;
     }
 
 }

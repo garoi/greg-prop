@@ -1,4 +1,5 @@
 package Dominio;
+import java.io.Serializable;
 import java.util.*;
 import java.lang.System;
 
@@ -6,9 +7,10 @@ import java.lang.System;
  *
  * @author Marc Garcia Roig
  */
-public class Mapa {
+public class Mapa implements Serializable {
     private String[] Nombres;
     private float[][] Ciudad;
+
     
     public String[] getNombres() {
         return Nombres;
@@ -35,8 +37,9 @@ public class Mapa {
         }  
     }
     
+
     public void ImprimirCiudad() {
-        System.out.println("la ciutat es" + Ciudad.length);
+        System.out.println("la ciutat es " + Ciudad.length);
         for (int j = 0; j < Ciudad.length; ++j) {
             for (int i = 0; i < Ciudad.length; ++i) {
                 System.out.print(Ciudad[i][j] + " ");

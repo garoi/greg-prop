@@ -1,4 +1,5 @@
 package Dominio;
+import java.io.*;
 import java.util.*;
 import java.lang.System;
 /**
@@ -16,7 +17,7 @@ public class Mensajeria {
         System.out.println("0 = Cerrar");
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         int IDclient = 0;
         boolean operador = false;
         ControlDominio cd = new ControlDominio();
@@ -26,9 +27,19 @@ public class Mensajeria {
         op = sc.nextInt();
         while(op != 0){
             if (op == 1){ 
-                Ruta r = new Ruta();
-                r.CrearCiudad();
-                r.ImprimirCiudad();
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/mapa1.txt"))) {
+                    Mapa m = new Mapa();
+                    m.CrearCiudad();
+                    m.ImprimirCiudad();
+                    oos.writeObject(m);
+                }
+                //NO SE COMO ESCRIBIR EL OBJETO GUARDA EN DISCO
+                /*System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
+                String Muuu;
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/mapa1.txt"))) {
+                    Muuu = (String) ois.readObject();
+                    System.out.println(Muuu);
+                }*/
             }
             else if (op == 2){
                 ListaPaquetes lp = new ListaPaquetes();
