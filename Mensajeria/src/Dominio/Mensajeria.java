@@ -34,12 +34,12 @@ public class Mensajeria {
                     oos.writeObject(m);
                 }
                 //NO SE COMO ESCRIBIR EL OBJETO GUARDA EN DISCO
-                /*System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
-                String Muuu;
+                System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
                 try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/mapa1.txt"))) {
-                    Muuu = (String) ois.readObject();
-                    System.out.println(Muuu);
-                }*/
+                    Mapa m2 = (Mapa) ois.readObject();
+                    m2.ImprimirCiudad();
+                }
+                
             }
             else if (op == 2){
                 ListaPaquetes lp = new ListaPaquetes();
