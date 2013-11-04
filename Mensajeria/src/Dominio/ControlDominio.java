@@ -12,7 +12,7 @@ public class ControlDominio {
     private float[][] Ciudad;
         
     public ControlDominio() {
-	InicializarControlDomini();
+	//InicializarControlDomini();
     }
         
     private void CrearSubgrafo(float[][] Subgrafo, String[] NombresSubgrafo) {
@@ -28,7 +28,7 @@ public class ControlDominio {
         }
     }
 
-    public void InicializarControlDomini() {
+    private void InicializarControlDomini() {
         float[][] Subgrafo = null;
         String[] NombresSubgrafo = null;
         CrearSubgrafo(Subgrafo, NombresSubgrafo);
