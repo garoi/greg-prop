@@ -13,18 +13,19 @@ public class ControlDominio {
         
     public ControlDominio() {
         //No funciona porque falta hacer la clase SeleccionarDestinos del operador
-	//InicializarControlDomini();
+	InicializarControlDomini();
     }
         
     private void CrearSubgrafo(float[][] Subgrafo, String[] NombresSubgrafo) {
         Operador o = new Operador();
-        int[] PaquetesSeleccionados = o.SeleccionarDestinos();
-        Subgrafo = new float[PaquetesSeleccionados.length][PaquetesSeleccionados.length];
-        NombresSubgrafo = new String[PaquetesSeleccionados.length];
-        for (int i = 0; i < PaquetesSeleccionados.length; ++i) {
-            NombresSubgrafo[i] = Nombres[PaquetesSeleccionados[i]];
-            for (int j = 0; j < PaquetesSeleccionados.length; ++j) {
-                Subgrafo[i][j] = Ciudad[PaquetesSeleccionados[i]][PaquetesSeleccionados[j]];
+        ArrayList<Integer> PaquetesSeleccionados = new ArrayList<Integer>();
+        PaquetesSeleccionados = o.SeleccionarPaquetes();
+        Subgrafo = new float[PaquetesSeleccionados.size()][PaquetesSeleccionados.size()];
+        NombresSubgrafo = new String[PaquetesSeleccionados.size()];
+        for (int i = 0; i < PaquetesSeleccionados.size(); ++i) {
+            NombresSubgrafo[i] = Nombres[PaquetesSeleccionados.get(i)];
+            for (int j = 0; j < PaquetesSeleccionados.size(); ++j) {
+                Subgrafo[i][j] = Ciudad[PaquetesSeleccionados.get(i)][PaquetesSeleccionados.get(j)];
             }
         }
     }
