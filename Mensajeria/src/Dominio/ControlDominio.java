@@ -12,6 +12,7 @@ public class ControlDominio {
     private float[][] Ciudad;
         
     public ControlDominio() {
+        //No funciona porque falta hacer la clase SeleccionarDestinos del operador
 	//InicializarControlDomini();
     }
         

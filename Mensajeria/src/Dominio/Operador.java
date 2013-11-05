@@ -8,8 +8,18 @@ import java.util.ArrayList;
  * @author ivich
  */
 public class Operador {
-    private String nombre = new String();
+    private String Nombre = new String();
     private int IDenc;
+    private final ArrayList<Paquete> ListaPaquetesParaEntregar = new ArrayList<Paquete>();
+    
+    public ArrayList<Paquete> OrdenarPorCliente() {
+        ArrayList<
+        Collections.sort(ListaPaquetesPAraEntregar, )
+    }
+    
+    public AnadirPaquete(Paquete p) {
+        ListaPaquetesParaEntregar.add(p);
+    }
     
     //DEvuelve un vector con el identificador de los destinos de los paquetes seleccionados
     public int[] SeleccionarDestinos() {

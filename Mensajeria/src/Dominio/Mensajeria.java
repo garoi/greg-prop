@@ -33,7 +33,6 @@ public class Mensajeria {
                     m.ImprimirCiudad();
                     oos.writeObject(m);
                 }
-                //NO SE COMO ESCRIBIR EL OBJETO GUARDA EN DISCO
                 System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
                 try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/mapa1.txt"))) {
                     Mapa m2 = (Mapa) ois.readObject();

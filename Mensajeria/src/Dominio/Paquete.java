@@ -10,7 +10,7 @@ public class Paquete {
     private int IDCliente;
     private String Destino;
     private String Estado;
-    private String Origen;
+    
     public int getIDPaquete() {
         return IDPaquete;
     }
