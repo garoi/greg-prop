@@ -6,7 +6,7 @@ import java.lang.System;
  * @author ivich
  */
 public class Paquete {
-    private int IDPaquete;
+    private int IDPaquete = 0;
     private int IDCliente;
     private String Destino;
     private String Estado;
@@ -48,13 +48,14 @@ public class Paquete {
         Scanner sc = new Scanner(System.in);
         //String Estado = sc.next(); 
         /** De momento solo necesitamos el destino*/
-        System.out.println("Entra l'origen del paquet");
-        String origen = sc.next();
         //setOrigen(origen);
         System.out.println("Entra el desti del paquet");
         String Destino = sc.next();
         setDestino(Destino);
+        setIDPaquete(IDPaquete);
+        ++IDPaquete;
         setIDCliente(IDCliente);
+        setEstado("para enviar");
         
     }
 }

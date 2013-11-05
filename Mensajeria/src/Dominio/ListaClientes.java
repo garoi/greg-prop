@@ -29,9 +29,30 @@ public class ListaClientes {
     }
     
     public boolean EncontrarCliente(String nombre){
-        
+        for(int i = 0; i < ListaClientes.size(); ++i){
+            if(ListaClientes.get(i).getNombre().equals(nombre)){
+                System.out.println("nombre cliente es "+ ListaClientes.get(i).getNombre());
+                return true;
+                
+            }
+        }
+        System.out.println("no he encontrao una mierda");
+        return false;
     }
     
-    public Cliente getClient(String nombre)
+    public Cliente getClient(String nombre){
+        for(int i = 0; i < ListaClientes.size(); ++i){
+            if(ListaClientes.get(i).getNombre().equals(nombre)) return ListaClientes.get(i);
+        }
+         return null;
+    }
     
+    public void PacksClient(int IDCliente){
+        Cliente c = ListaClientes.get(IDCliente);
+        c.Ver_Lista();
+        
+    
+    }
+       
 }
+    

@@ -31,12 +31,24 @@ public class Cliente {
     }
     
     public void Ver_Lista(){
-        ListaPaquetes lp = new ListaPaquetes();
-        lp.PacksClient(IDCliente);
+        for(int i = 0; i < ListaPaquetes.size();++i){
+            System.out.print("IDpaquete"+ListaPaquetes.get(i).getIDPaquete() + " ");
+            System.out.print("Destino"+ListaPaquetes.get(i).getDestino()+ " ");
+            System.out.println("Estado"+ListaPaquetes.get(i).getEstado()+ " ");
+            
+        }
     }
     
     public String getPass(){
         return password;
+    }
+    
+    public int getIDCliente(){
+        return IDCliente;
+    }
+    
+    public String getNombre(){
+        return NombreCliente;
     }
     
 }
