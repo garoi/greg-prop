@@ -12,14 +12,14 @@ public class Operador {
     private int IDenc;
     private final ArrayList<Paquete> ListaPaquetesParaEntregar = new ArrayList<Paquete>();
     
-    public ArrayList<Paquete> OrdenarPorCliente() {
+   /* public ArrayList<Paquete> OrdenarPorCliente() {
         ArrayList<
         Collections.sort(ListaPaquetesPAraEntregar, )
     }
     
     public AnadirPaquete(Paquete p) {
         ListaPaquetesParaEntregar.add(p);
-    }
+    }*/
     
     //DEvuelve un vector con el identificador de los destinos de los paquetes seleccionados
     public int[] SeleccionarDestinos() {
@@ -30,7 +30,7 @@ public class Operador {
     public void LeerOPerador(){
         System.out.println("Anadir el nombre del operador");
         Scanner sc = new Scanner(System.in);
-        nombre = sc.next();
+        //nombre = sc.next();
         
         
     }

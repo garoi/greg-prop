@@ -42,12 +42,7 @@ public class Paquete {
     private void setEstado(String Estado) {
         this.Estado = Estado;
     }
-    
-    private void setOrigen(String origen){
-        origen = Origen;
-    }
-    
-    
+      
     
     public void LeerPaquete(int IDcliente) {
         Scanner sc = new Scanner(System.in);
@@ -55,7 +50,7 @@ public class Paquete {
         /** De momento solo necesitamos el destino*/
         System.out.println("Entra l'origen del paquet");
         String origen = sc.next();
-        setOrigen(origen);
+        //setOrigen(origen);
         System.out.println("Entra el desti del paquet");
         String Destino = sc.next();
         setDestino(Destino);

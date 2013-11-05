@@ -11,25 +11,32 @@ import java.util.*;
  */
 public class Cliente {
     private int IDCliente;
-    private String NombreCliente = new String();
+    private String password;
+    private String NombreCliente;;
      ArrayList<Paquete> ListaPaquetes = new ArrayList<Paquete>();
     
      
-    public void AnadirCliente(int IDCliente){
+    public void LeerCliente(Cliente cl, int IDCliente){
         System.out.println("Anadir el nombre del cliente");
-        this.IDCliente = IDCliente;
         Scanner sc = new Scanner(System.in);
         NombreCliente = sc.next();
-        
+        System.out.println("Anadir el password del cliente");
+        password = sc.next();
+        this.IDCliente = IDCliente;
     }
     
     public void AnadePaquete(Paquete p){
         ListaPaquetes.add(p);
         
     }
+    
     public void Ver_Lista(){
         ListaPaquetes lp = new ListaPaquetes();
         lp.PacksClient(IDCliente);
+    }
+    
+    public String getPass(){
+        return password;
     }
     
 }

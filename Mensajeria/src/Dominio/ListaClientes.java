@@ -24,4 +24,14 @@ public class ListaClientes {
     
     }
     
+    public void LeerCliente(){
+        
+    }
+    
+    public boolean EncontrarCliente(String nombre){
+        
+    }
+    
+    public Cliente getClient(String nombre)
+    
 }
