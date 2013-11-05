@@ -25,6 +25,10 @@ public class Mensajeria {
         Scanner sc = new Scanner(System.in);
         info();
         op = sc.nextInt();
+        ListaClientes lc = new ListaClientes();
+        //Cliente c = new Cliente();
+        //Paquete p = new Paquete();
+        Operador oper = new Operador();
         while(op != 0){
             if (op == 1){ 
                 try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/mapa1.txt"))) {
@@ -42,14 +46,15 @@ public class Mensajeria {
                 
             }
             else if (op == 2){
-                ListaPaquetes lp = new ListaPaquetes();
+                //ListaPaquetes lp = new ListaPaquetes();
                 Paquete p = new Paquete();
-                p.InsertarPaquete(IDclient);
-                lp.AnadirPaquete(p);
+                p.LeerPaquete(IDclient);
+                lc.AnadirPaquete(p, IDclient);
+                op.AnadirPaquete(p);
+                
             }
             else if (op == 3) {
                 if(!operador){
-                    Operador oper = new Operador();
                     oper.LeerOPerador();
                     operador = true;
                 }
