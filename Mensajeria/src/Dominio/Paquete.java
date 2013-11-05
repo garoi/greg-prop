@@ -48,7 +48,8 @@ public class Paquete {
     }
     
     
-    public void InsertarPaquete(int IDcliente) {
+    
+    public void LeerPaquete(int IDcliente) {
         Scanner sc = new Scanner(System.in);
         //String Estado = sc.next(); 
         /** De momento solo necesitamos el destino*/

@@ -12,8 +12,9 @@ import java.util.*;
 public class Cliente {
     private int IDCliente;
     private String NombreCliente = new String();
+     ArrayList<Paquete> ListaPaquetes = new ArrayList<Paquete>();
     
-    
+     
     public void AnadirCliente(int IDCliente){
         System.out.println("Anadir el nombre del cliente");
         this.IDCliente = IDCliente;
@@ -22,10 +23,13 @@ public class Cliente {
         
     }
     
-    public void AnadirPaquete(){
-        Paquete p = new Paquete();
-        p.InsertarPaquete(IDCliente);
+    public void AnadePaquete(Paquete p){
+        ListaPaquetes.add(p);
         
+    }
+    public void Ver_Lista(){
+        ListaPaquetes lp = new ListaPaquetes();
+        lp.PacksClient(IDCliente);
     }
     
 }
