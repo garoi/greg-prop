@@ -20,7 +20,7 @@ public class Mensajeria {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         int IDclient = 0;
         boolean operador = false;
-        ControlDominio cd = new ControlDominio();
+        //ControlDominio cd = new ControlDominio();
         //int op;
         Scanner sc = new Scanner(System.in);
         //info();
