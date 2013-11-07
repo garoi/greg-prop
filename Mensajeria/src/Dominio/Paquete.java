@@ -6,56 +6,49 @@ import java.lang.System;
  * @author ivich
  */
 public class Paquete {
-    private int IDPaquete = 0;
-    private int IDCliente;
-    private String Destino;
-    private String Estado;
+    private int idPaquete = 0;
+    private int idCliente;
+    private String destino;
+    private String estado;
     
-    public int getIDPaquete() {
-        return IDPaquete;
+    public int getIdPaquete() {
+        return idPaquete;
     }
 
-    private void setIDPaquete(int IDPaquete) {
-        this.IDPaquete = IDPaquete;
+    public void setIdPaquete(int idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
-    public int getIDCliente() {
-        return IDCliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    private void setIDCliente(int IDCliente) {
-        this.IDCliente = IDCliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getDestino() {
-        return Destino;
+        return destino;
     }
 
-    private void setDestino(String Destino) {
-        this.Destino = Destino;
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
-    private void setEstado(String Estado) {
-        this.Estado = Estado;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
-      
-    
-    public void LeerPaquete(int IDcliente) {
+  
+    public void LeerPaquete(Paquete p, int idPaquete, int idCliente) {
         Scanner sc = new Scanner(System.in);
-        //String Estado = sc.next(); 
-        /** De momento solo necesitamos el destino*/
-        //setOrigen(origen);
-        System.out.println("Entra el desti del paquet");
-        String Destino = sc.next();
-        setDestino(Destino);
-        setIDPaquete(IDPaquete);
-        ++IDPaquete;
-        setIDCliente(IDCliente);
-        setEstado("para enviar");
-        
+        System.out.println("Destino del paquete?");
+        this.destino = sc.next();
+        this.estado = "para enviar";
+        this.idPaquete = idPaquete;
+        this.idCliente = idCliente;
     }
 }

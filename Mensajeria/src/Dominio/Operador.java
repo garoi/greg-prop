@@ -6,39 +6,48 @@ import java.util.*;
  * @author Marc Garcia
  */
 public class Operador {
-    private final String Nombre = new String();
-    private int IDenc;
-    private final ArrayList<Paquete> ListaPaquetesParaEntregar = new ArrayList<Paquete>();
+    private String nombreOperador;
+    private String password;
+    private final ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
+    
+    public String getNombreOperador() {
+        return nombreOperador;
+    }
+
+    public String getPassword() {
+        return password;
+    }
      
     public void AnadirPaquete(Paquete p) {
-        ListaPaquetesParaEntregar.add(p);
+        listaPaquetesParaEntregar.add(p);
     }
     
-    //Dvuelve un vector con el identificador de los destinos de los paquetes seleccionados
+    //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
     public ArrayList<Integer> SeleccionarPaquetes() {
-        ArrayList<Integer> PaquetesDestino = new ArrayList<Integer>();
+        ArrayList<Integer> paquetesDestino = new ArrayList<Integer>();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Selecciona el IDPAQUETE de los paquetes de la siguiente lista:");
-        for (int i = 0; i < ListaPaquetesParaEntregar.size(); ++i) {
-            System.out.print("ID Paquete " + ListaPaquetesParaEntregar.get(i).getIDPaquete() + " ");
-            System.out.print("ID Cliente " + ListaPaquetesParaEntregar.get(i).getIDCliente() + " ");
-            System.out.println("Destino " + ListaPaquetesParaEntregar.get(i).getDestino() + " ");
+        System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
+            System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
+            System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
         }
         System.out.println("Para parar de entrar paquetes pulsa 0"); 
-        int IDPaquete = sc.nextInt();
-        while (IDPaquete != 0) {
-            IDPaquete = sc.nextInt();
-            PaquetesDestino.add(IDPaquete);
+        int idPaquete = sc.nextInt();
+        paquetesDestino.add(idPaquete);
+        while (idPaquete != 0) {
+            idPaquete = sc.nextInt();
+            paquetesDestino.add(idPaquete);
         }
-        return PaquetesDestino;
+        paquetesDestino.remove(paquetesDestino.size() - 1);
+        return paquetesDestino;
     }
     
-    public void LeerOPerador(){
-        System.out.println("Anadir el nombre del operador");
+    public void LeerOperador() {
         Scanner sc = new Scanner(System.in);
-        //nombre = sc.next();
+        System.out.println("Anadir el nombre del operador");
+        nombreOperador = sc.next();
+        System.out.println("Anadir el password del operador");
+        password = sc.next();
     }
-    
-    
-    
 }

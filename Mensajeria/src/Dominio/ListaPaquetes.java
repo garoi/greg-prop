@@ -6,23 +6,18 @@ import java.util.*;
  * @author Marc Garcia Roig
  */
 public class ListaPaquetes {
-     ArrayList<Paquete> Lista = new ArrayList<Paquete>();
-     int IDPaquete = 0;
-  
-    public ListaPaquetes(){}
+     ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
+     int idPaquete = 0;
     
     public void AnadirPaquete(Paquete p){
         System.out.println("ahora añadiremos el paquete a la lista :D");
-        //Scanner sc = new Scanner(System.in);
-        //int NPaquets = sc.nextInt();
-            
-            Lista.add(p);
-            
+        listaPaquetes.add(p);    
     }
-    public void PacksClient(int IDClient){
-        for(int i = 0; i < Lista.size(); ++i){
-            if(Lista.get(i).getIDCliente() == IDClient){
-                EscribePaquete(Lista.get(i));
+    
+    public void PacksClient(int idCliente){
+        for(int i = 0; i < listaPaquetes.size(); ++i){
+            if(listaPaquetes.get(i).getIdCliente() == idCliente){
+                EscribePaquete(listaPaquetes.get(i));
             }
         }
     }

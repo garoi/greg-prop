@@ -8,30 +8,31 @@ import java.lang.System;
  */
 public class Ruta {
     Mapa m = new Mapa();
-    private String[] NombresSubgrafo;
-    private float[][] Subgrafo;
+    private String[] nombresSubgrafo;
+    private float[][] subgrafo;
 
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
     //Modificadoras
-    public void setNombresSubgrafo(String[] NombresSubgrafo) {
-        this.NombresSubgrafo = NombresSubgrafo;
+
+    public String[] getNombresSubgrafo() {
+        return nombresSubgrafo;
     }
 
-    public void setSubgrafo(float[][] Subgrafo) {
-        this.Subgrafo = Subgrafo;
-    }
-    //CONSULTORAS
-    public String[] getNombresSubgrafo() {
-        return NombresSubgrafo;
+    public void setNombresSubgrafo(String[] nombresSubgrafo) {
+        this.nombresSubgrafo = nombresSubgrafo;
     }
 
     public float[][] getSubgrafo() {
-        return Subgrafo;
+        return subgrafo;
+    }
+
+    public void setSubgrafo(float[][] subgrafo) {
+        this.subgrafo = subgrafo;
     }
     
     private ArrayList< ArrayList<Pair> > ReconvertirArbol(float[][] arbol){
-        ArrayList< ArrayList<Pair> > MSTKaux = new ArrayList<>();
+        ArrayList< ArrayList<Pair> > mstkaux = new ArrayList<>();
         for (int j = 0; j < arbol.length; ++j) {
             ArrayList<Pair> v = new ArrayList<Pair>();
             for (int i = 0; i < arbol.length; ++i) {
@@ -39,34 +40,34 @@ public class Ruta {
                     v.add(new Pair(i, arbol[i][j]));
                 }
             }
-            MSTKaux.add(v);
+            mstkaux.add(v);
         }
-        return MSTKaux;
+        return mstkaux;
     }
     
     /**
      *Devuelve un arbol de expancion minima
      */
     public ArrayList< ArrayList<Pair> > MST() {
-        int NumeroNodos = Subgrafo.length;
-        int[] pertenece = new int[NumeroNodos];
-        float[][] arbol = new float[NumeroNodos][NumeroNodos];
+        int numeroNodos = subgrafo.length;
+        int[] pertenece = new int[numeroNodos];
+        float[][] arbol = new float[numeroNodos][numeroNodos];
         
-        for (int i = 0; i < NumeroNodos; ++i) {
+        for (int i = 0; i < numeroNodos; ++i) {
             pertenece[i] = i;
-            for (int j = 0; j < NumeroNodos; ++j) {
+            for (int j = 0; j < numeroNodos; ++j) {
                 arbol[i][j] = (float) POSITIVE_INFINITY;
             }
         }
         int nodoA, nodoB;
         nodoA = nodoB = (int)POSITIVE_INFINITY;
         int arcos = 1;
-        while (arcos < NumeroNodos) {
+        while (arcos < numeroNodos) {
             float min = (float)POSITIVE_INFINITY;
-            for (int i = 0; i < NumeroNodos; ++i) {
-                for (int j = 0; j < NumeroNodos; ++j) {
-                    if (min > Subgrafo[i][j] && pertenece[i] != pertenece[j]) {
-                        min = Subgrafo[i][j];
+            for (int i = 0; i < numeroNodos; ++i) {
+                for (int j = 0; j < numeroNodos; ++j) {
+                    if (min > subgrafo[i][j] && pertenece[i] != pertenece[j]) {
+                        min = subgrafo[i][j];
                         nodoA = i;
                         nodoB = j;
                     }
@@ -78,7 +79,7 @@ public class Ruta {
                 arbol[nodoB][nodoA] = min;
                 int temp = pertenece[nodoB];
                 pertenece[nodoB] = pertenece[nodoA];
-                for(int k = 0; k < NumeroNodos; k++) {
+                for(int k = 0; k < numeroNodos; k++) {
                     if(pertenece[k] == temp) {
                         pertenece[k] = pertenece[nodoA];
                     }
@@ -86,8 +87,8 @@ public class Ruta {
                 arcos++;
             }
         }
-        for (int j = 0; j < NumeroNodos; ++j) {
-            for (int i = 0; i < NumeroNodos; ++i) {
+        for (int j = 0; j < numeroNodos; ++j) {
+            for (int i = 0; i < numeroNodos; ++i) {
                 System.out.print(arbol[i][j] + " ");
             }
             System.out.println();
