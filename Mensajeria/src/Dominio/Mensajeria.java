@@ -99,6 +99,7 @@ public class Mensajeria {
                         op = sc.nextInt();
                         while(op != 0){
                             InfoOperador();
+
                             op = sc.nextInt();
                         }
                     }

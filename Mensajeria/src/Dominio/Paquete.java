@@ -51,4 +51,11 @@ public class Paquete {
         this.idPaquete = idPaquete;
         this.idCliente = idCliente;
     }
+    
+    
+    public static class IdPaqueteComparator implements Comparator<Paquete> {
+        @Override public int compare(Paquete p1, Paquete p2) {
+            return p1.getIdPaquete() - p2.getIdPaquete();
+        }
+    }
 }

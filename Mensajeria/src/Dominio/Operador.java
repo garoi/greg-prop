@@ -21,6 +21,17 @@ public class Operador {
     public void AnadirPaquete(Paquete p) {
         listaPaquetesParaEntregar.add(p);
     }
+    public void OrdenarPorIdPaquete() {
+        Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
+    }
+    
+    public void ImprimirLista() {
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
+            System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
+            System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+        }
+    }
     
     //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
     public ArrayList<Integer> SeleccionarPaquetes() {
