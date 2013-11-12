@@ -52,10 +52,17 @@ public class Paquete {
         this.idCliente = idCliente;
     }
     
-    
     public static class IdPaqueteComparator implements Comparator<Paquete> {
         @Override public int compare(Paquete p1, Paquete p2) {
             return p1.getIdPaquete() - p2.getIdPaquete();
+        }
+    }
+    
+    public static class DestinoComparator implements Comparator<Paquete> {
+        @Override public int compare(Paquete p1, Paquete p2) {
+            if (p1.getDestino().compareTo(p2.getDestino()) < 0) return 1;
+            else return -1;
+            //return p1.getDestino() - p2.getDestino();
         }
     }
 }

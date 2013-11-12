@@ -50,7 +50,7 @@ public class Cliente {
         int i = 0;
         while (i < listaPaquetes.size() && !encontrado) {
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetes.get(i).getEstado() == "para enviar") {
+                if (listaPaquetes.get(i).getEstado().equals("para enviar")) {
                     listaPaquetes.remove(i);
                     encontrado = true;
                 }
@@ -72,7 +72,7 @@ public class Cliente {
         int i = 0;
         while (i < listaPaquetes.size() && !encontrado) {
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetes.get(i).getEstado() == "enviado") {
+                if (listaPaquetes.get(i).getEstado().equals("enviado")) {
                     listaPaquetes.remove(i);
                     encontrado = true;
                 }

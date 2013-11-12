@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 import java.util.*;
 
@@ -37,17 +33,11 @@ public class ListaClientes {
         return -1;
     }
     
-    public void CancelarPaquete(Cliente cl) {
-        System.out.println("Cual es el idPaquete?");
-        Scanner sc = new Scanner(System.in);
-        int idPaquete = sc.nextInt();
+    public void CancelarPaquete(Cliente cl, int idPaquete) {
         cl.CancelarPaquete(idPaquete);  
     }
     
-    public void EliminarPaquete(Cliente cl) {
-        System.out.println("Cual es el idPaquete?");
-        Scanner sc = new Scanner(System.in);
-        int idPaquete = sc.nextInt();
+    public void EliminarPaquete(Cliente cl, int idPaquete) {
         cl.EliminarPaquete(idPaquete);  
     }
     

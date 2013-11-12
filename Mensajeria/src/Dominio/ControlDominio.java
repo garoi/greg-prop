@@ -17,7 +17,7 @@ public class ControlDominio {
     }
         
     private void Crearsubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
-        Operador o = new Operador();
+        Operador o  = new Operador();
         ArrayList<Integer> paquetesSeleccionados = new ArrayList<Integer>();
         paquetesSeleccionados = o.SeleccionarPaquetes();
         subgrafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];

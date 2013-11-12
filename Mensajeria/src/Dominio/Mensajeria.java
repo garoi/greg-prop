@@ -10,8 +10,9 @@ public class Mensajeria {
     
     public static void InfoOperador() {
         System.out.println("1 ver paquetes");
-        System.out.println("2 seleccionar paquetes");
-        System.out.println("3 Salir");
+        System.out.println("2 añadir ciudad");
+        System.out.println("3 modificar ciudad");
+        System.out.println("4 seleccionar paquetes y calcular ruta");
         System.out.println("0 Salir");
     }
     
@@ -99,6 +100,18 @@ public class Mensajeria {
                         op = sc.nextInt();
                         while(op != 0){
                             InfoOperador();
+                            if (op == 1) {
+                                oper.VerPaquetes();
+                            }
+                            else if (op == 2) {
+                                
+                            }
+                            else if (op == 3) {
+                                
+                            }
+                            else if (op == 4) {
+                                ControlDominio cd = new ControlDominio();
+                            }
 
                             op = sc.nextInt();
                         }
@@ -147,22 +160,27 @@ public class Mensajeria {
                             if (op == 1) {
                                 Paquete p = new Paquete();
                                 p.LeerPaquete(p, idPaquete, cl.getIdCliente());
-                                lc.AnadirPaquete(p, cl.getIdCliente());     
+                                lc.AnadirPaquete(p, cl.getIdCliente());
+                                oper.AnadirPaquete(p);
                                 ++idPaquete;
-                                //Falta añadirlo al operador
                             }
                             else if (op == 2) {
                                 lc.PacksClient(cl.getIdCliente());
                             }
                             else if (op == 3) {
                                 //Si el estado del paquete es: para enviar, lo eliminamos.
-                                lc.CancelarPaquete(cl);
+                                System.out.println("Cual es el idPaquete?");
+                                int idPaq = sc.nextInt();
+                                lc.CancelarPaquete(cl, idPaq);
+                                oper.CancelarPaquete(idPaq);
                                 //Falta para quitarlo del operador
                             }
                             else if (op == 4) {
                                 //Si el estado es enviado lo eliminamos.
-                                lc.EliminarPaquete(cl);
-                                //Falta quitarlo del operador
+                                System.out.println("Cual es el idPaquete?");
+                                int idPaq = sc.nextInt();
+                                lc.EliminarPaquete(cl, idPaq);
+                                oper.EliminarPaquete(idPaq);
                             }
                             InfoCliente();
                             op = sc.nextInt();
