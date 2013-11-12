@@ -3,9 +3,10 @@ import java.util.*;
 
 /**
  *
- * @author ivich
+ * @author Albert Gili
  */
 public class ListaClientes {
+    private int IDcliente = 0;
     ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
     
      public Cliente getCliente(int idCliente){
@@ -13,6 +14,8 @@ public class ListaClientes {
     }
     
     public void AnadirCliente(Cliente c){
+        c.setIDcliente(IDcliente);
+        ++IDcliente;
         listaClientes.add(c);
     }
     

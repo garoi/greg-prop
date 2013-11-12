@@ -8,6 +8,9 @@ import java.lang.System;
  */
 public class Mensajeria {
     
+    
+    
+    ControlDominio cd = new ControlDominio();
     public static void InfoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
@@ -24,17 +27,9 @@ public class Mensajeria {
         System.out.println("0 Salir");
     }
 
-    public static void main(String[] args) {
-        int idCliente = 0;
-        int idPaquete = 0;
-        boolean operador = false;
-        Scanner sc = new Scanner(System.in);
-        ListaClientes lc = new ListaClientes();
-        Operador oper = new Operador();
-        boolean salida = false;
-        //Bucle principal
-        while (!salida) {
-            String logreg;          
+    public static void opcion(boolean operador, Operador oper, ListaClientes lc){
+            String logreg;    
+            Scanner sc = new Scanner(System.in);
             System.out.println("login o registro?");
             logreg = sc.next();
             if(logreg.equals("registro")){
@@ -53,23 +48,23 @@ public class Mensajeria {
                 else if (tipo.equals("cliente")){
                     System.out.println("Datos cliente");
                     Cliente cl = new Cliente();
-                    cl.LeerCliente(cl, idCliente);
+                    cl.LeerCliente(cl);
                     lc.AnadirCliente(cl);
-                    ++idCliente;
+                    //++idCliente;
                 }
             }
-            System.out.println("operador o cliente?");
-            String tipo2 = sc.next();
-            
-            //OPERADOR
-            if (tipo2.equals("operador")) {
-                System.out.println("Escriba su nombre de operador");
+    
+    }
+    
+    public static void funcoperador(Operador oper, ListaPaquetes lp){
+         System.out.println("Escriba su nombre de operador");
+                Scanner sc = new Scanner(System.in);
                 String nombreoper = sc.next();
                 int encontradooper;
                 boolean exitoper = false;
                 
                 //Enctontrar nombre de operador
-                if (oper.getNombreOperador() == nombreoper) encontradooper = 1;
+                if (oper.getNombreOperador().equals(nombreoper)) encontradooper = 1;
                 else encontradooper = -1;
                 
                 while(encontradooper < 0 && !exitoper){
@@ -100,10 +95,14 @@ public class Mensajeria {
                         op = sc.nextInt();
                         while(op != 0){
                             InfoOperador();
+                            //VER PAQUETES
                             if (op == 1) {
                                 oper.VerPaquetes();
                             }
+                            //ANADIR CIUDAD
                             else if (op == 2) {
+                                Mapa map = new Mapa();
+                                map.CrearCiudad();
                                 
                             }
                             else if (op == 3) {
@@ -117,17 +116,16 @@ public class Mensajeria {
                         }
                     }
                 }
-            }
-            //CLIENTE
-            else if (tipo2.equals("cliente")){
+    }
+    
+    public static void funcliente(ListaClientes lc, Operador oper, ListaPaquetes lp){
+                Scanner sc = new Scanner(System.in);
                 System.out.println("Escriba su nombre de usuario");
                 String nombre;
                 nombre = sc.next();
                 int encontrado;
                 boolean exit = false;
-                
-                //Enctontrar nombre de ususario del cliente
-                encontrado =  lc.EncontrarCliente(nombre);
+                 encontrado =  lc.EncontrarCliente(nombre);
                 while (encontrado < 0 && !exit) {
                     System.out.println("username incorrecto");  
                     System.out.println("pulse 1 para salir");                   
@@ -143,7 +141,7 @@ public class Mensajeria {
                         encontrado =  lc.EncontrarCliente(nombre);                    
                     }
                 }
-                //Checkear password del usuario encontrado, salir si exit = true
+                
                 if (encontrado >= 0) {
                     Cliente cl = new Cliente();
                     cl = lc.getCliente(encontrado);
@@ -159,10 +157,10 @@ public class Mensajeria {
                         while (op != 0) {
                             if (op == 1) {
                                 Paquete p = new Paquete();
-                                p.LeerPaquete(p, idPaquete, cl.getIdCliente());
+                                p.LeerPaquete(p, cl.getIdCliente());
+                                lp.AnadirPaquete(p);
                                 lc.AnadirPaquete(p, cl.getIdCliente());
                                 oper.AnadirPaquete(p);
-                                ++idPaquete;
                             }
                             else if (op == 2) {
                                 lc.PacksClient(cl.getIdCliente());
@@ -187,6 +185,30 @@ public class Mensajeria {
                         }
                     }
                 }
+    }
+    
+    public static void main(String[] args) {
+        int idCliente = 0;
+        int idPaquete = 0;
+        boolean operador = false;
+        Scanner sc = new Scanner(System.in);
+        ListaClientes lc = new ListaClientes();
+        Operador oper = new Operador();
+        boolean salida = false;
+        ListaPaquetes lp = new ListaPaquetes();
+        //Bucle principal
+        while (!salida) {
+            opcion(operador, oper, lc);
+            System.out.println("operador o cliente?");
+            String tipo2 = sc.next();
+            
+            //OPERADOR
+            if (tipo2.equals("operador")) {
+                funcoperador(oper, lp);
+            }
+            //CLIENTE
+            else if (tipo2.equals("cliente")){
+                funcliente(lc, oper, lp);
             }
             else System.out.println("Aprende a escribir hijodeputa");   
         }

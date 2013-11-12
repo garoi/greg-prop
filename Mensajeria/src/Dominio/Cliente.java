@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  *
- * @author ivich
+ * @author Albert Gili
  */
 public class Cliente {
     private int idCliente;
@@ -17,6 +17,10 @@ public class Cliente {
     
     public int getIdCliente() {
         return idCliente;
+    }
+    
+    public void setIDcliente(int idCliente){
+        this.idCliente = idCliente;
     }
 
     public String getPassword() {
@@ -31,13 +35,12 @@ public class Cliente {
         return listaPaquetes;
     }
      
-    public void LeerCliente(Cliente cl, int idCliente){
+    public void LeerCliente(Cliente cl){
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del cliente");
         nombreCliente = sc.next();
         System.out.println("Anadir el password del cliente");
         password = sc.next();
-        this.idCliente = idCliente;
     }
     
     public void AnadePaquete(Paquete p){

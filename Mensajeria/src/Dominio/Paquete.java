@@ -3,10 +3,10 @@ import java.util.*;
 import java.lang.System;
 /**
  *
- * @author ivich
+ * @author Albert Gili
  */
 public class Paquete {
-    private int idPaquete = 0;
+    private int idPaquete;
     private int idCliente;
     private String destino;
     private String estado;
@@ -17,7 +17,7 @@ public class Paquete {
     }
 
     public void setIdPaquete(int idPaquete) {
-        this.idPaquete = idPaquete;
+       this.idPaquete = idPaquete;
     }
 
     public int getIdCliente() {
@@ -44,7 +44,7 @@ public class Paquete {
         this.estado = estado;
     }
   
-    public void LeerPaquete(Paquete p, int idPaquete, int idCliente) {
+    public void LeerPaquete(Paquete p,int idCliente) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Destino del paquete?");
         this.destino = sc.next();

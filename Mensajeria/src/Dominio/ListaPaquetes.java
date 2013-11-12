@@ -3,13 +3,15 @@ import java.util.*;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Albert Gili
  */
 public class ListaPaquetes {
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
      int idPaquete = 0;
     
     public void AnadirPaquete(Paquete p){
+        p.setIdPaquete(idPaquete);
+        ++idPaquete;
         System.out.println("ahora añadiremos el paquete a la lista :D");
         listaPaquetes.add(p);    
     }
