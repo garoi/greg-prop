@@ -160,7 +160,7 @@ public class Mensajeria {
                         while (op != 0) {
                             if (op == 1) {
                                 Paquete p = new Paquete();
-                                p.LeerPaquete(p, cl.getIdCliente());
+                                p.LeerPaquete(cl.getIdCliente());
                                 lp.AnadirPaquete(p);
                                 lc.AnadirPaquete(p, cl.getIdCliente());
                                 oper.AnadirPaquete(p);

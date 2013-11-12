@@ -8,49 +8,68 @@ import java.lang.System;
 public class Paquete {
     private int idPaquete;
     private int idCliente;
+    private String ciudad;
     private String destino;
     private String estado;
     //private String ciudad;
     
+    
+    //CREADORA
+    public Paquete(){}
+    //CONSULTORAS
     public int getIdPaquete() {
         return idPaquete;
     }
-
-    public void setIdPaquete(int idPaquete) {
-       this.idPaquete = idPaquete;
-    }
-
+    
     public int getIdCliente() {
         return idCliente;
+    }
+    public String getDestino() {
+        return destino;
+    }
+        
+    public String getEstado() {
+        return estado;
+    }
+    
+    public String getCiudad(){
+        return ciudad;
+    }
+
+    //MODIFICADORAS
+    public void setCiudad(String ciudad){
+        this.ciudad = ciudad;
+    }
+    public void setIdPaquete(int idPaquete) {
+       this.idPaquete = idPaquete;
     }
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    public String getDestino() {
-        return destino;
-    }
+
 
     public void setDestino(String destino) {
         this.destino = destino;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
+    
     public void setEstado(String estado) {
         this.estado = estado;
     }
   
-    public void LeerPaquete(Paquete p,int idCliente) {
+    //LECTORAS
+    public void LeerPaquete(int idCliente) {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Escriba la ciudad");
+        this.ciudad = sc.nextLine();
         System.out.println("Destino del paquete?");
-        this.destino = sc.next();
-        this.estado = "para enviar";
-        this.idPaquete = idPaquete;
-        this.idCliente = idCliente;
+        String destinoPaquete = sc.nextLine();
+        setDestino(destinoPaquete);
+        String estadoPaquete = "para enviar";
+        setEstado(estadoPaquete);
+        setIdCliente(idCliente);
     }
     
     public static class IdPaqueteComparator implements Comparator<Paquete> {
