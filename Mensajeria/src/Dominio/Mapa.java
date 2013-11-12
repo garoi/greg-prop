@@ -19,8 +19,19 @@ public class Mapa implements Serializable {
     public float[][] getCiudad() {
         return ciudad;
     }
+    
+    private void setNombreCiudad(String nombre){
+        this.nombreCiudad = nombre;
+    }
+    public String getNombreCiudad(){
+        return nombreCiudad;
+    }
 
     public void CrearCiudad(){
+        System.out.println("Escriu el nom de la ciutat");
+        Scanner sc3 = new Scanner(System.in);
+        String nombre = sc3.nextLine();
+        setNombreCiudad(nombre);
         System.out.println("Quants nodes hi ha?");
         Scanner sc = new Scanner(System.in);
         int nodes = sc.nextInt();

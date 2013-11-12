@@ -2,7 +2,6 @@ package Dominio;
 import java.io.*;
 import java.util.*;
 import java.lang.System;
-import Persistencia.ControlPersistencia;
 /**
  *
  * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
@@ -11,7 +10,8 @@ public class Mensajeria {
     
     
     
-    ControlDominio cd = new ControlDominio();
+   
+
     public static void InfoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
@@ -57,7 +57,7 @@ public class Mensajeria {
     
     }
     
-    public static void funcoperador(Operador oper, ListaPaquetes lp) throws IOException, ClassNotFoundException {
+    public static void funcoperador(Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException, ClassNotFoundException {
          System.out.println("Escriba su nombre de operador");
                 Scanner sc = new Scanner(System.in);
                 String nombreoper = sc.next();
@@ -86,7 +86,6 @@ public class Mensajeria {
                 }
                 //Checkear password del operador encontrado, salir si exit = true
                 if (encontradooper >= 0) {
-                    ControlPersistencia pm = new ControlPersistencia();
                     System.out.println("ingrese su password");
                     boolean validpassoper = false;
                     String passwordoper = sc.next();
@@ -105,14 +104,14 @@ public class Mensajeria {
                             else if (op == 2) {
                                 Mapa map = new Mapa();
                                 map.CrearCiudad();
-                                Mapa m = (Mapa) pm.GuardarMapas(map);
-                                m.ImprimirCiudad();
+                                String name = map.getNombreCiudad();
+                                cd.GuardaMapa(map, name);
                             }
                             else if (op == 3) {
-                                
+                                Mapa m = (Mapa) cd.LeerCiudad();
+                                m.ImprimirCiudad();
                             }
                             else if (op == 4) {
-                                ControlDominio cd = new ControlDominio();
                             }
 
                             op = sc.nextInt();
@@ -121,7 +120,7 @@ public class Mensajeria {
                 }
     }
     
-    public static void funcliente(ListaClientes lc, Operador oper, ListaPaquetes lp){
+    public static void funcliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd){
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Escriba su nombre de usuario");
                 String nombre;
@@ -191,6 +190,7 @@ public class Mensajeria {
     }
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ControlDominio cd = new ControlDominio();
         int idCliente = 0;
         int idPaquete = 0;
         boolean operador = false;
@@ -207,35 +207,13 @@ public class Mensajeria {
             
             //OPERADOR
             if (tipo2.equals("operador")) {
-                funcoperador(oper, lp);
+                funcoperador(oper, lp, cd);
             }
             //CLIENTE
             else if (tipo2.equals("cliente")){
-                funcliente(lc, oper, lp);
+                funcliente(lc, oper, lp, cd);
             }
             else System.out.println("Aprende a escribir hijodeputa");   
         }
     }
 }
-
-
-
-
-
-
-
-
-/*
-Ejemplo de guardar en ficheros
-try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/mapa1.txt"))) {
-                    Mapa m = new Mapa();
-                    m.CrearCiudad();
-                    m.ImprimirCiudad();
-                    oos.writeObject(m);
-                }
-                System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/mapa1.txt"))) {
-                    Mapa m2 = (Mapa) ois.readObject();
-                    m2.ImprimirCiudad();
-                }
-*/

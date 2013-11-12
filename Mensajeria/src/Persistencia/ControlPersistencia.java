@@ -53,4 +53,7 @@ public class ControlPersistencia {
     public ArrayList<String> ListarCiudades() {
         return pm.ListarCiudades();
     }
+    public Object LeerCiudad(String nom) throws FileNotFoundException, IOException, ClassNotFoundException{
+        return pm.LeerCiudad(nom);
+    }
 }

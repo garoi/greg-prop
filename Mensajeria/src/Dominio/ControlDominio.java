@@ -1,20 +1,24 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.*;
 import Persistencia.ControlPersistencia;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 /**
  *
  * @author Marc Garcia Roig xD
  */
 public class ControlDominio {
+    ControlPersistencia cp = new ControlPersistencia();
     Mapa m = new Mapa();
     private String[] nombres;
     private float[][] ciudad;
         
-    public ControlDominio() {
+    /*public ControlDominio() {
         //No funciona porque falta hacer la clase SeleccionarDestinos del operador
 	InicializarControlDomini();
-    }
+    }*/
         
     private void Crearsubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
         Operador o  = new Operador();
@@ -47,5 +51,19 @@ public class ControlDominio {
         int[] PermutacionsNoOpt = chris.buscaPermutacion();
         
         //Llamar a la optimizacion
+    }
+    
+    public void GuardaMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
+        cp.GuardarMapas(map, nombreciudad);
+    }
+    public Object LeerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> ciudades = new ArrayList<>();
+        ciudades = cp.ListarCiudades();
+        for(int i = 0; i < ciudades.size(); ++i){
+            System.out.println(ciudades.get(i));
+        }
+        String nom = sc.nextLine();
+        return cp.LeerCiudad(nom);
     }
 }
