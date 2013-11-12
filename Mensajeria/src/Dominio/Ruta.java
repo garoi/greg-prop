@@ -87,12 +87,7 @@ public class Ruta {
                 arcos++;
             }
         }
-        for (int j = 0; j < numeroNodos; ++j) {
-            for (int i = 0; i < numeroNodos; ++i) {
-                System.out.print(arbol[i][j] + " ");
-            }
-            System.out.println();
-        }
+
         MSTK = ReconvertirArbol(arbol);
         for (int i = 0; i < arbol.length; ++i) {
             System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());

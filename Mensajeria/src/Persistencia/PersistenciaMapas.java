@@ -37,7 +37,7 @@ public class PersistenciaMapas {
             nombreFichero = file.getName();
             boolean guion = nombreFichero.endsWith("-mapa.txt");
             if (guion) {
-                ficheros.add(file.getName());
+                ficheros.add(nombreFichero.substring(0, (nombreFichero.length()-9)));
             }
         }
         return ficheros;
