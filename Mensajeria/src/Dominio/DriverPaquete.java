@@ -19,7 +19,7 @@ public class DriverPaquete {
         System.out.println("Escriba un identificador de cliente (entero):");
         int idCliente = sc.nextInt();
         Paquete p = new Paquete();
-        p.LeerPaquete(idCliente);
+        p.leerPaquete(idCliente);
         //CONSULTORAS 
          System.out.print("Destino :");
          System.out.println(p.getDestino());

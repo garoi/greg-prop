@@ -15,20 +15,20 @@ import java.util.ArrayList;
  */
 public class PersistenciaMapas {
     
-    public void GuardarMapa(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
+    public void guardarMapa(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/"+nombreCiudad+"-mapa.txt"))) {
             oos.writeObject(x);
         }
     }
     
-    public Object LeerCiudad(String nombreCiudad) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Object leerCiudad(String nombreCiudad) throws FileNotFoundException, IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/"+nombreCiudad+"-mapa.txt"))) {
             Object m2 = ois.readObject();
             return m2;
         }
     }
     
-    public ArrayList<String> ListarCiudades() {
+    public ArrayList<String> listarCiudades() {
         File directorio = new File ("Data/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();

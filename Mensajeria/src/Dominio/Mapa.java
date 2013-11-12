@@ -27,7 +27,7 @@ public class Mapa implements Serializable {
         return nombreCiudad;
     }
 
-    public void CrearCiudad(){
+    public void crearCiudad(){
         System.out.println("Escriu el nom de la ciutat");
         Scanner sc3 = new Scanner(System.in);
         String nombre = sc3.nextLine();
@@ -49,7 +49,7 @@ public class Mapa implements Serializable {
     }
     
 
-    public void ImprimirCiudad() {
+    public void imprimirCiudad() {
         System.out.println("la ciutat es " + ciudad.length);
         for (int j = 0; j < ciudad.length; ++j) {
             for (int i = 0; i < ciudad.length; ++i) {
@@ -59,12 +59,12 @@ public class Mapa implements Serializable {
         }
     }
     
-    private void InfoModificarCiudad() {
+    private void infoModificarCiudad() {
         System.out.println("1 Modificar distancia entre dos punto");
         System.out.println("0 Salir de la modificacion de la ciudad manualmente");
     }
     
-    public void ModificarCiudad() {
+    public void modificarCiudad() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1 Modificar ciudad con el fichero");
         System.out.println("2 Modificar ciudad manualmente");
@@ -74,7 +74,7 @@ public class Mapa implements Serializable {
             //Abrir y modifiar el fichero de la ciudad
         }
         if (op == 2) {
-            InfoModificarCiudad();
+            infoModificarCiudad();
             int ord = sc.nextInt();
             while (ord != 0) {
                 if (ord == 1) {
@@ -107,7 +107,7 @@ public class Mapa implements Serializable {
                     ciudad[punto1i][punto2i] = distancia;
                     ciudad[punto2i][punto1i] = distancia;
                 }
-                InfoModificarCiudad();
+                infoModificarCiudad();
                 ord = sc.nextInt();
             }
         }

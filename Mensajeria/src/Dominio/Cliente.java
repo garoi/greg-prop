@@ -35,7 +35,7 @@ public class Cliente {
         return listaPaquetes;
     }
      
-    public void LeerCliente(Cliente cl){
+    public void leerCliente(Cliente cl){
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del cliente");
         nombreCliente = sc.next();
@@ -43,12 +43,12 @@ public class Cliente {
         password = sc.next();
     }
     
-    public void AnadePaquete(Paquete p){
+    public void anadirPaquete(Paquete p){
         listaPaquetes.add(p);
         
     }
     
-    public void CancelarPaquete(int idPaquete) {
+    public void cancelarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
         while (i < listaPaquetes.size() && !encontrado) {
@@ -70,7 +70,7 @@ public class Cliente {
         }
     }
     
-    public void EliminarPaquete(int idPaquete) {
+    public void eliminarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
         while (i < listaPaquetes.size() && !encontrado) {
@@ -96,7 +96,7 @@ public class Cliente {
         }
     }
     
-    public void VerLista(){
+    public void verLista(){
         for (int i = 0; i < listaPaquetes.size();++i) {
             System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
             System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");

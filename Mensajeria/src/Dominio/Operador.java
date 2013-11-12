@@ -18,27 +18,27 @@ public class Operador {
         return password;
     }
      
-    public void AnadirPaquete(Paquete p) {
+    public void anadirPaquete(Paquete p) {
         listaPaquetesParaEntregar.add(p);
     }
-    public void OrdenarPorIdPaquete() {
+    public void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
     }
     
-    public void OrdenarPorDestino() {
+    public void ordenarPorDestino() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
     }
     
-    public void VerPaquetes() {
+    public void verPaquetes() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1 Para ver segun idCliente");
         System.out.println("2 Para ver segun Destino");
         int op = sc.nextInt();
         if (op == 1) {
-            OrdenarPorIdPaquete();
+            ordenarPorIdPaquete();
         }
         else if (op == 2) {
-            OrdenarPorDestino();
+            ordenarPorDestino();
         }
         else {
             System.out.println("Mal escrito");
@@ -51,7 +51,7 @@ public class Operador {
     }
     
     //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
-    public ArrayList<Integer> SeleccionarPaquetes() {
+    public ArrayList<Integer> seleccionarPaquetes() {
         ArrayList<Integer> paquetesDestino = new ArrayList<Integer>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
@@ -71,7 +71,7 @@ public class Operador {
         return paquetesDestino;
     }
     
-    public void LeerOperador() {
+    public void leerOperador() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del operador");
         nombreOperador = sc.next();
@@ -79,7 +79,7 @@ public class Operador {
         password = sc.next();
     }
     
-    public void CancelarPaquete(int idPaquete) {
+    public void cancelarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
         while (i < listaPaquetesParaEntregar.size() && !encontrado) {
@@ -98,7 +98,7 @@ public class Operador {
         }
     }
     
-    public void EliminarPaquete(int idPaquete) {
+    public void eliminarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
         while (i < listaPaquetesParaEntregar.size() && !encontrado) {

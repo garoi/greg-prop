@@ -60,7 +60,7 @@ public class Paquete {
     }
   
     //LECTORAS
-    public void LeerPaquete(int idCliente) {
+    public void leerPaquete(int idCliente) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escriba la ciudad");
         this.ciudad = sc.nextLine();

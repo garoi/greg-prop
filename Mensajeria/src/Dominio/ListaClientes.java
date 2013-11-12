@@ -13,19 +13,19 @@ public class ListaClientes {
         return listaClientes.get(idCliente);
     }
     
-    public void AnadirCliente(Cliente c){
+    public void anadirCliente(Cliente c){
         c.setIDcliente(IDcliente);
         ++IDcliente;
         listaClientes.add(c);
     }
     
-    public void AnadirPaquete(Paquete p, int IDclient){
+    public void anadirPaquete(Paquete p, int IDclient){
         Cliente c = listaClientes.get(IDclient);
-        c.AnadePaquete(p);
+        c.anadirPaquete(p);
     
     }
     
-    public int EncontrarCliente(String nombre){
+    public int encontrarCliente(String nombre){
         for(int i = 0; i < listaClientes.size(); ++i){
             if(listaClientes.get(i).getNombreCliente().equals(nombre)){
                 System.out.println("nombre cliente es "+ listaClientes.get(i).getNombreCliente());
@@ -36,17 +36,17 @@ public class ListaClientes {
         return -1;
     }
     
-    public void CancelarPaquete(Cliente cl, int idPaquete) {
-        cl.CancelarPaquete(idPaquete);  
+    public void cancelarPaquete(Cliente cl, int idPaquete) {
+        cl.cancelarPaquete(idPaquete);  
     }
     
-    public void EliminarPaquete(Cliente cl, int idPaquete) {
-        cl.EliminarPaquete(idPaquete);  
+    public void eliminarPaquete(Cliente cl, int idPaquete) {
+        cl.eliminarPaquete(idPaquete);  
     }
     
-    public void PacksClient(int idCliente){
+    public void packsCliente(int idCliente){
         Cliente c = listaClientes.get(idCliente);
-        c.VerLista();
+        c.verLista();
     }
        
 }

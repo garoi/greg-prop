@@ -31,7 +31,7 @@ public class Ruta {
         this.subgrafo = subgrafo;
     }
     
-    private ArrayList< ArrayList<Pair> > ReconvertirArbol(float[][] arbol){
+    private ArrayList< ArrayList<Pair> > reconvertirArbol(float[][] arbol){
         ArrayList< ArrayList<Pair> > mstkaux = new ArrayList<>();
         for (int j = 0; j < arbol.length; ++j) {
             ArrayList<Pair> v = new ArrayList<Pair>();
@@ -48,7 +48,7 @@ public class Ruta {
     /**
      *Devuelve un arbol de expancion minima
      */
-    public ArrayList< ArrayList<Pair> > MST() {
+    public ArrayList< ArrayList<Pair> > mst() {
         int numeroNodos = subgrafo.length;
         int[] pertenece = new int[numeroNodos];
         float[][] arbol = new float[numeroNodos][numeroNodos];
@@ -88,7 +88,7 @@ public class Ruta {
             }
         }
 
-        MSTK = ReconvertirArbol(arbol);
+        MSTK = reconvertirArbol(arbol);
         for (int i = 0; i < arbol.length; ++i) {
             System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());
             for (int j = 0; j < MSTK.get(i).size(); ++j) {

@@ -17,13 +17,13 @@ public class ControlDominio {
         
     /*public ControlDominio() {
         //No funciona porque falta hacer la clase SeleccionarDestinos del operador
-	InicializarControlDomini();
+	inicializarControlDomini();
     }*/
         
-    private void Crearsubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
+    private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
         Operador o  = new Operador();
         ArrayList<Integer> paquetesSeleccionados = new ArrayList<Integer>();
-        paquetesSeleccionados = o.SeleccionarPaquetes();
+        paquetesSeleccionados = o.seleccionarPaquetes();
         subgrafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         nombresSubgrafo = new String[paquetesSeleccionados.size()];
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
@@ -34,10 +34,10 @@ public class ControlDominio {
         }
     }
 
-    private void InicializarControlDomini() {
+    private void inicializarControlDomini() {
         float[][] subgrafo = null;
         String[] nombresSubgrafo = null;
-        Crearsubgrafo(subgrafo, nombresSubgrafo);
+        crearSubgrafo(subgrafo, nombresSubgrafo);
         Ruta r = new Ruta();
         r.setNombresSubgrafo(nombresSubgrafo);
         r.setSubgrafo(subgrafo);
@@ -53,17 +53,17 @@ public class ControlDominio {
         //Llamar a la optimizacion
     }
     
-    public void GuardaMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
-        cp.GuardarMapas(map, nombreciudad);
+    public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
+        cp.guardarMapas(map, nombreciudad);
     }
-    public Object LeerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Object leerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         ArrayList<String> ciudades = new ArrayList<>();
-        ciudades = cp.ListarCiudades();
+        ciudades = cp.listarCiudades();
         for(int i = 0; i < ciudades.size(); ++i){
             System.out.println(ciudades.get(i));
         }
         String nom = sc.nextLine();
-        return cp.LeerCiudad(nom);
+        return cp.leerCiudad(nom);
     }
 }
