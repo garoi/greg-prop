@@ -10,6 +10,7 @@ public class Paquete {
     private int idCliente;
     private String destino;
     private String estado;
+    //private String ciudad;
     
     public int getIdPaquete() {
         return idPaquete;
@@ -62,7 +63,6 @@ public class Paquete {
         @Override public int compare(Paquete p1, Paquete p2) {
             if (p1.getDestino().compareTo(p2.getDestino()) < 0) return 1;
             else return -1;
-            //return p1.getDestino() - p2.getDestino();
         }
     }
 }
