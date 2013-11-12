@@ -19,12 +19,12 @@ public class Ruta {
         return nombresSubgrafo;
     }
 
-    public void setNombresSubgrafo(String[] nombresSubgrafo) {
-        this.nombresSubgrafo = nombresSubgrafo;
-    }
-
     public float[][] getSubgrafo() {
         return subgrafo;
+    }
+    
+    public void setNombresSubgrafo(String[] nombresSubgrafo) {
+        this.nombresSubgrafo = nombresSubgrafo;
     }
 
     public void setSubgrafo(float[][] subgrafo) {

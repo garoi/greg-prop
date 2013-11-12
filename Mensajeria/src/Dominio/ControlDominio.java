@@ -1,7 +1,7 @@
 package Dominio;
 
 import java.util.ArrayList;
-
+import Persistencia.ControlPersistencia;
 /**
  *
  * @author Marc Garcia Roig xD

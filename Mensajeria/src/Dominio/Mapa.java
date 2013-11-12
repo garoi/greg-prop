@@ -7,6 +7,7 @@ import java.util.*;
  * @author Marc Garcia Roig
  */
 public class Mapa implements Serializable {
+    private String nombreCiudad;
     private String[] nombres;
     private float[][] ciudad;
 

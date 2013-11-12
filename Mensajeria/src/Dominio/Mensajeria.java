@@ -2,6 +2,7 @@ package Dominio;
 import java.io.*;
 import java.util.*;
 import java.lang.System;
+import Persistencia.ControlPersistencia;
 /**
  *
  * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
@@ -56,7 +57,7 @@ public class Mensajeria {
     
     }
     
-    public static void funcoperador(Operador oper, ListaPaquetes lp){
+    public static void funcoperador(Operador oper, ListaPaquetes lp) throws IOException, ClassNotFoundException {
          System.out.println("Escriba su nombre de operador");
                 Scanner sc = new Scanner(System.in);
                 String nombreoper = sc.next();
@@ -85,6 +86,7 @@ public class Mensajeria {
                 }
                 //Checkear password del operador encontrado, salir si exit = true
                 if (encontradooper >= 0) {
+                    ControlPersistencia pm = new ControlPersistencia();
                     System.out.println("ingrese su password");
                     boolean validpassoper = false;
                     String passwordoper = sc.next();
@@ -103,7 +105,8 @@ public class Mensajeria {
                             else if (op == 2) {
                                 Mapa map = new Mapa();
                                 map.CrearCiudad();
-                                
+                                Mapa m = (Mapa) pm.GuardarMapas(map);
+                                m.ImprimirCiudad();
                             }
                             else if (op == 3) {
                                 
@@ -187,7 +190,7 @@ public class Mensajeria {
                 }
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         int idCliente = 0;
         int idPaquete = 0;
         boolean operador = false;
