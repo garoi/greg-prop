@@ -56,4 +56,9 @@ public class ControlPersistencia {
     public Object leerCiudad(String nom) throws FileNotFoundException, IOException, ClassNotFoundException{
         return pm.leerCiudad(nom);
     }
+    
+    public void guardadoGeneral(Object lc, Object lp) throws IOException {
+        guardarListaClientes(lc);
+        guardarListaPaquetes(lp);
+    }
 }

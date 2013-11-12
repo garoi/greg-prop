@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 /**
  *
- * @author Marc Garcia Roig xD
+ * @author Marc Garcia Roig
  */
 public class ControlDominio {
     ControlPersistencia cp = new ControlPersistencia();
@@ -65,5 +65,8 @@ public class ControlDominio {
         }
         String nom = sc.nextLine();
         return cp.leerCiudad(nom);
+    }
+    public void guardadoGeneral(Object lc, Object lp) throws IOException {
+        cp.guardadoGeneral(lc, lp);
     }
 }

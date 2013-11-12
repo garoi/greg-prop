@@ -62,10 +62,7 @@ public class Cliente {
                 ++i;
             }
         }
-        if (encontrado) {
-            //eliminar el fichero de disco
-        }
-        else {
+        if (!encontrado) {
             System.out.println("Paquete no encontrado para este cliente");
         }
     }
@@ -89,10 +86,7 @@ public class Cliente {
             }
         }
         if (encontrado) {
-            //eliminar el fichero de disco, no siempre
-        }
-        else {
-            System.out.println("Paquete no encontrado para este cliente");
+            System.out.println("Paquete no encontrado para este cliente o no enviado");
         }
     }
     

@@ -57,7 +57,7 @@ public class Mensajeria {
     
     }
     
-    public static void funcOperador(Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException, ClassNotFoundException {
+    public static void funcOperador(Operador oper, ListaPaquetes lp, ControlDominio cd, ListaClientes lc) throws IOException, ClassNotFoundException {
          System.out.println("Escriba su nombre de operador");
                 Scanner sc = new Scanner(System.in);
                 String nombreoper = sc.next();
@@ -116,11 +116,12 @@ public class Mensajeria {
 
                             op = sc.nextInt();
                         }
+                        cd.guardadoGeneral(lc, lp);
                     }
                 }
     }
     
-    public static void funCliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd){
+    public static void funCliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException{
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Escriba su nombre de usuario");
                 String nombre;
@@ -185,6 +186,7 @@ public class Mensajeria {
                             infoCliente();
                             op = sc.nextInt();
                         }
+                        cd.guardadoGeneral(lc, lp);
                     }
                 }
     }
@@ -207,7 +209,8 @@ public class Mensajeria {
             
             //OPERADOR
             if (tipo2.equals("operador")) {
-                funcOperador(oper, lp, cd);
+                funcOperador(oper, lp, cd, lc);
+
             }
             //CLIENTE
             else if (tipo2.equals("cliente")){
