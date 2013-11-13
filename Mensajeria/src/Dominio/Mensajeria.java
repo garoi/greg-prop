@@ -212,7 +212,7 @@ public class Mensajeria {
             else if (tipo2.equals("cliente")){
                 funCliente(lc, oper, lp, cd);
             }
-            else System.out.println("Aprende a escribir hijodeputa");   
+            else System.out.println("El tipo de usuario no existe.");   
         }
     }
 }
