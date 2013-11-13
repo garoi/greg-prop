@@ -18,7 +18,7 @@ public class Main {
     static CtrlPresentacion ctrlp;
     static Mensajeria msn;
     
-    public static void main(String args[]) {
+    public static void main(final String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -33,10 +33,8 @@ public class Main {
                 else if(i==2){ 
                     msn = new Mensajeria();
                     try {
-                        msn.main();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
+                        msn.main(args);
+                    } catch (IOException | ClassNotFoundException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }

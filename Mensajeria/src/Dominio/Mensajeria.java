@@ -4,174 +4,215 @@ import java.util.*;
 import java.lang.System;
 /**
  *
- * @author ivich
+ * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
  */
 public class Mensajeria {
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void info() {
-        System.out.println("Entra una opcion\n" + "1 = Crear ciudad");
-        System.out.println("2 = Añadir paquetes\n" + "3 = Calculo de la ruta");
-        System.out.println("0 = Cerrar");
+    public static void infoOperador() {
+        System.out.println("1 ver paquetes");
+        System.out.println("2 añadir ciudad");
+        System.out.println("3 modificar ciudad");
+        System.out.println("4 seleccionar paquetes y calcular ruta");
+        System.out.println("0 Salir");
     }
     
-    public static void main() throws IOException, ClassNotFoundException {
-        int IDclient = 0;
-        boolean operador = false;
-        //ControlDominio cd = new ControlDominio();
-        //int op;
-        Scanner sc = new Scanner(System.in);
-        //info();
-        //op = sc.nextInt();
-        ListaClientes lc = new ListaClientes();
-        //Cliente c = new Cliente();
-        //Paquete p = new Paquete();
-        Operador oper = new Operador();
-        boolean salida = false;
-        //Bucle principal
-        while(!salida){
-            
-            
-            Scanner sc2 = new Scanner(System.in);
-            String logreg;
-            
+    public static void infoCliente() {
+        System.out.println("1 anadir paquetes");
+        System.out.println("2 ver paquetes");
+        System.out.println("3 cancelar envio");
+        System.out.println("4 eliminar paquetes");
+        System.out.println("0 Salir");
+    }
+
+    public static void opcion(boolean operador, Operador oper, ListaClientes lc){
+            String logreg;    
+            Scanner sc = new Scanner(System.in);
             System.out.println("login o registro?");
-            logreg = sc2.next();
+            logreg = sc.next();
             if(logreg.equals("registro")){
-                
                 System.out.println("operador o cliente?");
-                String tipo = sc2.next();
-                if(tipo.equals("operador")){
-                    if(operador) System.out.println("Solo puede haber un operador");
-                        else{
-                        System.out.println("datos operador");
-                        oper.LeerOPerador();
+                String tipo = sc.next();
+                if (tipo.equals("operador")){
+                    if(operador) {
+                        System.out.println("Solo puede haber un operador");
+                    }
+                    else {
+                        System.out.println("Datos operador");
+                        oper.leerOperador();
                         operador = true;
-                        }
+                    }
                 }
                 else if (tipo.equals("cliente")){
-                     System.out.println("datos cliente");
-                        Cliente cl = new Cliente();
-                        cl.LeerCliente(cl,IDclient);
-                        lc.AnadirCliente(cl);
-                        ++IDclient;
+                    System.out.println("Datos cliente");
+                    Cliente cl = new Cliente();
+                    cl.leerCliente(cl);
+                    lc.anadirCliente(cl);
+                    //++idCliente;
                 }
             }
-            System.out.println("operador o cliente?");
-            String tipo2 = sc2.next();
-            if(tipo2.equals("operador")){}
-            else if(tipo2.equals("cliente")){
-                //Cliente cl = new Cliente();
-                System.out.println("escriba su nombre de usuario");
-                String nombre;
-                nombre = sc2.next();
-                boolean encontrado = false;
-                boolean exit = false;
+    
+    }
+    
+    public static void funcOperador(Operador oper, ListaPaquetes lp, ControlDominio cd, ListaClientes lc) throws IOException, ClassNotFoundException {
+         System.out.println("Escriba su nombre de operador");
+                Scanner sc = new Scanner(System.in);
+                String nombreoper = sc.next();
+                int encontradooper;
+                boolean exitoper = false;
                 
-                //Enctontrar nombre de ususario del cliente
-                encontrado =  lc.EncontrarCliente(nombre);
-                Scanner sc3 = new Scanner(System.in);
-                while(!encontrado){
+                //Enctontrar nombre de operador
+                if (oper.getNombreOperador().equals(nombreoper)) encontradooper = 1;
+                else encontradooper = -1;
+                
+                while(encontradooper < 0 && !exitoper){
+                    System.out.println("operador incorrecto");  
+                    System.out.println("pulse 1 para salir");                   
+                    System.out.println("pulse 2 para marcar otro nombre");
+                    int opcionoper;
+                    opcionoper = sc.nextInt();
+                    if (opcionoper == 1) {
+                        exitoper = true;
+                    }
+                    else {
+                        System.out.println("Vuelva a escribir el nombre");
+                        nombreoper = sc.nextLine();
+                        if (oper.getNombreOperador() == nombreoper) encontradooper = 1;
+                        else encontradooper = -1;
+                    }
+                }
+                //Checkear password del operador encontrado, salir si exit = true
+                if (encontradooper >= 0) {
+                    System.out.println("ingrese su password");
+                    boolean validpassoper = false;
+                    String passwordoper = sc.next();
+                    if(oper.getPassword().equals(passwordoper)){
+                        System.out.println("Acceso concedido");
+                        int op = 1;
+                        infoOperador();
+                        op = sc.nextInt();
+                        while(op != 0){
+                            infoOperador();
+                            //VER PAQUETES
+                            if (op == 1) {
+                                oper.verPaquetes();
+                            }
+                            //ANADIR CIUDAD
+                            else if (op == 2) {
+                                Mapa map = new Mapa();
+                                map.crearCiudad();
+                                String name = map.getNombreCiudad();
+                                cd.guardarMapa(map, name);
+                            }
+                            else if (op == 3) {
+                                Mapa m = (Mapa) cd.leerCiudad();
+                                m.imprimirCiudad();
+                            }
+                            else if (op == 4) {
+                            }
+
+                            op = sc.nextInt();
+                        }
+                        cd.guardadoGeneral(lc, lp);
+                    }
+                }
+    }
+    
+    public static void funCliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException{
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Escriba su nombre de usuario");
+                String nombre;
+                nombre = sc.next();
+                int encontrado;
+                boolean exit = false;
+                 encontrado =  lc.encontrarCliente(nombre);
+                while (encontrado < 0 && !exit) {
                     System.out.println("username incorrecto");  
                     System.out.println("pulse 1 para salir");                   
                     System.out.println("pulse 2 para marcar otro nombre");
                     int opcion;
-                    opcion = sc3.nextInt();
-                    if(opcion == 1){
+                    opcion = sc.nextInt();
+                    if (opcion == 1) {
                         exit = true;
                     }
-                    else{
-                    nombre = sc2.nextLine();
-                    encontrado =  lc.EncontrarCliente(nombre);                    
+                    else {
+                        System.out.println("Vuelva a escribir el nombre");
+                        nombre = sc.nextLine();
+                        encontrado =  lc.encontrarCliente(nombre);                    
                     }
                 }
-                //Checkear password del usuario encontrado, salir si exit = true
-                if(encontrado){
+                
+                if (encontrado >= 0) {
+                    Cliente cl = new Cliente();
+                    cl = lc.getCliente(encontrado);
                     System.out.println("ingrese su password");
                     boolean validpass = false;
                     String password;
-                    password = sc2.next();
-                    Cliente cl = new Cliente();
-                    cl = lc.getClient(nombre);
-                    if(cl.getPass().equals(password)){
-                        System.out.println("acceso concedido");
+                    password = sc.next();
+                    if (cl.getPassword().equals(password)) {
+                        System.out.println("Acceso concedido");
                         int op = 1;
-                        System.out.println("1 anadir paquetes");
-                        System.out.println("2 ver paquetes");
-                        System.out.println("3 cancelar envio");
-                        System.out.println("4 eliminar oinks");
-                        op = sc2.nextInt();
-                        while(op != 0){
-                            if(op == 1){
+                        infoCliente();
+                        op = sc.nextInt();
+                        while (op != 0) {
+                            if (op == 1) {
                                 Paquete p = new Paquete();
-                                p.LeerPaquete(cl.getIDCliente());
-                                lc.AnadirPaquete(p, cl.getIDCliente());                            
+                                p.leerPaquete(cl.getIdCliente());
+                                lp.anadirPaquete(p);
+                                lc.anadirPaquete(p, cl.getIdCliente());
+                                oper.anadirPaquete(p);
                             }
-                            else if(op == 2){
-                                lc.PacksClient(cl.getIDCliente());
+                            else if (op == 2) {
+                                lc.packsCliente(cl.getIdCliente());
                             }
-                            else if(op == 3){}
-                            else if(op == 4){}
-                            op = sc2.nextInt();
+                            else if (op == 3) {
+                                //Si el estado del paquete es: para enviar, lo eliminamos.
+                                System.out.println("Cual es el idPaquete?");
+                                int idPaq = sc.nextInt();
+                                lc.cancelarPaquete(cl, idPaq);
+                                oper.cancelarPaquete(idPaq);
+                                //Falta para quitarlo del operador
+                            }
+                            else if (op == 4) {
+                                //Si el estado es enviado lo eliminamos.
+                                System.out.println("Cual es el idPaquete?");
+                                int idPaq = sc.nextInt();
+                                lc.eliminarPaquete(cl, idPaq);
+                                oper.eliminarPaquete(idPaq);
+                            }
+                            infoCliente();
+                            op = sc.nextInt();
                         }
+                        cd.guardadoGeneral(lc, lp);
                     }
                 }
-                
-                
-            }
-            else System.out.println("Aprende a escribir hijodeputa");
+    }
+    
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ControlDominio cd = new ControlDominio();
+        int idCliente = 0;
+        int idPaquete = 0;
+        boolean operador = false;
+        Scanner sc = new Scanner(System.in);
+        ListaClientes lc = new ListaClientes();
+        Operador oper = new Operador();
+        boolean salida = false;
+        ListaPaquetes lp = new ListaPaquetes();
+        //Bucle principal
+        while (!salida) {
+            opcion(operador, oper, lc);
+            System.out.println("operador o cliente?");
+            String tipo2 = sc.next();
             
+            //OPERADOR
+            if (tipo2.equals("operador")) {
+                funcOperador(oper, lp, cd, lc);
+
             }
-            
-            
-            //salida = true;
-            
-            /*if (op == 1){ 
-                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/mapa1.txt"))) {
-                    Mapa m = new Mapa();
-                    m.CrearCiudad();
-                    m.ImprimirCiudad();
-                    oos.writeObject(m);
-                }
-                System.out.println("VOY A ESCRIBIR EL MAPA DESDE FICHERO");
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/mapa1.txt"))) {
-                    Mapa m2 = (Mapa) ois.readObject();
-                    m2.ImprimirCiudad();
-                }
-                
+            //CLIENTE
+            else if (tipo2.equals("cliente")){
+                funCliente(lc, oper, lp, cd);
             }
-            else if (op == 2){
-                //ListaPaquetes lp = new ListaPaquetes();
-                Paquete p = new Paquete();
-                p.LeerPaquete(IDclient);
-                lc.AnadirPaquete(p, IDclient);
-                //0op.AnadirPaquete(p);     
-            }
-            else if (op == 3) {
-                Scanner sc2 =  new Scanner(System.in);
-                String tipo;
-                System.out.println("operador o cliente?");
-                tipo = sc2.next();
-                if(tipo.equals("operador")){
-                    if(operador) System.out.println("Solo puede haber un operador");
-                    else{
-                    System.out.println("datos operador");
-                    oper.LeerOPerador();
-                    operador = true;
-                    }
-                }
-                else{
-                    System.out.println("datos cliente");
-                    Cliente cl = new Cliente();
-                    cl.LeerCliente(cl,IDclient);
-                    lc.AnadirCliente(cl);
-                    ++IDclient;
-                }
-            }
-            info();*/
-            //op = sc.nextInt();
+            else System.out.println("Aprende a escribir hijodeputa");   
         }
     }
-//}
+}

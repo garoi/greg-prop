@@ -7,55 +7,103 @@ import java.util.*;
 
 /**
  *
- * @author ivich
+ * @author Albert Gili
  */
 public class Cliente {
-    private int IDCliente;
+    private int idCliente;
     private String password;
-    private String NombreCliente;
-     ArrayList<Paquete> ListaPaquetes = new ArrayList<Paquete>();
+    private String nombreCliente;
+    ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
     
     public Cliente(){}
      
     public Cliente(String nombre, String contrasena){
-        NombreCliente = nombre;
+        nombreCliente = nombre;
         password = contrasena;
-        IDCliente = ListaPaquetes.size();
-    }
-     
-    public void LeerCliente(Cliente cl, int IDCliente){
-        System.out.println("Anadir el nombre del cliente");
-        Scanner sc = new Scanner(System.in);
-        NombreCliente = sc.next();
-        System.out.println("Anadir el password del cliente");
-        password = sc.next();
-        this.IDCliente = IDCliente;
+        idCliente = listaPaquetes.size();
     }
     
-    public void AnadePaquete(Paquete p){
-        ListaPaquetes.add(p);
+    public int getIdCliente() {
+        return idCliente;
+    }
+    
+    public void setIDcliente(int idCliente){
+        this.idCliente = idCliente;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public ArrayList<Paquete> getListaPaquetes() {
+        return listaPaquetes;
+
+    }
+     
+    public void leerCliente(Cliente cl){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Anadir el nombre del cliente");
+        nombreCliente = sc.next();
+        System.out.println("Anadir el password del cliente");
+        password = sc.next();
+    }
+    
+    public void anadirPaquete(Paquete p){
+        listaPaquetes.add(p);
         
     }
     
-    public void Ver_Lista(){
-        for(int i = 0; i < ListaPaquetes.size();++i){
-            System.out.print("IDpaquete"+ListaPaquetes.get(i).getIDPaquete() + " ");
-            System.out.print("Destino"+ListaPaquetes.get(i).getDestino()+ " ");
-            System.out.println("Estado"+ListaPaquetes.get(i).getEstado()+ " ");
-            
+    public void cancelarPaquete(int idPaquete) {
+        boolean encontrado = false;
+        int i = 0;
+        while (i < listaPaquetes.size() && !encontrado) {
+            if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
+                if (listaPaquetes.get(i).getEstado().equals("para enviar")) {
+                    listaPaquetes.remove(i);
+                    encontrado = true;
+                }
+            }
+            else {
+                ++i;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("Paquete no encontrado para este cliente");
         }
     }
     
-    public String getPass(){
-        return password;
+    public void eliminarPaquete(int idPaquete) {
+        boolean encontrado = false;
+        int i = 0;
+        while (i < listaPaquetes.size() && !encontrado) {
+            if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
+                if (listaPaquetes.get(i).getEstado().equals("enviado")) {
+                    listaPaquetes.remove(i);
+                    encontrado = true;
+                }
+                else {
+                    System.out.println("El paquete aun no se ha enviado, lo tienes que cancelar");
+                    encontrado = true;
+                }
+            }
+            else {
+                ++i;
+            }
+        }
+        if (encontrado) {
+            System.out.println("Paquete no encontrado para este cliente o no enviado");
+        }
     }
     
-    public int getIDCliente(){
-        return IDCliente;
+    public void verLista(){
+        for (int i = 0; i < listaPaquetes.size();++i) {
+            System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
+            System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");
+            System.out.println("Estado " + listaPaquetes.get(i).getEstado() + " ");
+        }
     }
-    
-    public String getNombre(){
-        return NombreCliente;
-    }
-
 }
