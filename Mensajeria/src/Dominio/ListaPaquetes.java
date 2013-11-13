@@ -1,11 +1,12 @@
 package Dominio;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Albert Gili
  */
-public class ListaPaquetes {
+public class ListaPaquetes implements Serializable {
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
      int idPaquete = 0;
     

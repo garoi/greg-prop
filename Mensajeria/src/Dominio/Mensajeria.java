@@ -7,10 +7,6 @@ import java.lang.System;
  * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
  */
 public class Mensajeria {
-    
-    
-    
-   
 
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
@@ -113,7 +109,7 @@ public class Mensajeria {
                             }
                             else if (op == 4) {
                             }
-
+                            infoOperador();
                             op = sc.nextInt();
                         }
                         cd.guardadoGeneral(lc, lp);
