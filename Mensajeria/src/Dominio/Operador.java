@@ -142,4 +142,23 @@ public class Operador {
         cd.cargarMapa(nombre);
     }*/
     
+    
+    private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
+        System.out.println("cuantos paquetes quiere eliminar de la lista?");
+        Scanner sc = new Scanner(System.in);
+        int numeliminados = sc.nextInt();
+        System.out.println("Indique los ID de los paquetes que desea eliminar");
+        for(int i = 0; i < numeliminados; ++i){
+            int idpaquete = sc.nextInt();
+        }
+    }
+    
+    public void modificarRuta(ControlDominio cd){
+        Ruta r = new Ruta();
+        r = cd.leerRuta();
+        ArrayList<Paquete> paquetes = new ArraList<>();
+        paquetes = r.getListaPaquetesRuta();
+        modificaListaPaquetes(paquetes);
+    }
+    
 }
