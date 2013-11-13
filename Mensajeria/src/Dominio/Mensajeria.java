@@ -11,8 +11,9 @@ public class Mensajeria {
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
-        System.out.println("3 seleccionar ciudad ciudad");
+        System.out.println("3 Seleccionar ciudad");
         System.out.println("4 seleccionar paquetes y calcular ruta");
+        System.out.println("5 modificar ruta");
         System.out.println("0 Salir");
     }
     
@@ -45,7 +46,7 @@ public class Mensajeria {
                 else if (tipo.equals("cliente")){
                     System.out.println("Datos cliente");
                     Cliente cl = new Cliente();
-                    cl.leerCliente(cl);
+                    cl.leerCliente();
                     lc.anadirCliente(cl);
                     //++idCliente;
                 }
@@ -107,6 +108,9 @@ public class Mensajeria {
                             }
                             else if (op == 4) {
                                 oper.calcularRuta(cd);
+                            }
+                            else if (op == 5){
+                                oper.modificarRuta(cd);
                             }
                             infoOperador();
                             op = sc.nextInt();

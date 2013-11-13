@@ -76,4 +76,5 @@ public class ControlDominio {
     public void guardadoGeneral(Object lc, Object lp) throws IOException {
         cp.guardadoGeneral(lc, lp);
     }
+    
 }
