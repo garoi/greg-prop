@@ -20,14 +20,26 @@ public class ListaPaquetes implements Serializable {
     public void packsCliente(int idCliente){
         for(int i = 0; i < listaPaquetes.size(); ++i){
             if(listaPaquetes.get(i).getIdCliente() == idCliente){
-                escribirPaquete(listaPaquetes.get(i));
+                escribirPaquete(i);
             }
         }
     }
     
-    public void escribirPaquete(Paquete p){
-        System.out.println("Destino paquete :\n");
-        System.out.println();
-        
+    public int tamanoListaPaquetes(){
+        return listaPaquetes.size();
+    }
+    
+    public void escribirPaquete(int idPaquete){
+        if(idPaquete > tamanoListaPaquetes()){
+            System.out.print("El paquete no existe");
+        }
+        else{
+            Paquete p = listaPaquetes.get(idPaquete);
+            System.out.print(p.getIdPaquete() + "\n");
+            System.out.print(p.getIdCliente() + "\n");
+            System.out.print(p.getCiudad() + "\n");
+            System.out.print(p.getDestino() + "\n");
+            System.out.print(p.getEstado() + "\n");
+        }
     }
 }
