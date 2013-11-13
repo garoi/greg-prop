@@ -17,7 +17,7 @@ public class Mensajeria {
         System.out.println("0 = Cerrar");
     }
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main() throws IOException, ClassNotFoundException {
         int IDclient = 0;
         boolean operador = false;
         //ControlDominio cd = new ControlDominio();

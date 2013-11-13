@@ -12,9 +12,16 @@ import java.util.*;
 public class Cliente {
     private int IDCliente;
     private String password;
-    private String NombreCliente;;
+    private String NombreCliente;
      ArrayList<Paquete> ListaPaquetes = new ArrayList<Paquete>();
     
+    public Cliente(){}
+     
+    public Cliente(String nombre, String contrasena){
+        NombreCliente = nombre;
+        password = contrasena;
+        IDCliente = ListaPaquetes.size();
+    }
      
     public void LeerCliente(Cliente cl, int IDCliente){
         System.out.println("Anadir el nombre del cliente");
@@ -50,5 +57,5 @@ public class Cliente {
     public String getNombre(){
         return NombreCliente;
     }
-    
+
 }
