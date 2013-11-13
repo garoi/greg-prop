@@ -15,10 +15,7 @@ public class ControlDominio {
     private String[] nombres;
     private float[][] ciudad;
         
-    private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
-        Operador o  = new Operador();
-        ArrayList<Integer> paquetesSeleccionados = new ArrayList<Integer>();
-        paquetesSeleccionados = o.seleccionarPaquetes();
+    private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo, ArrayList<Integer> paquetesSeleccionados) {
         subgrafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         nombresSubgrafo = new String[paquetesSeleccionados.size()];
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
@@ -29,26 +26,25 @@ public class ControlDominio {
         }
     }
 
-    private Integer[] calcularRuta() {
+    public void calcularRuta(ArrayList<Integer> paquetesSeleccionados) {
         float[][] subgrafo = null;
         String[] nombresSubgrafo = null;
-        crearSubgrafo(subgrafo, nombresSubgrafo);
+        crearSubgrafo(subgrafo, nombresSubgrafo, paquetesSeleccionados);
         Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
         r.setGrafo(subgrafo);
         r.setNombres(nombres);
-        Integer[] permutacion;
         System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
         String raplent =sc.nextLine();
         if (raplent.equals("rapidamente")) {
-            permutacion = r.calcularRapida();
+            r.calcularRapida();
         }
         else {
             r.calcularMinSpaTree();
-            permutacion = r.calcularChristofides();
+            r.calcularChristofides();
             //Llamar a la optimizacion
         }
-        return permutacion;
+        cp.guardarRuta(r);
     }
     
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
@@ -62,8 +58,19 @@ public class ControlDominio {
         for(int i = 0; i < ciudades.size(); ++i){
             System.out.println(ciudades.get(i));
         }
-        String nom = sc.nextLine();
-        return cp.leerCiudad(nom);
+        String nombre = sc.nextLine();
+        return cp.leerCiudad(nombre);
+    }
+    
+    public Object leerRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> rutas = new ArrayList<>();
+        rutas = cp.listarRutas();
+        for(int i = 0; i < rutas.size(); ++i){
+            System.out.println(rutas.get(i));
+        }
+        String nombre = sc.nextLine();
+        return cp.leerRuta(nombre);
     }
     
     public void guardadoGeneral(Object lc, Object lp) throws IOException {

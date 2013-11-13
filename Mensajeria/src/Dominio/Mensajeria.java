@@ -11,7 +11,7 @@ public class Mensajeria {
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
-        System.out.println("3 modificar ciudad");
+        System.out.println("3 seleccionar ciudad ciudad");
         System.out.println("4 seleccionar paquetes y calcular ruta");
         System.out.println("0 Salir");
     }
@@ -100,16 +100,13 @@ public class Mensajeria {
                             }
                             //ANADIR CIUDAD
                             else if (op == 2) {
-                                Mapa map = new Mapa();
-                                map.crearCiudad();
-                                String name = map.getNombreCiudad();
-                                cd.guardarMapa(map, name);
+                                oper.anadirCiudad(cd);
                             }
                             else if (op == 3) {
-                                Mapa m = (Mapa) cd.leerCiudad();
-                                m.imprimirCiudad();
+                                oper.cargarCiudad(cd);
                             }
                             else if (op == 4) {
+                                oper.calcularRuta(cd);
                             }
                             infoOperador();
                             op = sc.nextInt();

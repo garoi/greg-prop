@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class ControlPersistencia {
     
     PersistenciaMapas pm;
+    PersistenciaRutas pr;
     
     public ControlPersistencia() {
         pm = new PersistenciaMapas();
+        pr = new PersistenciaRutas();
     }
     
     public void guardarListaPaquetes(Object lp) throws IOException {
@@ -53,8 +55,20 @@ public class ControlPersistencia {
     public ArrayList<String> listarCiudades() {
         return pm.listarCiudades();
     }
-    public Object leerCiudad(String nom) throws FileNotFoundException, IOException, ClassNotFoundException{
-        return pm.leerCiudad(nom);
+    public Object leerCiudad(String nombre) throws FileNotFoundException, IOException, ClassNotFoundException{
+        return pm.leerCiudad(nombre);
+    }
+    
+    public ArrayList<String> listarRutas() {
+        return pr.listarRutas();
+    }
+    
+    public Object leerRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
+        return pr.leerRuta(nombre);
+    }
+    
+    public Object guardarRuta(Object x) {
+        return pr.guardarRuta(x);
     }
     
     public void guardadoGeneral(Object lc, Object lp) throws IOException {

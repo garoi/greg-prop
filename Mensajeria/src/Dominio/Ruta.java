@@ -9,29 +9,51 @@ import java.lang.System;
 public class Ruta implements Serializable {
     private String[] nombres;
     private float[][] grafo;
+    private Integer[] permutacion;
+    private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
+    private boolean verificada;
     
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    public String[] getNombres() {
-        return nombres;
-    }
-
     public void setNombres(String[] nombres) {
         this.nombres = nombres;
+    }
+    
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
+    }
+    
+    public void setListaPaquetesRuta(ArrayList<Paquete> listaPaquetesRuta) {
+        this.listaPaquetesRuta = listaPaquetesRuta;
+    }
+    
+    public void setVerificada(boolean verificada) {
+        this.verificada = verificada;
     }
 
     public float[][] getGrafo() {
         return grafo;
     }
-
-    public void setGrafo(float[][] grafo) {
-        this.grafo = grafo;
+    
+    public String[] getNombres() {
+        return nombres;
     }
     
-    public Integer[] calcularRapida() {
+    public Integer[] getPermutacion() {
+        return permutacion;
+    }
+    
+    public ArrayList<Paquete> getListaPaquetesRuta() {
+        return listaPaquetesRuta;
+    }
+
+    public boolean isVerificada() {
+        return verificada;
+    }
+    
+    public void calcularRapida() {
         SolveGreedy sg = new SolveGreedy(grafo);
-        Integer[] rutaRapida = sg.solve();
-        return rutaRapida;
+        permutacion = sg.solve();
     }
     
     public void calcularMinSpaTree() {
@@ -40,11 +62,11 @@ public class Ruta implements Serializable {
         mst.setNombres(nombres);
         MSTK = mst.MST();
     }
-    public Integer[] calcularChristofides() {
+    public void calcularChristofides() {
         Christofides ch = new Christofides();
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
         ch.setMST(MSTK);
-        return ch.buscaPermutacion();
+        permutacion = ch.buscaPermutacion();
     }
 }

@@ -73,6 +73,10 @@ public class Operador {
         return paquetesDestino;
     }
     
+    public void calcularRuta(ControlDominio cd) {
+        cd.calcularRuta(seleccionarPaquetes());
+    }
+    
     public void leerOperador() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del operador");
