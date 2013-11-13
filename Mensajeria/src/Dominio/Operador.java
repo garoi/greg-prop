@@ -160,7 +160,7 @@ public class Operador {
     public void modificarRuta(ControlDominio cd){
         Ruta r = new Ruta();
         r = cd.leerRuta();
-        ArrayList<Paquete> paquetes = new ArraList<>();
+        ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
         modificaListaPaquetes(paquetes);
     }
