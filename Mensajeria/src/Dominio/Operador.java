@@ -1,5 +1,7 @@
 package Dominio;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 /**
  *
@@ -120,4 +122,24 @@ public class Operador {
             System.out.println("Paquete no encontrado para este cliente");
         }
     }
+    
+    public void anadirCiudad(ControlDominio cd) throws IOException, ClassNotFoundException{
+        Mapa map = new Mapa();
+        map.crearCiudad();
+        String name = map.getNombreCiudad();
+        cd.guardarMapa(map, name);
+        
+    }
+    
+    public void cargarCiudad(ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException{
+        cd.leerCiudad();
+    }
+    
+    /*public void seleccionarCiudad(ControlDominio cd){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese el nombre de la ciudad que quiere cargar");
+        String nombre = sc.nextLine();
+        cd.cargarMapa(nombre);
+    }*/
+    
 }
