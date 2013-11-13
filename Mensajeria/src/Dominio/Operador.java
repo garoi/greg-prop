@@ -73,7 +73,7 @@ public class Operador {
         return paquetesDestino;
     }
     
-    public void calcularRuta(ControlDominio cd) {
+    public void calcularRuta(ControlDominio cd) throws IOException {
         cd.calcularRuta(seleccionarPaquetes());
     }
     
@@ -139,30 +139,56 @@ public class Operador {
         cd.leerCiudad();
     }
     
-    /*public void seleccionarCiudad(ControlDominio cd){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese el nombre de la ciudad que quiere cargar");
-        String nombre = sc.nextLine();
-        cd.cargarMapa(nombre);
-    }*/
+    private void ordenaPaquetes(ArrayList<Paquete> paquetes){
+        
+        //MERGESORT!!!! PRO AHORA ME DA PALO IMPLEMENTAR!!!!!!
+    }
     
+    private void buscayElimina(ArrayList<Paquete> paquetes, int idpaquete){
+        
+        //HAURIA DE SER UNA BINARY SEARCH PRO NECESSITEM EL VECTOR ORDENAT
+        for(int i = 0; i < paquetes.size(); ++i){
+            if(idpaquete == paquetes.get(i).getIdPaquete()){
+                paquetes.remove(i);
+            }
+        }
+    }
     
     private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
         int numeliminados = sc.nextInt();
         System.out.println("Indique los ID de los paquetes que desea eliminar");
+        ordenaPaquetes(paquetes);
         for(int i = 0; i < numeliminados; ++i){
             int idpaquete = sc.nextInt();
+            buscayElimina(paquetes, idpaquete);
         }
+        //ArrayList <Paquete> nuevospaquetes = new ArrayList<>();
+        System.out.println("cuantos paquetes quiere agregar de la lista?");
+        int numagregados = sc.nextInt();
+        System.out.println("Indique los ID de los paquetes que desea agregar");
+        for(int i = 0; i < numagregados; ++i){
+            int idagregado = sc.nextInt();
+            paquetes.add(listaPaquetesParaEntregar.get(idagregado));
+        }
+        
     }
     
-    public void modificarRuta(ControlDominio cd){
+    public void modificarRuta(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = new Ruta();
-        r = cd.leerRuta();
+        r = (Ruta) cd.leerRuta();
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
         modificaListaPaquetes(paquetes);
-    }
+        ArrayList <Integer> idpaquetes = new ArrayList<>();
+        //AIXO ES CRIMINAL PRO EM PENSABA K LI PASSAVES UN VECTOR DE PAQUETS I NO DE INTS!!!
+        for(int i = 0; i < paquetes.size(); ++i){
+            idpaquetes.add(paquetes.get(i).getIdPaquete());
+        }
+        System.out.println("Procedemos al recalculo de la ruta");
+        cd.calcularRuta(idpaquetes);
+        
+   }
     
 }

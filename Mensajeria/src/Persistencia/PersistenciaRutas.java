@@ -41,10 +41,9 @@ public class PersistenciaRutas {
     
     public void guardarRuta(Object x) throws IOException {
         Date fecha = new Date();
-        String nombreRuta = new String(fecha.getDate());
+        String nombreRuta = null;// = new String(fecha.getDate()); +fecha.getHours()
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/"+nombreRuta+"-mapa.txt"))) {
             oos.writeObject(x);
         }
     }
 }
-+fecha.getHours()
