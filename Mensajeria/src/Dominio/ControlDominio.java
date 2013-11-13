@@ -15,11 +15,6 @@ public class ControlDominio {
     private String[] nombres;
     private float[][] ciudad;
         
-    /*public ControlDominio() {
-        //No funciona porque falta hacer la clase SeleccionarDestinos del operador
-	inicializarControlDomini();
-    }*/
-        
     private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
         Operador o  = new Operador();
         ArrayList<Integer> paquetesSeleccionados = new ArrayList<Integer>();
@@ -34,28 +29,32 @@ public class ControlDominio {
         }
     }
 
-    private void inicializarControlDomini() {
+    private Integer[] calcularRuta() {
         float[][] subgrafo = null;
         String[] nombresSubgrafo = null;
         crearSubgrafo(subgrafo, nombresSubgrafo);
+        Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
-        r.setNombresSubgrafo(nombresSubgrafo);
-        r.setSubgrafo(subgrafo);
-        ArrayList< ArrayList<Pair> > ARM = new ArrayList<>();
-        //S'utlitza abaix -> ARM = r.MSTK;
-        
-        Christofides chris = new Christofides();
-        chris.setGrafo(ciudad);
-        chris.setMST(r.MSTK);
-        chris.setNombres(nombresSubgrafo);
-        int[] PermutacionsNoOpt = chris.buscaPermutacion();
-        
-        //Llamar a la optimizacion
+        r.setGrafo(subgrafo);
+        r.setNombres(nombres);
+        Integer[] permutacion;
+        System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
+        String raplent =sc.nextLine();
+        if (raplent.equals("rapidamente")) {
+            permutacion = r.calcularRapida();
+        }
+        else {
+            r.calcularMinSpaTree();
+            permutacion = r.calcularChristofides();
+            //Llamar a la optimizacion
+        }
+        return permutacion;
     }
     
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
         cp.guardarMapas(map, nombreciudad);
     }
+    
     public Object leerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         ArrayList<String> ciudades = new ArrayList<>();
@@ -66,6 +65,7 @@ public class ControlDominio {
         String nom = sc.nextLine();
         return cp.leerCiudad(nom);
     }
+    
     public void guardadoGeneral(Object lc, Object lp) throws IOException {
         cp.guardadoGeneral(lc, lp);
     }

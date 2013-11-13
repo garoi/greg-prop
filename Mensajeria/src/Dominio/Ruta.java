@@ -1,99 +1,50 @@
 package Dominio;
-import static java.lang.Double.POSITIVE_INFINITY;
+import java.io.Serializable;
 import java.util.*;
 import java.lang.System;
 /**
  *
  * @author Marc Garcia Roig
  */
-public class Ruta {
-    Mapa m = new Mapa();
-    private String[] nombresSubgrafo;
-    private float[][] subgrafo;
-
+public class Ruta implements Serializable {
+    private String[] nombres;
+    private float[][] grafo;
+    
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    //Modificadoras
-
-    public String[] getNombresSubgrafo() {
-        return nombresSubgrafo;
+    public String[] getNombres() {
+        return nombres;
     }
 
-    public float[][] getSubgrafo() {
-        return subgrafo;
+    public void setNombres(String[] nombres) {
+        this.nombres = nombres;
+    }
+
+    public float[][] getGrafo() {
+        return grafo;
+    }
+
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
     }
     
-    public void setNombresSubgrafo(String[] nombresSubgrafo) {
-        this.nombresSubgrafo = nombresSubgrafo;
-    }
-
-    public void setSubgrafo(float[][] subgrafo) {
-        this.subgrafo = subgrafo;
+    public Integer[] calcularRapida() {
+        SolveGreedy sg = new SolveGreedy(grafo);
+        Integer[] rutaRapida = sg.solve();
+        return rutaRapida;
     }
     
-    private void reconvertirArbol(float[][] arbol){
-        for (int j = 0; j < arbol.length; ++j) {
-            ArrayList<Pair> v = new ArrayList<Pair>();
-            for (int i = 0; i < arbol.length; ++i) {
-                if (arbol[i][j] != POSITIVE_INFINITY) {
-                    v.add(new Pair(i, arbol[i][j]));
-                }
-            }
-            MSTK.add(v);
-        }
+    public void calcularMinSpaTree() {
+        MinSpaTree mst = new MinSpaTree();
+        mst.setGrafo(grafo);
+        mst.setNombres(nombres);
+        MSTK = mst.MST();
     }
-    
-    /**
-     *Devuelve un arbol de expancion minima
-     */
-    public ArrayList< ArrayList<Pair> > mst() {
-        int numeroNodos = subgrafo.length;
-        int[] pertenece = new int[numeroNodos];
-        float[][] arbol = new float[numeroNodos][numeroNodos];
-        
-        for (int i = 0; i < numeroNodos; ++i) {
-            pertenece[i] = i;
-            for (int j = 0; j < numeroNodos; ++j) {
-                arbol[i][j] = (float) POSITIVE_INFINITY;
-            }
-        }
-        int nodoA, nodoB;
-        nodoA = nodoB = (int)POSITIVE_INFINITY;
-        int arcos = 1;
-        while (arcos < numeroNodos) {
-            float min = (float)POSITIVE_INFINITY;
-            for (int i = 0; i < numeroNodos; ++i) {
-                for (int j = 0; j < numeroNodos; ++j) {
-                    if (min > subgrafo[i][j] && pertenece[i] != pertenece[j]) {
-                        min = subgrafo[i][j];
-                        nodoA = i;
-                        nodoB = j;
-                    }
-                    if (j == i) arbol[i][j] = arbol[j][i] = 0;
-                }
-            }
-            if (pertenece[nodoA] != pertenece[nodoB]) {
-                arbol[nodoA][nodoB] = min;
-                arbol[nodoB][nodoA] = min;
-                int temp = pertenece[nodoB];
-                pertenece[nodoB] = pertenece[nodoA];
-                for(int k = 0; k < numeroNodos; k++) {
-                    if(pertenece[k] == temp) {
-                        pertenece[k] = pertenece[nodoA];
-                    }
-                }
-                arcos++;
-            }
-        }
-
-        reconvertirArbol(arbol);
-        for (int i = 0; i < arbol.length; ++i) {
-            System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());
-            for (int j = 0; j < MSTK.get(i).size(); ++j) {
-                System.out.println(MSTK.get(i).get(j).first() + " " + MSTK.get(i).get(j).second());
-            }
-        }
-        return MSTK;
+    public Integer[] calcularChristofides() {
+        Christofides ch = new Christofides();
+        ch.setGrafo(grafo);
+        ch.setNombres(nombres);
+        ch.setMST(MSTK);
+        return ch.buscaPermutacion();
     }
-
 }
