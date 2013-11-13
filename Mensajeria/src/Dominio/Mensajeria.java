@@ -28,7 +28,7 @@ public class Mensajeria {
             String logreg;    
             Scanner sc = new Scanner(System.in);
             System.out.println("login o registro?");
-            logreg = sc.next();
+            logreg = sc.nextLine();
             if(logreg.equals("registro")){
                 System.out.println("operador o cliente?");
                 String tipo = sc.next();
@@ -50,7 +50,9 @@ public class Mensajeria {
                     //++idCliente;
                 }
             }
-    
+            else if (!logreg.equals("login")) {
+                System.out.println("Escribe bien!");
+            }
     }
     
     public static void funcOperador(Operador oper, ListaPaquetes lp, ControlDominio cd, ListaClientes lc) throws IOException, ClassNotFoundException {
@@ -211,6 +213,9 @@ public class Mensajeria {
             //CLIENTE
             else if (tipo2.equals("cliente")){
                 funCliente(lc, oper, lp, cd);
+            }
+            else if (tipo2.equals("0")) {
+                salida = true;
             }
             else System.out.println("Aprende a escribir hijodeputa");   
         }

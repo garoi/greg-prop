@@ -28,7 +28,7 @@ public class Mapa implements Serializable {
     }
 
     public void crearCiudad(){
-        System.out.println("Escriu el nom de la ciutat");
+        System.out.println("Escribe el nombre de la ciudad");
         Scanner sc3 = new Scanner(System.in);
         String nombre = sc3.nextLine();
         setNombreCiudad(nombre);
@@ -38,10 +38,10 @@ public class Mapa implements Serializable {
         ciudad = new float[nodes][nodes];
         nombres = new String[nodes];
         for (int i = 0; i < nodes; ++i) {
-            System.out.println("Entra el nom del node " + (i+1));
+            System.out.println("Entra el nombre de los nodos " + (i+1));
             String nombreNodo = sc.next();
             nombres[i] = nombreNodo;
-            System.out.println("Ara les distancies dels node [0....inf]");
+            System.out.println("Ahora las distancias de los nodos [0....inf]");
             for (int j = 0; j < nodes; ++j) {
                 ciudad[i][j] = sc.nextInt();
             }

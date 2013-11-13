@@ -1,34 +1,32 @@
 package Dominio;
+
 import static java.lang.Double.POSITIVE_INFINITY;
-import java.util.*;
-import java.lang.System;
+import java.util.ArrayList;
+
 /**
  *
  * @author Marc Garcia Roig
  */
-public class Ruta {
-    Mapa m = new Mapa();
-    private String[] nombresSubgrafo;
-    private float[][] subgrafo;
-
+public class MinSpaTree {
+    private String[] nombres;
+    private float[][] grafo;
+    
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    //Modificadoras
-
-    public String[] getNombresSubgrafo() {
-        return nombresSubgrafo;
+    public String[] getNombres() {
+        return nombres;
     }
 
-    public float[][] getSubgrafo() {
-        return subgrafo;
-    }
-    
-    public void setNombresSubgrafo(String[] nombresSubgrafo) {
-        this.nombresSubgrafo = nombresSubgrafo;
+    public void setNombres(String[] nombres) {
+        this.nombres = nombres;
     }
 
-    public void setSubgrafo(float[][] subgrafo) {
-        this.subgrafo = subgrafo;
+    public float[][] getGrafo() {
+        return grafo;
+    }
+
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
     }
     
     private void reconvertirArbol(float[][] arbol){
@@ -46,8 +44,8 @@ public class Ruta {
     /**
      *Devuelve un arbol de expancion minima
      */
-    public ArrayList< ArrayList<Pair> > mst() {
-        int numeroNodos = subgrafo.length;
+    public ArrayList< ArrayList<Pair> > MST() {
+        int numeroNodos = grafo.length;
         int[] pertenece = new int[numeroNodos];
         float[][] arbol = new float[numeroNodos][numeroNodos];
         
@@ -64,8 +62,8 @@ public class Ruta {
             float min = (float)POSITIVE_INFINITY;
             for (int i = 0; i < numeroNodos; ++i) {
                 for (int j = 0; j < numeroNodos; ++j) {
-                    if (min > subgrafo[i][j] && pertenece[i] != pertenece[j]) {
-                        min = subgrafo[i][j];
+                    if (min > grafo[i][j] && pertenece[i] != pertenece[j]) {
+                        min = grafo[i][j];
                         nodoA = i;
                         nodoB = j;
                     }
@@ -85,15 +83,7 @@ public class Ruta {
                 arcos++;
             }
         }
-
         reconvertirArbol(arbol);
-        for (int i = 0; i < arbol.length; ++i) {
-            System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());
-            for (int j = 0; j < MSTK.get(i).size(); ++j) {
-                System.out.println(MSTK.get(i).get(j).first() + " " + MSTK.get(i).get(j).second());
-            }
-        }
         return MSTK;
     }
-
 }
