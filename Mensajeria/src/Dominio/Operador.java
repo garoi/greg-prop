@@ -73,7 +73,7 @@ public class Operador {
         return paquetesDestino;
     }
     
-    public void calcularRuta(ControlDominio cd) {
+    public void calcularRuta(ControlDominio cd) throws IOException {
         cd.calcularRuta(seleccionarPaquetes());
     }
     
@@ -139,14 +139,6 @@ public class Operador {
         cd.leerCiudad();
     }
     
-    /*public void seleccionarCiudad(ControlDominio cd){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese el nombre de la ciudad que quiere cargar");
-        String nombre = sc.nextLine();
-        cd.cargarMapa(nombre);
-    }*/
-    
-    
     private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
@@ -157,10 +149,10 @@ public class Operador {
         }
     }
     
-    public void modificarRuta(ControlDominio cd){
+    public void modificarRuta(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = new Ruta();
-        r = cd.leerRuta();
-        ArrayList<Paquete> paquetes = new ArraList<>();
+        r = (Ruta) cd.leerRuta();
+        ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
         modificaListaPaquetes(paquetes);
     }

@@ -67,8 +67,8 @@ public class ControlPersistencia {
         return pr.leerRuta(nombre);
     }
     
-    public Object guardarRuta(Object x) {
-        return pr.guardarRuta(x);
+    public void guardarRuta(Object x) throws IOException {
+        pr.guardarRuta(x);
     }
     
     public void guardadoGeneral(Object lc, Object lp) throws IOException {

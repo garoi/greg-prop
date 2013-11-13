@@ -26,7 +26,7 @@ public class ControlDominio {
         }
     }
 
-    public void calcularRuta(ArrayList<Integer> paquetesSeleccionados) {
+    public void calcularRuta(ArrayList<Integer> paquetesSeleccionados) throws IOException {
         float[][] subgrafo = null;
         String[] nombresSubgrafo = null;
         crearSubgrafo(subgrafo, nombresSubgrafo, paquetesSeleccionados);
