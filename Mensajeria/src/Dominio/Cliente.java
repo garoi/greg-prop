@@ -35,7 +35,7 @@ public class Cliente {
         return listaPaquetes;
     }
      
-    public void leerCliente(Cliente cl){
+    public void leerCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del cliente");
         nombreCliente = sc.next();
@@ -85,7 +85,7 @@ public class Cliente {
                 ++i;
             }
         }
-        if (encontrado) {
+        if (!encontrado) { // canviat de encontrado a !encontrado
             System.out.println("Paquete no encontrado para este cliente o no enviado");
         }
     }

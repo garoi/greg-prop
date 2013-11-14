@@ -45,7 +45,7 @@ public class Mensajeria {
                 else if (tipo.equals("cliente")){
                     System.out.println("Datos cliente");
                     Cliente cl = new Cliente();
-                    cl.leerCliente(cl);
+                    cl.leerCliente();
                     lc.anadirCliente(cl);
                     //++idCliente;
                 }
