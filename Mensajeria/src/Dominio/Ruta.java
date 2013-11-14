@@ -9,29 +9,56 @@ import java.lang.System;
 public class Ruta implements Serializable {
     private String[] nombres;
     private float[][] grafo;
+    private Integer[] permutacion;
+    private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
+    private boolean verificada;
+    private Mapa mapa;
     
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    public String[] getNombres() {
-        return nombres;
-    }
-
     public void setNombres(String[] nombres) {
         this.nombres = nombres;
+    }
+    
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
+    }
+    
+    public void setListaPaquetesRuta(ArrayList<Paquete> listaPaquetesRuta) {
+        this.listaPaquetesRuta = listaPaquetesRuta;
+    }
+    
+    public void setVerificada(boolean verificada) {
+        this.verificada = verificada;
     }
 
     public float[][] getGrafo() {
         return grafo;
     }
-
-    public void setGrafo(float[][] grafo) {
-        this.grafo = grafo;
+    
+    public String[] getNombres() {
+        return nombres;
     }
     
-    public Integer[] calcularRapida() {
+    public Integer[] getPermutacion() {
+        return permutacion;
+    }
+    
+    public ArrayList<Paquete> getListaPaquetesRuta() {
+        return listaPaquetesRuta;
+    }
+
+    public boolean isVerificada() {
+        return verificada;
+    }
+    
+     public Mapa getMapa() {
+        return mapa;
+    }
+    
+    public void calcularRapida() {
         SolveGreedy sg = new SolveGreedy(grafo);
-        Integer[] rutaRapida = sg.solve();
-        return rutaRapida;
+        permutacion = sg.solve();
     }
     
     public void calcularMinSpaTree() {
@@ -40,11 +67,47 @@ public class Ruta implements Serializable {
         mst.setNombres(nombres);
         MSTK = mst.MST();
     }
-    public Integer[] calcularChristofides() {
+    public void calcularChristofides() {
         Christofides ch = new Christofides();
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
         ch.setMST(MSTK);
-        return ch.buscaPermutacion();
+        permutacion = ch.buscaPermutacion();
+    }
+    public void optimizar() {
+        
+    }
+    
+    public void mostrarRuta() {
+        System.out.println("La ruta pasara por los siguientes puntos del mapa:");
+        for (int i = 0; i < permutacion.length; ++i) {
+            System.out.print(" " + permutacion[i]);
+        }
+    }
+    public void acceptarRuta() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Verificas la ruta. s/n");
+        String ord = sc.nextLine();
+        if (ord.equals("s")) {
+            setVerificada(true);
+        }
+        else {
+            setVerificada(false);
+        }
+    }
+    
+    public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
+        mapa = map;
+        grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
+        nombres = new String[paquetesSeleccionados.size()];
+        String[] nombresCiudad = mapa.getNombres();
+        float[][] ciudad = mapa.getCiudad();
+        for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
+            nombres[i] = paquetesSeleccionados.get(i).getDestino();
+            for (int j = 0; j < paquetesSeleccionados.size(); ++j) {
+                //Fer la busqueta de desti del paquet a nombresCiudad y ya tindre el index
+                grafo[i][j] = ciudad[paquetesSeleccionados.get(i)][paquetesSeleccionados.get(j)];
+            }
+        }
     }
 }

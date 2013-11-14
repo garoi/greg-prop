@@ -37,7 +37,8 @@ public class Cliente {
      
     public void leerCliente(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Anadir el nombre del cliente");
+        System.out.println("Anadir el nombre del client"
+                + "e");
         nombreCliente = sc.next();
         System.out.println("Anadir el password del cliente");
         password = sc.next();

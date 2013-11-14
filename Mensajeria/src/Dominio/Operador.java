@@ -11,6 +11,7 @@ public class Operador {
     private String nombreOperador;
     private String password;
     private final ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
+    private Mapa mapa;
     
     public String getNombreOperador() {
         return nombreOperador;
@@ -52,9 +53,18 @@ public class Operador {
         }
     }
     
+    public Paquete buscarPaquete(int idPaquete) {
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
+                return listaPaquetesParaEntregar.get(i);
+            }
+        }
+        return null;
+    }
+    
     //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
-    public ArrayList<Integer> seleccionarPaquetes() {
-        ArrayList<Integer> paquetesDestino = new ArrayList<Integer>();
+    public ArrayList<Paquete> seleccionarPaquetes() {
+        ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
@@ -62,15 +72,56 @@ public class Operador {
             System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
             System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
         }
-        System.out.println("Para parar de entrar(seleccionar) paquetes pulsa 0"); 
+        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa 0"); 
         int idPaquete = sc.nextInt();
-        paquetesDestino.add(idPaquete);
+        paquetesDestino.add(buscarPaquete(idPaquete));
         while (idPaquete != 0) {
             idPaquete = sc.nextInt();
-            paquetesDestino.add(idPaquete);
+            paquetesDestino.add(buscarPaquete(idPaquete));
         }
         paquetesDestino.remove(paquetesDestino.size() - 1);
         return paquetesDestino;
+    }
+    
+    public void calcularRuta(ControlDominio cd) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Quieres calcular la ruta de hoy y de este turno? s/n");
+        String ord = sc.nextLine();
+        Date date = new Date();
+        String turno;
+        if (ord.equals("s")) {
+            if (date.getHours() > 9 & date.getHours()<15) turno = "-mañana";
+            else turno = "-tarde";
+            String fecha = String.valueOf(date.getDate()+"."+(date.getMonth()+1)+"."+(date.getYear()-100));
+            fecha = fecha + turno;
+                cd.calcularRuta(seleccionarPaquetes(), fecha, mapa);
+            }
+        else {
+            System.out.println("Entra la fecha (dd.mm.aa)");
+            String fecha = sc.nextLine();
+            String ano = fecha.substring(6, fecha.length());
+            String mes = fecha.substring(3, fecha.length()-3);
+            String dia = fecha.substring(0, fecha.length()-6);
+            if (ano.compareTo(String.valueOf(date.getYear()-100)) > 0) {
+                System.out.println("La fecha tiene que ser superios a la fecha actual");
+            }
+            else {
+                if (mes.compareTo(String.valueOf(date.getMonth()+1)) > 0) {
+                    System.out.println("La fecha tiene que ser superios a la fecha actual");
+                }
+                else {
+                    if (dia.compareTo(String.valueOf(date.getDate())) > 0) {
+                        System.out.println("La fecha tiene que ser superios a la fecha actual");
+                    }
+                    else {
+                        System.out.println("Entra el turno (mañana/tarde)");
+                        turno = "-"+sc.nextLine();
+                        fecha = fecha + turno;
+                        cd.calcularRuta(seleccionarPaquetes(), fecha, mapa);
+                    }
+                }
+            }
+        }
     }
     
     public void leerOperador() {
@@ -132,14 +183,61 @@ public class Operador {
     }
     
     public void cargarCiudad(ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException{
-        cd.leerCiudad();
+        mapa = cd.leerCiudad();
     }
     
-    /*public void seleccionarCiudad(ControlDominio cd){
+    private void ordenaPaquetes(ArrayList<Paquete> paquetes){
+        
+        //MERGESORT!!!! PRO AHORA ME DA PALO IMPLEMENTAR!!!!!!
+        //PUES MIRAQUE ES FACIL; SOLO TIENES QUE LLAMAR A UNA PUTA FUNCION; YA LO HICE TODO YO
+        //HIJOPUTA!!! xD
+    }
+    
+    private void buscayElimina(ArrayList<Paquete> paquetes, int idpaquete){
+        
+        //HAURIA DE SER UNA BINARY SEARCH PRO NECESSITEM EL VECTOR ORDENAT
+        for(int i = 0; i < paquetes.size(); ++i){
+            if(idpaquete == paquetes.get(i).getIdPaquete()){
+                paquetes.remove(i);
+            }
+        }
+    }
+    
+    private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
+        System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese el nombre de la ciudad que quiere cargar");
-        String nombre = sc.nextLine();
-        cd.cargarMapa(nombre);
-    }*/
+        int numeliminados = sc.nextInt();
+        System.out.println("Indique los ID de los paquetes que desea eliminar");
+        ordenaPaquetes(paquetes);
+        for(int i = 0; i < numeliminados; ++i){
+            int idpaquete = sc.nextInt();
+            buscayElimina(paquetes, idpaquete);
+        }
+        //ArrayList <Paquete> nuevospaquetes = new ArrayList<>();
+        System.out.println("cuantos paquetes quiere agregar de la lista?");
+        int numagregados = sc.nextInt();
+        System.out.println("Indique los ID de los paquetes que desea agregar");
+        for(int i = 0; i < numagregados; ++i){
+            int idagregado = sc.nextInt();
+            paquetes.add(listaPaquetesParaEntregar.get(idagregado));
+        }
+        
+    }
+    
+    public void modificarRuta(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
+        Ruta r = new Ruta();
+        r = (Ruta) cd.leerRuta();
+        ArrayList<Paquete> paquetes = new ArrayList<>();
+        paquetes = r.getListaPaquetesRuta();
+        modificaListaPaquetes(paquetes);
+        ArrayList <Integer> idpaquetes = new ArrayList<>();
+        //AIXO ES CRIMINAL PRO EM PENSABA K LI PASSAVES UN VECTOR DE PAQUETS I NO DE INTS!!!
+        for(int i = 0; i < paquetes.size(); ++i){
+            idpaquetes.add(paquetes.get(i).getIdPaquete());
+        }
+        System.out.println("Procedemos al recalculo de la ruta");
+        cd.calcularRuta(idpaquetes);
+        
+   }
     
 }

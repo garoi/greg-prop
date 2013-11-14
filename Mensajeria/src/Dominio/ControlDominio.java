@@ -11,44 +11,29 @@ import java.io.IOException;
  */
 public class ControlDominio {
     ControlPersistencia cp = new ControlPersistencia();
-    Mapa m = new Mapa();
-    private String[] nombres;
-    private float[][] ciudad;
         
-    private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo) {
-        Operador o  = new Operador();
-        ArrayList<Integer> paquetesSeleccionados = new ArrayList<Integer>();
-        paquetesSeleccionados = o.seleccionarPaquetes();
-        subgrafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
-        nombresSubgrafo = new String[paquetesSeleccionados.size()];
-        for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
-            nombresSubgrafo[i] = nombres[paquetesSeleccionados.get(i)];
-            for (int j = 0; j < paquetesSeleccionados.size(); ++j) {
-                subgrafo[i][j] = ciudad[paquetesSeleccionados.get(i)][paquetesSeleccionados.get(j)];
-            }
-        }
-    }
-
-    private Integer[] calcularRuta() {
-        float[][] subgrafo = null;
-        String[] nombresSubgrafo = null;
-        crearSubgrafo(subgrafo, nombresSubgrafo);
+    public void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Mapa mapa) throws IOException {
         Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
-        r.setGrafo(subgrafo);
-        r.setNombres(nombres);
-        Integer[] permutacion;
+        r.crearGrafo(paquetesSeleccionados, mapa);
         System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
-        String raplent =sc.nextLine();
+        String raplent = sc.nextLine();
         if (raplent.equals("rapidamente")) {
-            permutacion = r.calcularRapida();
+            r.calcularRapida();
         }
         else {
             r.calcularMinSpaTree();
-            permutacion = r.calcularChristofides();
+            r.calcularChristofides();
             //Llamar a la optimizacion
         }
-        return permutacion;
+        r.mostrarRuta();
+        r.acceptarRuta();
+        if (r.isVerificada()) {
+            cp.guardarRuta(r, fecha, true);
+        }
+        else {
+            cp.guardarRuta(r, fecha, false);
+        }
     }
     
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
@@ -62,8 +47,19 @@ public class ControlDominio {
         for(int i = 0; i < ciudades.size(); ++i){
             System.out.println(ciudades.get(i));
         }
-        String nom = sc.nextLine();
-        return cp.leerCiudad(nom);
+        String nombre = sc.nextLine();
+        return cp.leerCiudad(nombre);
+    }
+    
+    public Object leerRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> rutas = new ArrayList<>();
+        rutas = cp.listarRutas();
+        for(int i = 0; i < rutas.size(); ++i){
+            System.out.println(rutas.get(i));
+        }
+        String nombre = sc.nextLine();
+        return cp.leerRuta(nombre);
     }
     
     public void guardadoGeneral(Object lc, Object lp) throws IOException {
