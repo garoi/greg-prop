@@ -29,6 +29,7 @@ public class DriverListaClientes {
         System.out.print("5: cancelarPaquete" + "\n");
         System.out.print("6: eliminarPaquete" + "\n");
         System.out.print("7: packsCliente" + "\n");
+        System.out.print("8: tamanoListaClientes" + "\n");
         System.out.print("0: Finalizar" + "\n");
         
         Scanner sc = new Scanner(System.in);
@@ -37,14 +38,16 @@ public class DriverListaClientes {
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
-                System.out.print(lc.getCliente(0).getNombreCliente() + "\n");
+                System.out.print("Introduce id del cliente" + "\n");
+                int id = sc.nextInt();
+                if(id < lc.tamanoListaClientes()){
+                    System.out.print(lc.getCliente(id).getNombreCliente() + "\n");
+                }
+                else System.out.print("No existe un cliente con este id" + "\n");
             }
             else if(op == 2){
                 Cliente c = new Cliente();
                 c.leerCliente();
-                System.out.print("Entra el id del cliente" + "\n");
-                int idCliente = sc.nextInt();
-                c.setIDcliente(idCliente);
                 lc.anadirCliente(c);
             }
             else if(op == 3){
@@ -84,6 +87,9 @@ public class DriverListaClientes {
                 System.out.print("Entra el id del cliente");
                 int idCliente = sc.nextInt();
                 lc.packsCliente(idCliente);
+            }
+            else if(op == 8){
+                System.out.print(lc.tamanoListaClientes() + "\n");
             }
             else System.out.print("Opcion Incorrecta vuelve seleccionar una opcion" + "\n");
             
