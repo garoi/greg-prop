@@ -6,6 +6,8 @@
 
 package Dominio;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -17,7 +19,7 @@ public class DriverListaPaquetes {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         // TODO code application logic here
         System.out.print("Selecciona funcion a probar" + "\n");
         System.out.print("1: anadirPaquete" + "\n");
@@ -27,6 +29,7 @@ public class DriverListaPaquetes {
         System.out.print("0: Finalizar" + "\n");
         Scanner sc = new Scanner(System.in);
         ListaPaquetes lp = new ListaPaquetes();
+        ControlDominio cd = new ControlDominio();
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
@@ -34,7 +37,7 @@ public class DriverListaPaquetes {
                 System.out.print("Crea un paquete para poder anadirlo" + "\n");
                 System.out.print("Entra el id. del cliente" + "\n");
                 int idcliente = sc.nextInt();
-                p.leerPaquete(idcliente);
+                p.leerPaquete(idcliente,cd);
                 lp.anadirPaquete(p);
             }
             else if(op == 2){

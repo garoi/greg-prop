@@ -33,7 +33,7 @@ public class ListaClientes implements Serializable {
                 return i;
             }
         }
-        System.out.println("no he encontrao una mierda");
+        System.out.println("cliente no encontrado");
         return -1;
     }
     

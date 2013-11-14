@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package Dominio;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -12,14 +14,15 @@ import java.util.*;
 public class DriverPaquete {
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         //FUNCION LECTORA
         Scanner sc = new Scanner(System.in);
         System.out.println("procedemos a leer el paquete");
         System.out.println("Escriba un identificador de cliente (entero):");
         int idCliente = sc.nextInt();
         Paquete p = new Paquete();
-        p.leerPaquete(idCliente);
+        ControlDominio cd = new ControlDominio();
+        p.leerPaquete(idCliente,cd);
         //CONSULTORAS 
          System.out.print("Destino :");
          System.out.println(p.getDestino());
