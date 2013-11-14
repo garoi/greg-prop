@@ -49,6 +49,10 @@ public class ListaClientes implements Serializable {
         Cliente c = listaClientes.get(idCliente);
         c.verLista();
     }
+    
+    public int tamanoListaClientes(){
+        return listaClientes.size();
+    }
        
 }
     
