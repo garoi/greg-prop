@@ -28,6 +28,7 @@ public class ControlDominio {
         }
         r.mostrarRuta();
         r.acceptarRuta();
+        r.setFecha(fecha);
         if (r.isVerificada()) {
             cp.guardarRuta(r, fecha, true);
         }
@@ -58,11 +59,24 @@ public class ControlDominio {
         for(int i = 0; i < rutas.size(); ++i){
             System.out.println(rutas.get(i));
         }
+        System.out.println("Elige la ciudad:");
         String nombre = sc.nextLine();
         return cp.leerRuta(nombre);
     }
     
-    public void guardadoGeneral(Object lc, Object lp) throws IOException {
-        cp.guardadoGeneral(lc, lp);
+    public Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
+        return cp.leerListaPaquetes();
+    }
+    
+    public Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
+        return cp.leerListaClientes();
+    }
+    
+    public Object leerOperador() throws IOException, ClassNotFoundException {
+        return cp.leerOperador();
+    }
+    
+    public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
+        cp.guardadoGeneral(lc, lp, oper);
     }
 }

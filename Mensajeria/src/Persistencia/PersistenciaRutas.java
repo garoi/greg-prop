@@ -39,26 +39,33 @@ public class PersistenciaRutas {
     }
     
     public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
+        System.out.println("CR");
         if (!verificada) {
+            System.out.println("CR1");
             String nombreRuta = data + "-NO_verificada-ruta.txt";
+            
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             }
         }
         else {
+            System.out.println("CR2");
             File directorio = new File ("Data/Rutas/");
             File[] nombres = directorio.listFiles();
             String nombreFichero;
             for(File file:nombres) {
+                System.out.println("CR3");
                 nombreFichero = file.getName();
                 boolean borrar = nombreFichero.endsWith(data+"-NO_verificada-ruta.txt");
                 if (borrar) {
+                    System.out.println("CR4");
                     file.delete();
                 }
-                String nombreRuta = data + "-Verificada-ruta.txt";
-                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
-                    oos.writeObject(x);
-                }
+            }
+            System.out.println("CR5");
+            String nombreRuta = data + "-Verificada-ruta.txt";
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
+                oos.writeObject(x);
             }
         }
     }

@@ -48,6 +48,19 @@ public class ControlPersistencia {
         }
     }
     
+    public void guardarOperador(Object oper) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
+            oos.writeObject(oper);
+        }
+    }
+    
+    public Object leerOperador() throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Operador.txt"))) {
+            Object oper = ois.readObject();
+            return oper;
+        }
+    }
+    
     public void guardarMapas(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
         pm.guardarMapa(x, nombreCiudad);
     }
@@ -68,11 +81,13 @@ public class ControlPersistencia {
     }
     
     public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
+        System.out.println("CP");
         pr.guardarRuta(x, data, verificada);
     }
     
-    public void guardadoGeneral(Object lc, Object lp) throws IOException {
+    public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
         guardarListaClientes(lc);
         guardarListaPaquetes(lp);
+        guardarOperador(oper);
     }
 }

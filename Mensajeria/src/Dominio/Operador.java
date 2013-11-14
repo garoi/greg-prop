@@ -236,8 +236,8 @@ public class Operador implements Serializable {
         String nom = map.getNombreCiudad();
         ArrayList <Integer> idpaquetes = new ArrayList<>();
         System.out.println("Procedemos al recalculo de la ruta");
-        cd.calcularRuta(paquetes, nom, map);
-        
+        String fecha = r.getFecha();
+        cd.calcularRuta(paquetes, fecha, map);
    }
     
 }

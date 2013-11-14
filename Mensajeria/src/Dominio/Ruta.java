@@ -13,7 +13,7 @@ public class Ruta implements Serializable {
     private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
     private boolean verificada;
     private Mapa mapa;
-     
+    private String fecha;
     
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
@@ -31,6 +31,10 @@ public class Ruta implements Serializable {
     
     public void setVerificada(boolean verificada) {
         this.verificada = verificada;
+    }
+    
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public float[][] getGrafo() {
@@ -55,6 +59,10 @@ public class Ruta implements Serializable {
     
      public Mapa getMapa() {
         return mapa;
+    }
+     
+    public String getFecha() {
+        return fecha;
     }
     
     public void calcularRapida() {
@@ -90,10 +98,10 @@ public class Ruta implements Serializable {
         System.out.println("Verificas la ruta. s/n");
         String ord = sc.nextLine();
         if (ord.equals("s")) {
-            setVerificada(true);
+            verificada = true;
         }
         else {
-            setVerificada(false);
+            verificada = false;
         }
     }
     

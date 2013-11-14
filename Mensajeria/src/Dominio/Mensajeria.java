@@ -115,7 +115,7 @@ public class Mensajeria {
                             infoOperador();
                             op = sc.nextInt();
                         }
-                        cd.guardadoGeneral(lc, lp);
+                        cd.guardadoGeneral(lc, lp, oper);
                     }
                 }
     }
@@ -127,7 +127,7 @@ public class Mensajeria {
                 nombre = sc.next();
                 int encontrado;
                 boolean exit = false;
-                 encontrado =  lc.encontrarCliente(nombre);
+                encontrado =  lc.encontrarCliente(nombre);
                 while (encontrado < 0 && !exit) {
                     System.out.println("username incorrecto");  
                     System.out.println("pulse 1 para salir");                   
@@ -185,22 +185,22 @@ public class Mensajeria {
                             infoCliente();
                             op = sc.nextInt();
                         }
-                        cd.guardadoGeneral(lc, lp);
+                        cd.guardadoGeneral(lc, lp, oper);
                     }
                 }
     }
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ControlDominio cd = new ControlDominio();
-        //cd.cargaTotal();
+        
         int idCliente = 0;
         int idPaquete = 0;
         boolean operador = false;
         Scanner sc = new Scanner(System.in);
-        ListaClientes lc = new ListaClientes();
-        Operador oper = new Operador();
+        ListaClientes lc = (ListaClientes) cd.leerListaClientes();
+        Operador oper = (Operador) cd.leerOperador();
         boolean salida = false;
-        ListaPaquetes lp = new ListaPaquetes();
+        ListaPaquetes lp = (ListaPaquetes) cd.leerListaPaquetes();
         //Bucle principal
         while (!salida) {
             opcion(operador, oper, lc);
