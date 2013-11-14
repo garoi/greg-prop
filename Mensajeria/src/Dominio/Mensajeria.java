@@ -192,6 +192,7 @@ public class Mensajeria {
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ControlDominio cd = new ControlDominio();
+        cd.cargaTotal();
         int idCliente = 0;
         int idPaquete = 0;
         boolean operador = false;
