@@ -11,14 +11,11 @@ import java.io.IOException;
  */
 public class ControlDominio {
     ControlPersistencia cp = new ControlPersistencia();
-    Mapa m = new Mapa();
-    private String[] nombres;
-    private float[][] ciudad;
         
     public void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Mapa mapa) throws IOException {
         Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
-        r.crearGrafo(paquetesSeleccionados);
+        r.crearGrafo(paquetesSeleccionados, mapa);
         System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
         String raplent = sc.nextLine();
         if (raplent.equals("rapidamente")) {
@@ -68,5 +65,4 @@ public class ControlDominio {
     public void guardadoGeneral(Object lc, Object lp) throws IOException {
         cp.guardadoGeneral(lc, lp);
     }
-    
 }
