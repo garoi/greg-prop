@@ -1,10 +1,12 @@
 package Dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marc
  */
-public class Pair {
+public class Pair implements Serializable{
     private int first;
     private float second;
     

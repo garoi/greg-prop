@@ -13,6 +13,7 @@ public class Ruta implements Serializable {
     private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
     private boolean verificada;
     private Mapa mapa;
+     
     
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
@@ -100,13 +101,11 @@ public class Ruta implements Serializable {
         mapa = map;
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         nombres = new String[paquetesSeleccionados.size()];
-        String[] nombresCiudad = mapa.getNombres();
         float[][] ciudad = mapa.getCiudad();
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
-            for (int j = 0; j < paquetesSeleccionados.size(); ++j) {
-                //Fer la busqueta de desti del paquet a nombresCiudad y ya tindre el index
-                grafo[i][j] = ciudad[paquetesSeleccionados.get(i)][paquetesSeleccionados.get(j)];
+            for (int j = 0; j < paquetesSeleccionados.size(); ++j){
+                grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getidDestino()][paquetesSeleccionados.get(j).getidDestino()];
             }
         }
     }

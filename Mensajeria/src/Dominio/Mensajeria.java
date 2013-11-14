@@ -120,7 +120,7 @@ public class Mensajeria {
                 }
     }
     
-    public static void funCliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException{
+    public static void funCliente(ListaClientes lc, Operador oper, ListaPaquetes lp, ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Escriba su nombre de usuario");
                 String nombre;
@@ -159,7 +159,7 @@ public class Mensajeria {
                         while (op != 0) {
                             if (op == 1) {
                                 Paquete p = new Paquete();
-                                p.leerPaquete(cl.getIdCliente());
+                                p.leerPaquete(cl.getIdCliente(), cd);
                                 lp.anadirPaquete(p);
                                 lc.anadirPaquete(p, cl.getIdCliente());
                                 oper.anadirPaquete(p);
@@ -192,7 +192,7 @@ public class Mensajeria {
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ControlDominio cd = new ControlDominio();
-        cd.cargaTotal();
+        //cd.cargaTotal();
         int idCliente = 0;
         int idPaquete = 0;
         boolean operador = false;

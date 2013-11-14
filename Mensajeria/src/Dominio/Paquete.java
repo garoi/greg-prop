@@ -1,13 +1,18 @@
 package Dominio;
+import java.io.FileNotFoundException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 import java.lang.System;
 /**
  *
  * @author Albert Gili
  */
-public class Paquete {
+public class Paquete implements Serializable{
     private int idPaquete;
     private int idCliente;
+    private int idDestino;
     private String ciudad;
     private String destino;
     private String estado;
@@ -35,7 +40,10 @@ public class Paquete {
     public String getCiudad(){
         return ciudad;
     }
-
+    
+    public int getidDestino(){
+        return idDestino;
+    }
     //MODIFICADORAS
     public void setCiudad(String ciudad){
         this.ciudad = ciudad;
@@ -60,16 +68,29 @@ public class Paquete {
     }
   
     //LECTORAS
-    public void leerPaquete(int idCliente) {
+    public void leerPaquete(int idCliente, ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Escriba la ciudad");
-        this.ciudad = sc.nextLine();
+        Mapa mapa = (Mapa) cd.leerCiudad();
+        String[]nombresPuntos;
+        nombresPuntos = mapa.getNombres();
         System.out.println("Destino del paquete?");
         String destinoPaquete = sc.nextLine();
-        setDestino(destinoPaquete);
-        String estadoPaquete = "para enviar";
-        setEstado(estadoPaquete);
-        setIdCliente(idCliente);
+        boolean encontrado = false;
+        for(int i = 0; i < nombresPuntos.length & !encontrado; ++i){
+            if(nombresPuntos[i].equals(destinoPaquete)){
+                idDestino = i; 
+                encontrado = true;
+            }
+        }
+        if(!encontrado){
+            System.out.println("El destino no existe");
+        }
+        else{
+            setDestino(destinoPaquete);
+            String estadoPaquete = "para enviar";
+            setEstado(estadoPaquete);
+            setIdCliente(idCliente);
+        }
     }
     
     public static class IdPaqueteComparator implements Comparator<Paquete> {

@@ -2,12 +2,13 @@ package Dominio;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 /**
  *
  * @author Marc Garcia
  */
-public class Operador {
+public class Operador implements Serializable {
     private String nombreOperador;
     private String password;
     private final ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
@@ -72,10 +73,10 @@ public class Operador {
             System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
             System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
         }
-        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa 0"); 
+        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa 9"); 
         int idPaquete = sc.nextInt();
         paquetesDestino.add(buscarPaquete(idPaquete));
-        while (idPaquete != 0) {
+        while (idPaquete != 9) {
             idPaquete = sc.nextInt();
             paquetesDestino.add(buscarPaquete(idPaquete));
         }
@@ -183,7 +184,7 @@ public class Operador {
     }
     
     public void cargarCiudad(ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException{
-        mapa = cd.leerCiudad();
+        mapa = (Mapa) cd.leerCiudad();
     }
     
     private void ordenaPaquetes(ArrayList<Paquete> paquetes){
@@ -230,13 +231,12 @@ public class Operador {
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
         modificaListaPaquetes(paquetes);
+        Mapa map = new Mapa();
+        map = r.getMapa();
+        String nom = map.getNombreCiudad();
         ArrayList <Integer> idpaquetes = new ArrayList<>();
-        //AIXO ES CRIMINAL PRO EM PENSABA K LI PASSAVES UN VECTOR DE PAQUETS I NO DE INTS!!!
-        for(int i = 0; i < paquetes.size(); ++i){
-            idpaquetes.add(paquetes.get(i).getIdPaquete());
-        }
         System.out.println("Procedemos al recalculo de la ruta");
-        cd.calcularRuta(idpaquetes);
+        cd.calcularRuta(paquetes, nom, map);
         
    }
     

@@ -3,13 +3,14 @@
  * and open the template in the editor.
  */
 package Dominio;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Albert Gili
  */
-public class Cliente {
+public class Cliente implements Serializable {
     private int idCliente;
     private String password;
     private String nombreCliente;
