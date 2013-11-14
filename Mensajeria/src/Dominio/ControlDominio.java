@@ -10,8 +10,23 @@ import java.io.IOException;
  * @author Marc Garcia Roig
  */
 public class ControlDominio {
-    ControlPersistencia cp = new ControlPersistencia();
+
+    private ControlPersistencia cp;
+    private ListaClientes lc;
+    private Operador oper;
+    private ListaPaquetes lp;
+    
+    public ControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
+        cp = new ControlPersistencia();
+        lc = (ListaClientes) leerListaClientes();
+        oper = (Operador) leerOperador();
+        lp = (ListaPaquetes) leerListaPaquetes();
         
+    }
+    
+        
+    
+    
     public void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Mapa mapa) throws IOException {
         Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
@@ -79,4 +94,31 @@ public class ControlDominio {
     public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
         cp.guardadoGeneral(lc, lp, oper);
     }
+    public void anadirPaquete(Cliente cl) throws FileNotFoundException, IOException, ClassNotFoundException{
+        Paquete p = new Paquete();
+        Mapa map = (Mapa) leerCiudad();
+        String nombreCiudad = map.getNombreCiudad();
+        p.leerPaquete(cl.getIdCliente(), nombreCiudad);
+        String[] nombresNodo = map.getNombres();
+        boolean encontrado = false;
+        String destino = p.getDestino();
+        int idDestino = -1;
+        for(int i = 0; i < nombresNodo.length & !encontrado; ++i){
+            if(nombresNodo[i].equals(destino)){
+                encontrado = true;
+                idDestino = i;
+            }
+        }
+        if(encontrado){
+            p.setIdDestino(idDestino);
+            lp.anadirPaquete(p);
+            lc.anadirPaquete(p, cl.getIdCliente());
+            oper.anadirPaquete(p);
+        }
+        else{
+            System.out.println("la ciudad no existe en la base de datos");
+        }
+    }
+    
+    
 }

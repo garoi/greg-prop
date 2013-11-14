@@ -16,7 +16,10 @@ public class Paquete implements Serializable{
     private String ciudad;
     private String destino;
     private String estado;
+    private String fecha;
+    private String turno;
     //private String ciudad;
+    
     
     
     //CREADORA
@@ -67,31 +70,24 @@ public class Paquete implements Serializable{
         this.estado = estado;
     }
   
-    //LECTORAS
-    public void leerPaquete(int idCliente, ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in);
-        Mapa mapa = (Mapa) cd.leerCiudad();
-        String[]nombresPuntos;
-        nombresPuntos = mapa.getNombres();
-        System.out.println("Destino del paquete?");
-        String destinoPaquete = sc.nextLine();
-        boolean encontrado = false;
-        for(int i = 0; i < nombresPuntos.length & !encontrado; ++i){
-            if(nombresPuntos[i].equals(destinoPaquete)){
-                idDestino = i; 
-                encontrado = true;
-            }
-        }
-        if(!encontrado){
-            System.out.println("El destino no existe");
-        }
-        else{
-            setDestino(destinoPaquete);
-            String estadoPaquete = "para enviar";
-            setEstado(estadoPaquete);
-            setIdCliente(idCliente);
-        }
+    public void setIdDestino(int idDestino){
+        this.idDestino = idDestino;
     }
+    //LECTORAS
+    public void leerPaquete(int idCliente, String nombreCiudad) {
+        this.idCliente = idCliente;
+        this.ciudad = nombreCiudad;
+        setEstado("para enviar");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("escribe el destino del paquete");
+        String destino = sc.nextLine();
+        System.out.println("escriba la fecha (formato XX.XX.XX)");
+        String fecha = sc.nextLine();
+        this.fecha = fecha;
+        String turno = sc.nextLine();
+        this.turno = turno;
+    }
+    
     
     public static class IdPaqueteComparator implements Comparator<Paquete> {
         @Override public int compare(Paquete p1, Paquete p2) {
