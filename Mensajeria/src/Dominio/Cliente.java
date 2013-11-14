@@ -87,7 +87,7 @@ public class Cliente implements Serializable {
                 ++i;
             }
         }
-        if (encontrado) {
+        if (!encontrado) { // canviat de encontrado a !encontrado
             System.out.println("Paquete no encontrado para este cliente o no enviado");
         }
     }
