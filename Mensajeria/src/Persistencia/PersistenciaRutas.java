@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -18,7 +17,7 @@ public class PersistenciaRutas {
     
     public ArrayList<String> listarRutas() {
         System.out.println("Las rutas guardadas son:");
-        File directorio = new File ("Data/");
+        File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();
         String nombreFichero;
@@ -33,17 +32,34 @@ public class PersistenciaRutas {
     }
     
     public Object leerRuta(String nombre) throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/"+nombre+"-ruta.txt"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Rutas/"+nombre+"-ruta.txt"))) {
             Object m2 = ois.readObject();
             return m2;
         }
     }
     
-    public void guardarRuta(Object x) throws IOException {
-        Date fecha = new Date();
-        String nombreRuta = null;// = new String(fecha.getDate()); +fecha.getHours()
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/"+nombreRuta+"-mapa.txt"))) {
-            oos.writeObject(x);
+    public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
+        if (!verificada) {
+            String nombreRuta = data + "-NO_verificada-ruta.txt";
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
+                oos.writeObject(x);
+            }
+        }
+        else {
+            File directorio = new File ("Data/Rutas/");
+            File[] nombres = directorio.listFiles();
+            String nombreFichero;
+            for(File file:nombres) {
+                nombreFichero = file.getName();
+                boolean borrar = nombreFichero.endsWith(data+"-NO_verificada-ruta.txt");
+                if (borrar) {
+                    file.delete();
+                }
+                String nombreRuta = data + "-Verificada-ruta.txt";
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
+                    oos.writeObject(x);
+                }
+            }
         }
     }
 }

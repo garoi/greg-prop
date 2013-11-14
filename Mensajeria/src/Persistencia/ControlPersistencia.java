@@ -23,26 +23,26 @@ public class ControlPersistencia {
     }
     
     public void guardarListaPaquetes(Object lp) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaPaquetes.txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaPaquetes/ListaPaquetes.txt"))) {
             oos.writeObject(lp);
         }
     }
     
     public Object leerListaPaquetes() throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaPaquetes.txt"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaPaquetes/ListaPaquetes.txt"))) {
             Object lp = ois.readObject();
             return lp;
         }
     }
     
     public void guardarListaClientes(Object lc) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaClientes.txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaClientes/ListaClientes.txt"))) {
             oos.writeObject(lc);
         }
     }
     
     public Object leerListaClientes() throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaClientes.txt"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaClientes/ListaClientes.txt"))) {
             Object lc = ois.readObject();
             return lc;
         }
@@ -67,8 +67,8 @@ public class ControlPersistencia {
         return pr.leerRuta(nombre);
     }
     
-    public void guardarRuta(Object x) throws IOException {
-        pr.guardarRuta(x);
+    public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
+        pr.guardarRuta(x, data, verificada);
     }
     
     public void guardadoGeneral(Object lc, Object lp) throws IOException {

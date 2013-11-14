@@ -16,13 +16,13 @@ import java.util.ArrayList;
 public class PersistenciaMapas {
     
     public void guardarMapa(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/"+nombreCiudad+"-mapa.txt"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Mapas/"+nombreCiudad+"-mapa.txt"))) {
             oos.writeObject(x);
         }
     }
     
     public Object leerCiudad(String nombreCiudad) throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/"+nombreCiudad+"-mapa.txt"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Mapas/"+nombreCiudad+"-mapa.txt"))) {
             Object m2 = ois.readObject();
             return m2;
         }
@@ -30,7 +30,7 @@ public class PersistenciaMapas {
     
     public ArrayList<String> listarCiudades() {
         System.out.println("Las ciudades guardadas son:");
-        File directorio = new File ("Data/");
+        File directorio = new File ("Data/Mapas/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();
         String nombreFichero;

@@ -15,27 +15,12 @@ public class ControlDominio {
     private String[] nombres;
     private float[][] ciudad;
         
-    private void crearSubgrafo(float[][] subgrafo, String[] nombresSubgrafo, ArrayList<Integer> paquetesSeleccionados) {
-        subgrafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
-        nombresSubgrafo = new String[paquetesSeleccionados.size()];
-        for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
-            nombresSubgrafo[i] = nombres[paquetesSeleccionados.get(i)];
-            for (int j = 0; j < paquetesSeleccionados.size(); ++j) {
-                subgrafo[i][j] = ciudad[paquetesSeleccionados.get(i)][paquetesSeleccionados.get(j)];
-            }
-        }
-    }
-
-    public void calcularRuta(ArrayList<Integer> paquetesSeleccionados) throws IOException {
-        float[][] subgrafo = null;
-        String[] nombresSubgrafo = null;
-        crearSubgrafo(subgrafo, nombresSubgrafo, paquetesSeleccionados);
+    public void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Mapa mapa) throws IOException {
         Scanner sc = new Scanner(System.in);
         Ruta r = new Ruta();
-        r.setGrafo(subgrafo);
-        r.setNombres(nombres);
+        r.crearGrafo(paquetesSeleccionados);
         System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
-        String raplent =sc.nextLine();
+        String raplent = sc.nextLine();
         if (raplent.equals("rapidamente")) {
             r.calcularRapida();
         }
@@ -44,7 +29,14 @@ public class ControlDominio {
             r.calcularChristofides();
             //Llamar a la optimizacion
         }
-        cp.guardarRuta(r);
+        r.mostrarRuta();
+        r.acceptarRuta();
+        if (r.isVerificada()) {
+            cp.guardarRuta(r, fecha, true);
+        }
+        else {
+            cp.guardarRuta(r, fecha, false);
+        }
     }
     
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
