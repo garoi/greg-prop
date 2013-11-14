@@ -11,8 +11,9 @@ import java.util.*;
 public class Operador implements Serializable {
     private String nombreOperador;
     private String password;
-    private final ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
+    private ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
     private Mapa mapa;
+    private ListaPaquetes lp;
     
     public String getNombreOperador() {
         return nombreOperador;
@@ -23,7 +24,9 @@ public class Operador implements Serializable {
     }
      
     public void anadirPaquete(Paquete p) {
+        System.out.println("OINK");
         listaPaquetesParaEntregar.add(p);
+        System.out.println("SIZE :" + listaPaquetesParaEntregar.size());
     }
     public void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
@@ -204,6 +207,15 @@ public class Operador implements Serializable {
         }
     }
     
+    private void buscayAgrega(ArrayList <Paquete> paquetes, int idagregado){
+        for(int i = 0; i < listaPaquetesParaEntregar.size(); ++i){
+            if(listaPaquetesParaEntregar.get(i).getIdPaquete() == idagregado){
+                
+                paquetes.add(listaPaquetesParaEntregar.get(i));
+            }
+        }
+    }
+    
     private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
@@ -220,7 +232,7 @@ public class Operador implements Serializable {
         System.out.println("Indique los ID de los paquetes que desea agregar");
         for(int i = 0; i < numagregados; ++i){
             int idagregado = sc.nextInt();
-            paquetes.add(listaPaquetesParaEntregar.get(idagregado));
+            buscayAgrega(paquetes, idagregado);
         }
         
     }
@@ -230,12 +242,16 @@ public class Operador implements Serializable {
         r = (Ruta) cd.leerRuta();
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
+        System.out.println("SIZE1 :"+paquetes.size());
         modificaListaPaquetes(paquetes);
         Mapa map = new Mapa();
         map = r.getMapa();
         String nom = map.getNombreCiudad();
-        ArrayList <Integer> idpaquetes = new ArrayList<>();
         System.out.println("Procedemos al recalculo de la ruta");
+        System.out.println("SIZE2 :"+paquetes.size());
+        for(int i = 0; i < paquetes.size(); ++i){
+            System.out.println(paquetes.get(i).getidDestino()+" ");
+        }
         cd.calcularRuta(paquetes, nom, map);
         
    }
