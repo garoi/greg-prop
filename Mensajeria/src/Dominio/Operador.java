@@ -248,12 +248,12 @@ public class Operador implements Serializable {
         map = r.getMapa();
         String nom = map.getNombreCiudad();
         System.out.println("Procedemos al recalculo de la ruta");
-        String fecha = r.getFecha();
-        cd.calcularRuta(paquetes, fecha, map);
+        System.out.println("SIZE2 :"+paquetes.size());
         for(int i = 0; i < paquetes.size(); ++i){
             System.out.println(paquetes.get(i).getidDestino()+" ");
         }
         cd.calcularRuta(paquetes, nom, map);
+        
    }
     
 }
