@@ -112,6 +112,7 @@ public class Ruta implements Serializable {
         float[][] ciudad = mapa.getCiudad();
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
+            listaPaquetesRuta.add(paquetesSeleccionados.get(i));
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
                 grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getidDestino()][paquetesSeleccionados.get(j).getidDestino()];
             }

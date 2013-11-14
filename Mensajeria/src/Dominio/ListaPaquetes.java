@@ -9,6 +9,10 @@ import java.util.*;
 public class ListaPaquetes implements Serializable {
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
      int idPaquete = 0;
+    public ArrayList<Paquete> getListaPaquetes() {
+        return listaPaquetes;
+    }
+     
     
     public void anadirPaquete(Paquete p){
         p.setIdPaquete(idPaquete);
