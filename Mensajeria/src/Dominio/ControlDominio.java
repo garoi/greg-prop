@@ -20,6 +20,13 @@ public class ControlDominio {
     private boolean existeOper = true;
     private Mapa map;
     
+    /**
+     * Inicializa el controlador de dominio
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     * 
+     */
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
         cu = new ControlUsuario();
@@ -36,6 +43,12 @@ public class ControlDominio {
         if(lp == null) lp = new ListaPaquetes();
     }
     
+    /**
+     * 
+     * @return retorna si se registra o se loguea
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public boolean registroLogin() throws IOException, ClassNotFoundException {
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
@@ -76,14 +89,29 @@ public class ControlDominio {
         return resultado;
     }
     
+    /**
+     * 
+     * @return Si es cliente
+     */
     public boolean loginCliente() {
         return cu.isLoginCliente();
     }
     
+    /**
+     * 
+     * @return Si es operador
+     */
     public boolean loginOper() {
         return cu.isLoginOper();
     }
  
+    /**
+     * Calcula el camino de una ruta
+     * @param paquetesSeleccionados
+     * @param fecha
+     * @param r
+     * @throws IOException 
+     */
     private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
         r.crearGrafo(paquetesSeleccionados, map);
@@ -108,10 +136,24 @@ public class ControlDominio {
         }
     }
     
+    /**
+     * Guarda un mapa
+     * @param map
+     * @param nombreciudad
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
         cp.guardarMapas(map, nombreciudad);
     }
     
+    /**
+     * Lee una ciudad
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public Object leerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         ArrayList<String> ciudades = new ArrayList<>();
@@ -124,6 +166,13 @@ public class ControlDominio {
         return cp.leerCiudad(nombre);
     }
     
+    /**
+     * Lee una ruta
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     private Object leerRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> rutas = new ArrayList<>();
@@ -136,6 +185,13 @@ public class ControlDominio {
         return cp.leerRuta(nombre);
     }
     
+    /**
+     * Lee una lista de paquetes
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
         try {
             return lp = (ListaPaquetes) cp.leerListaPaquetes();
@@ -148,6 +204,13 @@ public class ControlDominio {
         }
     }
     
+    /**
+     * Lee una lista de clientes
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
         try {
             return lc = (ListaClientes) cp.leerListaClientes();
@@ -160,6 +223,12 @@ public class ControlDominio {
         }
     }
     
+    /**
+     * Lee un operador
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public Object leerOperador() throws IOException, ClassNotFoundException {
         try {
             return oper = (Operador) cp.leerOperador();
@@ -169,19 +238,37 @@ public class ControlDominio {
         }
     }
     
+    /**
+     * Guarda los clientes, los paquetes y el operador
+     * @throws IOException 
+     */
     public void guardadoGeneral() throws IOException {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
+    /**
+     * Muestra los paquetes del operador
+     */
     public void verPaquetesOperador(){
         oper.verPaquetes();
     }
     
+    /**
+     * Anade una ciudad
+     * @throws ClassNotFoundException
+     * @throws IOException 
+     */
     public void anadirCiudad() throws ClassNotFoundException, IOException{
         map = oper.anadirCiudad(map);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
+    /**
+     * Selecciona una ciudad
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public void seleccionarCiudad() throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         ArrayList <String> nombresciudades = cp.listarCiudades();
@@ -195,6 +282,12 @@ public class ControlDominio {
         opcionesOperador();
     }
     
+    /**
+     * Ejecuta las operaciones del operador
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public void opcionesOperador() throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         System.out.println("pulse 1 para calcular una ruta nueva, 2 para recalcular una ruta existente");
@@ -209,6 +302,12 @@ public class ControlDominio {
         }
     }
     
+    /**
+     * Recalcula una ruta
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     private void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = (Ruta) leerRuta();
         ArrayList<Paquete> paquetes = new ArrayList<>();
@@ -222,6 +321,12 @@ public class ControlDominio {
         
    }
     
+    /**
+     * Inialicializa una ruta
+     * @param fecha
+     * @param r
+     * @throws IOException 
+     */
     public void iniciarRuta(String fecha, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Quieres calcular la ruta de hoy y de este turno? s/n");

@@ -17,14 +17,28 @@ public class ControlUsuario {
    private boolean loginCliente = false;
    private boolean loginOper = false;
    
+   /**
+    * 
+    * @return loginCliente
+    */
    public boolean isLoginCliente() {
         return loginCliente;
     }
 
+   /**
+    * 
+    * @return loginOper
+    */
     public boolean isLoginOper() {
         return loginOper;
     }
     
+    /**
+     * 
+     * @param cl
+     * @param lc
+     * @return Si el cliente se ha registrado correctamente
+     */
     public boolean registroCliente(Cliente cl, ListaClientes lc){
         cl.leerCliente();
         boolean existe = lc.comprueba(cl.getNombreCliente());
@@ -39,6 +53,11 @@ public class ControlUsuario {
         }
     }
     
+    /**
+     * Registra al operador
+     * @param oper 
+     * 
+     */
     public void registroOperador(Operador oper){
             Scanner sc = new Scanner(System.in);
             System.out.println("ponga el nombre del operador");
@@ -49,7 +68,11 @@ public class ControlUsuario {
             oper.setPassword(password);
     }
     
-    
+    /**
+     * 
+     * @param lc
+     * @return id del cliente que se ha logueado
+     */
     public int loginCliente(ListaClientes lc){
         Scanner sc2 = new Scanner(System.in);
         String nombre = sc2.next();
@@ -74,6 +97,11 @@ public class ControlUsuario {
         return -1;
     }
     
+    /**
+     * Permite loguear al operador
+     * @param oper
+     * 
+     */
     public void loginOperador(Operador oper) {
         Scanner sc2 = new Scanner(System.in);
         boolean concuerdan = false;
