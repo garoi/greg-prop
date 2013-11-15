@@ -16,11 +16,13 @@ public class ControlDominio {
     private Operador oper;
     private ListaPaquetes lp;
     private Cliente cl;
+    private ControlUsuario cu;
     private boolean existeOper = true;
     private Mapa map;
     
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
+        cu = new ControlUsuario();
         lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
         
@@ -35,10 +37,10 @@ public class ControlDominio {
     }
     
     public boolean registroLogin() throws IOException, ClassNotFoundException {
-        ControlUsuario cu = new ControlUsuario();
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
         int op = sc.nextInt();
+        boolean resultado= false;
         if(op == 1) {
             if(!existeOper){
                 System.out.println("No hay operador, vamos a registrarlo");
@@ -50,63 +52,37 @@ public class ControlDominio {
             cu.loginOperador(oper);
             return false;
         }
-        else if(op == 2){
+        else if (op == 2) {
                 Scanner sc2 = new Scanner(System.in);
+                boolean existeCliente = true;
                 System.out.println("es un usuario nuevo? pulse 1 si, 2 no");
                 int op2 = sc2.nextInt();
                 if(op2 == 1){
                     Cliente cl = new Cliente();
-                    cu.registroCliente(cl, lc);
+                     existeCliente = cu.registroCliente(cl, lc);
+                    if (existeCliente) cp.guardarListaClientes(lc);
+                    else resultado = true;
                 }
-                System.out.println("vamos a proceder al login");
-                int indice;
-                indice = cu.loginCliente(lc);
-                if(indice != -1){
-                    cl = lc.getCliente(indice);
-
+                if (existeCliente) {
+                    System.out.println("vamos a proceder al login");
+                    int indice;
+                    indice = cu.loginCliente(lc);
+                    if(indice != -1){
+                        cl = lc.getCliente(indice);
+                    }
+                    return true;
                 }
-                return true;
         }
-        return false;
+        return resultado;
     }
-        /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
-        int op = sc.nextInt();
-        if(op == 1){       
-            if(!oper.isCheckExistencia()){
-                oper = cu.registroOperador();
-                oper.setCheckExistencia(true);             
-                System.out.println("pulse 1 si quiere logearse, pulse 2 si quiere salir");
-                int op3 = sc.nextInt();
-                if(op3 == 1){
-                    cu.loginOperador();
-                }
-                else salir = true;
-                
-            }
-            else {
-                cu.loginOperador();
-            }
-        }
-        else if(op == 2){
-            System.out.println("pulse 1 registro, pulse 2 log");
-            int op2 = sc.nextInt();
-            if(op2 == 1){
-                cl = cu.registroCliente();
-                if(cl != null) lc.anadirCliente(cl);
-                System.out.println("pulse 1 log, pulse 2 para salir");
-                int op3 = sc.nextInt();
-                if(op3 == 1){
-                    cl = cu.loginCliente();
-                    esCliente = true;
-                }
-                else salir = true;
-            }
-            else if(op2 == 2){
-                cl = cu.loginCliente();
-                esCliente = true;
-            }
-        }*/
     
+    public boolean loginCliente() {
+        return cu.isLoginCliente();
+    }
+    
+    public boolean loginOper() {
+        return cu.isLoginOper();
+    }
  
     private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);

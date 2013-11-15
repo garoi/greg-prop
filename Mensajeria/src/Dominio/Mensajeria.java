@@ -72,14 +72,13 @@ public class Mensajeria {
         Scanner sc = new Scanner(System.in);
         ControlDominio cd = new ControlDominio();
         cd.iniControlDominio();
-        boolean salir = false;
         boolean esCliente  = cd.registroLogin();
         //operador
-        if (!esCliente) {
+        if (!esCliente && cd.loginOper()) {
             funcOperador(cd);
         }
         //cliente
-        else if(esCliente){
+        else if(esCliente && cd.loginCliente()){
             funcCliente(cd);
         }
     }

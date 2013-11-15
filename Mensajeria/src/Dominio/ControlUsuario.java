@@ -14,24 +14,28 @@ import java.util.*;
  */
 public class ControlUsuario {
     
-   /* private Operador oper;
-    private ListaClientes lc;
-    private Cliente cl;
-    public ControlUsuario(Operador oper, ListaClientes lc) {
-        this.oper = oper;
-        this.lc = lc;
-    }*/
+   private boolean loginCliente = false;
+   private boolean loginOper = false;
+   
+   public boolean isLoginCliente() {
+        return loginCliente;
+    }
+
+    public boolean isLoginOper() {
+        return loginOper;
+    }
     
-    public void registroCliente(Cliente cl, ListaClientes lc){
-        cl = new Cliente();
+    public boolean registroCliente(Cliente cl, ListaClientes lc){
         cl.leerCliente();
         boolean existe = lc.comprueba(cl.getNombreCliente());
         if(!existe){
             lc.anadirCliente(cl);
             System.out.println("registrado correctamente");
+            return true;
         }
         else{
             System.out.println("El usuario ya esta registrado");
+            return false;
         }
     }
     
@@ -59,6 +63,7 @@ public class ControlUsuario {
                 if(cl.getPassword().equals(password)){
                     System.out.println("acceso concedido");
                     valido = true;
+                    loginCliente = true;
                     return indice;
                 }
                 else{ 
@@ -81,6 +86,7 @@ public class ControlUsuario {
                 if(oper.getPassword().equals(password)){
                     System.out.println("acceso concedido");
                     concuerdan = true;
+                    loginOper = true;
                 }
                 else{
                     System.out.println("acceso denegado");
