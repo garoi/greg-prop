@@ -14,15 +14,18 @@ import java.util.*;
 public class DriverPaquete {
     
     
-    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public static void main(String[] args){
         //FUNCION LECTORA
         Scanner sc = new Scanner(System.in);
         System.out.println("procedemos a leer el paquete");
         System.out.println("Escriba un identificador de cliente (entero):");
         int idCliente = sc.nextInt();
+        System.out.println("Escriba la ciudad del paquete");
+        System.out.println("hola");
+        Scanner sc2 = new Scanner(System.in);
+        String nombreCiudad = sc2.nextLine();
         Paquete p = new Paquete();
-        ControlDominio cd = new ControlDominio();
-        p.leerPaquete(idCliente,cd);
+        p.leerPaquete(idCliente, nombreCiudad);
         //CONSULTORAS 
          System.out.print("Destino :");
          System.out.println(p.getDestino());

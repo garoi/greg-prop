@@ -46,4 +46,8 @@ public class ListaPaquetes implements Serializable {
             System.out.print(p.getEstado() + "\n");
         }
     }
+    
+    public void cancelarPaquete(int idPaquete){
+        listaPaquetes.get(idPaquete).setEstado("cancelado");
+    }
 }

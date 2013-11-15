@@ -16,15 +16,15 @@ public class Paquete implements Serializable{
     private String ciudad;
     private String destino;
     private String estado;
-    private String fecha;
-    private String turno;
     //private String ciudad;
     
-    
-    
-    //CREADORA
-    public Paquete(){}
     //CONSULTORAS
+    
+    public int getIdDestino() {
+        return idDestino;
+    }
+    
+    
     public int getIdPaquete() {
         return idPaquete;
     }
@@ -73,19 +73,17 @@ public class Paquete implements Serializable{
     public void setIdDestino(int idDestino){
         this.idDestino = idDestino;
     }
-    //LECTORAS
+    
     public void leerPaquete(int idCliente, String nombreCiudad) {
         this.idCliente = idCliente;
         this.ciudad = nombreCiudad;
-        setEstado("para enviar");
         Scanner sc = new Scanner(System.in);
+        setEstado("para enviar");
+        this.ciudad = nombreCiudad;
         System.out.println("escribe el destino del paquete");
         String destino = sc.nextLine();
-        System.out.println("escriba la fecha (formato XX.XX.XX)");
-        String fecha = sc.nextLine();
-        this.fecha = fecha;
-        String turno = sc.nextLine();
-        this.turno = turno;
+        this.destino = destino;
+        
     }
     
     

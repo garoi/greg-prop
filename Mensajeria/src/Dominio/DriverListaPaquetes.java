@@ -37,7 +37,9 @@ public class DriverListaPaquetes {
                 System.out.print("Crea un paquete para poder anadirlo" + "\n");
                 System.out.print("Entra el id. del cliente" + "\n");
                 int idcliente = sc.nextInt();
-                p.leerPaquete(idcliente,cd);
+                System.out.print("entra el nombre de la ciudad" + "\n");
+                String nombreciudad = sc.nextLine();
+                p.leerPaquete(idcliente, nombreciudad);
                 lp.anadirPaquete(p);
             }
             else if(op == 2){
