@@ -14,6 +14,18 @@ public class Operador implements Serializable {
     private ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
     private Mapa mapa;
     private ListaPaquetes lp;
+    private boolean checkExistencia = false;
+
+    
+    
+    
+    public void setCheckExistencia(boolean checkExistencia) {
+        this.checkExistencia = checkExistencia;
+    }
+
+    public boolean isCheckExistencia() {
+        return checkExistencia;
+    }
     
     public String getNombreOperador() {
         return nombreOperador;

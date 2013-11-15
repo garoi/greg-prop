@@ -21,27 +21,30 @@ public class ControlDominio {
     
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
-        System.out.println("HOLA1");
         if(lc == null) lc = new ListaClientes();
         else lc = (ListaClientes) leerListaClientes();
-        if(oper == null) oper = new Operador();
+        if(oper == null) oper = new Operador();     
         else oper = (Operador) leerOperador();
-        System.out.println("HOLA2");
         if(lp == null) lp = new ListaPaquetes();
         else lp = (ListaPaquetes) leerListaPaquetes();
         sc = new Scanner(System.in);
 
     }
     
-    public boolean registroLogin() {
+    public void registroLogin(boolean esCliente, boolean salir) {
         ControlUsuario cu = new ControlUsuario(oper,lc, sc);
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         int op = sc.nextInt();
-        if(op == 1){
-            if(oper == null){
+        if(op == 1){       
+            if(!oper.isCheckExistencia()){
                 oper = cu.registroOperador();
-                cu.loginOperador();
-                return true;
+                oper.setCheckExistencia(true);             
+                System.out.println("pulse 1 si quiere logearse, pulse 2 si quiere salir");
+                int op3 = sc.nextInt();
+                if(op3 == 1){
+                    cu.loginOperador();
+                }
+                else salir = true;
                 
             }
             else {
@@ -52,15 +55,21 @@ public class ControlDominio {
             System.out.println("pulse 1 registro, pulse 2 log");
             int op2 = sc.nextInt();
             if(op2 == 1){
-                cu.registroCliente();
-                cl = cu.loginCliente();
-                return false;
+                cl = cu.registroCliente();
+                if(cl != null) lc.anadirCliente(cl);
+                System.out.println("pulse 1 log, pulse 2 para salir");
+                int op3 = sc.nextInt();
+                if(op3 == 1){
+                    cl = cu.loginCliente();
+                    esCliente = true;
+                }
+                else salir = true;
             }
             else if(op2 == 2){
                 cl = cu.loginCliente();
+                esCliente = true;
             }
         }
-        return false;
     }    
  
     private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Ruta r) throws IOException {
@@ -195,9 +204,9 @@ public class ControlDominio {
             if (date.getHours() > 9 & date.getHours()<15) turno = "-mañana";
             else turno = "-tarde";
             fecha = String.valueOf(date.getDate()+"."+(date.getMonth()+1)+"."+(date.getYear()-100));
-            ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha, turno);
-            fecha = fecha + turno;
-            calcularRuta(paquetesSeleccionados, fecha, r);     
+            //ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha, turno);
+            //fecha = fecha + turno;
+            //calcularRuta(paquetesSeleccionados, fecha, r);     
         }
         else {
             System.out.println("Entra la fecha (dd.mm.aa)");
@@ -220,8 +229,8 @@ public class ControlDominio {
                         System.out.println("Entra el turno (mañana/tarde)");
                         turno = "-"+sc.nextLine();
                         fecha = fecha + turno;
-                        ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha,turno);
-                        calcularRuta(paquetesSeleccionados, fecha, r);
+                        //ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha,turno);
+                        //calcularRuta(paquetesSeleccionados, fecha, r);
                     }
                 }
             }

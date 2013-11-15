@@ -6,7 +6,7 @@
 
 package Dominio;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -24,27 +24,30 @@ public class ControlUsuario {
         this.sc = sc;
     }
     
-    public boolean registroCliente(){
+    public Cliente registroCliente(){
         cl = new Cliente();
         cl.leerCliente();
         boolean existe = lc.comprueba(cl.getNombreCliente());
         if(!existe){
-            lc.anadirCliente(cl);
-            return true;
+            return cl;
         }
         else{
             System.out.println("El usuario ya esta registrado");
-            return false;
+            return null;
         }
     }
     
     
     public Operador registroOperador(){
-        if(oper == null){
-            oper = new Operador();
-            String nombre = sc.nextLine();
+                         // System.out.println("IVICH2");
+        if(!oper.isCheckExistencia()){
+            oper = new Operador(); 
+            Scanner sc2 = new Scanner(System.in);
+            System.out.println("ponga el nombre del operador");
+            String nombre = sc2.nextLine();
             oper.setNombreOperador(nombre);
-            String password = sc.nextLine();
+            System.out.println("ponga el password del operador");
+            String password = sc2.nextLine();
             oper.setPassword(password);
             return oper;
         }
@@ -53,10 +56,11 @@ public class ControlUsuario {
     
     
     public Cliente loginCliente(){
-        String nombre = sc.nextLine();
+        Scanner sc2 = new Scanner(System.in);
+        String nombre = sc2.next();
         cl = lc.compruebaCliente(nombre);
         if(cl != null){
-            String password = sc.nextLine();
+            String password = sc.next();
             if(cl.getPassword().equals(password)){
                 System.out.println("acceso concedido");
                 return cl;
@@ -70,9 +74,12 @@ public class ControlUsuario {
     }
     
     public void loginOperador() {
-        String nombre = sc.nextLine();
+        System.out.println("argibajkln");
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Nombre usuario");
+        String nombre = sc2.nextLine();
         if(oper.getNombreOperador().equals(nombre)){
-            String password = sc.nextLine();
+            String password = sc2.nextLine();
             if(oper.getPassword().equals(password)){
                 System.out.println("acceso concedido");
             }
@@ -83,7 +90,7 @@ public class ControlUsuario {
         }
     }
     
-    public Cliente iniCliente(){
+   /* public Cliente iniCliente(){
         System.out.println("pulse 1 para registrarse, 2 para loguearse");
         int op = sc.nextInt();
          if(op == 1){
@@ -95,5 +102,5 @@ public class ControlUsuario {
              return cl;
          }
          else return null;
-    }
+    }*/
 }
