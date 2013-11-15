@@ -34,7 +34,7 @@ public class ControlDominio {
         if(lp == null) lp = new ListaPaquetes();
     }
     
-    public void registroLogin(boolean esCliente, boolean salir) throws IOException, ClassNotFoundException {
+    public boolean registroLogin() throws IOException, ClassNotFoundException {
         ControlUsuario cu = new ControlUsuario();
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
@@ -48,9 +48,9 @@ public class ControlDominio {
             }
             System.out.println("vamos a hacer login");
             cu.loginOperador(oper);
+            return false;
         }
         else if(op == 2){
-                esCliente = true;
                 Scanner sc2 = new Scanner(System.in);
                 System.out.println("es un usuario nuevo? pulse 1 si, 2 no");
                 int op2 = sc2.nextInt();
@@ -65,8 +65,9 @@ public class ControlDominio {
                     cl = lc.getCliente(indice);
 
                 }
-            }
-        System.out.println("boool esss:" + esCliente);
+                return true;
+        }
+        return false;
     }
         /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         int op = sc.nextInt();
