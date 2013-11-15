@@ -17,6 +17,7 @@ public class ControlDominio {
     private ListaPaquetes lp;
     private Scanner sc;
     private Cliente cl;
+    private boolean existeOper = false;
     private Mapa map;
     
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -32,8 +33,26 @@ public class ControlDominio {
     }
     
     public void registroLogin(boolean esCliente, boolean salir) {
-        ControlUsuario cu = new ControlUsuario(oper,lc, sc);
+        ControlUsuario cu = new ControlUsuario();
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
+        Scanner sc = new Scanner(System.in);
+        int op = sc.nextInt();
+        if(op == 1){
+            if(!existeOper){
+                System.out.println("No hay operador, vamos a registrarlo");
+                cu.registroOperador(oper);
+                existeOper = true;
+            }
+                System.out.println("vamos a hacer login");
+                cu.loginOperador(oper);
+                /*System.out.println("nombre oper:");
+                System.out.println(oper.getNombreOperador());
+                System.out.println("passoper:");
+                System.out.println(oper.getPassword());*/
+
+        }
+    }
+        /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         int op = sc.nextInt();
         if(op == 1){       
             if(!oper.isCheckExistencia()){
@@ -69,8 +88,8 @@ public class ControlDominio {
                 cl = cu.loginCliente();
                 esCliente = true;
             }
-        }
-    }    
+        }*/
+    
  
     private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
