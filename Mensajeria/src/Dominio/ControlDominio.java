@@ -15,7 +15,6 @@ public class ControlDominio {
     private ListaClientes lc;
     private Operador oper;
     private ListaPaquetes lp;
-    private Scanner sc;
     private Cliente cl;
     private Mapa map;
     
@@ -27,8 +26,6 @@ public class ControlDominio {
         else oper = (Operador) leerOperador();
         if(lp == null) lp = new ListaPaquetes();
         else lp = (ListaPaquetes) leerListaPaquetes();
-        sc = new Scanner(System.in);
-
     }
     
     public void registroLogin(boolean esCliente, boolean salir) {
@@ -143,23 +140,27 @@ public class ControlDominio {
     public void verPaquetesOperador(){
         oper.verPaquetes();
     }
+    
     public void anadirCiudad() throws ClassNotFoundException, IOException{
-        Mapa mapa = oper.anadirCiudad();
-        cp.guardarMapas(mapa, mapa.getNombreCiudad());
+        map = oper.anadirCiudad(map);
+        cp.guardarMapas(map, map.getNombreCiudad());
     }
+    
     public void seleccionarCiudad() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Scanner sc = new Scanner(System.in);
         ArrayList <String> nombresciudades = cp.listarCiudades();
-        System.out.println("estas son las Ciudades que puede seleccionar");
+        System.out.println("Estas son las Ciudades que puede seleccionar");
         for(int i = 0; i < nombresciudades.size(); ++i){
             System.out.println(nombresciudades.get(i));
         }
-        System.out.println("escriba la ciudad que quiera seleccionar");
+        System.out.println("Escriba la ciudad que quiera seleccionar");
         String nombre = sc.nextLine();
         map = (Mapa) cp.leerCiudad(nombre);
         opcionesOperador();
-        
     }
+    
     public void opcionesOperador() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Scanner sc = new Scanner(System.in);
         System.out.println("pulse 1 para calcular una ruta nueva, 2 para recalcular una ruta existente");
         int op = sc.nextInt();
         if(op == 1){
@@ -171,7 +172,6 @@ public class ControlDominio {
             recalcularRuta();
         }
     }
-    
     
     private void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = (Ruta) leerRuta();
@@ -186,17 +186,9 @@ public class ControlDominio {
         
    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-      public void iniciarRuta(String fecha, Ruta r) throws IOException {
+    public void iniciarRuta(String fecha, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Quieres calcular la ruta de hoy y de este turno? s/n");
+        System.out.println("Quieres calcular la ruta de hoy y de este turno? s/n");
         String ord = sc.nextLine();
         Date date = new Date();
         String turno;
@@ -204,9 +196,9 @@ public class ControlDominio {
             if (date.getHours() > 9 & date.getHours()<15) turno = "-mañana";
             else turno = "-tarde";
             fecha = String.valueOf(date.getDate()+"."+(date.getMonth()+1)+"."+(date.getYear()-100));
-            //ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha, turno);
-            //fecha = fecha + turno;
-            //calcularRuta(paquetesSeleccionados, fecha, r);     
+            ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes();
+            fecha = fecha + turno;
+            calcularRuta(paquetesSeleccionados, fecha, r);     
         }
         else {
             System.out.println("Entra la fecha (dd.mm.aa)");
@@ -241,7 +233,7 @@ public class ControlDominio {
     //FUNCIONES DEL CLIENTE!!!!
 
       
-public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
         Paquete p = new Paquete();
         Mapa map = (Mapa) leerCiudad();
         String nombreCiudad = map.getNombreCiudad();
@@ -288,6 +280,5 @@ public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotF
     public void elminarPaquete(){
         System.out.println("eliminaremos todos los paquetes enviados");
         cl.eliminarPaquetes();
-    }
-    
+    } 
 }

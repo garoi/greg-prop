@@ -57,8 +57,7 @@ public class Operador implements Serializable {
     
     public void verPaquetes() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("1 Para ver segun idCliente");
-        System.out.println("2 Para ver segun Destino");
+        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino");
         int op = sc.nextInt();
         if (op == 1) {
             ordenarPorIdPaquete();
@@ -94,15 +93,16 @@ public class Operador implements Serializable {
                 System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
                 System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
                 System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+                System.out.print("Dia " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
+                System.out.print("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
         }
-        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa -1"); 
+        System.out.println("Si desea parar de entrar/seleccionar paquetes pulsa -1"); 
         int idPaquete = sc.nextInt();
         paquetesDestino.add(buscarPaquete(idPaquete));
         while (idPaquete >= 0) {
             idPaquete = sc.nextInt();
             paquetesDestino.add(buscarPaquete(idPaquete));
         }
-        //paquetesDestino.remove(paquetesDestino.size() - 1);
         return paquetesDestino;
     }
     
@@ -157,13 +157,9 @@ public class Operador implements Serializable {
         }
     }
     
-    public Mapa anadirCiudad() throws IOException, ClassNotFoundException{
-        Mapa map = new Mapa();
+    public Mapa anadirCiudad(Mapa map) throws IOException, ClassNotFoundException{
         map.crearCiudad();
-        //String name = map.getNombreCiudad();
         return map;
-        //cd.guardarMapa(map, name);
-        
     }
     
     /*public void cargarCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{

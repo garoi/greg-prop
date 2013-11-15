@@ -48,7 +48,6 @@ public class Mensajeria {
     
 
     public static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
-
         Scanner sc = new Scanner(System.in);
         infoOperador();
         int op = sc.nextInt();
