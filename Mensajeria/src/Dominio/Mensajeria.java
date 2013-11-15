@@ -48,6 +48,7 @@ public class Mensajeria {
     
 
     public static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
+
         Scanner sc = new Scanner(System.in);
         infoOperador();
         int op = sc.nextInt();
@@ -73,18 +74,14 @@ public class Mensajeria {
         boolean esCliente = false;
         boolean salir = false;
         cd.registroLogin(esCliente, salir);
-        System.out.println("escliente " + esCliente);
-        //cliente
-        if (!esCliente & !salir) {
+        System.out.println("boool esss:" + esCliente);
+        //operador
+        if (!esCliente) {
             funcOperador(cd);
         }
-        //operador
-        else if(esCliente & !salir){
-            System.out.println("BAS");
+        //cliente
+        else if(esCliente){
             funcCliente(cd);
         }
-        /*
-        if sali = true cd.guardodogeneral
-        */
     }
 }

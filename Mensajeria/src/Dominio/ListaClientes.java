@@ -57,13 +57,13 @@ public class ListaClientes implements Serializable {
         return false;
     }
     
-    public Cliente compruebaCliente(String nombre){
+    public int compruebaCliente(String nombre){
         for(int i = 0; i < listaClientes.size(); ++i){
             if(nombre.equals(listaClientes.get(i).getNombreCliente())){
-                return listaClientes.get(i);
+                return listaClientes.get(i).getIdCliente();
             }
         }
-        return null;
+        return -1;
     }
        
 }

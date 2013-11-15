@@ -49,6 +49,24 @@ public class ControlDominio {
             System.out.println("vamos a hacer login");
             cu.loginOperador(oper);
         }
+        else if(op == 2){
+                esCliente = true;
+                Scanner sc2 = new Scanner(System.in);
+                System.out.println("es un usuario nuevo? pulse 1 si, 2 no");
+                int op2 = sc2.nextInt();
+                if(op2 == 1){
+                    Cliente cl = new Cliente();
+                    cu.registroCliente(cl, lc);
+                }
+                System.out.println("vamos a proceder al login");
+                int indice;
+                indice = cu.loginCliente(lc);
+                if(indice != -1){
+                    cl = lc.getCliente(indice);
+
+                }
+            }
+        System.out.println("boool esss:" + esCliente);
     }
         /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         int op = sc.nextInt();
