@@ -23,7 +23,8 @@ public class Mensajeria {
         System.out.println("0 Salir");
     }
     
-    public static void funcCliente(ControlDominio cd){
+
+    public static void funcCliente(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         infoCliente();
         int op = sc.nextInt();
@@ -32,20 +33,22 @@ public class Mensajeria {
                 cd.anadirPaquete();
             }
             else if (op == 2) {
-                cd.verPaquetes();
+                cd.verPaquetesCliente();
             }
             else if (op == 3) {
-                cd.cancelarPaquetes();
+                cd.cancelarPaquete();
             }
             else if (op == 4) {
-                cd.eliminarPaquete();
+                cd.elminarPaquete();
             }
             infoCliente();
             op = sc.nextInt();
         }
     }
     
-    public static void funcOperador() {
+
+    public static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
+
         Scanner sc = new Scanner(System.in);
         infoOperador();
         int op = sc.nextInt();
@@ -59,21 +62,25 @@ public class Mensajeria {
             else if (op == 3) {
                 cd.seleccionarCiudad();
             }
-            infoCliente();
+            infoOperador();
             op = sc.nextInt();
         }
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ControlDominio cd = new ControlDominio();
+        cd.iniControlDominio();
+        boolean esCliente = false;
+        boolean salir = false;
+        cd.registroLogin(esCliente, salir);
         //cliente
-        if (!cd.registroLogin()) {
-            funcCliente(cd);
+        if (!esCliente & !salir) {
+            funcOperador(cd);
         }
         //operador
-        else {
-            funcOperador();
+        else if(esCliente & !salir){
+            funcCliente(cd);
         }
     }
 }

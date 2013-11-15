@@ -29,6 +29,7 @@ public class ListaClientes implements Serializable {
     public int encontrarCliente(String nombre){
         for(int i = 0; i < listaClientes.size(); ++i){
             if(listaClientes.get(i).getNombreCliente().equals(nombre)){
+                System.out.println("ID cliente es "+ listaClientes.get(i).getIdCliente());
                 System.out.println("nombre cliente es "+ listaClientes.get(i).getNombreCliente());
                 return i;
             }
@@ -37,17 +38,32 @@ public class ListaClientes implements Serializable {
         return -1;
     }
     
-    public void cancelarPaquete(Cliente cl, int idPaquete) {
-        cl.cancelarPaquete(idPaquete);  
-    }
-    
-    public void eliminarPaquete(Cliente cl, int idPaquete) {
-        cl.eliminarPaquete(idPaquete);  
-    }
     
     public void packsCliente(int idCliente){
         Cliente c = listaClientes.get(idCliente);
         c.verLista();
+    }
+    
+    public int tamanoListaClientes(){
+        return listaClientes.size();
+    }
+    
+    public boolean comprueba(String nombre){
+        for(int i = 0; i < listaClientes.size(); ++i){
+            if(nombre.equals(listaClientes.get(i).getNombreCliente())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Cliente compruebaCliente(String nombre){
+        for(int i = 0; i < listaClientes.size(); ++i){
+            if(nombre.equals(listaClientes.get(i).getNombreCliente())){
+                return listaClientes.get(i);
+            }
+        }
+        return null;
     }
        
 }

@@ -14,6 +14,18 @@ public class Operador implements Serializable {
     private ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
     private Mapa mapa;
     private ListaPaquetes lp;
+    private boolean checkExistencia = false;
+
+    
+    
+    
+    public void setCheckExistencia(boolean checkExistencia) {
+        this.checkExistencia = checkExistencia;
+    }
+
+    public boolean isCheckExistencia() {
+        return checkExistencia;
+    }
     
     public String getNombreOperador() {
         return nombreOperador;
@@ -23,10 +35,17 @@ public class Operador implements Serializable {
         return password;
     }
      
+   
+    public void setNombreOperador(String nombreOperador) {
+        this.nombreOperador = nombreOperador;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public void anadirPaquete(Paquete p) {
-        System.out.println("OINK");
         listaPaquetesParaEntregar.add(p);
-        System.out.println("SIZE :" + listaPaquetesParaEntregar.size());
     }
     public void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
@@ -72,61 +91,21 @@ public class Operador implements Serializable {
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
-            System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-            System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+                System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
+                System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
+                System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
         }
-        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa 9"); 
+        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa -1"); 
         int idPaquete = sc.nextInt();
         paquetesDestino.add(buscarPaquete(idPaquete));
-        while (idPaquete != 9) {
+        while (idPaquete >= 0) {
             idPaquete = sc.nextInt();
             paquetesDestino.add(buscarPaquete(idPaquete));
         }
-        paquetesDestino.remove(paquetesDestino.size() - 1);
+        //paquetesDestino.remove(paquetesDestino.size() - 1);
         return paquetesDestino;
     }
     
-    public void calcularRuta(ControlDominio cd) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Quieres calcular la ruta de hoy y de este turno? s/n");
-        String ord = sc.nextLine();
-        Date date = new Date();
-        String turno;
-        if (ord.equals("s")) {
-            if (date.getHours() > 9 & date.getHours()<15) turno = "-mañana";
-            else turno = "-tarde";
-            String fecha = String.valueOf(date.getDate()+"."+(date.getMonth()+1)+"."+(date.getYear()-100));
-            fecha = fecha + turno;
-                cd.calcularRuta(seleccionarPaquetes(), fecha, mapa);
-            }
-        else {
-            System.out.println("Entra la fecha (dd.mm.aa)");
-            String fecha = sc.nextLine();
-            String ano = fecha.substring(6, fecha.length());
-            String mes = fecha.substring(3, fecha.length()-3);
-            String dia = fecha.substring(0, fecha.length()-6);
-            if (ano.compareTo(String.valueOf(date.getYear()-100)) > 0) {
-                System.out.println("La fecha tiene que ser superios a la fecha actual");
-            }
-            else {
-                if (mes.compareTo(String.valueOf(date.getMonth()+1)) > 0) {
-                    System.out.println("La fecha tiene que ser superios a la fecha actual");
-                }
-                else {
-                    if (dia.compareTo(String.valueOf(date.getDate())) > 0) {
-                        System.out.println("La fecha tiene que ser superios a la fecha actual");
-                    }
-                    else {
-                        System.out.println("Entra el turno (mañana/tarde)");
-                        turno = "-"+sc.nextLine();
-                        fecha = fecha + turno;
-                        cd.calcularRuta(seleccionarPaquetes(), fecha, mapa);
-                    }
-                }
-            }
-        }
-    }
     
     public void leerOperador() {
         Scanner sc = new Scanner(System.in);
@@ -178,17 +157,18 @@ public class Operador implements Serializable {
         }
     }
     
-    public void anadirCiudad(ControlDominio cd) throws IOException, ClassNotFoundException{
+    public Mapa anadirCiudad() throws IOException, ClassNotFoundException{
         Mapa map = new Mapa();
         map.crearCiudad();
-        String name = map.getNombreCiudad();
-        cd.guardarMapa(map, name);
+        //String name = map.getNombreCiudad();
+        return map;
+        //cd.guardarMapa(map, name);
         
     }
     
-    public void cargarCiudad(ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException{
+    /*public void cargarCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
         mapa = (Mapa) cd.leerCiudad();
-    }
+    }*/
     
     private void ordenaPaquetes(ArrayList<Paquete> paquetes){
         
@@ -216,7 +196,7 @@ public class Operador implements Serializable {
         }
     }
     
-    private void modificaListaPaquetes(ArrayList<Paquete> paquetes){
+    public void modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
         int numeliminados = sc.nextInt();
@@ -237,23 +217,21 @@ public class Operador implements Serializable {
         
     }
     
-    public void modificarRuta(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
+    /*public void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = new Ruta();
         r = (Ruta) cd.leerRuta();
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
-        System.out.println("SIZE1 :"+paquetes.size());
         modificaListaPaquetes(paquetes);
         Mapa map = new Mapa();
         map = r.getMapa();
         String nom = map.getNombreCiudad();
         System.out.println("Procedemos al recalculo de la ruta");
-        String fecha = r.getFecha();
-        cd.calcularRuta(paquetes, fecha, map);
         for(int i = 0; i < paquetes.size(); ++i){
             System.out.println(paquetes.get(i).getidDestino()+" ");
         }
         cd.calcularRuta(paquetes, nom, map);
-   }
+        
+   }*/
     
 }

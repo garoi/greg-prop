@@ -44,6 +44,11 @@ public class Paquete implements Serializable{
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+    
+    public int getIdDestino() {
+        return idDestino;
+    }
+   
     public int getIdPaquete() {
         return idPaquete;
     }
@@ -89,31 +94,22 @@ public class Paquete implements Serializable{
         this.estado = estado;
     }
   
-    //LECTORAS
-    public void leerPaquete(int idCliente, ControlDominio cd) throws FileNotFoundException, IOException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in);
-        Mapa mapa = (Mapa) cd.leerCiudad();
-        String[]nombresPuntos;
-        nombresPuntos = mapa.getNombres();
-        System.out.println("Destino del paquete?");
-        String destinoPaquete = sc.nextLine();
-        boolean encontrado = false;
-        for(int i = 0; i < nombresPuntos.length & !encontrado; ++i){
-            if(nombresPuntos[i].equals(destinoPaquete)){
-                idDestino = i; 
-                encontrado = true;
-            }
-        }
-        if(!encontrado){
-            System.out.println("El destino no existe");
-        }
-        else{
-            setDestino(destinoPaquete);
-            String estadoPaquete = "para enviar";
-            setEstado(estadoPaquete);
-            setIdCliente(idCliente);
-        }
+    public void setIdDestino(int idDestino){
+        this.idDestino = idDestino;
     }
+    
+    public void leerPaquete(int idCliente, String nombreCiudad) {
+        this.idCliente = idCliente;
+        this.ciudad = nombreCiudad;
+        Scanner sc = new Scanner(System.in);
+        setEstado("para enviar");
+        this.ciudad = nombreCiudad;
+        System.out.println("escribe el destino del paquete");
+        String destino = sc.nextLine();
+        this.destino = destino;
+        
+    }
+    
     
     public static class IdPaqueteComparator implements Comparator<Paquete> {
         @Override public int compare(Paquete p1, Paquete p2) {

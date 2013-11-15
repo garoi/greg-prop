@@ -50,51 +50,35 @@ public class Cliente implements Serializable {
         
     }
     
-    public void cancelarPaquete(int idPaquete) {
-        boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetes.size() && !encontrado) {
+    public boolean cancelarPaquete(int idPaquete) {
+        for (int i = 0; i < listaPaquetes.size(); ++i) {
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
                 if (listaPaquetes.get(i).getEstado().equals("para enviar")) {
                     listaPaquetes.remove(i);
-                    encontrado = true;
+                    return true;
                 }
             }
-            else {
-                ++i;
-            }
         }
-        if (!encontrado) {
-            System.out.println("Paquete no encontrado para este cliente");
-        }
+        return false;
     }
     
-    public void eliminarPaquete(int idPaquete) {
+    public void eliminarPaquetes() {
         boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetes.size() && !encontrado) {
-            if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetes.get(i).getEstado().equals("enviado")) {
-                    listaPaquetes.remove(i);
-                    encontrado = true;
-                }
-                else {
-                    System.out.println("El paquete aun no se ha enviado, lo tienes que cancelar");
-                    encontrado = true;
-                }
-            }
-            else {
-                ++i;
+        for (int i = 0; i < listaPaquetes.size(); ++i) {
+            if (listaPaquetes.get(i).getEstado().equals("enviado")) {
+                listaPaquetes.remove(i);
+                encontrado = true;
             }
         }
-        if (!encontrado) { // canviat de encontrado a !encontrado
-            System.out.println("Paquete no encontrado para este cliente o no enviado");
+        if (!encontrado) { 
+            System.out.println("No tienes ningun paquete enviado");
         }
     }
     
     public void verLista(){
         for (int i = 0; i < listaPaquetes.size();++i) {
             System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
+            System.out.print("Ciudad " + listaPaquetes.get(i).getCiudad() + " ");
             System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");
             System.out.println("Estado " + listaPaquetes.get(i).getEstado() + " ");
         }

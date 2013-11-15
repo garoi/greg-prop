@@ -31,7 +31,6 @@ public class DriverCliente {
         
         Scanner sc = new Scanner(System.in);
         Cliente c = new Cliente();
-        ControlDominio cd = new ControlDominio();
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
@@ -43,15 +42,13 @@ public class DriverCliente {
                 System.out.print("nombreCliente: " + c.getNombreCliente() + "\n");
                 System.out.print("listaPaquetes: " + c.getListaPaquetes() + "\n");
                 
-                System.out.print("set de idCliente" + "\n");
-                System.out.print("Introduce nuevo id del cliente" + "\n");
-                int id = sc.nextInt();
-                c.setIDcliente(id);
-                System.out.print("Nuevo id del cliente: " + c.getIdCliente() + "\n");
             }
             else if(op == 2){
                 Paquete p = new Paquete();
-                p.leerPaquete(c.getIdCliente(),cd);
+                Scanner sc2 = new Scanner(System.in);
+                System.out.print("escriba el nombre de la ciudad del paquete");
+                String nombreCiudad = sc2.nextLine();
+                p.leerPaquete(c.getIdCliente(), nombreCiudad);
                 c.anadirPaquete(p);
             }
             else if(op == 3){
@@ -62,7 +59,7 @@ public class DriverCliente {
             else if(op == 4){
                 System.out.print("Introduce el id del paquete a eliminar:" + "\n");
                 int idPaquete = sc.nextInt();
-                c.eliminarPaquete(idPaquete);
+                c.eliminarPaquetes();
             }
             else if(op == 5){
                 System.out.print("Lista de paquetes del cliente: " + "\n");
