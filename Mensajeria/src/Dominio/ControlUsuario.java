@@ -22,19 +22,18 @@ public class ControlUsuario {
         this.lc = lc;
     }*/
     
-    /*public Cliente registroCliente(Cliente cl){
+    public void registroCliente(Cliente cl, ListaClientes lc){
         cl = new Cliente();
         cl.leerCliente();
         boolean existe = lc.comprueba(cl.getNombreCliente());
         if(!existe){
-            return cl;
+            lc.anadirCliente(cl);
+            System.out.println("registrado correctamente");
         }
         else{
             System.out.println("El usuario ya esta registrado");
-            return null;
         }
     }
-    */
     
     public void registroOperador(Operador oper){
             Scanner sc2 = new Scanner(System.in);
@@ -47,23 +46,28 @@ public class ControlUsuario {
     }
     
     
-    /*public Cliente loginCliente(){
+    public int loginCliente(ListaClientes lc){
         Scanner sc2 = new Scanner(System.in);
         String nombre = sc2.next();
-        cl = lc.compruebaCliente(nombre);
-        if(cl != null){
-            String password = sc2.next();
-            if(cl.getPassword().equals(password)){
-                System.out.println("acceso concedido");
-                return cl;
-            }
-            else{ 
-                System.out.println("acceso denegado");
-                return null;
+        boolean valido = false;
+        int indice = -1;
+        indice = lc.compruebaCliente(nombre);
+        if(indice != -1){
+            Cliente cl = lc.getCliente(indice);
+            while(!valido){
+                String password = sc2.next();
+                if(cl.getPassword().equals(password)){
+                    System.out.println("acceso concedido");
+                    valido = true;
+                    return indice;
+                }
+                else{ 
+                    System.out.println("acceso denegado");
+                }
             }
         }
-        else return null;
-    }*/
+        return -1;
+    }
     
     public void loginOperador(Operador oper) {
         Scanner sc2 = new Scanner(System.in);

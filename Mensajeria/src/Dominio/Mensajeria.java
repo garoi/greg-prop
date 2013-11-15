@@ -74,12 +74,13 @@ public class Mensajeria {
         boolean esCliente = false;
         boolean salir = false;
         cd.registroLogin(esCliente, salir);
-        //cliente
-        if (!esCliente & !salir) {
+        System.out.println("boool esss:" + esCliente);
+        //operador
+        if (!esCliente) {
             funcOperador(cd);
         }
-        //operador
-        else if(esCliente & !salir){
+        //cliente
+        else if(esCliente){
             funcCliente(cd);
         }
     }
