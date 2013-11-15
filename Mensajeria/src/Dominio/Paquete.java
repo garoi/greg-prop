@@ -16,12 +16,34 @@ public class Paquete implements Serializable{
     private String ciudad;
     private String destino;
     private String estado;
+    private String turno;
+    private String fecha;
     //private String ciudad;
     
-    
-    //CREADORA
-    public Paquete(){}
     //CONSULTORAS
+    public int getIdDestino() {
+        return idDestino;
+    }
+
+    public void setIdDestino(int idDestino) {
+        this.idDestino = idDestino;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     public int getIdPaquete() {
         return idPaquete;
     }
