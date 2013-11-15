@@ -16,37 +16,38 @@ public class ControlDominio {
     private Operador oper;
     private ListaPaquetes lp;
     private Cliente cl;
-    private boolean existeOper = false;
+    private boolean existeOper = true;
     private Mapa map;
     
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
+        lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
-        else lc = (ListaClientes) leerListaClientes();
-        if(oper == null) oper = new Operador();     
-        else oper = (Operador) leerOperador();
+        
+        oper = (Operador) leerOperador();
+        if(oper == null) {
+            oper = new Operador();
+            existeOper = false;
+        }     
+        
+        lp = (ListaPaquetes) leerListaPaquetes();
         if(lp == null) lp = new ListaPaquetes();
-        else lp = (ListaPaquetes) leerListaPaquetes();
     }
     
-    public void registroLogin(boolean esCliente, boolean salir) {
+    public void registroLogin(boolean esCliente, boolean salir) throws IOException, ClassNotFoundException {
         ControlUsuario cu = new ControlUsuario();
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
         int op = sc.nextInt();
-        if(op == 1){
+        if(op == 1) {
             if(!existeOper){
                 System.out.println("No hay operador, vamos a registrarlo");
                 cu.registroOperador(oper);
                 existeOper = true;
+                cp.guardarOperador(oper);
             }
-                System.out.println("vamos a hacer login");
-                cu.loginOperador(oper);
-                /*System.out.println("nombre oper:");
-                System.out.println(oper.getNombreOperador());
-                System.out.println("passoper:");
-                System.out.println(oper.getPassword());*/
-
+            System.out.println("vamos a hacer login");
+            cu.loginOperador(oper);
         }
     }
         /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
@@ -141,18 +142,39 @@ public class ControlDominio {
     }
     
     public Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return cp.leerListaPaquetes();
+        try {
+            return lp = (ListaPaquetes) cp.leerListaPaquetes();
+        }
+        catch (FileNotFoundException e) {
+            return lp = null;
+        }
+        catch (IOException e) {
+            return lp = null;
+        }
     }
     
     public Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return cp.leerListaClientes();
+        try {
+            return lc = (ListaClientes) cp.leerListaClientes();
+        }
+        catch (FileNotFoundException e) {
+            return lc = null;
+        }
+        catch (IOException e) {
+            return lc = null;
+        }
     }
     
     public Object leerOperador() throws IOException, ClassNotFoundException {
-        return cp.leerOperador();
+        try {
+            return oper = (Operador) cp.leerOperador();
+        }
+        catch (IOException e) {
+            return oper = null;
+        }
     }
     
-    public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
+    public void guardadoGeneral() throws IOException {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
@@ -220,7 +242,8 @@ public class ControlDominio {
             calcularRuta(paquetesSeleccionados, fecha, r);     
         }
         else {
-            System.out.println("Entra la fecha (dd.mm.aa)");
+            System.out.println("Aun no implementado");
+            /*System.out.println("Entra la fecha (dd.mm.aa)");
             fecha = sc.nextLine();
             String ano = fecha.substring(6, fecha.length());
             String mes = fecha.substring(3, fecha.length()-3);
@@ -244,7 +267,7 @@ public class ControlDominio {
                         //calcularRuta(paquetesSeleccionados, fecha, r);
                     }
                 }
-            }
+            }*/
         }
     }
     
@@ -283,6 +306,7 @@ public class ControlDominio {
     }
     
     public void cancelarPaquete(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("puede cancelar los siguientes paquetes");
         verPaquetesCliente();
         System.out.println("Introduzca el ID del paquete que desea cancelar");

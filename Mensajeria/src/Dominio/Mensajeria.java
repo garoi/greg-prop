@@ -73,13 +73,18 @@ public class Mensajeria {
         boolean esCliente = false;
         boolean salir = false;
         cd.registroLogin(esCliente, salir);
+        System.out.println("escliente " + esCliente);
         //cliente
         if (!esCliente & !salir) {
             funcOperador(cd);
         }
         //operador
         else if(esCliente & !salir){
+            System.out.println("BAS");
             funcCliente(cd);
         }
+        /*
+        if sali = true cd.guardodogeneral
+        */
     }
 }

@@ -37,12 +37,12 @@ public class ControlUsuario {
     */
     
     public void registroOperador(Operador oper){
-            Scanner sc2 = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
             System.out.println("ponga el nombre del operador");
-            String nombre = sc2.nextLine();
+            String nombre = sc.nextLine();
             oper.setNombreOperador(nombre);
             System.out.println("ponga el password del operador");
-            String password = sc2.nextLine();
+            String password = sc.nextLine();
             oper.setPassword(password);
     }
     
@@ -72,6 +72,7 @@ public class ControlUsuario {
             System.out.println("Nombre usuario");
             String nombre = sc2.nextLine();
             if(oper.getNombreOperador().equals(nombre)){
+                System.out.println("Contraseña");
                 String password = sc2.nextLine();
                 if(oper.getPassword().equals(password)){
                     System.out.println("acceso concedido");
