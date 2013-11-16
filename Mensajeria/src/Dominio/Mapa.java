@@ -11,24 +11,44 @@ public class Mapa implements Serializable {
     private String[] nombres;
     private float[][] ciudad;
 
-    
+    /**
+     * 
+     * @return nombres
+     */
     public String[] getNombres() {
         return nombres;
     }
 
+    /**
+     * 
+     * @return ciudad
+     */
     public float[][] getCiudad() {
         return ciudad;
     }
     
+    /**
+     * 
+     * @param nombre 
+     */
     private void setNombreCiudad(String nombre){
         this.nombreCiudad = nombre;
     }
+    
+    /**
+     * 
+     * @return nombreCiudad
+     */
     public String getNombreCiudad(){
         return nombreCiudad;
     }
 
+    /**
+     * Crea una ciudad
+     * @param
+     */
     public void crearCiudad(){
-        System.out.println("Escriu el nom de la ciutat");
+        System.out.println("Escribe el nombre de la ciudad");
         Scanner sc3 = new Scanner(System.in);
         String nombre = sc3.nextLine();
         setNombreCiudad(nombre);
@@ -38,10 +58,10 @@ public class Mapa implements Serializable {
         ciudad = new float[nodes][nodes];
         nombres = new String[nodes];
         for (int i = 0; i < nodes; ++i) {
-            System.out.println("Entra el nom del node " + (i+1));
+            System.out.println("Entra el nombre de los nodos " + (i+1));
             String nombreNodo = sc.next();
             nombres[i] = nombreNodo;
-            System.out.println("Ara les distancies dels node [0....inf]");
+            System.out.println("Ahora las distancias de los nodos [0....inf]");
             for (int j = 0; j < nodes; ++j) {
                 ciudad[i][j] = sc.nextInt();
             }
@@ -49,6 +69,10 @@ public class Mapa implements Serializable {
     }
     
 
+    /**
+     * Muestra una ciudad
+     * @param
+     */
     public void imprimirCiudad() {
         System.out.println("la ciutat es " + ciudad.length);
         for (int j = 0; j < ciudad.length; ++j) {
@@ -64,6 +88,10 @@ public class Mapa implements Serializable {
         System.out.println("0 Salir de la modificacion de la ciudad manualmente");
     }
     
+    /**
+     * Modifica la ciudad
+     * @param
+     */
     public void modificarCiudad() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1 Modificar ciudad con el fichero");

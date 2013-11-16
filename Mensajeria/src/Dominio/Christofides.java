@@ -26,7 +26,7 @@ class Christofides {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    int[] buscaPermutacion() {
+    Integer[] buscaPermutacion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

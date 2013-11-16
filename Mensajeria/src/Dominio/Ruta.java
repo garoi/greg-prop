@@ -1,101 +1,218 @@
 package Dominio;
-import static java.lang.Double.POSITIVE_INFINITY;
+import java.io.Serializable;
 import java.util.*;
 import java.lang.System;
 /**
  *
  * @author Marc Garcia Roig
  */
-public class Ruta {
-    Mapa m = new Mapa();
-    private String[] nombresSubgrafo;
-    private float[][] subgrafo;
+public class Ruta implements Serializable {
+    private String[] nombres;
+    private float[][] grafo;
+    private Integer[] permutacion;
+    private ArrayList<Paquete> listaPaquetesRuta = new ArrayList<>();
+    private boolean verificada = false;
+    private Mapa mapa;
+    private String fecha;
+    private String turno;
 
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
-    //Modificadoras
 
-    public String[] getNombresSubgrafo() {
-        return nombresSubgrafo;
-    }
-
-    public float[][] getSubgrafo() {
-        return subgrafo;
-    }
-    
-    public void setNombresSubgrafo(String[] nombresSubgrafo) {
-        this.nombresSubgrafo = nombresSubgrafo;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setSubgrafo(float[][] subgrafo) {
-        this.subgrafo = subgrafo;
-    }
-    
-    private ArrayList< ArrayList<Pair> > reconvertirArbol(float[][] arbol){
-        ArrayList< ArrayList<Pair> > mstkaux = new ArrayList<>();
-        for (int j = 0; j < arbol.length; ++j) {
-            ArrayList<Pair> v = new ArrayList<Pair>();
-            for (int i = 0; i < arbol.length; ++i) {
-                if (arbol[i][j] != POSITIVE_INFINITY) {
-                    v.add(new Pair(i, arbol[i][j]));
-                }
-            }
-            mstkaux.add(v);
-        }
-        return mstkaux;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
     
     /**
-     *Devuelve un arbol de expancion minima
+     * 
+     * @param nombres 
      */
-    public ArrayList< ArrayList<Pair> > mst() {
-        int numeroNodos = subgrafo.length;
-        int[] pertenece = new int[numeroNodos];
-        float[][] arbol = new float[numeroNodos][numeroNodos];
-        
-        for (int i = 0; i < numeroNodos; ++i) {
-            pertenece[i] = i;
-            for (int j = 0; j < numeroNodos; ++j) {
-                arbol[i][j] = (float) POSITIVE_INFINITY;
-            }
-        }
-        int nodoA, nodoB;
-        nodoA = nodoB = (int)POSITIVE_INFINITY;
-        int arcos = 1;
-        while (arcos < numeroNodos) {
-            float min = (float)POSITIVE_INFINITY;
-            for (int i = 0; i < numeroNodos; ++i) {
-                for (int j = 0; j < numeroNodos; ++j) {
-                    if (min > subgrafo[i][j] && pertenece[i] != pertenece[j]) {
-                        min = subgrafo[i][j];
-                        nodoA = i;
-                        nodoB = j;
-                    }
-                    if (j == i) arbol[i][j] = arbol[j][i] = 0;
-                }
-            }
-            if (pertenece[nodoA] != pertenece[nodoB]) {
-                arbol[nodoA][nodoB] = min;
-                arbol[nodoB][nodoA] = min;
-                int temp = pertenece[nodoB];
-                pertenece[nodoB] = pertenece[nodoA];
-                for(int k = 0; k < numeroNodos; k++) {
-                    if(pertenece[k] == temp) {
-                        pertenece[k] = pertenece[nodoA];
-                    }
-                }
-                arcos++;
-            }
-        }
-
-        MSTK = reconvertirArbol(arbol);
-        for (int i = 0; i < arbol.length; ++i) {
-            System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + MSTK.get(i).size());
-            for (int j = 0; j < MSTK.get(i).size(); ++j) {
-                System.out.println(MSTK.get(i).get(j).first() + " " + MSTK.get(i).get(j).second());
-            }
-        }
-        return MSTK;
+    public void setNombres(String[] nombres) {
+        this.nombres = nombres;
+    }
+    
+    /**
+     * 
+     * @param grafo 
+     */
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
+    }
+    
+    /**
+     * 
+     * @param listaPaquetesRuta 
+     */
+    public void setListaPaquetesRuta(ArrayList<Paquete> listaPaquetesRuta) {
+        if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList<>();
+        this.listaPaquetesRuta = listaPaquetesRuta;
+    }
+    
+    /**
+     * 
+     * @param verificada 
+     */
+    public void setVerificada(boolean verificada) {
+        this.verificada = verificada;
+    }
+    
+    /**
+     * 
+     * @param fecha 
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
+    /**
+     * 
+     * @return grafo
+     */
+    public float[][] getGrafo() {
+        return grafo;
+    }
+    
+    /**
+     * 
+     * @return nombres
+     */
+    public String[] getNombres() {
+        return nombres;
+    }
+    
+    /**
+     * 
+     * @return permutacion
+     */
+    public Integer[] getPermutacion() {
+        return permutacion;
+    }
+    
+    /**
+     * 
+     * @return listaPaquetesRuta
+     */
+    public ArrayList<Paquete> getListaPaquetesRuta() {
+        return listaPaquetesRuta;
+    }
+
+    /**
+     * 
+     * @return verificada
+     */
+    public boolean isVerificada() {
+        return verificada;
+    }
+    
+    /**
+     * 
+     * @return mapa
+     */
+     public Mapa getMapa() {
+        return mapa;
+    }
+     
+    /**
+     * 
+     * @return fecha
+     */
+    public String getFecha() {
+        return fecha;
+    }
+    
+    /**
+     * Calcula una ruta de entrega con el algoritmo rapido
+     * @param
+     */
+    public void calcularRapida() {
+        SolveGreedy sg = new SolveGreedy(grafo);
+        permutacion = sg.solve();
+    }
+    
+    /**
+     * Calcula el arbol de expansion minima de un grafo
+     * @param
+     */
+    public void calcularMinSpaTree() {
+        MinSpaTree mst = new MinSpaTree();
+        mst.setGrafo(grafo);
+        mst.setNombres(nombres);
+        MSTK = mst.MST();
+    }
+    
+    /**
+     * Ejecuta el algoritmo de Christofides
+     * @param
+     */
+    public void calcularChristofides() {
+        Christofides ch = new Christofides();
+        ch.setGrafo(grafo);
+        ch.setNombres(nombres);
+        ch.setMST(MSTK);
+        permutacion = ch.buscaPermutacion();
+    }
+    
+    /**
+     * Optimiza la ruta encontrada
+     */
+    public void optimizar() {
+        
+    }
+    
+    /**
+     * Muestra los puntos del mapa por donde pasara la ruta
+     * @param
+     */
+    public void mostrarRuta() {
+        System.out.println("La ruta pasara por los siguientes puntos del mapa:");
+        for (int i = 0; i < permutacion.length; ++i) {
+            System.out.print(" " + permutacion[i]);
+        }
+        System.out.println();
+    }
+    
+    /**
+     * Verifica una ruta
+     * @param
+     */
+    public void acceptarRuta() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Verificas la ruta. s/n");
+        String ord = sc.nextLine();
+        if (ord.equals("s")) {
+            verificada = true;
+        }
+        else {
+            verificada = false;
+        }
+    }
+    
+    /**
+     * Crea un subgrafo del mapa de los puntos por donde 
+     * tendra que recoger los paquetes
+     * @param paquetesSeleccionados
+     * @param map
+     * 
+     */
+    public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
+        mapa = map; 
+        if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList <>();
+        if (grafo != null) grafo = null;
+        grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
+        if (nombres != null) nombres = null;
+        nombres = new String[paquetesSeleccionados.size()];
+        float[][] ciudad = mapa.getCiudad();
+        for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
+            nombres[i] = paquetesSeleccionados.get(i).getDestino();
+            listaPaquetesRuta.add(paquetesSeleccionados.get(i));
+            for (int j = 0; j < paquetesSeleccionados.size(); ++j){
+                grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getIdDestino()][paquetesSeleccionados.get(j).getIdDestino()];
+            }
+        }
+        
+    }
 }

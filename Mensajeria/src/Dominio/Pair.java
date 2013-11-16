@@ -1,27 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Dominio;
+
+import java.io.Serializable;
 
 /**
  *
  * @author marc
  */
-public class Pair {
+public class Pair implements Serializable{
     private int first;
     private float second;
     
+    /**
+     * 
+     * @param a
+     * @param b 
+     */
     public Pair(int a, float b) {
         first = a; 
         second = b;
     }
+    
+    /**
+     * Consultora del primer elemento del pair
+     * @return first
+     */
     public int first() {
         return first;
     }
     
+    /**
+     * Consultora del segundo elemento del pair
+     * @return second
+     */
     public float second() {
         return second;
     }

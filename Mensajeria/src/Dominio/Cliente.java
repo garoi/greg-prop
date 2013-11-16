@@ -3,13 +3,14 @@
  * and open the template in the editor.
  */
 package Dominio;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Albert Gili
  */
-public class Cliente {
+public class Cliente implements Serializable {
     private int idCliente;
     private String password;
     private String nombreCliente;
@@ -23,87 +24,130 @@ public class Cliente {
         idCliente = listaPaquetes.size();
     }
     
+    /**
+     * 
+     * @return Id del cliente
+     */
     public int getIdCliente() {
         return idCliente;
     }
     
+    /**
+     * 
+     * @param idCliente 
+     */
     public void setIDcliente(int idCliente){
         this.idCliente = idCliente;
     }
-
+    
+    /**
+     * 
+     * @return El passwoed del cliente
+     */
     public String getPassword() {
         return password;
     }
-
+    
+    /**
+     * 
+     * @return El nombre del cliente
+     */
     public String getNombreCliente() {
         return nombreCliente;
     }
-
+    
+    /**
+     * 
+     * @return Lista de paquetes del cliente
+     */
     public ArrayList<Paquete> getListaPaquetes() {
         return listaPaquetes;
 
     }
      
-    public void leerCliente(Cliente cl){
+    /**
+     * Lee los datos del cliente
+     * 
+     */
+    public void leerCliente(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Anadir el nombre del cliente");
+        System.out.println("Anadir el nombre del client"
+                + "e");
         nombreCliente = sc.next();
         System.out.println("Anadir el password del cliente");
         password = sc.next();
     }
     
+    /**
+     * Añade un paquete a la lista de paquetes del cliente
+     * @param p Paquete
+     */
     public void anadirPaquete(Paquete p){
         listaPaquetes.add(p);
         
     }
     
-    public void cancelarPaquete(int idPaquete) {
-        boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetes.size() && !encontrado) {
+    /**
+     * Cancelamos un paquete que aun no ha sido enviado
+     * @param idPaquete
+     * @return Si ha podido cancelar el paquete
+     */
+    public boolean cancelarPaquete(int idPaquete) {
+        for (int i = 0; i < listaPaquetes.size(); ++i) {
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
                 if (listaPaquetes.get(i).getEstado().equals("para enviar")) {
                     listaPaquetes.remove(i);
-                    encontrado = true;
+                    return true;
                 }
             }
-            else {
-                ++i;
-            }
         }
-        if (!encontrado) {
-            System.out.println("Paquete no encontrado para este cliente");
-        }
+        return false;
     }
     
-    public void eliminarPaquete(int idPaquete) {
+    /**
+     * Elimina todos los paquetes enviados
+     * 
+     */
+    public void eliminarPaquetes() {
         boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetes.size() && !encontrado) {
-            if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetes.get(i).getEstado().equals("enviado")) {
-                    listaPaquetes.remove(i);
-                    encontrado = true;
-                }
-                else {
-                    System.out.println("El paquete aun no se ha enviado, lo tienes que cancelar");
-                    encontrado = true;
-                }
-            }
-            else {
-                ++i;
+        for (int i = 0; i < listaPaquetes.size(); ++i) {
+            if (listaPaquetes.get(i).getEstado().equals("enviado")) {
+                listaPaquetes.remove(i);
+                encontrado = true;
             }
         }
-        if (encontrado) {
-            System.out.println("Paquete no encontrado para este cliente o no enviado");
+        if (!encontrado) { 
+            System.out.println("No tienes ningun paquete enviado");
         }
     }
     
+    /**
+     * Muestra la lista de paquetes del cliente
+     */
     public void verLista(){
         for (int i = 0; i < listaPaquetes.size();++i) {
             System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
+            System.out.print("Ciudad " + listaPaquetes.get(i).getCiudad() + " ");
             System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");
-            System.out.println("Estado " + listaPaquetes.get(i).getEstado() + " ");
+            System.out.print("Estado " + listaPaquetes.get(i).getEstado() + " ");
+            System.out.print("Fecha " + listaPaquetes.get(i).getFecha() + " ");
+            System.out.println("Turno " + listaPaquetes.get(i).getTurno() + " ");
+        }
+    }
+    
+    /**
+     * Una vez enviados los paquetes cambia el estado
+     * @param paquetesEnviados
+     */
+    public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
+        for (int i = 0; i < paquetesEnviados.size(); ++i) {
+            boolean encontrado = false;
+            for (int j = 0; j < listaPaquetes.size() & !encontrado; ++j) {
+                if (listaPaquetes.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
+                    listaPaquetes.get(j).setEstado("enviado");
+                    encontrado = true;
+                }
+            }
         }
     }
 }
