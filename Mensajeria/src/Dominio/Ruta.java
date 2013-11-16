@@ -10,7 +10,7 @@ public class Ruta implements Serializable {
     private String[] nombres;
     private float[][] grafo;
     private Integer[] permutacion;
-    private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
+    private ArrayList<Paquete> listaPaquetesRuta = new ArrayList<>();
     private boolean verificada = false;
     private Mapa mapa;
     private String fecha;
@@ -48,6 +48,7 @@ public class Ruta implements Serializable {
      * @param listaPaquetesRuta 
      */
     public void setListaPaquetesRuta(ArrayList<Paquete> listaPaquetesRuta) {
+        if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList<>();
         this.listaPaquetesRuta = listaPaquetesRuta;
     }
     
@@ -124,7 +125,7 @@ public class Ruta implements Serializable {
     }
     
     /**
-     * Calcula una ruta de entrega
+     * Calcula una ruta de entrega con el algoritmo rapido
      * @param
      */
     public void calcularRapida() {
@@ -154,6 +155,10 @@ public class Ruta implements Serializable {
         ch.setMST(MSTK);
         permutacion = ch.buscaPermutacion();
     }
+    
+    /**
+     * Optimiza la ruta encontrada
+     */
     public void optimizar() {
         
     }
@@ -187,15 +192,18 @@ public class Ruta implements Serializable {
     }
     
     /**
-     * Crea un grafo
+     * Crea un subgrafo del mapa de los puntos por donde 
+     * tendra que recoger los paquetes
      * @param paquetesSeleccionados
      * @param map
      * 
      */
     public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
         mapa = map; 
+        if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList <>();
         if (grafo != null) grafo = null;
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
+        if (nombres != null) nombres = null;
         nombres = new String[paquetesSeleccionados.size()];
         ArrayList<ArrayList<Float>> ciudad = mapa.getCiudad();
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
@@ -209,5 +217,6 @@ public class Ruta implements Serializable {
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
+        
     }
 }

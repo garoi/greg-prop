@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Dominio;
 
 import java.util.*;
 
 /**
  *
- * @author Albert
+ * @author Marc Garcia Roig
  */
 public class ControlUsuario {
     
@@ -34,7 +28,7 @@ public class ControlUsuario {
     }
     
     /**
-     * 
+     * Registra en el sistema un nuevo cliente
      * @param cl
      * @param lc
      * @return Si el cliente se ha registrado correctamente
@@ -69,7 +63,7 @@ public class ControlUsuario {
     }
     
     /**
-     * 
+     * Logeamos el cliente
      * @param lc
      * @return id del cliente que se ha logueado
      */
@@ -123,18 +117,4 @@ public class ControlUsuario {
             }
         }
     }
-    
-   /* public Cliente iniCliente(){
-        System.out.println("pulse 1 para registrarse, 2 para loguearse");
-        int op = sc.nextInt();
-         if(op == 1){
-             while(!registroCliente());
-             return null;
-         }
-         else if(op == 2){
-             while(loginCliente() == null);
-             return cl;
-         }
-         else return null;
-    }*/
 }

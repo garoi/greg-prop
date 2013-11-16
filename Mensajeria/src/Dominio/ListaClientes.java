@@ -11,7 +11,7 @@ public class ListaClientes implements Serializable {
     ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
     
     /**
-     * 
+     * Devuelve el cliente especificado por su idCliente
      * @param idCliente
      * @return Cliente con identificador idCliente
      */
@@ -43,7 +43,7 @@ public class ListaClientes implements Serializable {
     }
     
     /**
-     * 
+     * Busca si existe el cliente correspondiente
      * @param nombre
      * @return idCliente que corresponde al cliente con nombre nombre
      */
@@ -70,7 +70,7 @@ public class ListaClientes implements Serializable {
     }
     
     /**
-     * 
+     * Devuelve el numero de clientes total
      * @return tamano de la lista de clientes
      */
     public int tamanoListaClientes(){
@@ -78,7 +78,7 @@ public class ListaClientes implements Serializable {
     }
     
     /**
-     * 
+     * Comprueba que exista el cliente con nombre especificado
      * @param nombre
      * @return Si el nombre del cliente es el mismo que nombre
      */
@@ -92,7 +92,7 @@ public class ListaClientes implements Serializable {
     }
     
     /**
-     * 
+     * Comprueba que exista el cliente con nombre especificado
      * @param nombre
      * @return id del cliente con nombre nombre
      */

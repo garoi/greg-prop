@@ -14,7 +14,7 @@ public class ListaPaquetes implements Serializable {
     }
      
     /**
-     * 
+     * Añade un paquete a la lista
      * @param p 
      */
     public void anadirPaquete(Paquete p){
@@ -38,7 +38,7 @@ public class ListaPaquetes implements Serializable {
     }
     
     /**
-     * 
+     * Devuelve el tamaño de la lista de paquetes
      * @return tamano de la lista de paquetes
      */
     public int tamanoListaPaquetes(){
@@ -61,6 +61,8 @@ public class ListaPaquetes implements Serializable {
             System.out.print(p.getCiudad() + "\n");
             System.out.print(p.getDestino() + "\n");
             System.out.print(p.getEstado() + "\n");
+            System.out.print(p.getFecha() + "\n");
+            System.out.print(p.getTurno() + "\n");
         }
     }
     
@@ -73,6 +75,10 @@ public class ListaPaquetes implements Serializable {
         listaPaquetes.get(idPaquete).setEstado("cancelado");
     }
     
+    /**
+     * Una vez confirmada la ruta cambia el estado de los paquetes enviados
+     * @param paquetesEnviados
+     */
     public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
         for (int i = 0; i < paquetesEnviados.size(); ++i) {
             boolean encontrado = false;
