@@ -83,4 +83,16 @@ public class Cliente implements Serializable {
             System.out.println("Estado " + listaPaquetes.get(i).getEstado() + " ");
         }
     }
+    
+    public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
+        for (int i = 0; i < paquetesEnviados.size(); ++i) {
+            boolean encontrado = false;
+            for (int j = 0; j < listaPaquetes.size() & !encontrado; ++j) {
+                if (listaPaquetes.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
+                    listaPaquetes.get(j).setEstado("enviado");
+                    encontrado = true;
+                }
+            }
+        }
+    }
 }

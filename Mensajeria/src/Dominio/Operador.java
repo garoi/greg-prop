@@ -15,9 +15,6 @@ public class Operador implements Serializable {
     private Mapa mapa;
     private ListaPaquetes lp;
     private boolean checkExistencia = false;
-
-    
-    
     
     public void setCheckExistencia(boolean checkExistencia) {
         this.checkExistencia = checkExistencia;
@@ -85,24 +82,32 @@ public class Operador implements Serializable {
     }
     
     //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
-    public ArrayList<Paquete> seleccionarPaquetes() {
+    public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
         ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-                System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
-                System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-                System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
-                System.out.print("Dia " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
-                System.out.print("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
+            if (listaPaquetesParaEntregar.get(i).getCiudad().equals(nombreCiudad)) {
+                if (fecha.equals(listaPaquetesParaEntregar.get(i).getFecha())) {
+                    if (turno.equals(listaPaquetesParaEntregar.get(i).getTurno())) {
+                        System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
+                        System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
+                        System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+                        System.out.print("Dia " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
+                        System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
+                    }
+                }
+            }
         }
         System.out.println("Si desea parar de entrar/seleccionar paquetes pulsa -1"); 
         int idPaquete = sc.nextInt();
         paquetesDestino.add(buscarPaquete(idPaquete));
-        while (idPaquete >= 0) {
+        while (idPaquete > -1) {
             idPaquete = sc.nextInt();
             paquetesDestino.add(buscarPaquete(idPaquete));
         }
+        paquetesDestino.remove(paquetesDestino.size()-1);
+        System.out.println("Has seleccionado " + paquetesDestino.size() + " paquetes");
         return paquetesDestino;
     }
     
@@ -186,13 +191,12 @@ public class Operador implements Serializable {
     private void buscayAgrega(ArrayList <Paquete> paquetes, int idagregado){
         for(int i = 0; i < listaPaquetesParaEntregar.size(); ++i){
             if(listaPaquetesParaEntregar.get(i).getIdPaquete() == idagregado){
-                
                 paquetes.add(listaPaquetesParaEntregar.get(i));
             }
         }
     }
     
-    public void modificaListaPaquetes(ArrayList<Paquete> paquetes){
+    public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
         int numeliminados = sc.nextInt();
@@ -202,7 +206,6 @@ public class Operador implements Serializable {
             int idpaquete = sc.nextInt();
             buscayElimina(paquetes, idpaquete);
         }
-        //ArrayList <Paquete> nuevospaquetes = new ArrayList<>();
         System.out.println("cuantos paquetes quiere agregar de la lista?");
         int numagregados = sc.nextInt();
         System.out.println("Indique los ID de los paquetes que desea agregar");
@@ -210,24 +213,18 @@ public class Operador implements Serializable {
             int idagregado = sc.nextInt();
             buscayAgrega(paquetes, idagregado);
         }
-        
+        return paquetes;
     }
     
-    /*public void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
-        Ruta r = new Ruta();
-        r = (Ruta) cd.leerRuta();
-        ArrayList<Paquete> paquetes = new ArrayList<>();
-        paquetes = r.getListaPaquetesRuta();
-        modificaListaPaquetes(paquetes);
-        Mapa map = new Mapa();
-        map = r.getMapa();
-        String nom = map.getNombreCiudad();
-        System.out.println("Procedemos al recalculo de la ruta");
-        for(int i = 0; i < paquetes.size(); ++i){
-            System.out.println(paquetes.get(i).getidDestino()+" ");
+    public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
+        for (int i = 0; i < paquetesEnviados.size(); ++i) {
+            boolean encontrado = false;
+            for (int j = 0; j < listaPaquetesParaEntregar.size() & !encontrado; ++j) {
+                if (listaPaquetesParaEntregar.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
+                    listaPaquetesParaEntregar.get(j).setEstado("enviado");
+                    encontrado = true;
+                }
+            }
         }
-        cd.calcularRuta(paquetes, nom, map);
-        
-   }*/
-    
+    }
 }

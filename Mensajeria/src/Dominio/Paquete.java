@@ -92,7 +92,22 @@ public class Paquete implements Serializable{
         System.out.println("escribe el destino del paquete");
         String destino = sc.nextLine();
         this.destino = destino;
-        
+        Fecha fecha = new Fecha();
+        System.out.println("Es para hoy y el turno actual? s/n");
+        String ord = sc.nextLine();
+        if (ord.equals("s")) {
+            this.fecha = fecha.fechaActual();
+        }
+        else {
+            System.out.println("Escribe la fecha (dd.mm.aa)");
+            String dat = sc.nextLine();
+            if (fecha.comprobarFecha(dat)) {
+                this.fecha = dat;
+                System.out.println("Entra el turno: (mañana/tarde)");
+                this.turno = sc.nextLine();
+            }
+            else System.out.println("La fecha es incorrecta");
+        }
     }
     
     

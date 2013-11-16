@@ -81,7 +81,6 @@ public class ControlPersistencia {
     }
     
     public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
-        System.out.println("CP");
         pr.guardarRuta(x, data, verificada);
     }
     

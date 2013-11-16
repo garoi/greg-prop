@@ -59,6 +59,7 @@ public class ControlUsuario {
         if(indice != -1){
             Cliente cl = lc.getCliente(indice);
             while(!valido){
+                System.out.println("Ingrese su contraseña");
                 String password = sc2.next();
                 if(cl.getPassword().equals(password)){
                     System.out.println("acceso concedido");

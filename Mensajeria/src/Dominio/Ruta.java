@@ -11,11 +11,20 @@ public class Ruta implements Serializable {
     private float[][] grafo;
     private Integer[] permutacion;
     private ArrayList<Paquete> listaPaquetesRuta = new ArrayList <>();
-    private boolean verificada;
+    private boolean verificada = false;
     private Mapa mapa;
     private String fecha;
-    
+    private String turno;
+
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
+    
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
     
     public void setNombres(String[] nombres) {
         this.nombres = nombres;
@@ -92,6 +101,7 @@ public class Ruta implements Serializable {
         for (int i = 0; i < permutacion.length; ++i) {
             System.out.print(" " + permutacion[i]);
         }
+        System.out.println();
     }
     public void acceptarRuta() {
         Scanner sc = new Scanner(System.in);
@@ -106,7 +116,8 @@ public class Ruta implements Serializable {
     }
     
     public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
-        mapa = map;
+        mapa = map; 
+        if (grafo != null) grafo = null;
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         nombres = new String[paquetesSeleccionados.size()];
         float[][] ciudad = mapa.getCiudad();
@@ -114,6 +125,8 @@ public class Ruta implements Serializable {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
+                System.out.println(paquetesSeleccionados.get(i).getIdDestino());
+                System.out.println(paquetesSeleccionados.get(j).getIdDestino());
                 grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getIdDestino()][paquetesSeleccionados.get(j).getIdDestino()];
             }
         }
