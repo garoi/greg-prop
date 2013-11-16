@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Dominio;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -28,14 +23,13 @@ public class DriverCliente {
         System.out.print("4: eliminarPaquete" + "\n");
         System.out.print("5: verLista" + "\n");
         System.out.print("0: Finalizar" + "\n");
-        
+        ListaPaquetes lp = new ListaPaquetes();
         Scanner sc = new Scanner(System.in);
         Cliente c = new Cliente();
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
-                c.leerCliente();
-                
+                c.leerCliente();               
                 System.out.print("Prueba de getters" + "\n");
                 System.out.print("idCliente: " + c.getIdCliente() + "\n");
                 System.out.print("password: " + c.getPassword() + "\n");
@@ -49,6 +43,7 @@ public class DriverCliente {
                 System.out.print("escriba el nombre de la ciudad del paquete");
                 String nombreCiudad = sc2.nextLine();
                 p.leerPaquete(c.getIdCliente(), nombreCiudad);
+                lp.anadirPaquete(p);
                 c.anadirPaquete(p);
             }
             else if(op == 3){
@@ -57,8 +52,6 @@ public class DriverCliente {
                 c.cancelarPaquete(idPaquete);
             }
             else if(op == 4){
-                System.out.print("Introduce el id del paquete a eliminar:" + "\n");
-                int idPaquete = sc.nextInt();
                 c.eliminarPaquetes();
             }
             else if(op == 5){

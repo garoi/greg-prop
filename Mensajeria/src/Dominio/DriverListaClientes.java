@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Dominio;
 
 import java.io.FileNotFoundException;
@@ -22,8 +16,8 @@ public class DriverListaClientes {
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         // TODO code application logic here
         System.out.print("Selecciona funcion a probar" + "\n");
-        System.out.print("1: getCliente" + "\n");
-        System.out.print("2: anadirCliente" + "\n");
+        System.out.print("1: anadirCliente" + "\n");
+        System.out.print("2: getCliente" + "\n");
         System.out.print("3: anadirPaquete" + "\n");
         System.out.print("4: encontrarCliente" + "\n");
         System.out.print("5: packsCliente" + "\n");
@@ -36,17 +30,22 @@ public class DriverListaClientes {
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
+                Cliente c = new Cliente();
+                c.leerCliente();
+                boolean existe;
+                existe = lc.comprueba(c.getNombreCliente());
+                if(!existe){
+                    lc.anadirCliente(c);
+                }
+                else System.out.print("el cliente ya existe");
+            }
+            else if(op == 2){
                 System.out.print("Introduce id del cliente" + "\n");
                 int id = sc.nextInt();
                 if(id < lc.tamanoListaClientes()){
                     System.out.print(lc.getCliente(id).getNombreCliente() + "\n");
                 }
                 else System.out.print("No existe un cliente con este id" + "\n");
-            }
-            else if(op == 2){
-                Cliente c = new Cliente();
-                c.leerCliente();
-                lc.anadirCliente(c);
             }
             else if(op == 3){
                 System.out.println("Entra el id del cliente al que quieras anadir el paquete");

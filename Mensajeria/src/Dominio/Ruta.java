@@ -148,11 +148,13 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularChristofides() {
-        Christofides ch = new Christofides();
+        /*Christofides ch = new Christofides();
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
-        ch.setMST(MSTK);
-        permutacion = ch.buscaPermutacion();
+        ch.setMST(MSTK);*/
+        //Stubs
+        calcularRapida();
+        //permutacion = ch.buscaPermutacion();
     }
     
     /**

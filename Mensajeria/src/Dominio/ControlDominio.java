@@ -343,7 +343,7 @@ public class ControlDominio {
         int nuevoPunto = sc.nextInt();
         while (nuevoPunto > -1) {
             Paquete p = new Paquete();
-            p.setDestino(nombresCiu[nuevoPunto]);
+            p.setDestino(nombresCiu.get(nuevoPunto));
             p.setIdDestino(nuevoPunto);
             listaPaquetesRutaTemp.add(p);
             nuevoPunto = sc.nextInt();

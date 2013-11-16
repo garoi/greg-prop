@@ -29,44 +29,45 @@ public class DriverMinSpaTree {
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
-                String[] n = new String[3];
-                n[0] = "casaOctavio";
-                n[1] = "casaPere";
-                n[2] = "casaAndreu";
+                String[] n = new String[4];
+                n[0] = "upc";
+                n[1] = "ub";
+                n[2] = "uab";
+                n[3] = "upf";
                 mst.setNombres(n);
                 System.out.println("Estos son los nombres: ");
                 String res[] = mst.getNombres();
-                for(int i = 0; i < 3; ++i){
+                for(int i = 0; i < 4; ++i){
                     System.out.print(res[i] + " ");
                 }
                 System.out.println();
                 
-                System.out.println("Escribe una matriz de floats de 3*3 para comprobar get y set de grafo");
-                float g[][] = new float[3][3];
-                for(int i = 0; i < 3; ++i){
-                    for(int j = 0; j < 3; ++j){
+                System.out.println("Escribe una matriz de floats de 4*4 para comprobar get y set de grafo");
+                float g[][] = new float[4][4];
+                for(int i = 0; i < 4; ++i){
+                    for(int j = 0; j < 4; ++j){
                         g[i][j] = sc.nextFloat();
                     }
                 }
                 mst.setGrafo(g);
                 float c[][] = mst.getGrafo();
                 System.out.println("Esta es la matriz: ");
-                for(int i = 0; i < 3; ++i){
-                    for(int j = 0; j < 3; ++j){
+                for(int i = 0; i < 4; ++i){
+                    for(int j = 0; j < 4; ++j){
                         System.out.print(c[i][j] + " ");
                     }
                     System.out.println();
                 }
             }
-            else if(op == 2){
+            else if(op == 2) {
                 ArrayList< ArrayList<Pair> >result = mst.MST();
                 System.out.println("Este es el Arbol de recubrimiento minimo");
                 for (int i = 0; i < result.size(); ++i) {
                     System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + result.get(i).size());
                     for (int j = 0; j < result.get(i).size(); ++j) {
                         System.out.println(result.get(i).get(j).first() + " " + result.get(i).get(j).second());
-            }
-        }
+                    }
+                }
             }
             else System.out.println("Opcion Incorrecta, vuelve a introducir una opcion");
             System.out.println("Selecciona funcion a probar");

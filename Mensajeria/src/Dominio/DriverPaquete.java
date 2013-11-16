@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dominio;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,7 +17,6 @@ public class DriverPaquete {
         System.out.println("Escriba un identificador de cliente (entero):");
         int idCliente = sc.nextInt();
         System.out.println("Escriba la ciudad del paquete");
-        System.out.println("hola");
         Scanner sc2 = new Scanner(System.in);
         String nombreCiudad = sc2.nextLine();
         Paquete p = new Paquete();
@@ -37,6 +32,12 @@ public class DriverPaquete {
          System.out.println(p.getIdPaquete());
          System.out.print("Ciudad :");
          System.out.println(p.getCiudad());
+         
+         System.out.print("fecha :");
+         System.out.println(p.getFecha());
+         
+         System.out.print("turno :");
+         System.out.println(p.getTurno());
          /*PODEMOS VER QUE LAS FUNCIONES DE GET FUNCIONAN IMPLICITAMENTE AL LLAMAR
           * A LA FUNCION LECTORA DE PAQUETE
           */
