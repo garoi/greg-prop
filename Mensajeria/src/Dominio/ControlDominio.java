@@ -330,13 +330,13 @@ public class ControlDominio {
         Scanner sc = new Scanner(System.in);
         Ruta r = (Ruta) leerRuta(nombre);
         Mapa maptem = r.getMapa();
-        String[] nombresCiu = maptem.getNombres();
+        ArrayList<String> nombresCiu = maptem.getNombres();
         Integer[] puntosRuta = r.getPermutacion();
         ArrayList<Paquete> listaPaquetesRutaTemp= new ArrayList<>();
         listaPaquetesRutaTemp = r.getListaPaquetesRuta();
         System.out.println("Por que puntos de la ciudad te gustaria pasar?");
-        for (int i = 0; i < nombresCiu.length; ++i) {
-            System.out.println(i + " " + nombresCiu[i]);
+        for (int i = 0; i < nombresCiu.size(); ++i) {
+            System.out.println(i + " " + nombresCiu.get(i));
         }
         System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa s");
         String nuevoPunto = sc.nextLine();
