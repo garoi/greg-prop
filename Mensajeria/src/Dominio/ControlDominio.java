@@ -330,13 +330,13 @@ public class ControlDominio {
         Scanner sc = new Scanner(System.in);
         Ruta r = (Ruta) leerRuta(nombre);
         Mapa maptem = r.getMapa();
-        String[] nombresCiu = maptem.getNombres();
+        ArrayList<String> nombresCiu = maptem.getNombres();
         Integer[] puntosRuta = r.getPermutacion();
         ArrayList<Paquete> listaPaquetesRutaTemp= new ArrayList<>();
         listaPaquetesRutaTemp = r.getListaPaquetesRuta();
         System.out.println("Por que puntos de la ciudad te gustaria pasar?");
-        for (int i = 0; i < nombresCiu.length; ++i) {
-            System.out.println(i + " " + nombresCiu[i]);
+        for (int i = 0; i < nombresCiu.size(); ++i) {
+            System.out.println(i + " " + nombresCiu.get(i));
         }
         System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa -1");
         System.out.println("entra el id destino");
@@ -415,12 +415,12 @@ public class ControlDominio {
         Mapa map = (Mapa) leerCiudad();;
         String nombreCiudad = map.getNombreCiudad();
         p.leerPaquete(cl.getIdCliente(), nombreCiudad);
-        String[] nombresNodo = map.getNombres();
+        ArrayList<String> nombresNodo = map.getNombres();
         boolean encontrado = false;
         String destino = p.getDestino();
         int idDestino = -1;
-        for(int i = 0; i < nombresNodo.length & !encontrado; ++i){
-            if(nombresNodo[i].equals(destino)){
+        for(int i = 0; i < nombresNodo.size() & !encontrado; ++i){
+            if(nombresNodo.get(i).equals(destino)){
                 encontrado = true;
                 idDestino = i;
             }

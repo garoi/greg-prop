@@ -16,6 +16,14 @@ public class Cliente implements Serializable {
     private String nombreCliente;
     ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
     
+    public Cliente(){}
+     
+    public Cliente(String nombre, String contrasena){
+        nombreCliente = nombre;
+        password = contrasena;
+        idCliente = listaPaquetes.size();
+    }
+    
     /**
      * 
      * @return Id del cliente
@@ -54,6 +62,7 @@ public class Cliente implements Serializable {
      */
     public ArrayList<Paquete> getListaPaquetes() {
         return listaPaquetes;
+
     }
      
     /**

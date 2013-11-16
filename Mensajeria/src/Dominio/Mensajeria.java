@@ -7,11 +7,12 @@ import java.lang.System;
  * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
  */
 public class Mensajeria {
-
+    
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
-        System.out.println("3 Seleccionar ciudad");
+        System.out.println("3 modificar ciudad");
+        System.out.println("4 seleccionar paquetes y calcular ruta");
         System.out.println("0 Salir");
     }
     
@@ -19,7 +20,7 @@ public class Mensajeria {
         System.out.println("1 anadir paquetes");
         System.out.println("2 ver paquetes");
         System.out.println("3 cancelar envio");
-        System.out.println("4 eliminar paquetes enviados");
+        System.out.println("4 eliminar paquetes");
         System.out.println("0 Salir");
     }
     
@@ -62,6 +63,7 @@ public class Mensajeria {
             else if (op == 3) {
                 cd.seleccionarCiudad();
             }
+            else System.out.println("El tipo de usuario no existe.");   
             infoOperador();
             op = sc.nextInt();
         }
