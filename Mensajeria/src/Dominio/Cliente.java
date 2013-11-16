@@ -70,8 +70,8 @@ public class Cliente implements Serializable {
     }
     
     /**
-     * 
-     * @param p 
+     * Añade un paquete a la lista de paquetes del cliente
+     * @param p Paquete
      */
     public void anadirPaquete(Paquete p){
         listaPaquetes.add(p);
@@ -79,7 +79,7 @@ public class Cliente implements Serializable {
     }
     
     /**
-     * 
+     * Cancelamos un paquete que aun no ha sido enviado
      * @param idPaquete
      * @return Si ha podido cancelar el paquete
      */
@@ -96,7 +96,7 @@ public class Cliente implements Serializable {
     }
     
     /**
-     * Elimina un paquete
+     * Elimina todos los paquetes enviados
      * 
      */
     public void eliminarPaquetes() {
@@ -120,10 +120,16 @@ public class Cliente implements Serializable {
             System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
             System.out.print("Ciudad " + listaPaquetes.get(i).getCiudad() + " ");
             System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");
-            System.out.println("Estado " + listaPaquetes.get(i).getEstado() + " ");
+            System.out.print("Estado " + listaPaquetes.get(i).getEstado() + " ");
+            System.out.print("Fecha " + listaPaquetes.get(i).getFecha() + " ");
+            System.out.println("Turno " + listaPaquetes.get(i).getTurno() + " ");
         }
     }
     
+    /**
+     * Una vez enviados los paquetes cambia el estado
+     * @param paquetesEnviados
+     */
     public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
         for (int i = 0; i < paquetesEnviados.size(); ++i) {
             boolean encontrado = false;

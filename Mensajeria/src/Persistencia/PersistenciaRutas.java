@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class PersistenciaRutas {
     
-    public ArrayList<String> listarRutas() {
+    public ArrayList<String> listarRutas(String nombreCiudad) {
         System.out.println("Las rutas guardadas son:");
         File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
@@ -23,8 +23,9 @@ public class PersistenciaRutas {
         String nombreFichero;
         for(File file:nombres) {
             nombreFichero = file.getName();
+            boolean nombre = nombreFichero.startsWith(nombreCiudad);
             boolean guion = nombreFichero.endsWith("-NO_verificada-ruta.txt");
-            if (guion) {
+            if (nombre & guion) {
                 ficheros.add(nombreFichero.substring(0, (nombreFichero.length()-9)));
             }
         }
@@ -38,7 +39,7 @@ public class PersistenciaRutas {
         }
     }
     
-    public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
+    public void guardarRuta(Object x, String data, boolean verificada, String nombreCiudad) throws IOException {
         File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
         String nombreFichero;
@@ -50,13 +51,13 @@ public class PersistenciaRutas {
             }
         }
         if (verificada) {
-            String nombreRuta = data + "-verificada-ruta.txt";
+            String nombreRuta = nombreCiudad + "-" + data + "-verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             }
         }
         else {
-            String nombreRuta = data + "-NO_verificada-ruta.txt";
+            String nombreRuta = nombreCiudad + "-" + data + "-NO_verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             }

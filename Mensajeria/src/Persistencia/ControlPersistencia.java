@@ -72,16 +72,16 @@ public class ControlPersistencia {
         return pm.leerCiudad(nombre);
     }
     
-    public ArrayList<String> listarRutas() {
-        return pr.listarRutas();
+    public ArrayList<String> listarRutas(String nombreCiudad) {
+        return pr.listarRutas(nombreCiudad);
     }
     
     public Object leerRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
         return pr.leerRuta(nombre);
     }
     
-    public void guardarRuta(Object x, String data, boolean verificada) throws IOException {
-        pr.guardarRuta(x, data, verificada);
+    public void guardarRuta(Object x, String data, boolean verificada, String nombreCiudad) throws IOException {
+        pr.guardarRuta(x, data, verificada, nombreCiudad);
     }
     
     public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {

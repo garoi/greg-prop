@@ -46,7 +46,8 @@ public class MinSpaTree {
     }
     
     /**
-     * Reconvierte un arbol de expansion minima
+     * Pasa el arbol de recobrimiento minimo, que esta en forma de matriz 
+     * a una estructura de ArrayList de ArrayList
      * @param arbol 
      * 
      */
@@ -63,7 +64,7 @@ public class MinSpaTree {
     }
     
     /**
-     *Devuelve un arbol de expancion minima
+     *Devuelve un arbol de recubrimiento minimo
      * @param
      */
     public ArrayList< ArrayList<Pair> > MST() {

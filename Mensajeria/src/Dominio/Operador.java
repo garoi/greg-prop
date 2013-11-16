@@ -66,7 +66,7 @@ public class Operador implements Serializable {
     }
     
     /**
-     * 
+     * Añade un paquete a la lista de paquetes para enviar del operador.
      * @param p 
      */
     public void anadirPaquete(Paquete p) {
@@ -88,14 +88,21 @@ public class Operador implements Serializable {
     public void ordenarPorDestino() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
     }
+    /**
+     * Ordena los paquetes por fecha y turno
+     * @param
+     */
+    public void ordenarPorFechaTurno() {
+        Collections.sort(listaPaquetesParaEntregar, new Paquete.FechaTurnoComparator());
+    }
     
     /**
-     * Muestra los paquetes por pantalla
+     * Muestra los paquetes por pantalla segun el criterio que se pida.
      * @param
      */
     public void verPaquetes() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino");
+        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino 3 Para ver segun feha y turno");
         int op = sc.nextInt();
         if (op == 1) {
             ordenarPorIdPaquete();
@@ -103,13 +110,18 @@ public class Operador implements Serializable {
         else if (op == 2) {
             ordenarPorDestino();
         }
+        else if (op == 3) {
+            ordenarPorFechaTurno();
+        }
         else {
             System.out.println("Mal escrito");
         }
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
             System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-            System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+            System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+            System.out.print("Fecha " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
+            System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
         }
     }
     
@@ -128,11 +140,10 @@ public class Operador implements Serializable {
     }
     
     /**
-     * 
-     * @return Vector con el identificador de los destinos de los paquetes seleccionados
+     * Selecciona los paquetes disponibles para la ruta que se desea crear
+     * @return Vector con los paquetes seleccionados
      */
     public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
-
         ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
@@ -143,7 +154,7 @@ public class Operador implements Serializable {
                         System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
                         System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
                         System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
-                        System.out.print("Dia " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
+                        System.out.print("Fecha " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
                         System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
                     }
                 }
@@ -198,11 +209,11 @@ public class Operador implements Serializable {
     }
     
     /**
-     * Elimina el paquete con identificador idPaquete
+     * Elimina todos los paquetes queya han sido enviados
      * @param idPaquete 
      * 
      */
-    public void eliminarPaquete(int idPaquete) {
+    /*public void eliminarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
         while (i < listaPaquetesParaEntregar.size() && !encontrado) {
@@ -223,12 +234,12 @@ public class Operador implements Serializable {
         if (!encontrado) {
             System.out.println("Paquete no encontrado para este cliente");
         }
-    }
+    }*/
     
     /**
      * Crea una ciudad
      * @param map
-     * @return
+     * @return Mapa
      * @throws IOException
      * @throws ClassNotFoundException 
      * 
@@ -238,17 +249,9 @@ public class Operador implements Serializable {
         return map;
     }
     
-    /*public void cargarCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
-        mapa = (Mapa) cd.leerCiudad();
-    }*/
-    
-    private void ordenaPaquetes(ArrayList<Paquete> paquetes){
-        
-        //MERGESORT!!!! 
-    }
-    
     /**
-     * Elimina el paquete de la lista de paquetes con identificador idpaquete
+     * Elimina el paquete de la lista de paquetes de la ruta que 
+     * se quiere recalcular con identificador idpaquete
      * @param paquetes
      * @param idpaquete 
      * 
@@ -264,7 +267,8 @@ public class Operador implements Serializable {
     }
     
     /**
-     * Anade el paquete con identificador idagregado a la lista de paquetes
+     * Anade el paquete de la lista de paquetes de la ruta que se quiere recalcular 
+     * con identificador idagregado a la lista de paquetes
      * @param paquetes
      * @param idagregado
      * 
@@ -278,16 +282,18 @@ public class Operador implements Serializable {
     }
 
     /**
-     * Modifica la lista de paquetes
+     * Modifica la lista de paquetes para la ruta.
      * @param paquetes 
+     * @return ArrayList<Paquete>
      * 
      */
-    public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes){
+    public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes) {
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
+
         int numeliminados = sc.nextInt();
         System.out.println("Indique los ID de los paquetes que desea eliminar");
-        ordenaPaquetes(paquetes);
+        //ordenaPaquetes(paquetes);
         for(int i = 0; i < numeliminados; ++i){
             int idpaquete = sc.nextInt();
             buscayElimina(paquetes, idpaquete);
@@ -302,12 +308,16 @@ public class Operador implements Serializable {
         return paquetes;
     }
     
+    /**
+     * Una vez confirmada la ruta, cambia el estado del paquete, como enviado.
+     * @param paquetesEnviados
+     */
     public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
         for (int i = 0; i < paquetesEnviados.size(); ++i) {
             boolean encontrado = false;
             for (int j = 0; j < listaPaquetesParaEntregar.size() & !encontrado; ++j) {
                 if (listaPaquetesParaEntregar.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
-                    listaPaquetesParaEntregar.get(j).setEstado("enviado");
+                    listaPaquetesParaEntregar.remove(j);
                     encontrado = true;
                 }
             }

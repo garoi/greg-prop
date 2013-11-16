@@ -8,8 +8,13 @@ import java.util.Date;
 public class Fecha {
     
     private Date date = new Date();
+
+    /**
+     * Comprobamos que la fecha se mayor o igual a nuestra fecha actual
+     * @param fecha
+     * @returntrue si el paramatro fecha es superior o igual a la fecha actual
+     */
     
-    /*Return true si el paramatro fecha es superior o igual a la fecha actual*/
     public boolean comprobarFecha(String fecha) {
         String ano = fecha.substring(6,fecha.length());
         String mes = fecha.substring(3, fecha.length()-3);
@@ -33,6 +38,10 @@ public class Fecha {
         }
     }
     
+    /**
+     * Devuelve el dia mes y año al que estamos
+     * @return una string con la fecha actual
+     */
     public String fechaActual() {
         String ano = String.valueOf(date.getYear()-100);
         String mes = String.valueOf(date.getMonth()+1);
@@ -41,6 +50,10 @@ public class Fecha {
         return fechaActual;
     }
     
+    /**
+     * Devuelve la franja horaria actual
+     * @return string con la franja horaria actual
+     */
     public String mañanaTarde() {
         if (date.getHours() >= 9 & date.getHours() <= 15) return "mañana";
         else return "tarde";

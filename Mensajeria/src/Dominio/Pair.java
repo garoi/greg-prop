@@ -21,7 +21,7 @@ public class Pair implements Serializable{
     }
     
     /**
-     * 
+     * Consultora del primer elemento del pair
      * @return first
      */
     public int first() {
@@ -29,7 +29,7 @@ public class Pair implements Serializable{
     }
     
     /**
-     * 
+     * Consultora del segundo elemento del pair
      * @return second
      */
     public float second() {

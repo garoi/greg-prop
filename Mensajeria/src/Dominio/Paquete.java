@@ -148,7 +148,8 @@ public class Paquete implements Serializable{
     }
     
     /**
-     * Lee el paquete del cliente idCliente con destino a la ciudad nombreCiudad
+     * Lee el paquete del cliente idCliente con destino a la ciudad nombreCiudad,
+     * así como su fecha de envio y turno
      * @param idCliente
      * @param nombreCiudad 
      */
@@ -194,6 +195,20 @@ public class Paquete implements Serializable{
     public static class DestinoComparator implements Comparator<Paquete> {
         @Override public int compare(Paquete p1, Paquete p2) {
             if (p1.getDestino().compareTo(p2.getDestino()) < 0) return 1;
+            else return -1;
+        }
+    }
+    
+    /**
+     * Compara dos fechas y turnos
+     */
+    public static class FechaTurnoComparator implements Comparator<Paquete> {
+        @Override public int compare(Paquete p1, Paquete p2) {
+            if (p1.getFecha().compareTo(p2.getFecha()) < 0) return 1;
+            if (p1.getFecha().compareTo(p2.getFecha()) == 0) {
+                if (p1.getTurno().compareTo(p2.getTurno()) < 0) return 1;
+                else return -1;
+            }
             else return -1;
         }
     }
