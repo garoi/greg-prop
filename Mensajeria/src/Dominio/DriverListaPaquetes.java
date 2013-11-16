@@ -23,13 +23,11 @@ public class DriverListaPaquetes {
         // TODO code application logic here
         System.out.print("Selecciona funcion a probar" + "\n");
         System.out.print("1: anadirPaquete" + "\n");
-        System.out.print("2: packsClient" + "\n");
-        System.out.print("3: tamanoListaPaquetes" + "\n");
-        System.out.print("4: escribePaquete" + "\n");
+        System.out.print("2: tamanoListaPaquetes" + "\n");
+        System.out.print("3: escribePaquete" + "\n");
         System.out.print("0: Finalizar" + "\n");
         Scanner sc = new Scanner(System.in);
         ListaPaquetes lp = new ListaPaquetes();
-        ControlDominio cd = new ControlDominio();
         int op = sc.nextInt();
         while(op != 0){
             if(op == 1){
@@ -43,14 +41,9 @@ public class DriverListaPaquetes {
                 lp.anadirPaquete(p);
             }
             else if(op == 2){
-                System.out.print("Escribe el id. del cliente" + "\n");
-                int idcliente = sc.nextInt();
-                lp.packsCliente(idcliente);
-            }
-            else if(op == 3){
                 System.out.print("Tamano de la lista de paquetes: " + lp.tamanoListaPaquetes() + "\n");  
             }
-            else if(op == 4){
+            else if(op == 3){
                 System.out.print("Escribimos los paquetes de la lista" + "\n");
                 for(int i = 0; i < lp.tamanoListaPaquetes();++i){
                     lp.escribirPaquete(i);
