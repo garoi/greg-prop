@@ -16,26 +16,50 @@ public class Cliente implements Serializable {
     private String nombreCliente;
     ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
     
+    /**
+     * 
+     * @return Id del cliente
+     */
     public int getIdCliente() {
         return idCliente;
     }
     
+    /**
+     * 
+     * @param idCliente 
+     */
     public void setIDcliente(int idCliente){
         this.idCliente = idCliente;
     }
-
+    
+    /**
+     * 
+     * @return El passwoed del cliente
+     */
     public String getPassword() {
         return password;
     }
-
+    
+    /**
+     * 
+     * @return El nombre del cliente
+     */
     public String getNombreCliente() {
         return nombreCliente;
     }
-
+    
+    /**
+     * 
+     * @return Lista de paquetes del cliente
+     */
     public ArrayList<Paquete> getListaPaquetes() {
         return listaPaquetes;
     }
      
+    /**
+     * Lee los datos del cliente
+     * 
+     */
     public void leerCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del client"
@@ -45,11 +69,20 @@ public class Cliente implements Serializable {
         password = sc.next();
     }
     
+    /**
+     * 
+     * @param p 
+     */
     public void anadirPaquete(Paquete p){
         listaPaquetes.add(p);
         
     }
     
+    /**
+     * 
+     * @param idPaquete
+     * @return Si ha podido cancelar el paquete
+     */
     public boolean cancelarPaquete(int idPaquete) {
         for (int i = 0; i < listaPaquetes.size(); ++i) {
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
@@ -62,6 +95,10 @@ public class Cliente implements Serializable {
         return false;
     }
     
+    /**
+     * Elimina un paquete
+     * 
+     */
     public void eliminarPaquetes() {
         boolean encontrado = false;
         for (int i = 0; i < listaPaquetes.size(); ++i) {
@@ -75,6 +112,9 @@ public class Cliente implements Serializable {
         }
     }
     
+    /**
+     * Muestra la lista de paquetes del cliente
+     */
     public void verLista(){
         for (int i = 0; i < listaPaquetes.size();++i) {
             System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");

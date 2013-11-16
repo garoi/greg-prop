@@ -11,22 +11,42 @@ public class Mapa implements Serializable {
     private String[] nombres;
     private float[][] ciudad;
 
-    
+    /**
+     * 
+     * @return nombres
+     */
     public String[] getNombres() {
         return nombres;
     }
 
+    /**
+     * 
+     * @return ciudad
+     */
     public float[][] getCiudad() {
         return ciudad;
     }
     
+    /**
+     * 
+     * @param nombre 
+     */
     private void setNombreCiudad(String nombre){
         this.nombreCiudad = nombre;
     }
+    
+    /**
+     * 
+     * @return nombreCiudad
+     */
     public String getNombreCiudad(){
         return nombreCiudad;
     }
 
+    /**
+     * Crea una ciudad
+     * @param
+     */
     public void crearCiudad(){
         System.out.println("Escribe el nombre de la ciudad");
         Scanner sc3 = new Scanner(System.in);
@@ -49,6 +69,10 @@ public class Mapa implements Serializable {
     }
     
 
+    /**
+     * Muestra una ciudad
+     * @param
+     */
     public void imprimirCiudad() {
         System.out.println("la ciutat es " + ciudad.length);
         for (int j = 0; j < ciudad.length; ++j) {
@@ -64,6 +88,10 @@ public class Mapa implements Serializable {
         System.out.println("0 Salir de la modificacion de la ciudad manualmente");
     }
     
+    /**
+     * Modifica la ciudad
+     * @param
+     */
     public void modificarCiudad() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1 Modificar ciudad con el fichero");
