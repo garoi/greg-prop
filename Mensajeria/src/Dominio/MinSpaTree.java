@@ -13,22 +13,43 @@ public class MinSpaTree {
     
     ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
     
+    /**
+     * 
+     * @return nombres
+     */
     public String[] getNombres() {
         return nombres;
     }
 
+    /**
+     * 
+     * @param nombres 
+     */
     public void setNombres(String[] nombres) {
         this.nombres = nombres;
     }
 
+    /**
+     * 
+     * @return grafo
+     */
     public float[][] getGrafo() {
         return grafo;
     }
 
+    /**
+     * 
+     * @param grafo 
+     */
     public void setGrafo(float[][] grafo) {
         this.grafo = grafo;
     }
     
+    /**
+     * Reconvierte un arbol de expansion minima
+     * @param arbol 
+     * 
+     */
     private void reconvertirArbol(float[][] arbol){
         for (int j = 0; j < arbol.length; ++j) {
             ArrayList<Pair> v = new ArrayList<Pair>();
@@ -43,6 +64,7 @@ public class MinSpaTree {
     
     /**
      *Devuelve un arbol de expancion minima
+     * @param
      */
     public ArrayList< ArrayList<Pair> > MST() {
         int numeroNodos = grafo.length;

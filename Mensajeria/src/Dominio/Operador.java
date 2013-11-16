@@ -15,50 +15,87 @@ public class Operador implements Serializable {
     private Mapa mapa;
     private ListaPaquetes lp;
     private boolean checkExistencia = false;
-
+   
     
-    
-    
+    /**
+     * 
+     * @param checkExistencia 
+     */
     public void setCheckExistencia(boolean checkExistencia) {
         this.checkExistencia = checkExistencia;
     }
 
+    /**
+     * 
+     * @return checkExistencia
+     */
     public boolean isCheckExistencia() {
         return checkExistencia;
     }
     
+    /**
+     * 
+     * @return nombreOperador
+     */
     public String getNombreOperador() {
         return nombreOperador;
     }
 
+    /**
+     * 
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
      
-   
+   /**
+    * 
+    * @param nombreOperador 
+    */
     public void setNombreOperador(String nombreOperador) {
         this.nombreOperador = nombreOperador;
     }
 
+    /**
+     * 
+     * @param password 
+     */
     public void setPassword(String password) {
         this.password = password;
     }
     
+    /**
+     * 
+     * @param p 
+     */
     public void anadirPaquete(Paquete p) {
         listaPaquetesParaEntregar.add(p);
     }
+    
+    /**
+     * Ordena los paquetes por identificador
+     * @param
+     */
     public void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
     }
     
+    /**
+     * Ordena los paquetes por destino
+     * @param
+     */
     public void ordenarPorDestino() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
     }
     
+    /**
+     * Muestra los paquetes por pantalla
+     * @param
+     */
     public void verPaquetes() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("1 Para ver segun idCliente");
-        System.out.println("2 Para ver segun Destino");
+        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino");
         int op = sc.nextInt();
         if (op == 1) {
             ordenarPorIdPaquete();
@@ -76,6 +113,11 @@ public class Operador implements Serializable {
         }
     }
     
+    /**
+     * 
+     * @param idPaquete
+     * @return El paquete con identificador idPaquete
+     */
     public Paquete buscarPaquete(int idPaquete) {
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
@@ -85,28 +127,44 @@ public class Operador implements Serializable {
         return null;
     }
     
-    //Devuelve un vector con el identificador de los destinos de los paquetes seleccionados
-    public ArrayList<Paquete> seleccionarPaquetes() {
+    /**
+     * 
+     * @return Vector con el identificador de los destinos de los paquetes seleccionados
+     */
+    public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
+
         ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-                System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
-                System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-                System.out.println("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+            if (listaPaquetesParaEntregar.get(i).getCiudad().equals(nombreCiudad)) {
+                if (fecha.equals(listaPaquetesParaEntregar.get(i).getFecha())) {
+                    if (turno.equals(listaPaquetesParaEntregar.get(i).getTurno())) {
+                        System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
+                        System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
+                        System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
+                        System.out.print("Dia " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
+                        System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
+                    }
+                }
+            }
         }
-        System.out.println("Para parar de entrar/seleccionar, paquetes pulsa -1"); 
+        System.out.println("Si desea parar de entrar/seleccionar paquetes pulsa -1"); 
         int idPaquete = sc.nextInt();
         paquetesDestino.add(buscarPaquete(idPaquete));
-        while (idPaquete >= 0) {
+        while (idPaquete > -1) {
             idPaquete = sc.nextInt();
             paquetesDestino.add(buscarPaquete(idPaquete));
         }
-        //paquetesDestino.remove(paquetesDestino.size() - 1);
+        paquetesDestino.remove(paquetesDestino.size()-1);
+        System.out.println("Has seleccionado " + paquetesDestino.size() + " paquetes");
         return paquetesDestino;
     }
     
-    
+    /**
+     * Lee los parametros del operador
+     * @param
+     */
     public void leerOperador() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del operador");
@@ -115,6 +173,11 @@ public class Operador implements Serializable {
         password = sc.next();
     }
     
+    /**
+     * Cancela el paquete con identificador idPaquete
+     * @param idPaquete 
+     * 
+     */
     public void cancelarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
@@ -134,6 +197,11 @@ public class Operador implements Serializable {
         }
     }
     
+    /**
+     * Elimina el paquete con identificador idPaquete
+     * @param idPaquete 
+     * 
+     */
     public void eliminarPaquete(int idPaquete) {
         boolean encontrado = false;
         int i = 0;
@@ -157,13 +225,17 @@ public class Operador implements Serializable {
         }
     }
     
-    public Mapa anadirCiudad() throws IOException, ClassNotFoundException{
-        Mapa map = new Mapa();
+    /**
+     * Crea una ciudad
+     * @param map
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     * 
+     */
+    public Mapa anadirCiudad(Mapa map) throws IOException, ClassNotFoundException{
         map.crearCiudad();
-        //String name = map.getNombreCiudad();
         return map;
-        //cd.guardarMapa(map, name);
-        
     }
     
     /*public void cargarCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -172,11 +244,15 @@ public class Operador implements Serializable {
     
     private void ordenaPaquetes(ArrayList<Paquete> paquetes){
         
-        //MERGESORT!!!! PRO AHORA ME DA PALO IMPLEMENTAR!!!!!!
-        //PUES MIRAQUE ES FACIL; SOLO TIENES QUE LLAMAR A UNA PUTA FUNCION; YA LO HICE TODO YO
-        //HIJOPUTA!!! xD
+        //MERGESORT!!!! 
     }
     
+    /**
+     * Elimina el paquete de la lista de paquetes con identificador idpaquete
+     * @param paquetes
+     * @param idpaquete 
+     * 
+     */
     private void buscayElimina(ArrayList<Paquete> paquetes, int idpaquete){
         
         //HAURIA DE SER UNA BINARY SEARCH PRO NECESSITEM EL VECTOR ORDENAT
@@ -187,16 +263,26 @@ public class Operador implements Serializable {
         }
     }
     
+    /**
+     * Anade el paquete con identificador idagregado a la lista de paquetes
+     * @param paquetes
+     * @param idagregado
+     * 
+     */
     private void buscayAgrega(ArrayList <Paquete> paquetes, int idagregado){
         for(int i = 0; i < listaPaquetesParaEntregar.size(); ++i){
             if(listaPaquetesParaEntregar.get(i).getIdPaquete() == idagregado){
-                
                 paquetes.add(listaPaquetesParaEntregar.get(i));
             }
         }
     }
-    
-    public void modificaListaPaquetes(ArrayList<Paquete> paquetes){
+
+    /**
+     * Modifica la lista de paquetes
+     * @param paquetes 
+     * 
+     */
+    public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes){
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
         int numeliminados = sc.nextInt();
@@ -206,7 +292,6 @@ public class Operador implements Serializable {
             int idpaquete = sc.nextInt();
             buscayElimina(paquetes, idpaquete);
         }
-        //ArrayList <Paquete> nuevospaquetes = new ArrayList<>();
         System.out.println("cuantos paquetes quiere agregar de la lista?");
         int numagregados = sc.nextInt();
         System.out.println("Indique los ID de los paquetes que desea agregar");
@@ -214,24 +299,18 @@ public class Operador implements Serializable {
             int idagregado = sc.nextInt();
             buscayAgrega(paquetes, idagregado);
         }
-        
+        return paquetes;
     }
     
-    /*public void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
-        Ruta r = new Ruta();
-        r = (Ruta) cd.leerRuta();
-        ArrayList<Paquete> paquetes = new ArrayList<>();
-        paquetes = r.getListaPaquetesRuta();
-        modificaListaPaquetes(paquetes);
-        Mapa map = new Mapa();
-        map = r.getMapa();
-        String nom = map.getNombreCiudad();
-        System.out.println("Procedemos al recalculo de la ruta");
-        for(int i = 0; i < paquetes.size(); ++i){
-            System.out.println(paquetes.get(i).getidDestino()+" ");
+    public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
+        for (int i = 0; i < paquetesEnviados.size(); ++i) {
+            boolean encontrado = false;
+            for (int j = 0; j < listaPaquetesParaEntregar.size() & !encontrado; ++j) {
+                if (listaPaquetesParaEntregar.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
+                    listaPaquetesParaEntregar.get(j).setEstado("enviado");
+                    encontrado = true;
+                }
+            }
         }
-        cd.calcularRuta(paquetes, nom, map);
-        
-   }*/
-    
+    }
 }

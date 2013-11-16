@@ -44,15 +44,15 @@ public class Mensajeria {
             infoCliente();
             op = sc.nextInt();
         }
+        cd.guardadoGeneral();
     }
     
 
     public static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
-
         Scanner sc = new Scanner(System.in);
         infoOperador();
         int op = sc.nextInt();
-        while(op != 0){
+        while(op != 0) {
             if (op == 1){
                 cd.verPaquetesOperador();
             }
@@ -65,21 +65,20 @@ public class Mensajeria {
             infoOperador();
             op = sc.nextInt();
         }
+        cd.guardadoGeneral();
     }
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ControlDominio cd = new ControlDominio();
         cd.iniControlDominio();
-        boolean esCliente = false;
-        boolean salir = false;
-        cd.registroLogin(esCliente, salir);
-        //cliente
-        if (!esCliente & !salir) {
+        boolean esCliente  = cd.registroLogin();
+        //operador
+        if (!esCliente && cd.loginOper()) {
             funcOperador(cd);
         }
-        //operador
-        else if(esCliente & !salir){
+        //cliente
+        else if(esCliente && cd.loginCliente()){
             funcCliente(cd);
         }
     }

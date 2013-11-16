@@ -15,84 +15,106 @@ public class ControlDominio {
     private ListaClientes lc;
     private Operador oper;
     private ListaPaquetes lp;
-    private Scanner sc;
     private Cliente cl;
-    private boolean existeOper = false;
+    private ControlUsuario cu;
+    private boolean existeOper = true;
     private Mapa map;
     
+    /**
+     * Inicializa el controlador de dominio
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     * 
+     */
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
+        cu = new ControlUsuario();
+        lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
-        else lc = (ListaClientes) leerListaClientes();
-        if(oper == null) oper = new Operador();     
-        else oper = (Operador) leerOperador();
+        
+        oper = (Operador) leerOperador();
+        if(oper == null) {
+            oper = new Operador();
+            existeOper = false;
+        }     
+        
+        lp = (ListaPaquetes) leerListaPaquetes();
         if(lp == null) lp = new ListaPaquetes();
-        else lp = (ListaPaquetes) leerListaPaquetes();
-        sc = new Scanner(System.in);
-
     }
     
-    public void registroLogin(boolean esCliente, boolean salir) {
-        ControlUsuario cu = new ControlUsuario();
+    /**
+     * 
+     * @return retorna si se registra o se loguea
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
+    public boolean registroLogin() throws IOException, ClassNotFoundException {
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
         int op = sc.nextInt();
-        if(op == 1){
+        boolean resultado= false;
+        if(op == 1) {
             if(!existeOper){
                 System.out.println("No hay operador, vamos a registrarlo");
                 cu.registroOperador(oper);
                 existeOper = true;
+                cp.guardarOperador(oper);
             }
-                System.out.println("vamos a hacer login");
-                cu.loginOperador(oper);
-                /*System.out.println("nombre oper:");
-                System.out.println(oper.getNombreOperador());
-                System.out.println("passoper:");
-                System.out.println(oper.getPassword());*/
-
+            System.out.println("vamos a hacer login");
+            cu.loginOperador(oper);
+            return false;
         }
+        else if (op == 2) {
+                Scanner sc2 = new Scanner(System.in);
+                boolean existeCliente = true;
+                System.out.println("es un usuario nuevo? pulse 1 si, 2 no");
+                int op2 = sc2.nextInt();
+                if(op2 == 1){
+                    Cliente cl = new Cliente();
+                     existeCliente = cu.registroCliente(cl, lc);
+                    if (existeCliente) cp.guardarListaClientes(lc);
+                    else resultado = true;
+                }
+                if (existeCliente) {
+                    System.out.println("vamos a proceder al login");
+                    int indice;
+                    indice = cu.loginCliente(lc);
+                    if(indice != -1){
+                        cl = lc.getCliente(indice);
+                    }
+                    return true;
+                }
+        }
+        return resultado;
     }
-        /*System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
-        int op = sc.nextInt();
-        if(op == 1){       
-            if(!oper.isCheckExistencia()){
-                oper = cu.registroOperador();
-                oper.setCheckExistencia(true);             
-                System.out.println("pulse 1 si quiere logearse, pulse 2 si quiere salir");
-                int op3 = sc.nextInt();
-                if(op3 == 1){
-                    cu.loginOperador();
-                }
-                else salir = true;
-                
-            }
-            else {
-                cu.loginOperador();
-            }
-        }
-        else if(op == 2){
-            System.out.println("pulse 1 registro, pulse 2 log");
-            int op2 = sc.nextInt();
-            if(op2 == 1){
-                cl = cu.registroCliente();
-                if(cl != null) lc.anadirCliente(cl);
-                System.out.println("pulse 1 log, pulse 2 para salir");
-                int op3 = sc.nextInt();
-                if(op3 == 1){
-                    cl = cu.loginCliente();
-                    esCliente = true;
-                }
-                else salir = true;
-            }
-            else if(op2 == 2){
-                cl = cu.loginCliente();
-                esCliente = true;
-            }
-        }*/
     
- 
-    private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, Ruta r) throws IOException {
+    /**
+     * 
+     * @return Si es cliente
+     */
+    public boolean loginCliente() {
+        return cu.isLoginCliente();
+    }
+    
+    /**
+     * 
+     * @return Si es operador
+     */
+    public boolean loginOper() {
+        return cu.isLoginOper();
+    }
+
+    /**
+     * Calcula el camino de una ruta
+     * @param paquetesSeleccionados
+     * @param fecha
+     * @param r
+     * @throws IOException 
+     */
+    private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
+        
         r.crearGrafo(paquetesSeleccionados, map);
         System.out.println("Quieres calcular una ruta rapidamente (poco eficaz) o lentamente (eficaz)");
         String raplent = sc.nextLine();
@@ -105,20 +127,53 @@ public class ControlDominio {
             //Llamar a la optimizacion
         }
         r.mostrarRuta();
-        r.acceptarRuta();
-        r.setFecha(fecha);
-        if (r.isVerificada()) {
-            cp.guardarRuta(r, fecha, true);
+        Fecha date = new Fecha();
+        if (fecha.equals(date.fechaActual())) {
+            if (turno.equals(date.mañanaTarde())) {
+                r.acceptarRuta();
+                r.setFecha(fecha);
+                r.setTurno(turno);
+                String nombreRuta = fecha+"-"+turno;
+                cp.guardarRuta(r, nombreRuta, r.isVerificada());
+                if (r.isVerificada()) {
+                    paquetesEnviados(r);
+                }
+            }
         }
         else {
-            cp.guardarRuta(r, fecha, false);
+            r.setFecha(fecha);
+            String nombreRuta = fecha+"-"+turno;
+            cp.guardarRuta(r, nombreRuta, r.isVerificada());
         }
+        
     }
     
+    private void paquetesEnviados(Ruta r) throws IOException {
+        ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
+        oper.cambiarEstadoPaquetes(paquetesEnviados);
+        cl.cambiarEstadoPaquetes(paquetesEnviados);
+        lp.cambiarEstadoPaquetes(paquetesEnviados);
+        guardadoGeneral();
+    }
+    
+    /**
+     * Guarda un mapa
+     * @param map
+     * @param nombreciudad
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
         cp.guardarMapas(map, nombreciudad);
     }
     
+    /**
+     * Lee una ciudad
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public Object leerCiudad() throws FileNotFoundException, IOException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         ArrayList<String> ciudades = new ArrayList<>();
@@ -131,6 +186,13 @@ public class ControlDominio {
         return cp.leerCiudad(nombre);
     }
     
+    /**
+     * Lee una ruta
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     private Object leerRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> rutas = new ArrayList<>();
@@ -143,115 +205,168 @@ public class ControlDominio {
         return cp.leerRuta(nombre);
     }
     
+    /**
+     * Lee una lista de paquetes
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return cp.leerListaPaquetes();
+        try {
+            return lp = (ListaPaquetes) cp.leerListaPaquetes();
+        }
+        catch (FileNotFoundException e) {
+            return lp = null;
+        }
+        catch (IOException e) {
+            return lp = null;
+        }
     }
     
+    /**
+     * Lee una lista de clientes
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return cp.leerListaClientes();
+        try {
+            return lc = (ListaClientes) cp.leerListaClientes();
+        }
+        catch (FileNotFoundException e) {
+            return lc = null;
+        }
+        catch (IOException e) {
+            return lc = null;
+        }
     }
     
+    /**
+     * Lee un operador
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public Object leerOperador() throws IOException, ClassNotFoundException {
-        return cp.leerOperador();
+        try {
+            return oper = (Operador) cp.leerOperador();
+        }
+        catch (IOException e) {
+            return oper = null;
+        }
     }
     
-    public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
+    /**
+     * Guarda los clientes, los paquetes y el operador
+     * @throws IOException 
+     */
+    public void guardadoGeneral() throws IOException {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
+    /**
+     * Muestra los paquetes del operador
+     */
     public void verPaquetesOperador(){
         oper.verPaquetes();
     }
+    
+
+    /**
+     * Anade una ciudad
+     * @throws ClassNotFoundException
+     * @throws IOException 
+     */
     public void anadirCiudad() throws ClassNotFoundException, IOException{
-        Mapa mapa = oper.anadirCiudad();
-        cp.guardarMapas(mapa, mapa.getNombreCiudad());
+        map = oper.anadirCiudad(map);
+        cp.guardarMapas(map, map.getNombreCiudad());
     }
+    
+    /**
+     * Selecciona una ciudad
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     public void seleccionarCiudad() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Scanner sc = new Scanner(System.in);
         ArrayList <String> nombresciudades = cp.listarCiudades();
-        System.out.println("estas son las Ciudades que puede seleccionar");
+        System.out.println("Estas son las Ciudades que puede seleccionar");
         for(int i = 0; i < nombresciudades.size(); ++i){
             System.out.println(nombresciudades.get(i));
         }
-        System.out.println("escriba la ciudad que quiera seleccionar");
+        System.out.println("Escriba la ciudad que quiera seleccionar");
         String nombre = sc.nextLine();
         map = (Mapa) cp.leerCiudad(nombre);
         opcionesOperador();
-        
     }
-    public void opcionesOperador() throws IOException, FileNotFoundException, ClassNotFoundException{
-        System.out.println("pulse 1 para calcular una ruta nueva, 2 para recalcular una ruta existente");
+
+    /**
+     * Ejecuta las operaciones del operador
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
+   private void opcionesOperador() throws IOException, FileNotFoundException, ClassNotFoundException{
+        Scanner sc = new Scanner(System.in);
+        System.out.println("pulse 1 para calcular una ruta nueva, 2 para recalcular una ruta existente pero no confirmada, 3 para modificar una ruta");
         int op = sc.nextInt();
         if(op == 1){
-            String fecha = null;
             Ruta r = new Ruta();
-            iniciarRuta(fecha, r);
+            iniciarRuta(r);
         }
         else if (op == 2){
             recalcularRuta();
         }
+        else {
+            System.out.println("Aun no implementado, no es necessario hasta la entrega 3");
+        }
     }
     
-    
+    /**
+     * Recalcula una ruta
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
     private void recalcularRuta() throws IOException, FileNotFoundException, ClassNotFoundException{
         Ruta r = (Ruta) leerRuta();
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
-        oper.modificaListaPaquetes(paquetes);
-        Mapa map = new Mapa();
+        paquetes = oper.modificaListaPaquetes(paquetes);
         map = r.getMapa();
-        String nom = r.getFecha();
         System.out.println("Procedemos al recalculo de la ruta");
-        calcularRuta(paquetes, nom, r);
+        calcularRuta(paquetes, r.getFecha(), r.getTurno(), r);
         
    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-      public void iniciarRuta(String fecha, Ruta r) throws IOException {
+    /**
+     * Inialicializa una ruta
+     * @param fecha
+     * @param r
+     * @throws IOException 
+     */
+    private void iniciarRuta(Ruta r) throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Quieres calcular la ruta de hoy y de este turno? s/n");
+        System.out.println("Quieres calcular la ruta de hoy y de este turno? s/n");
         String ord = sc.nextLine();
-        Date date = new Date();
-        String turno;
+        Fecha date = new Fecha();
         if (ord.equals("s")) {
-            if (date.getHours() > 9 & date.getHours()<15) turno = "-mañana";
-            else turno = "-tarde";
-            fecha = String.valueOf(date.getDate()+"."+(date.getMonth()+1)+"."+(date.getYear()-100));
-            //ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha, turno);
-            //fecha = fecha + turno;
-            //calcularRuta(paquetesSeleccionados, fecha, r);     
+            ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(map.getNombreCiudad(), date.fechaActual(), date.mañanaTarde());;
+            String fechaactual = date.fechaActual();
+            String turno = date.mañanaTarde();
+            calcularRuta(paquetesSeleccionados, fechaactual, turno, r);     
         }
         else {
             System.out.println("Entra la fecha (dd.mm.aa)");
-            fecha = sc.nextLine();
-            String ano = fecha.substring(6, fecha.length());
-            String mes = fecha.substring(3, fecha.length()-3);
-            String dia = fecha.substring(0, fecha.length()-6);
-            if(ano.compareTo(String.valueOf(date.getYear()-100)) < 0){
-                System.out.println("la fecha tiene que ser superior a la actual");
-            }
-            else{
-                if(mes.compareTo(String.valueOf(date.getMonth()+1)) < 0){
-                    System.out.println("la fecha tiene que ser superior a la actual");
-                }
-                else{
-                    if(dia.compareTo(String.valueOf(date.getDate())) < 0){
-                        System.out.println("la fecha tiene que ser superior a la actual");
-                    }
-                    else {
-                        System.out.println("Entra el turno (mañana/tarde)");
-                        turno = "-"+sc.nextLine();
-                        fecha = fecha + turno;
-                        //ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(fecha,turno);
-                        //calcularRuta(paquetesSeleccionados, fecha, r);
-                    }
-                }
+            String fecharuta = sc.nextLine();
+            if (date.comprobarFecha(fecharuta)) {
+                System.out.println("Entra el turno (mañana/tarde)");
+                String turno = sc.nextLine();
+                ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(map.getNombreCiudad(), fecharuta, turno);
+                calcularRuta(paquetesSeleccionados, fecharuta, turno, r);
             }
         }
     }
@@ -260,29 +375,31 @@ public class ControlDominio {
     //FUNCIONES DEL CLIENTE!!!!
 
       
-public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
+    public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
         Paquete p = new Paquete();
-        Mapa map = (Mapa) leerCiudad();
+        Mapa map = (Mapa) leerCiudad();;
         String nombreCiudad = map.getNombreCiudad();
-            String[] nombresNodo = map.getNombres();
-            boolean encontrado = false;
-            String destino = p.getDestino();
-            int idDestino = -1;
-            for(int i = 0; i < nombresNodo.length & !encontrado; ++i){
-                if(nombresNodo[i].equals(destino)){
-                    encontrado = true;
-                    idDestino = i;
-                }
+        p.leerPaquete(cl.getIdCliente(), nombreCiudad);
+        String[] nombresNodo = map.getNombres();
+        boolean encontrado = false;
+        String destino = p.getDestino();
+        int idDestino = -1;
+        for(int i = 0; i < nombresNodo.length & !encontrado; ++i){
+            if(nombresNodo[i].equals(destino)){
+                encontrado = true;
+                idDestino = i;
             }
-            if(encontrado){
-                p.setIdDestino(idDestino);
-                lp.anadirPaquete(p);
-                lc.anadirPaquete(p, cl.getIdCliente());
-                oper.anadirPaquete(p);
-            }
-            else{
-                System.out.println("El destino no existe en la base de datos");
-            }
+        }
+        if(encontrado){
+            p.setIdDestino(idDestino);
+            lp.anadirPaquete(p);
+            lc.anadirPaquete(p, cl.getIdCliente());
+            oper.anadirPaquete(p);
+            guardadoGeneral();
+        }
+        else {
+            System.out.println("El destino no existe en la base de datos");
+        }
    }
             
     
@@ -291,6 +408,7 @@ public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotF
     }
     
     public void cancelarPaquete(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("puede cancelar los siguientes paquetes");
         verPaquetesCliente();
         System.out.println("Introduzca el ID del paquete que desea cancelar");
@@ -307,6 +425,5 @@ public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotF
     public void elminarPaquete(){
         System.out.println("eliminaremos todos los paquetes enviados");
         cl.eliminarPaquetes();
-    }
-    
+    } 
 }
