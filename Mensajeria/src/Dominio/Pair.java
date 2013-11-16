@@ -7,8 +7,8 @@ import java.io.Serializable;
  * @author marc
  */
 public class Pair implements Serializable{
-    private int first;
-    private float second;
+    int first;
+    float second;
     
     /**
      * 

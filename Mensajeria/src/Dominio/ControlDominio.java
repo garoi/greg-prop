@@ -338,16 +338,18 @@ public class ControlDominio {
         for (int i = 0; i < nombresCiu.length; ++i) {
             System.out.println(i + " " + nombresCiu[i]);
         }
-        System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa s");
-        String nuevoPunto = sc.nextLine();
-        while (!nuevoPunto.equals("s")) {
+        System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa -1");
+        System.out.println("entra el id destino");
+        int nuevoPunto = sc.nextInt();
+        while (nuevoPunto > -1) {
             Paquete p = new Paquete();
-            p.setDestino(nuevoPunto);
-            p.setIdDestino(sc.nextInt());
+            p.setDestino(nombresCiu[nuevoPunto]);
+            p.setIdDestino(nuevoPunto);
             listaPaquetesRutaTemp.add(p);
-            nuevoPunto = sc.nextLine();
+            nuevoPunto = sc.nextInt();
         }
         r.setListaPaquetesRuta(listaPaquetesRutaTemp);
+        r.crearGrafo(listaPaquetesRutaTemp, map);
         r.calcularRapida();
         r.mostrarRuta();
     }

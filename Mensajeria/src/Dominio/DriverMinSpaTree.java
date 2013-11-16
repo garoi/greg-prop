@@ -6,6 +6,7 @@
 
 package Dominio;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,12 +19,10 @@ public class DriverMinSpaTree {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.print("Selecciona funcion a probar" + "\n");
-        System.out.print("1: Getters y setters" + "\n");
-        System.out.print("2: reconvertirArbol" + "\n");
-        System.out.print("3: MST" + "\n");
-        System.out.print("0: Finalizar" + "\n");
+        System.out.println("Selecciona funcion a probar");
+        System.out.println("1: Getters y setters");
+        System.out.println("2: Crear arbol de recubrimiento minimo");
+        System.out.println("0: Finalizar");
         
         Scanner sc = new Scanner(System.in);
         MinSpaTree mst = new MinSpaTree();
@@ -31,41 +30,46 @@ public class DriverMinSpaTree {
         while(op != 0){
             if(op == 1){
                 String[] n = new String[3];
-                n[0] = "Octavio";
-                n[1] = "Pere";
-                n[2] = "Andreu";
+                n[0] = "casaOctavio";
+                n[1] = "casaPere";
+                n[2] = "casaAndreu";
                 mst.setNombres(n);
-                System.out.print("Estos son los nombres: " + "\n");
+                System.out.println("Estos son los nombres: ");
                 String res[] = mst.getNombres();
                 for(int i = 0; i < 3; ++i){
                     System.out.print(res[i] + " ");
                 }
-                System.out.print("\n");
+                System.out.println();
                 
-                System.out.print("Escribe una matriz de floats de 3*3 para comprobar get y set de grafo" + "\n");
+                System.out.println("Escribe una matriz de floats de 3*3 para comprobar get y set de grafo");
                 float g[][] = new float[3][3];
                 for(int i = 0; i < 3; ++i){
                     for(int j = 0; j < 3; ++j){
                         g[i][j] = sc.nextFloat();
                     }
                 }
-                System.out.print("Esta es la matriz: " + "\n");
+                mst.setGrafo(g);
+                float c[][] = mst.getGrafo();
+                System.out.println("Esta es la matriz: ");
                 for(int i = 0; i < 3; ++i){
                     for(int j = 0; j < 3; ++j){
-                        System.out.print(g[i][j] + " ");
+                        System.out.print(c[i][j] + " ");
                     }
-                    System.out.print("\n");
+                    System.out.println();
                 }
             }
             else if(op == 2){
-                
+                ArrayList< ArrayList<Pair> >result = mst.MST();
+                System.out.println("Este es el Arbol de recubrimiento minimo");
+                for (int i = 0; i < result.size(); ++i) {
+                    System.out.println("EL INDICE ES: " + i + " Y su tamaño es " + result.get(i).size());
+                    for (int j = 0; j < result.get(i).size(); ++j) {
+                        System.out.println(result.get(i).get(j).first() + " " + result.get(i).get(j).second());
             }
-            else if(op == 3){
-                
+        }
             }
-            else System.out.print("Opcion Incorrecta, vuelve a introducir una opcion" + "\n");
-            
-            System.out.print("Selecciona funcion a probar" + "\n");
+            else System.out.println("Opcion Incorrecta, vuelve a introducir una opcion");
+            System.out.println("Selecciona funcion a probar");
             op = sc.nextInt();
         }
     }

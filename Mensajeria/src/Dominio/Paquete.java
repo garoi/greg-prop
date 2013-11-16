@@ -167,6 +167,7 @@ public class Paquete implements Serializable{
         String ord = sc.nextLine();
         if (ord.equals("s")) {
             this.fecha = fecha.fechaActual();
+            this.turno = fecha.mañanaTarde();
         }
         else {
             System.out.println("Escribe la fecha (dd.mm.aa)");
