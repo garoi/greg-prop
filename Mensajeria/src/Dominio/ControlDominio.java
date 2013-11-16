@@ -322,8 +322,34 @@ public class ControlDominio {
             recalcularRuta(nombre);
         }
         else {
-            System.out.println("Aun no implementado, no es necessario hasta la entrega 3");
+            modificarRuta(nombre);
         }
+    }
+   
+    private void modificarRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        Ruta r = (Ruta) leerRuta(nombre);
+        Mapa maptem = r.getMapa();
+        String[] nombresCiu = maptem.getNombres();
+        Integer[] puntosRuta = r.getPermutacion();
+        ArrayList<Paquete> listaPaquetesRutaTemp= new ArrayList<>();
+        listaPaquetesRutaTemp = r.getListaPaquetesRuta();
+        System.out.println("Por que puntos de la ciudad te gustaria pasar?");
+        for (int i = 0; i < nombresCiu.length; ++i) {
+            System.out.println(i + " " + nombresCiu[i]);
+        }
+        System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa s");
+        String nuevoPunto = sc.nextLine();
+        while (!nuevoPunto.equals("s")) {
+            Paquete p = new Paquete();
+            p.setDestino(nuevoPunto);
+            p.setIdDestino(sc.nextInt());
+            listaPaquetesRutaTemp.add(p);
+            nuevoPunto = sc.nextLine();
+        }
+        r.setListaPaquetesRuta(listaPaquetesRutaTemp);
+        r.calcularRapida();
+        r.mostrarRuta();
     }
     
     /**
@@ -336,7 +362,7 @@ public class ControlDominio {
         Ruta r = (Ruta) leerRuta(nombre);
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes = r.getListaPaquetesRuta();
-        System.out.println("PAquetes de recalculo");
+        System.out.println("Paquetes de recalculo");
         paquetes = oper.modificaListaPaquetes(paquetes);
         map = r.getMapa();
         System.out.println("Procedemos al recalculo de la ruta");

@@ -48,6 +48,7 @@ public class Ruta implements Serializable {
      * @param listaPaquetesRuta 
      */
     public void setListaPaquetesRuta(ArrayList<Paquete> listaPaquetesRuta) {
+        if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList<>();
         this.listaPaquetesRuta = listaPaquetesRuta;
     }
     
