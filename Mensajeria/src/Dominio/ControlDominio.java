@@ -380,12 +380,12 @@ public class ControlDominio {
         Mapa map = (Mapa) leerCiudad();;
         String nombreCiudad = map.getNombreCiudad();
         p.leerPaquete(cl.getIdCliente(), nombreCiudad);
-        String[] nombresNodo = map.getNombres();
+        ArrayList<String> nombresNodo = map.getNombres();
         boolean encontrado = false;
         String destino = p.getDestino();
         int idDestino = -1;
-        for(int i = 0; i < nombresNodo.length & !encontrado; ++i){
-            if(nombresNodo[i].equals(destino)){
+        for(int i = 0; i < nombresNodo.size() & !encontrado; ++i){
+            if(nombresNodo.get(i).equals(destino)){
                 encontrado = true;
                 idDestino = i;
             }

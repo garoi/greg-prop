@@ -234,7 +234,8 @@ public class Operador implements Serializable {
      * 
      */
     public Mapa anadirCiudad(Mapa map) throws IOException, ClassNotFoundException{
-        map.crearCiudad();
+//        map.crearCiudad();
+        map.crearCiudad("barcelona", 4);
         return map;
     }
     

@@ -197,14 +197,16 @@ public class Ruta implements Serializable {
         if (grafo != null) grafo = null;
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         nombres = new String[paquetesSeleccionados.size()];
-        float[][] ciudad = mapa.getCiudad();
+        ArrayList<ArrayList<Float>> ciudad = mapa.getCiudad();
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
                 System.out.println(paquetesSeleccionados.get(i).getIdDestino());
                 System.out.println(paquetesSeleccionados.get(j).getIdDestino());
-                grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getIdDestino()][paquetesSeleccionados.get(j).getIdDestino()];
+//                grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getIdDestino()][paquetesSeleccionados.get(j).getIdDestino()];
+                // Ahora se accede de esta manera a las distancias.
+                grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
     }

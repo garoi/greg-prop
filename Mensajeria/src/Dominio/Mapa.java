@@ -66,7 +66,7 @@ public class Mapa implements Serializable {
      * @param j indice horizontal de la matriz de distancias.
      * @return la distancia en float del punto i al j.
      */
-    private float getD(int i, int j){
+    public float getD(int i, int j){
         if(i<0 || j<0) return -1f;
         if(i<tamCiudad && j<tamCiudad){
             float f = (Float)((ArrayList)ciudad.get(i)).get(j);
