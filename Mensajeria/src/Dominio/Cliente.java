@@ -136,6 +136,9 @@ public class Cliente implements Serializable {
      * @param paquetesEnviados
      */
     public void cambiarEstadoPaquetes(Paquete p) {
-        listaPaquetes.get(p.getIdPaquete()).setEstado("Enviado");
+        for(int i = 0; i < listaPaquetes.size(); ++i)
+            if(p.getIdPaquete() == listaPaquetes.get(i).getIdPaquete()){
+                listaPaquetes.get(i).setEstado("Enviado");
+            }    
     }
 }
