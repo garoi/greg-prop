@@ -153,8 +153,8 @@ public class Ruta implements Serializable {
         ch.setNombres(nombres);
         ch.setMST(MSTK);*/
         //Stubs
-        calcularRapida();
         //permutacion = ch.buscaPermutacion();
+        calcularRapida();
     }
     
     /**
@@ -213,7 +213,6 @@ public class Ruta implements Serializable {
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
                 System.out.println(paquetesSeleccionados.get(i).getIdDestino());
                 System.out.println(paquetesSeleccionados.get(j).getIdDestino());
-//                grafo[i][j] = ciudad[paquetesSeleccionados.get(i).getIdDestino()][paquetesSeleccionados.get(j).getIdDestino()];
                 // Ahora se accede de esta manera a las distancias.
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }

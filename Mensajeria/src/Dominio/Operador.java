@@ -328,4 +328,8 @@ public class Operador implements Serializable {
             }
         }
     }
+    
+    public void modificarCiudad(Mapa map) {
+        map.modificarCiudad();
+    }
 }

@@ -280,9 +280,14 @@ public class ControlDominio {
      * @throws IOException 
      */
     public void anadirCiudad() throws ClassNotFoundException, IOException{
+        map = new Mapa();
         map = oper.anadirCiudad(map);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
+    
+    private void modificarCiudad() {
+       oper.modificarCiudad(map);
+   }
     
     /**
      * Selecciona una ciudad del sistema
@@ -312,7 +317,10 @@ public class ControlDominio {
      */
    private void opcionesOperador(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
-        System.out.println("pulse 1 para calcular una ruta nueva, 2 para recalcular una ruta existente pero no confirmada, 3 para modificar una ruta");
+        System.out.println("pulse 1 para calcular una ruta nueva");
+        System.out.println("2 para recalcular una ruta existente pero no confirmada");
+        System.out.println("3 para modificar una ruta");
+        System.out.println("4 para modificar una ciudad");
         int op = sc.nextInt();
         if(op == 1){
             Ruta r = new Ruta();
@@ -321,8 +329,11 @@ public class ControlDominio {
         else if (op == 2){
             recalcularRuta(nombre);
         }
-        else {
+        else if (op == 3) {
             modificarRuta(nombre);
+        }
+        else {
+            modificarCiudad();
         }
     }
    
