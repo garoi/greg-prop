@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 /**
  *
- * @author Marc Garcia Roig
+ * @author Albert Gili Zaragoza
  */
 public class ControlDominio {
 

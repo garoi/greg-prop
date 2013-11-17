@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Angel Rierola Mora
  */
 public class ControlPersistencia {
     

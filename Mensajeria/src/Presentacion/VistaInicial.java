@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author LuisGarcíaEstrades
+ * @author Luis García Estrades
  */
 public class VistaInicial extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;

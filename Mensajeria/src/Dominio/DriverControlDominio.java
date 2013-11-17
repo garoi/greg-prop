@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  *
- * @author ivich
+ * @author Albert Gili Zaragoza
  */
 public class DriverControlDominio {
     

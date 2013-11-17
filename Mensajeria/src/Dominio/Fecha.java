@@ -3,7 +3,7 @@ import java.util.Date;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Angel Rierola Mora
  */
 public class Fecha {
     

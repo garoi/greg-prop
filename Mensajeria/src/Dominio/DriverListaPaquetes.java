@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angel
+ * @author Albert Gili Zaragoza
  */
 public class DriverListaPaquetes {
 

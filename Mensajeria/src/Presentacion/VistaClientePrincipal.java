@@ -8,7 +8,7 @@ package Presentacion;
 
 /**
  *
- * @author Luis García Estrades https://github.com/lgarest
+ * @author Angel Rierola Mora
  */
 public class VistaClientePrincipal extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 /**
  *
- * @author Marc Garcia
+ * @author Albert Gili Zaragoza
  */
 public class Operador implements Serializable {
     private String nombreOperador;

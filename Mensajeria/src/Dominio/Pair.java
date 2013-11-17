@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author marc
+ * @author Marc Garcia Roig
  */
 public class Pair implements Serializable{
     int first;

@@ -4,7 +4,7 @@ import java.util.*;
 import java.lang.System;
 /**
  *
- * @author ivich HEM DE TENR EN COMPTE EL DESTI DEL PAQUETS I DEL MAPA.
+ * @author Albert Gili Zaragoza
  */
 public class Mensajeria {
     

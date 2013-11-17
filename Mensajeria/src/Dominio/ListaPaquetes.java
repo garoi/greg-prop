@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *
- * @author Albert Gili
+ * @author Albert Gili Zaragoza
  */
 public class ListaPaquetes implements Serializable {
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();

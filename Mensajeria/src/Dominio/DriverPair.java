@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Angel
+ * @author Marc Garcia Roig
  */
 public class DriverPair {
 

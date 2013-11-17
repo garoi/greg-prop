@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *
- * @author Albert Gili
+ * @author Marc Garcia Roig
  */
 public class ListaClientes implements Serializable {
     private int IDcliente = 0;

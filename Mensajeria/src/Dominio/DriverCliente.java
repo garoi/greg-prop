@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  *
- * @author Angel
+ * @author Angel Rierola Mora
  */
 public class DriverCliente {
 

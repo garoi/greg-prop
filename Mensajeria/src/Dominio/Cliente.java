@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *
- * @author Albert Gili
+ * @author Angel Rierola Mora
  */
 public class Cliente implements Serializable {
     private int idCliente;

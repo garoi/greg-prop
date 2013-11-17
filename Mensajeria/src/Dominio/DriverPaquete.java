@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  *
- * @author ivich
+ * @author Albert Gili Zaragoza
  */
 public class DriverPaquete {
     

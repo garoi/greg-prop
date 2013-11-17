@@ -12,7 +12,6 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 /**
  * Clase que permite ejecutar de forma individual las funciones de la clase Mapa
- * @see Mapa
  * @author Luis García Estrades https://github.com/lgarest
  */
 public class DriverMapa {

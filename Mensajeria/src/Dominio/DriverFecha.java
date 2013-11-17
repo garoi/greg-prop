@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Angel Rierola Mora
  */
 public class DriverFecha {
 

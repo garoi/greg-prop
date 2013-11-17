@@ -7,7 +7,7 @@ import java.util.*;
 import java.lang.System;
 /**
  *
- * @author Albert Gili
+ * @author Albert Gili Zaragoza
  */
 public class Paquete implements Serializable{
     private int idPaquete;
