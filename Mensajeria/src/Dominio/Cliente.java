@@ -135,15 +135,7 @@ public class Cliente implements Serializable {
      * Una vez enviados los paquetes cambia el estado
      * @param paquetesEnviados
      */
-    public void cambiarEstadoPaquetes(ArrayList<Paquete>paquetesEnviados) {
-        for (int i = 0; i < paquetesEnviados.size(); ++i) {
-            boolean encontrado = false;
-            for (int j = 0; j < listaPaquetes.size() & !encontrado; ++j) {
-                if (listaPaquetes.get(j).getIdPaquete() == (paquetesEnviados.get(i).getIdPaquete())) {
-                    listaPaquetes.get(j).setEstado("enviado");
-                    encontrado = true;
-                }
-            }
-        }
+    public void cambiarEstadoPaquetes(Paquete p) {
+        listaPaquetes.get(p.getIdPaquete()).setEstado("Enviado");
     }
 }

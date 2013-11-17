@@ -211,8 +211,6 @@ public class Ruta implements Serializable {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
-                System.out.println(paquetesSeleccionados.get(i).getIdDestino());
-                System.out.println(paquetesSeleccionados.get(j).getIdDestino());
                 // Ahora se accede de esta manera a las distancias.
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }

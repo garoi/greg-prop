@@ -151,9 +151,11 @@ public class ControlDominio {
     private void paquetesEnviados(Ruta r) throws IOException {
         ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
         oper.cambiarEstadoPaquetes(paquetesEnviados);
-        cl.cambiarEstadoPaquetes(paquetesEnviados);
-        lp.cambiarEstadoPaquetes(paquetesEnviados);
-        guardadoGeneral();
+        for(int i =0; i < lc.tamanoListaClientes();++i){
+            lc.cambiarEstadoPaquetes(paquetesEnviados.get(i));
+            lp.cambiarEstadoPaquetes(paquetesEnviados);
+            guardadoGeneral();
+        }
     }
     
     /**

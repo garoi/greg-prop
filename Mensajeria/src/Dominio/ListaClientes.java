@@ -104,6 +104,9 @@ public class ListaClientes implements Serializable {
         }
         return -1;
     }
+    public void cambiarEstadoPaquetes(Paquete p){
+        listaClientes.get(p.getIdCliente()).cambiarEstadoPaquetes(p);
+    }
        
 }
     
