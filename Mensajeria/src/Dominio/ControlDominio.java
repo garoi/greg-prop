@@ -412,7 +412,7 @@ public class ControlDominio {
       
     public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
         Paquete p = new Paquete();
-        Mapa map = (Mapa) leerCiudad();;
+        Mapa map = (Mapa) leerCiudad();
         String nombreCiudad = map.getNombreCiudad();
         p.leerPaquete(cl.getIdCliente(), nombreCiudad);
         ArrayList<String> nombresNodo = map.getNombres();

@@ -22,13 +22,13 @@ public class DriverControlDominio {
     System.out.println("primero registraremos y loguearemos un operador un operador");
     boolean reg;
     reg = cd.registroLogin();
+    cd.anadirCiudad();
     System.out.println("Ahora registraremos y loguearemos a un cliente, y lo añadiremos a la lista");
     reg = cd.registroLogin();
     System.out.println("Ahora logearemos con un cliente y un operador ya existentes");
     ControlDominio cd2 = new ControlDominio();
     System.out.println("Ahora vamos a entrar dentro de las funcionalidades del cliente");
     System.out.println("anadiremos 4 paquetes a la lista para posteriormente poder calcular una ruta con ellos");
-    //cd.seleccionarCiudad();
     cd.anadirPaquete();
     cd.anadirPaquete();
     cd.anadirPaquete();
@@ -43,7 +43,7 @@ public class DriverControlDominio {
     reg = cd.registroLogin();
     System.out.println("vamos a seleccionar una ciudad, y a partir de aqui crear una ruta");
     cd.seleccionarCiudad();
-    System.out.println("vamos a modificar la ruta eliminando un paquete de la lista");
+    System.out.println("vamos a recalcular la ruta eliminando un paquete de la lista");
     cd.seleccionarCiudad();
     }
     
