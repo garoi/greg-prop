@@ -14,20 +14,29 @@ import java.util.ArrayList;
  */
 class Christofides {
 
-    void setGrafo(float[][] Ciudad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
+    
+    private String[] nombres;
+    private float[][] grafo;
+    private Integer[] permutacion;
+
+    
+    public void setNombres(String[] nombres) {
+        this.nombres = nombres;
     }
 
-    void setMST(ArrayList<ArrayList<Pair>> MSTK) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setGrafo(float[][] grafo) {
+        this.grafo = grafo;
     }
 
-    void setNombres(String[] NombresSubgrafo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPermutacion(Integer[] permutacion) {
+        this.permutacion = permutacion;
     }
-
-    Integer[] buscaPermutacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Integer[] buscaPermutacion() {
+        SolveGreedy sg = new SolveGreedy(grafo);
+        permutacion = sg.solve();
+        return permutacion;
     }
     
 }

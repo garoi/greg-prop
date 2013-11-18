@@ -1,4 +1,5 @@
 package Dominio;
+import static java.lang.Double.POSITIVE_INFINITY;
 import java.util.*;
 /**
  *
@@ -48,9 +49,9 @@ public class SolveGreedy {
             ret[perm++] = v;
             vis[v]  = true ;
             Integer indiceMinimo = v;
-            float   costeMinimo = Float.POSITIVE_INFINITY;
+            float   costeMinimo = (float) POSITIVE_INFINITY;
             for(int i = 0; i < M[0].length ; ++i){
-                if(i!=v && M[v][i] < costeMinimo && !vis[i] ){
+                if(/*i!=v &&*/ !vis[i] && M[v][i] < costeMinimo){
                     indiceMinimo = i;
                     costeMinimo = M[v][i];
                 }
@@ -66,5 +67,7 @@ public class SolveGreedy {
      */
     void setPrimerVertice(Integer n){
         this.PrimerVertice = n;
-    }  
+    }
+    
+    
 }

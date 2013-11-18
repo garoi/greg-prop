@@ -252,7 +252,7 @@ public class Mapa implements Serializable {
             System.out.println("2 Modificar ciudad con los datos de un fichero.");
             int op = sc.nextInt();
             if (op == 2) {
-                System.out.println("Hasta que no tengamos hecha la Persistencia de Datos no lo podemos hacer");
+                System.out.println("Hasta que no tengamos esta parte de la Persistencia de Datos no lo podemos hacer");
                 //Abrir y modifiar el fichero de la ciudad
             }
             if (op == 1) {

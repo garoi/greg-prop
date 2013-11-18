@@ -148,13 +148,12 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularChristofides() {
-        /*Christofides ch = new Christofides();
+        Christofides ch = new Christofides();
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
-        ch.setMST(MSTK);*/
+        //ch.setMST(MSTK);
         //Stubs
-        //permutacion = ch.buscaPermutacion();
-        calcularRapida();
+        permutacion = ch.buscaPermutacion();
     }
     
     /**
@@ -171,7 +170,7 @@ public class Ruta implements Serializable {
     public void mostrarRuta() {
         System.out.println("La ruta pasara por los siguientes puntos del mapa:");
         for (int i = 0; i < permutacion.length; ++i) {
-            System.out.print(" " + permutacion[i]);
+            System.out.print(" " + nombres[permutacion[i]]);
         }
         System.out.println();
     }
@@ -214,7 +213,15 @@ public class Ruta implements Serializable {
                 // Ahora se accede de esta manera a las distancias.
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
+            
         }
-        
+        System.out.println("Este es el subgrafo");
+        for(int i = 0; i < grafo.length; ++i){
+            System.out.println("nombres[i] :" + nombres[i]);
+            for(int j = 0; j < grafo.length; ++j){
+                System.out.print(grafo[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
