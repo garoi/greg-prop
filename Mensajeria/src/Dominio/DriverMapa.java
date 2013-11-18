@@ -32,7 +32,7 @@ public class DriverMapa {
             + "| 7: Ejecutar función \"modificarCiudad\"    |");
         System.out.println(
             "|3: Ejecutar función \"setNombreCiudad\"  "
-            + "| 8: Ejecutar de toda la clase Mapa        |");
+            + "|                                          |");
         System.out.println(
             "|4: Ejecutar función \"getNombreCiudad\"  "
             + "|-1: Salir del driver.                     |");
@@ -101,7 +101,16 @@ public class DriverMapa {
                     System.out.println("Introduce un nombre para la ciudad:");
                     String nombre = sc.next();
                     System.out.println("Introduce el número de puntos de la ciudad:");
-                    int n_puntos = sc.nextInt();
+                    int n_puntos = 0;
+                    try{
+                        n_puntos = sc.nextInt();
+                    }
+                    catch(InputMismatchException e){
+                        System.out.println("El número de puntos DEBE ser un número entero."
+                            + " Saliendo del programa.");
+                        System.exit(1);
+                    }
+                        
                     m.crearCiudad(nombre, n_puntos);
                     break;
                 case 6:
@@ -109,6 +118,7 @@ public class DriverMapa {
                     break;
                 case 7:
                     m.modificarCiudad();
+                    break;
                 case -1:
                 default:
                     System.exit(0);

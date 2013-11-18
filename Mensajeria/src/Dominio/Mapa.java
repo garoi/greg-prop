@@ -271,11 +271,13 @@ public class Mapa implements Serializable {
                             }
                             if (nombres.size()>1){
                                 System.out.println("¿Entre qué dos puntos quieres modificar la distancia?");
+                                System.out.println("Introduce el nombre del primer punto:");
                                 String punto1 = sc.next();
+                                System.out.println("Introduce el nombre del segundo punto:");
                                 String punto2 = sc.next();
+                                System.out.println("Introduce la nueva distancia entre los puntos:");
                                 float distancia = sc.nextFloat();
                                 setDistancia(punto1, punto2, distancia);
-                                System.out.println("Introduce la nueva distancia entre los puntos:");
                             }
                         break;
                         case 2:
@@ -297,10 +299,14 @@ public class Mapa implements Serializable {
                         case 4:
     //                      "4: Renombrar un punto de la ciudad."
                             System.out.println("Escribe el nombre del punto a renombrar:");
+                            System.out.println("Los puntos son:");
+                            for (int i = 0; i < tamCiudad; ++i) {
+                                    System.out.println(nombres.get(i));
+                            }
                             String renNombreNodo = sc.next();
                             if(nombres.contains(renNombreNodo)){
                                 int idx = nombres.indexOf(renNombreNodo);
-                                System.out.println("Escribe el nombre del punto que quieres.");
+                                System.out.println("Escribe el nombre que tendrá el punto:");
                                 String ren2NombreNodo = sc.next();
                                 nombres.set(idx, ren2NombreNodo);
                             }

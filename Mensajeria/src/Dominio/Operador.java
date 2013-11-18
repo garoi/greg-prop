@@ -12,8 +12,6 @@ public class Operador implements Serializable {
     private String nombreOperador;
     private String password;
     private ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
-    private Mapa mapa;
-    private ListaPaquetes lp;
     private boolean checkExistencia = false;
    
     
@@ -34,7 +32,7 @@ public class Operador implements Serializable {
     }
     
     /**
-     * 
+     * Devuelve el nombre del operador.
      * @return nombreOperador
      */
     public String getNombreOperador() {
@@ -42,7 +40,7 @@ public class Operador implements Serializable {
     }
 
     /**
-     * 
+     * Devuelve la contraseña del operador.
      * @return password
      */
     public String getPassword() {
@@ -50,16 +48,16 @@ public class Operador implements Serializable {
     }
      
    /**
-    * 
-    * @param nombreOperador 
+    * Atribuye un nombre al operador.
+    * @param nombreOperador nombre con el que se quiere identificar al operador.
     */
     public void setNombreOperador(String nombreOperador) {
         this.nombreOperador = nombreOperador;
     }
 
     /**
-     * 
-     * @param password 
+     * Atribuye una contraseña al operador.
+     * @param password contraseña que se quiere definir para el operador.
      */
     public void setPassword(String password) {
         this.password = password;
@@ -67,30 +65,29 @@ public class Operador implements Serializable {
     
     /**
      * Añade un paquete a la lista de paquetes para enviar del operador.
-     * @param p 
+     * @param p Objeto paquete que se va a añadir a la lista de paquetes por enviar.
+     * @see Paquete
      */
     public void anadirPaquete(Paquete p) {
         listaPaquetesParaEntregar.add(p);
     }
     
     /**
-     * Ordena los paquetes por identificador
-     * @param
+     * Ordena los paquetes por identificador.
      */
     public void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
     }
     
     /**
-     * Ordena los paquetes por destino
-     * @param
+     * Ordena por paquetes por destino.
      */
     public void ordenarPorDestino() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
     }
+    
     /**
-     * Ordena los paquetes por fecha y turno
-     * @param
+     * Ordena los paquetes por fecha y turno.
      */
     public void ordenarPorFechaTurno() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.FechaTurnoComparator());
@@ -98,11 +95,10 @@ public class Operador implements Serializable {
     
     /**
      * Muestra los paquetes por pantalla segun el criterio que se pida.
-     * @param
      */
     public void verPaquetes() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino 3 Para ver segun feha y turno");
+        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino 3 Para ver segun feha y turno.");
         int op = sc.nextInt();
         if (op == 1) {
             ordenarPorIdPaquete();
@@ -126,9 +122,9 @@ public class Operador implements Serializable {
     }
     
     /**
-     * 
-     * @param idPaquete
-     * @return El paquete con identificador idPaquete
+     * Devuelve el paquete de id "idPaquete" pasado por referencia.
+     * @param idPaquete entero que identifica un paquete.
+     * @return el paquete con el identificador idPaquete pasado por referencia
      */
     public Paquete buscarPaquete(int idPaquete) {
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
@@ -140,7 +136,10 @@ public class Operador implements Serializable {
     }
     
     /**
-     * Selecciona los paquetes disponibles para la ruta que se desea crear
+     * Selecciona los paquetes que irán en la próxima ruta.
+     * @param nombreCiudad nombre de la ciudad.
+     * @param fecha fecha de envío
+     * @param turno turno de envío
      * @return Vector con los paquetes seleccionados
      */
     public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
@@ -148,6 +147,7 @@ public class Operador implements Serializable {
         Scanner sc = new Scanner(System.in);
         System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            System.out.println(listaPaquetesParaEntregar.size());
             if (listaPaquetesParaEntregar.get(i).getCiudad().equals(nombreCiudad)) {
                 if (fecha.equals(listaPaquetesParaEntregar.get(i).getFecha())) {
                     if (turno.equals(listaPaquetesParaEntregar.get(i).getTurno())) {
@@ -173,8 +173,7 @@ public class Operador implements Serializable {
     }
     
     /**
-     * Lee los parametros del operador
-     * @param
+     * Lee los parametros del operador y los inicializa.
      */
     public void leerOperador() {
         Scanner sc = new Scanner(System.in);
@@ -187,7 +186,6 @@ public class Operador implements Serializable {
     /**
      * Cancela el paquete con identificador idPaquete
      * @param idPaquete 
-     * 
      */
     public void cancelarPaquete(int idPaquete) {
         boolean encontrado = false;
@@ -207,42 +205,13 @@ public class Operador implements Serializable {
             System.out.println("Paquete no encontrado para este cliente");
         }
     }
-    
+        
     /**
-     * Elimina todos los paquetes queya han sido enviados
-     * @param idPaquete 
-     * 
-     */
-    /*public void eliminarPaquete(int idPaquete) {
-        boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetesParaEntregar.size() && !encontrado) {
-            if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetesParaEntregar.get(i).getEstado().equals("enviado")) {
-                    listaPaquetesParaEntregar.remove(i);
-                    encontrado = true;
-                }
-                else {
-                    System.out.println("El paquete aun no se ha enviado, lo tienes que cancelar");
-                    encontrado = true;
-                }
-            }
-            else {
-                ++i;
-            }
-        }
-        if (!encontrado) {
-            System.out.println("Paquete no encontrado para este cliente");
-        }
-    }*/
-    
-    /**
-     * Crea una ciudad
-     * @param map
-     * @return Mapa
+     * Crea una ciudad para el operador.
+     * @param map mapa vacío.
+     * @return Mapa el mapa de la ciudad ya inicializado.
      * @throws IOException
      * @throws ClassNotFoundException 
-     * 
      */
     public Mapa anadirCiudad(Mapa map) throws IOException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
@@ -290,7 +259,6 @@ public class Operador implements Serializable {
      * Modifica la lista de paquetes para la ruta.
      * @param paquetes 
      * @return ArrayList<Paquete>
-     * 
      */
     public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes) {
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
@@ -328,8 +296,20 @@ public class Operador implements Serializable {
             }
         }
     }
-    
+
+    /**
+     * Modifica la ciudad del operador.
+     * @param map ciudad
+     */
     public void modificarCiudad(Mapa map) {
         map.modificarCiudad();
+    }
+    
+    /**
+     * Muestra la ciudad del operador
+     * @param map ciudad.
+     */
+    public void verCiudad(Mapa map) {
+        map.imprimirCiudad();
     }
 }
