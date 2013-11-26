@@ -122,7 +122,7 @@ public class ControlDominio {
             r.calcularRapida();
         }
         else {
-           // r.calcularMinSpaTree();
+            r.calcularMinSpaTree();
             r.calcularChristofides();
             //Llamar a la optimizacion
         }

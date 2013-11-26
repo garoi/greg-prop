@@ -253,7 +253,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
     private void botonMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMapaActionPerformed
         // TODO add your handling code here:
-        ctrlp.iniVentanaSecundaria("vistaMapa");
     }//GEN-LAST:event_botonMapaActionPerformed
 
     /**

@@ -16,7 +16,11 @@ public class Ruta implements Serializable {
     private String fecha;
     private String turno;
 
-    ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
+    private ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
+
+    public void setMSTK(ArrayList<ArrayList<Pair>> MSTK) {
+        this.MSTK = MSTK;
+    }
     
 
     public String getTurno() {
@@ -143,6 +147,14 @@ public class Ruta implements Serializable {
         MSTK = mst.MST();
     }
     
+    private void quitaBucles() {
+        for (int i = 0; i < MSTK.size(); ++i) {
+            for (int j = 0; j < MSTK.get(i).size(); ++j) {
+                if (MSTK.get(i).get(j).first() == i) MSTK.get(i).remove(j);
+            }
+        }
+    }
+    
     /**
      * Ejecuta el algoritmo de Christofides
      * @param
@@ -151,8 +163,9 @@ public class Ruta implements Serializable {
         Christofides ch = new Christofides();
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
-        //ch.setMST(MSTK);
-        //Stubs
+        quitaBucles();
+        System.out.println("TAMANY abans de enviar " + MSTK.size());
+        ch.setMST(MSTK);
         permutacion = ch.buscaPermutacion();
     }
     
