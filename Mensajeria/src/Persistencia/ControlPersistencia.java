@@ -1,5 +1,6 @@
 package Persistencia;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -88,5 +89,18 @@ public class ControlPersistencia {
         guardarListaClientes(lc);
         guardarListaPaquetes(lp);
         guardarOperador(oper);
+    }
+    
+    public void crearDirectorios(){
+        File folderData = new File("./Data");
+        if(!folderData.exists()) folderData.mkdirs();
+        File folderListaClientes = new File("./Data/ListaClientes");
+        File folderListaPaquetes = new File("./Data/ListaPaquetes");
+        File folderMapas = new File("./Data/Mapas");
+        File folderRutas = new File("./Data/Rutas");
+        if(!folderListaClientes.exists()) folderListaClientes.mkdirs();
+        if(!folderListaPaquetes.exists()) folderListaPaquetes.mkdirs();
+        if(!folderMapas.exists()) folderMapas.mkdirs();
+        if(!folderRutas.exists()) folderRutas.mkdirs();
     }
 }
