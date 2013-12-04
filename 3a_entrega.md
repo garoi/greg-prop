@@ -22,6 +22,6 @@ Contenido
     - Relación de diferencias con la 1ª entrega y justificación.
     - Código de las clases del proyecto (Código fuente)
         - Separado por autores.
-        - Ejecutable(jav??) + Juegos de Pruebas (Incluir datos con los que se puede probar el programa, datos de entrada en cada estado del programa, ).
+        - Ejecutable(jar) + Juegos de Pruebas (Incluir datos con los que se puede probar el programa, datos de entrada en cada estado del programa, ).
         - Probar ejecución en otros entornos.
     - Carpeta con documentación (opc, JavaDoc, Doxygen, HTML).
