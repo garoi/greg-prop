@@ -2,7 +2,6 @@
 ==========
 
 Contenido
-----------
     - Todo en un pendrive
     - Algún documento en papel:
 
