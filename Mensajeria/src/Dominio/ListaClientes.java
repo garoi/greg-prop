@@ -59,15 +59,6 @@ public class ListaClientes implements Serializable {
         return -1;
     }
     
-    /**
-     * Muestra los paquetes del cliente con identificador idCliente
-     * @param idCliente 
-     * 
-     */
-    public void packsCliente(int idCliente){
-        Cliente c = listaClientes.get(idCliente);
-        c.verLista();
-    }
     
     /**
      * Devuelve el numero de clientes total

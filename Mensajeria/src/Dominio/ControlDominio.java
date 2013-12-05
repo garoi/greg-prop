@@ -91,47 +91,6 @@ public class ControlDominio {
         ControlUsuario cu = new ControlUsuario();
         return cu.loginOperador(usuario, password, oper);
     }
-    
-    /*public boolean registroLogin() throws IOException, ClassNotFoundException {
-        System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
-        Scanner sc = new Scanner(System.in);
-        int op = sc.nextInt();
-        boolean resultado= false;
-        if(op == 1) {
-            if(!existeOper){
-                System.out.println("No hay operador, vamos a registrarlo");
-                cu.registroOperador(oper);
-                existeOper = true;
-                cp.guardarOperador(oper);
-            }
-            System.out.println("vamos a hacer login");
-            cu.loginOperador(oper);
-            return false;
-        }
-        else if (op == 2) {
-                Scanner sc2 = new Scanner(System.in);
-                boolean existeCliente = true;
-                System.out.println("es un usuario nuevo? pulse 1 si, 2 no");
-                int op2 = sc2.nextInt();
-                if(op2 == 1){
-                    Cliente cl = new Cliente();
-                     existeCliente = cu.registroCliente(cl, lc);
-                    if (existeCliente) cp.guardarListaClientes(lc);
-                    else resultado = true;
-                }
-                if (existeCliente) {
-                    System.out.println("vamos a proceder al login");
-                    int indice;
-                    indice = cu.loginCliente(lc);
-                    if(indice != -1){
-                        cl = lc.getCliente(indice);
-                    }
-                    return true;
-                }
-        }
-        return resultado;
-    }*/
-    
 
     /**
      * Calcula el camino de una ruta
@@ -449,34 +408,6 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    
-      
-    /*public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
-        Paquete p = new Paquete();
-        Mapa map = (Mapa) leerCiudad();
-        String nombreCiudad = map.getNombreCiudad();
-        p.leerPaquete(cl.getIdCliente(), nombreCiudad);
-        ArrayList<String> nombresNodo = map.getNombres();
-        boolean encontrado = false;
-        String destino = p.getDestino();
-        int idDestino = -1;
-        for(int i = 0; i < nombresNodo.size() & !encontrado; ++i){
-            if(nombresNodo.get(i).equals(destino)){
-                encontrado = true;
-                idDestino = i;
-            }
-        }
-        if(encontrado){
-            p.setIdDestino(idDestino);
-            lp.anadirPaquete(p);
-            lc.anadirPaquete(p, cl.getIdCliente());
-            oper.anadirPaquete(p);
-            guardadoGeneral();
-        }
-        else {
-            System.out.println("El destino no existe en la base de datos");
-        }
-   }*/
    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
@@ -489,30 +420,18 @@ public class ControlDominio {
        ArrayList <String> puntosCiudad = new ArrayList <String>();
        //puntosCiudad = cp.leerPuntos(nombreCiudad);
     }
-
-    /**
-     * Se muestran los paquetes del cliente
-     */
-    public void verPaquetesCliente(){
-        cl.verLista();
-    }
     
     /**
      * El cliente cancela un paquete que aun no se ha enviado
      */
-    public void cancelarPaquete(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("puede cancelar los siguientes paquetes");
-        verPaquetesCliente();
-        System.out.println("Introduzca el ID del paquete que desea cancelar");
-        int idPaquete = sc.nextInt();
+    public boolean cancelarPaquete(int idPaquete){
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
             lp.cancelarPaquete(idPaquete);
+            oper.cancelarPaquete(idPaquete);
+            return true;
         }
-        else{
-            System.out.println("El paquete no ha podido ser cancelado");
-        }
+        else return false;
     }
     
     /**

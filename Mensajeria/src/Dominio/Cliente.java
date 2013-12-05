@@ -113,29 +113,10 @@ public class Cliente implements Serializable {
      * 
      */
     public void eliminarPaquetes() {
-        boolean encontrado = false;
         for (int i = 0; i < listaPaquetes.size(); ++i) {
             if (listaPaquetes.get(i).getEstado().equals("enviado")) {
                 listaPaquetes.remove(i);
-                encontrado = true;
             }
-        }
-        if (!encontrado) { 
-            System.out.println("No tienes ningun paquete enviado");
-        }
-    }
-    
-    /**
-     * Muestra la lista de paquetes del cliente
-     */
-    public void verLista(){
-        for (int i = 0; i < listaPaquetes.size();++i) {
-            System.out.print("IDpaquete " + listaPaquetes.get(i).getIdPaquete() + " ");
-            System.out.print("Ciudad " + listaPaquetes.get(i).getCiudad() + " ");
-            System.out.print("Destino " + listaPaquetes.get(i).getDestino() + " ");
-            System.out.print("Estado " + listaPaquetes.get(i).getEstado() + " ");
-            System.out.print("Fecha " + listaPaquetes.get(i).getFecha() + " ");
-            System.out.println("Turno " + listaPaquetes.get(i).getTurno() + " ");
         }
     }
     
