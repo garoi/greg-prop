@@ -175,6 +175,19 @@ public class ControlDominio {
         return cp.leerCiudad(nombre);
     }
     
+    public ArrayList<String> getNombresCiudades(){
+        ArrayList<String> ciudades = cp.listarCiudades();
+        return ciudades;
+    }
+    
+    public ArrayList <String> getDestinosCiudad(String nombreCiudad) throws IOException{
+        Mapa prov = new Mapa();
+        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);
+        ArrayList <String> destinos = new ArrayList <String>();
+        destinos = prov.getNombres();
+        return destinos;
+    }
+    
     /**
      * Lee una ruta
      * @return Ruta
@@ -422,7 +435,7 @@ public class ControlDominio {
             lc.anadirPaquete(p, idCliente);
             oper.anadirPaquete(p);
             ArrayList <String> puntosCiudad = new ArrayList <String>();
-       }
+       } 
     }
     
     /**
