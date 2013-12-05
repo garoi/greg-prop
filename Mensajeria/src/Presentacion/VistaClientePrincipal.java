@@ -108,6 +108,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         });
 
         botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         botonEliminar.setText("Eliminar");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +173,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
+                    .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -191,6 +196,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         // eliminar paquetes enviados del cliente
+        ctrlp.getDominio().elminarPaquetes();
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
@@ -198,6 +204,12 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         ctrlp.iniVentanaSecundaria("vistaMapa");
     }//GEN-LAST:event_botonVerMapaActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        // TODO add your handling code here:
+        int idx = listaEspera.getSelectedIndex();
+        System.out.println(idx);
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

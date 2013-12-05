@@ -7,6 +7,9 @@
 package Presentacion;
 
 import java.awt.MenuComponent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +17,17 @@ import java.awt.MenuComponent;
  */
 public class VistaMapa extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
+    private int dia;
+    private int mes;
+    private int ano;
+    private String turno;
+    private String ciudad;
+    private int diaahora;
+    private int mesahora;
+    private int anoahora;
+    private String turnoahora;
+    private String destino;
+    
     /**
      * Creates new form VistaMapa
      */
@@ -28,6 +42,42 @@ public class VistaMapa extends javax.swing.JFrame {
         this.ctrlp = ctrlp;
         initComponents();
         
+        // get fecha y turno actual
+        String[] data = ctrlp.getDominio().fechaHoy();
+        dia = Integer.parseInt(data[0]);
+        mes = Integer.parseInt(data[1]);
+        ano = Integer.parseInt(data[2]);
+        turno = data[3];
+        
+        diaahora = dia;
+        mesahora = mes;
+        anoahora = ano;
+        turnoahora = turno;
+        
+        // inicializamos las labels
+        labelDia.setText(data[0]);
+        labelMes.setText(data[1]);
+        labelAno.setText(data[2]);
+        labelTurno.setText(data[3]);
+        String [] c = ctrlp.getDominio().getNombresCiudades();
+        for (int i = 0 ; i< c.length; i++){
+            if (c[i] != null)
+                System.out.println(c[i]);
+            else System.out.println("Null");
+        }
+        
+        // inicializamos el combobox de ciudad
+        comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(
+            //ctrlp.getDominio().getDestinos();
+//            new String[] {"BCN"}
+            ctrlp.getDominio().getNombresCiudades()
+        ));
+        
+        // inicializamos el combobox de destino
+        comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
+            //ctrlp.getDominio().getDestinos();
+            new String[] {"UPC"}
+        ));
     }
 
     /**
@@ -43,22 +93,28 @@ public class VistaMapa extends javax.swing.JFrame {
         sidebar1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        btnOk = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        comboDestino = new javax.swing.JComboBox();
+        labelDia = new javax.swing.JLabel();
+        labelMes = new javax.swing.JLabel();
+        labelAno = new javax.swing.JLabel();
+        btnMasDia = new javax.swing.JButton();
+        btnMasMes = new javax.swing.JButton();
+        btnMasAno = new javax.swing.JButton();
+        btnMenosDia = new javax.swing.JButton();
+        btnMenosMes = new javax.swing.JButton();
+        btnMenosAno = new javax.swing.JButton();
+        labelTurno = new javax.swing.JLabel();
+        btnToggleTurno = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        comboCiudad = new javax.swing.JComboBox();
+        labelMes1 = new javax.swing.JLabel();
+        labelMes2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         sidebar1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Añadir paquete", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -66,121 +122,196 @@ public class VistaMapa extends javax.swing.JFrame {
 
         jLabel3.setText("Turno:");
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnOk.setText("OK");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnOkActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
+        btnCancel.setText("Cancel");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(
+        comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
             //ctrlp.getDominio().getDestinos();
             new String[] {"pene"}
         ));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboDestino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboDestinoActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("dd");
+        labelDia.setText("01");
 
-        jLabel5.setText("mm");
+        labelMes.setText("01");
 
-        jLabel6.setText("yy");
+        labelAno.setText("01");
 
-        jButton3.setText("^");
-        jButton3.setToolTipText("");
+        btnMasDia.setText("^");
+        btnMasDia.setToolTipText("");
+        btnMasDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasDiaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("^");
-        jButton4.setToolTipText("");
+        btnMasMes.setText("^");
+        btnMasMes.setToolTipText("");
+        btnMasMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasMesActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("^");
-        jButton5.setToolTipText("");
+        btnMasAno.setText("^");
+        btnMasAno.setToolTipText("");
+        btnMasAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasAnoActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("v");
+        btnMenosDia.setText("v");
+        btnMenosDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosDiaActionPerformed(evt);
+            }
+        });
 
-        jButton9.setText("v");
+        btnMenosMes.setText("v");
+        btnMenosMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosMesActionPerformed(evt);
+            }
+        });
 
-        jButton10.setText("v");
+        btnMenosAno.setText("v");
+        btnMenosAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosAnoActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("M");
+        labelTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelTurno.setText("M");
 
-        jButton7.setText("*");
+        btnToggleTurno.setText("*");
+        btnToggleTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToggleTurnoActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Ciudad:");
+
+        comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(
+            //ctrlp.getDominio().getDestinos();
+            new String[] {"pene", "pene2"}
+        ));
+        comboCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCiudadActionPerformed(evt);
+            }
+        });
+
+        labelMes1.setText("/");
+
+        labelMes2.setText("/");
 
         javax.swing.GroupLayout sidebar1Layout = new javax.swing.GroupLayout(sidebar1);
         sidebar1.setLayout(sidebar1Layout);
         sidebar1Layout.setHorizontalGroup(
             sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebar1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addContainerGap())
-            .addGroup(sidebar1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton3))
-                .addGap(17, 17, 17)
+                    .addComponent(btnMenosDia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDia)
+                    .addComponent(btnMasDia))
+                .addGap(2, 2, 2)
+                .addComponent(labelMes1)
+                .addGap(2, 2, 2)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton4))
-                .addGap(19, 19, 19)
+                    .addComponent(btnMenosMes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMes)
+                    .addComponent(btnMasMes))
+                .addGap(2, 2, 2)
+                .addComponent(labelMes2)
+                .addGap(2, 2, 2)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jButton5))
-                .addGap(18, 18, 18)
-                .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMenosAno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAno)
+                    .addComponent(btnMasAno)
+                    .addComponent(jLabel3))
+                .addGap(8, 8, 8)
+                .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnToggleTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(sidebar1Layout.createSequentialGroup()
+                .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sidebar1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(comboDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(sidebar1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel8))
+                    .addGroup(sidebar1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(comboCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(sidebar1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)))
+                .addContainerGap())
         );
 
-        sidebar1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton10, jButton3, jButton4, jButton5, jButton7, jButton8, jButton9});
+        sidebar1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMasAno, btnMasDia, btnMasMes, btnMenosAno, btnMenosDia, btnMenosMes, btnToggleTurno});
 
         sidebar1Layout.setVerticalGroup(
             sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebar1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(comboDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMasDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMasMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMasAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnToggleTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(291, 291, 291)
-                .addComponent(jButton1)
+                    .addComponent(btnMenosDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMenosMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMenosAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(212, 212, 212)
+                .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(34, 34, 34))
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
+
+        sidebar1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancel, btnOk});
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mapa de la ciudad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -213,7 +344,8 @@ public class VistaMapa extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sidebar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(sidebar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,15 +360,98 @@ public class VistaMapa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        String destino = jComboBox1.getActionCommand();
-        System.out.println(destino);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void comboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDestinoActionPerformed
+        destino = comboDestino.getActionCommand();
+    }//GEN-LAST:event_comboDestinoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        boolean do_it = false;
+        if (ano == anoahora){
+            if (mes == mesahora){
+                if (dia == diaahora)
+                    if (turno.equals(turnoahora)) do_it = true;
+                else if (dia > diaahora) do_it = true;
+            }
+            else if (mes > mesahora ) do_it = true;
+        }
+        else if (ano > anoahora) do_it = true;
+        if (do_it){
+            String fecha = Integer.toString(dia) + "." + Integer.toString(mes) + "." + Integer.toString(ano);
+            try {
+                ctrlp.getDominio().anadirPaquete(ciudad, destino, fecha, turno);
+            } catch (IOException ex) {
+                Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
+        ciudad = comboCiudad.getActionCommand();
+        System.out.println(ciudad);
+//        ctrlp.getDominio().getDestinos(ciudad);
+    }//GEN-LAST:event_comboCiudadActionPerformed
+
+    private void btnMasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasDiaActionPerformed
+        int limit = 31;
+        if (mes == 2) limit = 28;
+        else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+        if (dia <= limit)
+            dia += 1;
+        String s = "";
+        if (dia<10) s = "0";
+        labelDia.setText(s + Integer.toString(dia));
+    }//GEN-LAST:event_btnMasDiaActionPerformed
+
+    private void btnMenosDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosDiaActionPerformed
+        if (dia > 1)
+            dia -= 1;
+        String s = "";
+        if (dia<10) s = "0";
+        labelDia.setText(s + Integer.toString(dia));
+    }//GEN-LAST:event_btnMenosDiaActionPerformed
+
+    private void btnMasMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMesActionPerformed
+        if (mes <= 11)
+            mes += 1;
+        String s = "";
+        if (mes<10) s = "0";
+        labelMes.setText(s + Integer.toString(mes));
+    }//GEN-LAST:event_btnMasMesActionPerformed
+
+    private void btnMenosMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosMesActionPerformed
+        if (mes > 1)
+            mes -= 1;
+        String s = "";
+        if (mes<10) s = "0";
+        labelMes.setText(s + Integer.toString(mes));
+    }//GEN-LAST:event_btnMenosMesActionPerformed
+
+    private void btnMasAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasAnoActionPerformed
+        if (ano <= 99)
+            ano += 1;
+        String s = "";
+        if (ano<10) s = "0";
+        labelAno.setText(s + Integer.toString(ano));
+    }//GEN-LAST:event_btnMasAnoActionPerformed
+
+    private void btnMenosAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosAnoActionPerformed
+        if (ano > 0)
+            ano -= 1;
+        String s = "";
+        if (ano<10) s = "0";
+        labelAno.setText(s + Integer.toString(ano));
+    }//GEN-LAST:event_btnMenosAnoActionPerformed
+
+    private void btnToggleTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleTurnoActionPerformed
+        if (turno.equals("tarde")){
+            turno = "manana";
+        }
+        else{
+            turno = "tarde";
+        }
+        labelTurno.setText(turno);
+    }//GEN-LAST:event_btnToggleTurnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,25 +467,29 @@ public class VistaMapa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnMasAno;
+    private javax.swing.JButton btnMasDia;
+    private javax.swing.JButton btnMasMes;
+    private javax.swing.JButton btnMenosAno;
+    private javax.swing.JButton btnMenosDia;
+    private javax.swing.JButton btnMenosMes;
+    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnToggleTurno;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox comboCiudad;
+    private javax.swing.JComboBox comboDestino;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelAno;
+    private javax.swing.JLabel labelDia;
+    private javax.swing.JLabel labelMes;
+    private javax.swing.JLabel labelMes1;
+    private javax.swing.JLabel labelMes2;
+    private javax.swing.JLabel labelTurno;
     private javax.swing.JPanel sidebar1;
     // End of variables declaration//GEN-END:variables
 
