@@ -20,7 +20,6 @@ public class ListaPaquetes implements Serializable {
     public void anadirPaquete(Paquete p){
         p.setIdPaquete(idPaquete);
         ++idPaquete;
-        System.out.println("ahora añadiremos el paquete a la lista :D");
         listaPaquetes.add(p);    
     }
     

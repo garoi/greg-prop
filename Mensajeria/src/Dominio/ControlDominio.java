@@ -408,17 +408,21 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
+   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
        Mapa provisional = new Mapa();
-       p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno);
-       //Falta el idDestino
-       lp.anadirPaquete(p);
-       lc.anadirPaquete(p, idCliente);
-       oper.anadirPaquete(p);
-       ArrayList <String> puntosCiudad = new ArrayList <String>();
-       //puntosCiudad = cp.leerPuntos(nombreCiudad);
+       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
+       ArrayList <String> destinos = new ArrayList <String> ();
+       destinos = provisional.getNombres();
+       int idDestino = destinos.indexOf(destino);
+       if(idDestino != -1){
+            p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno, idDestino);
+            lp.anadirPaquete(p);
+            lc.anadirPaquete(p, idCliente);
+            oper.anadirPaquete(p);
+            ArrayList <String> puntosCiudad = new ArrayList <String>();
+       }
     }
     
     /**

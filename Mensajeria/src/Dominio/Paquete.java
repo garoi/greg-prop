@@ -153,11 +153,13 @@ public class Paquete implements Serializable{
      * @param idCliente
      * @param nombreCiudad 
      */
-    public void leerPaquete(int idCliente,String nombreCiudad, String destino, String fecha, String turno) {
+    public void leerPaquete(int idCliente,String nombreCiudad, String destino, String fecha, String turno, int idDestino) {
         setCiudad(nombreCiudad);
         setDestino(destino);
         setFecha(fecha);
         setTurno(turno);
+        setIdDestino(idDestino);
+        setEstado("para enviar");
     }
     
     /**
