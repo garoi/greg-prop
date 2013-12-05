@@ -7,7 +7,7 @@ import java.lang.System;
  * @author Albert Gili Zaragoza
  */
 public class Mensajeria {
-    
+  /*  
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
@@ -82,5 +82,5 @@ public class Mensajeria {
         else if(esCliente && cd.loginCliente()){
             funcCliente(cd);
         }
-    }
+    }*/
 }

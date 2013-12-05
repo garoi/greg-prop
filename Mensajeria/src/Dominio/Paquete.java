@@ -158,7 +158,6 @@ public class Paquete implements Serializable{
         setDestino(destino);
         setFecha(fecha);
         setTurno(turno);
-        set
     }
     
     /**
