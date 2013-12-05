@@ -166,7 +166,11 @@ public class VistaLogin extends javax.swing.JFrame {
             // if campos validos switch modo
             System.out.println("Falta Validar Campos del Registro");
             if(tipoUsuario=="Cliente"){
-//                Cliente cliente = new Cliente(usuario, contrasena);
+                try {
+                    ctrlp.getDominio().registroCliente(usuario, contrasena);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else if(tipoUsuario=="Operador"){
                 try {
@@ -203,7 +207,6 @@ public class VistaLogin extends javax.swing.JFrame {
         if(tipoUsuario == "Cliente"){
             System.out.println("LoginCliente");
             if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
-                System.out.println("IF DEL CLIENTE");
                 ctrlp.setVentanaPrincipal("vistaCliente");
             }
         }
@@ -211,7 +214,6 @@ public class VistaLogin extends javax.swing.JFrame {
             System.out.println("LoginOperador");
             try {
                 if (ctrlp.getDominio().loginOperador(usuario, contrasena)) {
-                    System.out.println("IF DEL OPERADOR");
                     ctrlp.setVentanaPrincipal("vistaOperador");
                 }
             } catch (IOException ex) {

@@ -83,7 +83,6 @@ public class ControlDominio {
         boolean reg = cu.registroOperado(usuario, password, oper);
         if(reg){
             cp.guardarOperador(oper);
-            System.out.println("operador guardado");
             return true;
         }
         else return false;
