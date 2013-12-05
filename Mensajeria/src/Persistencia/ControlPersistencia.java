@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -104,12 +106,17 @@ public class ControlPersistencia {
         if(!folderRutas.exists()) folderRutas.mkdirs();
     }
     
-    Object getPuntosMapa(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
-        ArrayList<String> ciudades = listarCiudades();
-        for(int i = 0; i < ciudades.size(); ++i){
-            if(ciudades.get(i).equals(nombre)){
-                return leerCiudad(nombre);
+    public Object getPuntosMapa(String nombre) throws IOException, FileNotFoundException {
+        try{
+            ArrayList<String> ciudades = listarCiudades();
+            for(int i = 0; i < ciudades.size(); ++i){
+                if(ciudades.get(i).equals(nombre)){
+                    return leerCiudad(nombre);
+                }
             }
+        }
+        catch(Exception e){
+            System.out.printf("Catch");
         }
         return null;
     }
