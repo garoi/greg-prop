@@ -35,7 +35,6 @@ public class PersistenciaMapas {
     }
     
     public ArrayList<String> listarCiudades() {
-        System.out.println("Las ciudades guardadas son:");
         File directorio = new File ("Data/Mapas/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();

@@ -10,6 +10,9 @@ import java.awt.Container;
 import javax.swing.SwingUtilities;
 import Dominio.Cliente;
 import Dominio.Operador;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -154,7 +157,7 @@ public class VistaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldContrasenaActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        // TODO add your handling code here:
+
         System.out.println(modo);
         if (modo=="registro"){
             String usuario = fieldUsuario.getText();
@@ -166,7 +169,13 @@ public class VistaLogin extends javax.swing.JFrame {
 //                Cliente cliente = new Cliente(usuario, contrasena);
             }
             else if(tipoUsuario=="Operador"){
-                // registrar nuevo operador
+                try {
+                    ctrlp.getDominio().registroOperador(usuario, contrasena);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else{
                 System.out.println("Invalid class init call");
@@ -192,17 +201,24 @@ public class VistaLogin extends javax.swing.JFrame {
         String contrasena = new String(fieldContrasena.getPassword());
         
         if(tipoUsuario == "Cliente"){
-//        if (ctrlp.canLogin(usuario, contrasena)){
             System.out.println("LoginCliente");
-            // ctrlp.login();
-//            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) 
+            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
+                System.out.println("IF DEL CLIENTE");
                 ctrlp.setVentanaPrincipal("vistaCliente");
-//        }
+            }
         }
         else{
             System.out.println("LoginOperador");
-//            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) 
-                ctrlp.setVentanaPrincipal("vistaOperador");
+            try {
+                if (ctrlp.getDominio().loginOperador(usuario, contrasena)) {
+                    System.out.println("IF DEL OPERADOR");
+                    ctrlp.setVentanaPrincipal("vistaOperador");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
 //        else{
