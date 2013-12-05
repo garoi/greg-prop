@@ -55,12 +55,18 @@ public class ControlPersistencia {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
             oos.writeObject(oper);
         }
+        catch(Exception e){
+            System.out.printf("Catch");
+        }
     }
     
     public Object leerOperador() throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Operador.txt"))) {
             Object oper = ois.readObject();
             return oper;
+        }
+        catch (Exception e) {
+            return null;
         }
     }
     

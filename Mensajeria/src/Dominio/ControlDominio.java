@@ -81,8 +81,6 @@ public class ControlDominio {
     
     public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
         ControlUsuario cu = new ControlUsuario();
-        Operador oper = new Operador();
-        oper = (Operador) leerOperador();
         boolean reg = cu.registroOperado(usuario, password, oper);
         if(reg){
             cp.guardarOperador(oper);
@@ -92,9 +90,13 @@ public class ControlDominio {
     }
     
     public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
-        Operador oper = new Operador();
+        System.out.println("OPERADOR CD");
+        //Operador oper = new Operador();
+        System.out.println("OPERADOR CD2");
         oper = (Operador) leerOperador();
+        System.out.println("OPERADOR CD3");
         ControlUsuario cu = new ControlUsuario();
+        System.out.println("OPERADOR CD4");
         return cu.loginOperador(usuario, password, oper);
     }
 
@@ -290,7 +292,6 @@ public class ControlDominio {
         oper.verPaquetes();
     }
     
-
     /**
      * Anade una ciudad al sistema
      * @throws ClassNotFoundException
