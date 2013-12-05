@@ -29,20 +29,20 @@ public class VistaMapa extends javax.swing.JFrame {
     private String destino;
     
     /**
-     * Creates new form VistaMapa
+     * Creadora de la clase VistaMapa
      */
     public VistaMapa() {
         initComponents();
     }
     
     /**
-     * Creates new form VistaMapa
+     * Creadora de la clase VistaMapa
      */
     public VistaMapa(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
         
-        // get fecha y turno actual
+        // cogemos la fecha y horas del sistema
         String[] data = ctrlp.getDominio().fechaHoy();
         dia = Integer.parseInt(data[0]);
         mes = Integer.parseInt(data[1]);
@@ -59,25 +59,26 @@ public class VistaMapa extends javax.swing.JFrame {
         labelMes.setText(data[1]);
         labelAno.setText(data[2]);
         labelTurno.setText(data[3]);
-        String [] c = ctrlp.getDominio().getNombresCiudades();
-        for (int i = 0 ; i< c.length; i++){
-            if (c[i] != null)
-                System.out.println(c[i]);
-            else System.out.println("Null");
+        
+        // Cogemos las ciudades del sistema
+        String [] ciudades = ctrlp.getDominio().getNombresCiudades();
+        if (ciudades.length >0){
+            try {
+                ciudad = ciudades[0];
+                // inicializamos el combobox de ciudad con la primera ciudad (por defecto)
+                comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(ciudades));
+                
+                // Cogemos los nombres de los destinos de la ciudad
+                String[] destinos = ctrlp.getDominio().getDestinosCiudad(ciudad);
+                // inicializamos el combobox de destino con los destinos
+                comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
+//                    ctrlp.getDominio().getDestinosCiudad(ciudad)
+                    destinos
+                ));
+            } catch (IOException ex) {
+                Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        // inicializamos el combobox de ciudad
-        comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(
-            //ctrlp.getDominio().getDestinos();
-//            new String[] {"BCN"}
-            ctrlp.getDominio().getNombresCiudades()
-        ));
-        
-        // inicializamos el combobox de destino
-        comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-            //ctrlp.getDominio().getDestinos();
-            new String[] {"UPC"}
-        ));
     }
 
     /**
@@ -360,10 +361,38 @@ public class VistaMapa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Recoge la opción seleccionada del combox de ciudades.
+     * El evento actualiza el combox de destinos.
+     * @param evt el evento de click sobre el combox.
+     */
+    private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
+        Object selectedItem = comboCiudad.getSelectedItem();
+        if (selectedItem != null) ciudad = selectedItem.toString();
+        try {
+            comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
+                ctrlp.getDominio().getDestinosCiudad(ciudad)
+            ));
+        } catch (IOException ex) {
+            Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_comboDestinoActionPerformed
+    
+    /**
+     * Recoge la opción seleccionada del combox de destinos.
+     * @param evt el evento de click sobre el combox.
+     */
     private void comboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDestinoActionPerformed
-        destino = comboDestino.getActionCommand();
+        Object selectedItem = comboDestino.getSelectedItem();
+        if (selectedItem != null) destino = selectedItem.toString();
     }//GEN-LAST:event_comboDestinoActionPerformed
 
+    /**
+     * Añade un evento cuando se hace click sobre el botón Ok.
+     * El evento comprueba que todos los campos del formulario son válidos.
+     * En ese caso añade el paquete al cliente.
+     * @param evt el evento de click sobre el botón.
+     */
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
         boolean do_it = false;
@@ -386,17 +415,11 @@ public class VistaMapa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
-    private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
-        ciudad = comboCiudad.getActionCommand();
-        System.out.println(ciudad);
-//        ctrlp.getDominio().getDestinos(ciudad);
-    }//GEN-LAST:event_comboCiudadActionPerformed
-
     private void btnMasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasDiaActionPerformed
         int limit = 31;
         if (mes == 2) limit = 28;
         else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
-        if (dia <= limit)
+        if (dia < limit)
             dia += 1;
         String s = "";
         if (dia<10) s = "0";
@@ -412,16 +435,32 @@ public class VistaMapa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenosDiaActionPerformed
 
     private void btnMasMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMesActionPerformed
-        if (mes <= 11)
+        if (mes <= 11){
             mes += 1;
+            int limit = 31;
+            if (mes == 2) limit = 28;
+            else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+            if (dia>limit){
+                dia = limit;
+                labelDia.setText(Integer.toString(dia));
+            }
+        }
         String s = "";
         if (mes<10) s = "0";
         labelMes.setText(s + Integer.toString(mes));
     }//GEN-LAST:event_btnMasMesActionPerformed
 
     private void btnMenosMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosMesActionPerformed
-        if (mes > 1)
+        if (mes > 1){
             mes -= 1;
+            int limit = 31;
+            if (mes == 2) limit = 28;
+            else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+            if (dia>limit){
+                dia = limit;
+                labelDia.setText(Integer.toString(dia));
+            }
+        }
         String s = "";
         if (mes<10) s = "0";
         labelMes.setText(s + Integer.toString(mes));

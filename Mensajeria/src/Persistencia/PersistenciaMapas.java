@@ -32,10 +32,14 @@ public class PersistenciaMapas {
             Object m2 = ois.readObject();
             return m2;
         }
+        catch(Exception e){
+           System.out.println(e);
+           System.out.println("Atencion: no se ha cargado el mapa");
+           return null;
+        }    
     }
     
     public ArrayList<String> listarCiudades() {
-        System.out.println("Las ciudades guardadas son:");
         File directorio = new File ("Data/Mapas/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();
@@ -43,9 +47,7 @@ public class PersistenciaMapas {
         for(File file:nombres) {
             nombreFichero = file.getName();
             boolean guion = nombreFichero.endsWith("-mapa.txt");
-            if (guion) {
-                ficheros.add(nombreFichero.substring(0, (nombreFichero.length()-9)));
-            }
+            if (guion) ficheros.add(nombreFichero.substring(0, (nombreFichero.length()-9)));
         }
         return ficheros;
     }
