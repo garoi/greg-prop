@@ -515,5 +515,13 @@ public class ControlDominio {
     public void elminarPaquete(){
         System.out.println("eliminaremos todos los paquetes enviados");
         cl.eliminarPaquetes();
-    } 
+    }
+    
+    public ArrayList<String> getPaquetesEspera(int idCliente){
+        return lc.getPaquetesEspera(idCliente);
+    }
+    
+    public ArrayList<String> getPaquetesEnviados(int idCliente){
+        return lc.getPaquetesEnviados(idCliente);
+    }
 }

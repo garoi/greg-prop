@@ -107,6 +107,17 @@ public class ListaClientes implements Serializable {
     public void cambiarEstadoPaquetes(Paquete p){
         listaClientes.get(p.getIdCliente()).cambiarEstadoPaquetes(p);
     }
-       
+     
+    public ArrayList<String> getPaquetesEspera(int id){
+        ArrayList<String> res = new ArrayList<String>();
+        res = listaClientes.get(id).getPaquetesEspera();
+        return res;
+    }
+    
+    public ArrayList<String> getPaquetesEnviados(int id){
+        ArrayList<String> res = new ArrayList<String>();
+        res = listaClientes.get(id).getPaquetesEnviados();
+        return res;
+    }
 }
     
