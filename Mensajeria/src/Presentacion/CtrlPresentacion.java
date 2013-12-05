@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  * @author Luis García Estrades https://github.com/lgarest
  */
 public class CtrlPresentacion {
-    private ControlDominio ctrlDominio;
+    private ControlDominio ctrld;
     private VistaInicial vistaInicial;
     private VistaLogin vistaLogin;
     private VistaClientePrincipal vistaCliente;
@@ -28,7 +28,7 @@ public class CtrlPresentacion {
      * Permite un control sobre la capa de presentación del programa.
      */
     public CtrlPresentacion(){
-        ctrlDominio = new ControlDominio();
+        ctrld = new ControlDominio();
         System.out.println("Entra CtrlPresentacion");
         if (ventanaPrimaria == null){
             
@@ -44,7 +44,7 @@ public class CtrlPresentacion {
     }
     
     public ControlDominio getDominio(){
-        return ctrlDominio;
+        return ctrld;
     }
     
     /**
@@ -97,6 +97,7 @@ public class CtrlPresentacion {
      * Actualiza la ventana primaria redibujando sus componentes
      */
     public void actualizarVentanaPrimaria(){
+        ventanaPrimaria.setLocationRelativeTo(null);
         ventanaPrimaria.repaint();
     }
 
@@ -110,17 +111,19 @@ public class CtrlPresentacion {
     public void iniVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
-                vistaMapa = new VistaMapa(this);
+                if(vistaMapa == null)
+                    vistaMapa = new VistaMapa(this);
                 ventanaSecundaria = new VistaMapa(this);
                 ventanaSecundaria.setTitle("Añadir Paquete");
             break;
                 
             case "vistaMapa":
-                vistaMapa = new VistaMapa(this);
+                if(vistaMapa == null)
+                    vistaMapa = new VistaMapa(this);
                 vistaMapa.getContentPane().remove(vistaMapa.getSidebar());
                 ventanaSecundaria = vistaMapa;
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
-                setTamanoVentanaSecundaria(-165, 0);
+//                setTamanoVentanaSecundaria(-165, 0);
             break;
             
             default:

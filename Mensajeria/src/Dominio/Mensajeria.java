@@ -7,6 +7,10 @@ import java.lang.System;
  * @author Albert Gili Zaragoza
  */
 public class Mensajeria {
+
+    public void main(String[] args) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   /*  
     public static void infoOperador() {
         System.out.println("1 ver paquetes");
