@@ -482,7 +482,13 @@ public class ControlDominio {
        int idCliente = cl.getIdCliente();
        Mapa provisional = new Mapa();
        p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno);
-   }
+       //Falta el idDestino
+       lp.anadirPaquete(p);
+       lc.anadirPaquete(p, idCliente);
+       oper.anadirPaquete(p);
+       ArrayList <String> puntosCiudad = new ArrayList <String>();
+       //puntosCiudad = cp.leerPuntos(nombreCiudad);
+    }
 
     /**
      * Se muestran los paquetes del cliente
@@ -512,8 +518,7 @@ public class ControlDominio {
     /**
      * El cliente elimina todos los paquetes que ya se han enviado
      */
-    public void elminarPaquete(){
-        System.out.println("eliminaremos todos los paquetes enviados");
+    public void elminarPaquetes(){
         cl.eliminarPaquetes();
     } 
 }

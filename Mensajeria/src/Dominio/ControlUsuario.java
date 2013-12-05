@@ -36,6 +36,7 @@ public class ControlUsuario {
             return true;
         }
     }
+    
     public boolean loginCliente(String usuario, String password,ListaClientes lc){
         int idCliente;
         idCliente = lc.compruebaCliente(usuario);
