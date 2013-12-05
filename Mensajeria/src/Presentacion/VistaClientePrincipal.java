@@ -14,19 +14,37 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
        
     /**
-     * Creates new form ClienteVista
+     * Creadora de la clase VistaClientePrincipal.
      */
     public VistaClientePrincipal() {
         initComponents();
     }
     
     /**
-     * Creates new form PrimeraVista
+     * Creadora de la clase VistaClientePrincipal.
      */
     public VistaClientePrincipal(CtrlPresentacion ctrlp) {
         this.setTitle("Cliente");
         this.ctrlp = ctrlp;
         initComponents();
+        
+//        ctrlp.getDominio().getPaquetesEnviados(idcliente);
+//        ctrlp.getDominio().getPaquetesPendientes(idcliente);
+        int idCliente = 0;
+        
+        listaEnviados.setModel(new javax.swing.AbstractListModel() {
+//            String[] strings = this.ctrlp.getDominio().getPaquetesEnviados(idCliente);
+            String[] strings = {"Paquete enviado"};
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        
+        listaEspera.setModel(new javax.swing.AbstractListModel() {
+//            String[] strings = this.ctrlp.getDominio().getPaquetesEspera(idCliente);
+            String[] strings = {"Paquete pendiente"};
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
     }
 
     /**
@@ -48,7 +66,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         botonAnadir = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
-        botonVerMapa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(806, 561));
@@ -121,13 +138,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonVerMapa.setText("Ver mapa");
-        botonVerMapa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVerMapaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -137,8 +147,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                     .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(botonVerMapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
         jPanel3Layout.setVerticalGroup(
@@ -150,9 +159,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
                 .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonVerMapa, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(328, 328, 328))
+                .addGap(379, 379, 379))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,33 +189,44 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Añade un evento cuando se hace click sobre el botón Añadir.
+     * El evento muestra una ventana para añadir un paquete y seleccionar el turno y destino.
+     * @param evt el evento de click sobre el botón.
+     */
     private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Añadir paquete");
         ctrlp.iniVentanaSecundaria("añadirPaquete");
     }//GEN-LAST:event_botonAnadirActionPerformed
 
+    /**
+     * Añade un evento cuando se hace click sobre el botón Eliminar.
+     * El evento limpia la lista de paquetes enviados del cliente.
+     * @param evt el evento de click sobre el botón.
+     */
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        // TODO add your handling code here:
+        // Limpiamos la lista de paquetes enviados
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {};
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         // eliminar paquetes enviados del cliente
-        ctrlp.getDominio().elminarPaquetes();
+        ctrlp.getDominio().eliminarPaquetes();
+        ctrlp.getDominio().eliminarPaquetes();
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
-    private void botonVerMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerMapaActionPerformed
-        // TODO add your handling code here:
-        ctrlp.iniVentanaSecundaria("vistaMapa");
-    }//GEN-LAST:event_botonVerMapaActionPerformed
-
+    /**
+     * Añade un evento cuando se hace click sobre el botón Cancelar.
+     * El evento elimina el paquete seleccionado de la lista de paquetes pendientes del cliente.
+     * @param evt el evento de click sobre el botón.
+     */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
         int idx = listaEspera.getSelectedIndex();
         System.out.println(idx);
+        listaEspera.remove(idx);
+//        ctrlp.getDominio().cancelarPaquete(idx);
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
@@ -230,7 +248,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonAnadir;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonEliminar;
-    private javax.swing.JButton botonVerMapa;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

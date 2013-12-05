@@ -109,11 +109,9 @@ public class ControlPersistencia {
     public Object getPuntosMapa(String nombre) throws IOException, FileNotFoundException {
         try{
             ArrayList<String> ciudades = listarCiudades();
-            for(int i = 0; i < ciudades.size(); ++i){
-                if(ciudades.get(i).equals(nombre)){
+            for(int i = 0; i < ciudades.size(); ++i)
+                if(ciudades.get(i).equals(nombre))
                     return leerCiudad(nombre);
-                }
-            }
         }
         catch(Exception e){
             System.out.printf("Catch");

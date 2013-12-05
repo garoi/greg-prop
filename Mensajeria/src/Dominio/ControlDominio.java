@@ -47,8 +47,13 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    
-    
+
+    /**
+     * Registramos o logeamos al cliente o al operador
+     * @return retorna si se registra o se loguea
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public boolean registroCliente(String usuario, String password) throws IOException{
         Cliente cl = new Cliente();
         cl.setNombre(usuario);
@@ -186,7 +191,7 @@ public class ControlDominio {
     
     public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
         Mapa prov = new Mapa();
-        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);      
+        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);
         ArrayList <String> destinos = new ArrayList <String>();
         destinos = prov.getNombres();
         String[] puntos = new String[destinos.size()];
@@ -462,7 +467,7 @@ public class ControlDominio {
     /**
      * El cliente elimina todos los paquetes que ya se han enviado
      */
-    public void elminarPaquetes(){
+    public void eliminarPaquetes(){
         cl.eliminarPaquetes();
     }
     

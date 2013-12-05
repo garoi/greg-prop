@@ -7,6 +7,9 @@
 package Presentacion;
 import Dominio.ControlDominio;
 import java.awt.Dimension;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -29,10 +32,15 @@ public class CtrlPresentacion {
      */
     public CtrlPresentacion(){
         ctrld = new ControlDominio();
+        try {
+            ctrld.iniControlDominio();
+        } catch (IOException ex) {
+            Logger.getLogger(CtrlPresentacion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CtrlPresentacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("Entra CtrlPresentacion");
         if (ventanaPrimaria == null){
-            
-            // devolver la última ventanaPrimaria vista
             vistaInicial = new VistaInicial(this);
             ventanaPrimaria = vistaInicial;
             vistaInicial=null;
@@ -52,12 +60,8 @@ public class CtrlPresentacion {
      * @param tipo soportados: "Cliente" u "Operador"
      */
     public void setTipoUsuario(String tipo){
-        if (tipo == "Cliente" || tipo == "Operador"){
-            tipoUsuario = tipo;
-        }
-        else{
-            System.out.print("\nTipo de usuario inválido. Los tipos son: \"Cliente\" u \"Operador\"\n");
-        }
+        if (tipo == "Cliente" || tipo == "Operador") tipoUsuario = tipo;
+        else System.out.print("\nTipo de usuario inválido. Los tipos son: \"Cliente\" u \"Operador\"\n");
     }
     
     /**
@@ -111,15 +115,13 @@ public class CtrlPresentacion {
     public void iniVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
-                if(vistaMapa == null)
-                    vistaMapa = new VistaMapa(this);
+                if(vistaMapa == null) vistaMapa = new VistaMapa(this);
                 ventanaSecundaria = new VistaMapa(this);
                 ventanaSecundaria.setTitle("Añadir Paquete");
             break;
                 
             case "vistaMapa":
-                if(vistaMapa == null)
-                    vistaMapa = new VistaMapa(this);
+                if(vistaMapa == null) vistaMapa = new VistaMapa(this);
                 vistaMapa.getContentPane().remove(vistaMapa.getSidebar());
                 ventanaSecundaria = vistaMapa;
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
