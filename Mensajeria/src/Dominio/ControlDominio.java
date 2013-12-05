@@ -480,11 +480,11 @@ public class ControlDominio {
      * @param idCliente
      * @return los paquetes en espera del cliente seleccionado
      */
-    public ArrayList<String> getPaquetesEspera(int idCliente){
+    public String[] getPaquetesEspera(int idCliente){
         return lc.getPaquetesEspera(idCliente);
     }
     
-    public ArrayList<String> getPaquetesEnviados(int idCliente){
+    public String[] getPaquetesEnviados(int idCliente){
         return lc.getPaquetesEnviados(idCliente);
     }
 }
