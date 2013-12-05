@@ -140,7 +140,8 @@ public class Cliente implements Serializable {
         for(int i = 0; i < listaPaquetes.size(); ++i){
             if(listaPaquetes.get(i).getEstado().equals("para enviar")){
                 res.add(listaPaquetes.get(i).getCiudad() + ", " + listaPaquetes.get(i).getDestino() + ", " + 
-                        listaPaquetes.get(i).getFecha() + ", " + "P");
+                        listaPaquetes.get(i).getFecha() + ", " + listaPaquetes.get(i).getTurno() + "-" + 
+                        listaPaquetes.get(i).getIdPaquete());
             }
         }
         Collections.sort(res);
@@ -156,7 +157,8 @@ public class Cliente implements Serializable {
         for(int i = 0; i < listaPaquetes.size(); ++i){
             if(listaPaquetes.get(i).getEstado().equals("enviado")){
                 res.add(listaPaquetes.get(i).getCiudad() + ", " + listaPaquetes.get(i).getDestino() + ", " + 
-                        listaPaquetes.get(i).getFecha() + ", " + "E");
+                        listaPaquetes.get(i).getFecha() + ", " + listaPaquetes.get(i).getTurno() + "-" +
+                        listaPaquetes.get(i).getIdPaquete());
             }
         }
         Collections.sort(res);

@@ -103,4 +103,14 @@ public class ControlPersistencia {
         if(!folderMapas.exists()) folderMapas.mkdirs();
         if(!folderRutas.exists()) folderRutas.mkdirs();
     }
+    
+    Object getPuntosMapa(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
+        ArrayList<String> ciudades = listarCiudades();
+        for(int i = 0; i < ciudades.size(); ++i){
+            if(ciudades.get(i).equals(nombre)){
+                return leerCiudad(nombre);
+            }
+        }
+        return null;
+    }
 }
