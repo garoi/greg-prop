@@ -481,5 +481,14 @@ public class ControlDominio {
     public void elminarPaquete(){
         System.out.println("eliminaremos todos los paquetes enviados");
         cl.eliminarPaquetes();
-    } 
+    }
+
+    /**
+     * Devuelve un vector con el dia mes año y turno actual
+     * @return vector de String[]
+     */
+    public String[] fechaHoy() {
+        Fecha date = new Fecha();
+        return date.fechaDeHoy();
+    }
 }
