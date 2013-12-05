@@ -484,6 +484,11 @@ public class ControlDominio {
         return lc.getPaquetesEspera(idCliente);
     }
     
+    /**
+     * Devuelve los paquetes enviados del cliente seleccionado
+     * @param idCliente
+     * @return los paquetes enviados del cliente seleccionado
+     */
     public String[] getPaquetesEnviados(int idCliente){
         return lc.getPaquetesEnviados(idCliente);
     }

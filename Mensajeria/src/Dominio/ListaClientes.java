@@ -99,6 +99,11 @@ public class ListaClientes implements Serializable {
         listaClientes.get(p.getIdCliente()).cambiarEstadoPaquetes(p);
     }
      
+    /**
+     * Devuelve una lista de paquetes en espera del cliente con identificador id
+     * @param id
+     * @return 
+     */
     public String[] getPaquetesEspera(int id){
         ArrayList<String> res = new ArrayList<String>();
         res = listaClientes.get(id).getPaquetesEspera();
@@ -107,6 +112,11 @@ public class ListaClientes implements Serializable {
         return r;
     }
     
+    /**
+     * Devuelve una lista de paquetes enviados del cliente con identificador id
+     * @param id
+     * @return 
+     */
     public String[] getPaquetesEnviados(int id){
         ArrayList<String> res = new ArrayList<String>();
         res = listaClientes.get(id).getPaquetesEnviados();
