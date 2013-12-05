@@ -16,7 +16,6 @@ public class ControlDominio {
     private Operador oper;
     private ListaPaquetes lp;
     private Cliente cl;
-    private ControlUsuario cu;
     private boolean existeOper = true;
     private Mapa map;
     
@@ -29,7 +28,6 @@ public class ControlDominio {
      */
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cp = new ControlPersistencia();
-        cu = new ControlUsuario();
         lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
         
@@ -49,7 +47,52 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    public boolean registroLogin() throws IOException, ClassNotFoundException {
+    
+    
+    public boolean registroCliente(String usuario, String password) throws IOException{
+        Cliente cl = new Cliente();
+        cl.setNombre(usuario);
+        cl.setPassword(password);
+        ControlUsuario cu = new ControlUsuario();
+        boolean reg = cu.registroCliente(usuario, password, cl, lc);
+        if(reg){
+                cp.guardarListaClientes(lc);
+                return true;
+        }
+        else return false;
+    }
+    
+    public boolean loginCliente(String usuario, String password){
+        ControlUsuario cu = new ControlUsuario();
+        Cliente cl2 = new Cliente();
+        boolean login =  cu.loginCliente(usuario, password, lc);
+        if(login){
+            cl = cl2;
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+        ControlUsuario cu = new ControlUsuario();
+        Operador oper = new Operador();
+        oper = (Operador) leerOperador();
+        boolean reg = cu.registroOperado(usuario, password, oper);
+        if(reg){
+            cp.guardarOperador(oper);
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+        Operador oper = new Operador();
+        oper = (Operador) leerOperador();
+        ControlUsuario cu = new ControlUsuario();
+        return cu.loginOperador(usuario, password, oper);
+    }
+    
+    /*public boolean registroLogin() throws IOException, ClassNotFoundException {
         System.out.println("pulse 1 si es operador, pulse 2 si es cliente");
         Scanner sc = new Scanner(System.in);
         int op = sc.nextInt();
@@ -87,23 +130,8 @@ public class ControlDominio {
                 }
         }
         return resultado;
-    }
+    }*/
     
-    /**
-     * Comprobamos si el cliente se ha logeado correctamente
-     * @return Si es cliente
-     */
-    public boolean loginCliente() {
-        return cu.isLoginCliente();
-    }
-    
-    /**
-     * Comprobamos si el operador se ha logeado correctamente
-     * @return Si es operador
-     */
-    public boolean loginOper() {
-        return cu.isLoginOper();
-    }
 
     /**
      * Calcula el camino de una ruta
@@ -423,7 +451,7 @@ public class ControlDominio {
      */
     
       
-    public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
+    /*public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
         Paquete p = new Paquete();
         Mapa map = (Mapa) leerCiudad();
         String nombreCiudad = map.getNombreCiudad();
@@ -448,6 +476,12 @@ public class ControlDominio {
         else {
             System.out.println("El destino no existe en la base de datos");
         }
+   }*/
+   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
+       Paquete p = new Paquete();
+       int idCliente = cl.getIdCliente();
+       Mapa provisional = new Mapa();
+       p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno);
    }
 
     /**

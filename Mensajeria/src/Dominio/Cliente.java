@@ -36,6 +36,13 @@ public class Cliente implements Serializable {
         this.idCliente = idCliente;
     }
     
+    public void setNombre(String nombre){
+        nombreCliente = nombre;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
+    }
     /**
      * 
      * @return El passwoed del cliente
