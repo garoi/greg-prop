@@ -7,6 +7,7 @@
 package Presentacion;
 import Dominio.ControlDominio;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 /**
  * Representa la clase que controla toda la parte de la capa de vistas del programa.
@@ -54,6 +55,8 @@ public class CtrlPresentacion {
             vistaInicial = new VistaInicial(this);
             ventanaPrimaria = vistaInicial;
             vistaInicial=null;
+            ImageIcon img = new ImageIcon("Data/Resource/icono.png");
+            ventanaPrimaria.setIconImage(img.getImage());
             ventanaPrimaria.setLocationRelativeTo(null);
             ventanaPrimaria.setVisible(true);
         }
