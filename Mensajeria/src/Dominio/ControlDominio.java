@@ -47,8 +47,13 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    
-    
+
+    /**
+     * Registramos o logeamos al cliente o al operador
+     * @return retorna si se registra o se loguea
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public boolean registroCliente(String usuario, String password) throws IOException{
         Cliente cl = new Cliente();
         cl.setNombre(usuario);
@@ -189,7 +194,7 @@ public class ControlDominio {
     
     public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
         Mapa prov = new Mapa();
-        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);      
+        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);
         ArrayList <String> destinos = new ArrayList <String>();
         destinos = prov.getNombres();
         String[] puntos = new String[destinos.size()];
@@ -464,7 +469,7 @@ public class ControlDominio {
     /**
      * El cliente elimina todos los paquetes que ya se han enviado
      */
-    public void elminarPaquetes(){
+    public void eliminarPaquetes(){
         cl.eliminarPaquetes();
     }
     
@@ -482,11 +487,16 @@ public class ControlDominio {
      * @param idCliente
      * @return los paquetes en espera del cliente seleccionado
      */
-    public ArrayList<String> getPaquetesEspera(int idCliente){
+    public String[] getPaquetesEspera(int idCliente){
         return lc.getPaquetesEspera(idCliente);
     }
     
-    public ArrayList<String> getPaquetesEnviados(int idCliente){
+    /**
+     * Devuelve los paquetes enviados del cliente seleccionado
+     * @param idCliente
+     * @return los paquetes enviados del cliente seleccionado
+     */
+    public String[] getPaquetesEnviados(int idCliente){
         return lc.getPaquetesEnviados(idCliente);
     }
 }

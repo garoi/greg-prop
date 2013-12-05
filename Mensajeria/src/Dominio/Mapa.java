@@ -7,10 +7,15 @@ import java.util.*;
  * @author Luis García Estrades https://github.com/lgarest
  */
 public class Mapa implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
     private String nombreCiudad;
     private ArrayList<String> nombres;
     private ArrayList<ArrayList<Float>> ciudad;
     private int tamCiudad;
+    
+    public Mapa(){
+        nombres = new ArrayList<>();
+    }
 
     public int getTamCiudad(){
         return tamCiudad;
