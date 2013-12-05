@@ -99,16 +99,20 @@ public class ListaClientes implements Serializable {
         listaClientes.get(p.getIdCliente()).cambiarEstadoPaquetes(p);
     }
      
-    public ArrayList<String> getPaquetesEspera(int id){
+    public String[] getPaquetesEspera(int id){
         ArrayList<String> res = new ArrayList<String>();
         res = listaClientes.get(id).getPaquetesEspera();
-        return res;
+        String[] r = new String[res.size()];
+        for(int i = 0; i < r.length; ++i) r[i] = res.get(i);
+        return r;
     }
     
-    public ArrayList<String> getPaquetesEnviados(int id){
+    public String[] getPaquetesEnviados(int id){
         ArrayList<String> res = new ArrayList<String>();
         res = listaClientes.get(id).getPaquetesEnviados();
-        return res;
+        String[] r = new String[res.size()];
+        for(int i = 0; i < r.length; ++i) r[i] = res.get(i);
+        return r;
     }
 }
     
