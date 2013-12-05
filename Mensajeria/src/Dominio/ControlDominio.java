@@ -487,7 +487,8 @@ public class ControlDominio {
      * @param idCliente
      * @return los paquetes en espera del cliente seleccionado
      */
-    public String[] getPaquetesEspera(int idCliente){
+    public String[] getPaquetesEspera(){
+        int idCliente = cl.getIdCliente();
         return lc.getPaquetesEspera(idCliente);
     }
     
@@ -496,7 +497,8 @@ public class ControlDominio {
      * @param idCliente
      * @return los paquetes enviados del cliente seleccionado
      */
-    public String[] getPaquetesEnviados(int idCliente){
+    public String[] getPaquetesEnviados(){
+        int idCliente = cl.getIdCliente();
         return lc.getPaquetesEnviados(idCliente);
     }
 }
