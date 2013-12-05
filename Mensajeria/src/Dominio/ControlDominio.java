@@ -262,7 +262,6 @@ public class ControlDominio {
         oper.verPaquetes();
     }
     
-
     /**
      * Anade una ciudad al sistema
      * @throws ClassNotFoundException
