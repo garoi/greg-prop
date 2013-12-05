@@ -41,6 +41,7 @@ public class ControlDominio {
         if(lp == null) lp = new ListaPaquetes();
     }
     
+    
     /**
      * Registramos o logeamos al cliente o al operador
      * @return retorna si se registra o se loguea
@@ -176,7 +177,8 @@ public class ControlDominio {
     }
     
     public String[] getNombresCiudades(){
-        ArrayList<String> ciudades = cp.listarCiudades();
+        ArrayList<String> ciudades = new ArrayList <String>();
+        ciudades = cp.listarCiudades();
         String[] cities = new String[ciudades.size()];
         for(int i = 0; i < ciudades.size(); ++i){
             cities[i] = ciudades.get(i);
