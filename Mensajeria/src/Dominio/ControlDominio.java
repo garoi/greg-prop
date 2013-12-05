@@ -520,5 +520,27 @@ public class ControlDominio {
      */
     public void elminarPaquetes(){
         cl.eliminarPaquetes();
-    } 
+    }
+    
+    /**
+     * Devuelve un vector con el dia mes año y turno actual
+     * @return vector de String[]
+     */
+    public String[] fechaHoy() {
+        Fecha date = new Fecha();
+        return date.fechaDeHoy();
+    }
+    
+    /**
+     * Devuelve los paquetes en espera del cliente seleccionado
+     * @param idCliente
+     * @return los paquetes en espera del cliente seleccionado
+     */
+    public ArrayList<String> getPaquetesEspera(int idCliente){
+        return lc.getPaquetesEspera(idCliente);
+    }
+    
+    public ArrayList<String> getPaquetesEnviados(int idCliente){
+        return lc.getPaquetesEnviados(idCliente);
+    }
 }

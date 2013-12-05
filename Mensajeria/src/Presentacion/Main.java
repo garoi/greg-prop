@@ -26,18 +26,14 @@ public class Main {
             public void run() {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("1 para arrancar la interfaz.");
-                System.out.println("2 para ejecutar el programa por terminal.");
+//                System.out.println("2 para ejecutar el programa por terminal.");
                 System.out.println("3 para cerrar el programa.");
                 int i = sc.nextInt();
                 if( i == 1) ctrlp = new CtrlPresentacion();
-                else if(i==2){ 
-                    msn = new Mensajeria();
-                    try {
-                        msn.main(args);
-                    } catch (IOException | ClassNotFoundException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+//                else if(i==2){ 
+//                    msn = new Mensajeria();
+//                    msn.main(args);
+//                }
                 else System.exit(0);
             }
         });

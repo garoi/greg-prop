@@ -12,6 +12,14 @@ public class Mapa implements Serializable {
     private ArrayList<ArrayList<Float>> ciudad;
     private int tamCiudad;
 
+    public int getTamCiudad(){
+        return tamCiudad;
+    }
+    
+    public void setTamCiudad(int tamCiudad){
+        this.tamCiudad = tamCiudad;
+    }
+    
     /**
      * Devuelve una lista con los nombres de los puntos de la ciudad.
      * @return una lista con los nombres de los puntos de la ciudad.

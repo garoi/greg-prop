@@ -1,5 +1,6 @@
 package Dominio;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.*;
 
 /**
@@ -147,5 +148,37 @@ public class Cliente implements Serializable {
             if(p.getIdPaquete() == listaPaquetes.get(i).getIdPaquete()){
                 listaPaquetes.get(i).setEstado("Enviado");
             }    
+    }
+    
+    /**
+     * Devuelve una lista con los paquetes en espera del cliente
+     * @return res
+     */
+    public ArrayList<String> getPaquetesEspera(){
+        ArrayList<String> res = new ArrayList<String> ();
+        for(int i = 0; i < listaPaquetes.size(); ++i){
+            if(listaPaquetes.get(i).getEstado().equals("para enviar")){
+                res.add(listaPaquetes.get(i).getCiudad() + ", " + listaPaquetes.get(i).getDestino() + ", " + 
+                        listaPaquetes.get(i).getFecha() + ", " + "P");
+            }
+        }
+        Collections.sort(res);
+        return res;
+    }
+    
+    /**
+     * Devuelve una lista con los paquetes enviados del cliente
+     * @return res
+     */
+    public ArrayList<String> getPaquetesEnviados(){
+        ArrayList<String> res = new ArrayList<String> ();
+        for(int i = 0; i < listaPaquetes.size(); ++i){
+            if(listaPaquetes.get(i).getEstado().equals("enviado")){
+                res.add(listaPaquetes.get(i).getCiudad() + ", " + listaPaquetes.get(i).getDestino() + ", " + 
+                        listaPaquetes.get(i).getFecha() + ", " + "E");
+            }
+        }
+        Collections.sort(res);
+        return res;
     }
 }
