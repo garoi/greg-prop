@@ -480,7 +480,7 @@ public class ControlDominio {
    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
-       Mapa provisional = new Map();
+       Mapa provisional = new Mapa();
        p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno);
    }
 
