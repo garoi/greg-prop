@@ -195,12 +195,16 @@ public class VistaLogin extends javax.swing.JFrame {
 //        if (ctrlp.canLogin(usuario, contrasena)){
             System.out.println("LoginCliente");
             // ctrlp.login();
-            ctrlp.setVentanaPrincipal("vistaCliente");
+            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
+                ctrlp.setVentanaPrincipal("vistaCliente");
+            }
 //        }
         }
         else{
             System.out.println("LoginOperador");
-            ctrlp.setVentanaPrincipal("vistaOperador");
+            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) 
+                ctrlp.setVentanaPrincipal("vistaOperador");
+            
         }
 //        else{
 //            fieldUsuario.setText("Invalid user or password");
