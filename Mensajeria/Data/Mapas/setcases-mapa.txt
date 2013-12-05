@@ -1,8 +1,0 @@
-setcases
-casa bar botiga riu
-casa bar 2
-casa botiga 3
-casa riu 3
-bar botiga 1
-bar riu 5
-botiga riu 4

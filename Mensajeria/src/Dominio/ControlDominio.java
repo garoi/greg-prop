@@ -175,6 +175,27 @@ public class ControlDominio {
         return cp.leerCiudad(nombre);
     }
     
+    public String[] getNombresCiudades(){
+        ArrayList<String> ciudades = cp.listarCiudades();
+        String[] cities = new String[ciudades.size()];
+        for(int i = 0; i < ciudades.size(); ++i){
+            cities[i] = ciudades.get(i);
+        }
+        return cities;
+    }
+    
+    public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
+        Mapa prov = new Mapa();
+        prov = (Mapa) cp.getPuntosMapa(nombreCiudad);      
+        ArrayList <String> destinos = new ArrayList <String>();
+        destinos = prov.getNombres();
+        String[] puntos = new String[destinos.size()];
+        for(int i = 0; i < destinos.size(); ++i){
+            puntos[i] = destinos.get(i);
+        }
+        return puntos;
+    }
+    
     /**
      * Lee una ruta
      * @return Ruta
@@ -421,7 +442,7 @@ public class ControlDominio {
             lc.anadirPaquete(p, idCliente);
             oper.anadirPaquete(p);
             ArrayList <String> puntosCiudad = new ArrayList <String>();
-       }
+       } 
     }
     
     /**
