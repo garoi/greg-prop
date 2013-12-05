@@ -64,7 +64,13 @@ public class ControlDominio {
     
     public boolean loginCliente(String usuario, String password){
         ControlUsuario cu = new ControlUsuario();
-        return cu.loginCliente(usuario, password, lc);
+        Cliente cl2 = new Cliente();
+        boolean login =  cu.loginCliente(usuario, password, lc);
+        if(login){
+            cl = cl2;
+            return true;
+        }
+        else return false;
     }
     
     public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
@@ -445,7 +451,7 @@ public class ControlDominio {
      */
     
       
-    public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
+    /*public void anadirPaquete() throws FileNotFoundException, IOException, ClassNotFoundException{
         Paquete p = new Paquete();
         Mapa map = (Mapa) leerCiudad();
         String nombreCiudad = map.getNombreCiudad();
@@ -470,6 +476,12 @@ public class ControlDominio {
         else {
             System.out.println("El destino no existe en la base de datos");
         }
+   }*/
+   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
+       Paquete p = new Paquete();
+       int idCliente = cl.getIdCliente();
+       Mapa provisional = new Map();
+       p.leerPaquete(idCliente, nombreCiudad, destino, fecha, turno);
    }
 
     /**

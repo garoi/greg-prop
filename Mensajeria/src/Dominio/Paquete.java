@@ -153,32 +153,12 @@ public class Paquete implements Serializable{
      * @param idCliente
      * @param nombreCiudad 
      */
-    public void leerPaquete(int idCliente, String nombreCiudad) {
-        this.idCliente = idCliente;
-        this.ciudad = nombreCiudad;
-        Scanner sc = new Scanner(System.in);
-        setEstado("para enviar");
-        this.ciudad = nombreCiudad;
-        System.out.println("escribe el destino del paquete");
-        String destino = sc.nextLine();
-        this.destino = destino;
-        Fecha fecha = new Fecha();
-        System.out.println("Es para hoy y el turno actual? s/n");
-        String ord = sc.nextLine();
-        if (ord.equals("s")) {
-            this.fecha = fecha.fechaActual();
-            this.turno = fecha.mañanaTarde();
-        }
-        else {
-            System.out.println("Escribe la fecha (dd.mm.aa)");
-            String dat = sc.nextLine();
-            if (fecha.comprobarFecha(dat)) {
-                this.fecha = dat;
-                System.out.println("Entra el turno: (mañana/tarde)");
-                this.turno = sc.nextLine();
-            }
-            else System.out.println("La fecha es incorrecta");
-        }
+    public void leerPaquete(int idCliente,String nombreCiudad, String destino, String fecha, String turno) {
+        setCiudad(nombreCiudad);
+        setDestino(destino);
+        setFecha(fecha);
+        setTurno(turno);
+        set
     }
     
     /**
