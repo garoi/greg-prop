@@ -13,11 +13,9 @@ public class Fecha {
         String diaSistema = null;
         if (date.getDate() < 10) {
             diaSistema = '0' + String.valueOf(date.getDate());
-            System.out.println("Llego aki 4");
         }
         else {
             diaSistema = String.valueOf(date.getDate());
-            System.out.println("Llego aki 3");
         }
         return diaSistema;
     }
@@ -26,11 +24,9 @@ public class Fecha {
         String mesSistema = null;
         if ((date.getMonth() + 1) < 10) {
             mesSistema = '0' + String.valueOf(date.getMonth()+1);
-            System.out.println("Llego aki 6");
         }
         else {
             mesSistema = String.valueOf(date.getMonth()+1);
-            System.out.println("Llego aki 5");
         }
         return mesSistema;
     }
@@ -39,11 +35,9 @@ public class Fecha {
         String anoSistema = null;
         if ((date.getYear()-100) < 10) {
             anoSistema = '0' + String.valueOf((date.getYear()-100));
-            System.out.println("Llego aki 8");
         }
         else {
             anoSistema = String.valueOf((date.getYear()-100));
-            System.out.println("Llego aki 7" + anoSistema);
         }
         return anoSistema;
     }
