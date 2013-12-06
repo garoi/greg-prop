@@ -37,14 +37,15 @@ public class ControlUsuario {
         }
     }
     
-    public boolean loginCliente(String usuario, String password,ListaClientes lc){
+    public boolean loginCliente(String usuario, String password,ListaClientes lc, Cliente cl2){
         int idCliente;
         idCliente = lc.compruebaCliente(usuario);
         if(idCliente == -1) return false;
         else{
-            Cliente cl = new Cliente();
-            cl = lc.getCliente(idCliente);
-            if(cl.getPassword().equals(password)) return true;
+            cl2.setNombre(usuario);
+            cl2.setPassword(password);
+            cl2.setIDcliente(idCliente);
+            if(cl2.getPassword().equals(password)) return true;
             else return false;
         }
     }

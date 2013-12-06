@@ -71,9 +71,10 @@ public class ControlDominio {
     public boolean loginCliente(String usuario, String password){
         ControlUsuario cu = new ControlUsuario();
         Cliente cl2 = new Cliente();
-        boolean login =  cu.loginCliente(usuario, password, lc);
+        boolean login =  cu.loginCliente(usuario, password, lc, cl2);
         if(login){
             cl = cl2;
+            System.out.println("IDCLIENTTEEE : " + cl.getNombreCliente());
             return true;
         }
         else return false;
@@ -451,17 +452,24 @@ public class ControlDominio {
             lc.anadirPaquete(p, idCliente);
             oper.anadirPaquete(p);
             ArrayList <String> puntosCiudad = new ArrayList <String>();
-       } 
+       }
+       System.out.println("idpakete : " + p.getIdPaquete());
+       System.out.println("destino : " + p.getDestino());
+       cp.guardadoGeneral(lc, lp, oper);
     }
     
     /**
      * El cliente cancela un paquete que aun no se ha enviado
      */
-    public boolean cancelarPaquete(int idPaquete){
+    public boolean cancelarPaquete(int idPaquete) throws IOException{
+        System.out.println("IDcliente!!!! " + cl.getNombreCliente());
+        
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
             lp.cancelarPaquete(idPaquete);
             oper.cancelarPaquete(idPaquete);
+            
+           // cp.guardadoGeneral(lc, lp, oper);
             return true;
         }
         else return false;

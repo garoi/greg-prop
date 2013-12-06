@@ -108,7 +108,7 @@ public class ListaClientes implements Serializable {
     public String[] getPaquetesEspera(int id){
         ArrayList<String> res = new ArrayList<String>();
         res = listaClientes.get(id).getPaquetesEspera();
-        //System.out.println("size : " + res.size());
+        System.out.println("size : " + res.size());
         String[] r = new String[res.size()];
         for(int i = 0; i < r.length; ++i) r[i] = res.get(i);
         return r;
