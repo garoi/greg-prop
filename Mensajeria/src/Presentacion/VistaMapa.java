@@ -75,6 +75,7 @@ public class VistaMapa extends javax.swing.JFrame {
 //                    ctrlp.getDominio().getDestinosCiudad(ciudad)
                     destinos
                 ));
+                destino = destinos[0];
             } catch (IOException ex) {
                 Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
             }
