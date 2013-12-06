@@ -10,6 +10,7 @@ import java.lang.System;
  * @author Albert Gili Zaragoza
  */
 public class Paquete implements Serializable{
+    private static final long serialVersionUID = 9040177911315386368L;
     private int idPaquete;
     private int idCliente;
     private int idDestino;

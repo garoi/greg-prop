@@ -7,6 +7,7 @@ import java.util.*;
  * @author Marc Garcia Roig
  */
 public class ListaClientes implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
     private int IDcliente = 0;
     ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
     

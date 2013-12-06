@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author Marc Garcia Roig
  */
 public class Pair implements Serializable{
+    private static final long serialVersionUID = 9040177911315386368L;
     int first;
     float second;
     

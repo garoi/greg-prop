@@ -7,6 +7,7 @@ import java.util.*;
  * @author Albert Gili Zaragoza
  */
 public class ListaPaquetes implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
      int idPaquete = 0;
     public ArrayList<Paquete> getListaPaquetes() {

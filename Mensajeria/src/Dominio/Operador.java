@@ -9,6 +9,7 @@ import java.util.*;
  * @author Albert Gili Zaragoza
  */
 public class Operador implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
     private String nombreOperador;
     private String password;
     private ArrayList<Paquete> listaPaquetesParaEntregar = new ArrayList<Paquete>();
