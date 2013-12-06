@@ -87,7 +87,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(806, 561));
 
-        panelEspera.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en espera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        panelEspera.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en espera", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(75, 75, 75)));
         panelEspera.setMinimumSize(new java.awt.Dimension(300, 500));
         panelEspera.setPreferredSize(new java.awt.Dimension(300, 500));
 
@@ -109,7 +109,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
         );
 
-        panelEnviados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes enviados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        panelEnviados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes enviados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(75, 75, 75)));
         panelEnviados.setMinimumSize(new java.awt.Dimension(300, 500));
         panelEnviados.setPreferredSize(new java.awt.Dimension(300, 500));
 
@@ -131,9 +131,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             .addComponent(jScrollPane2)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(75, 75, 75)));
         jPanel3.setMinimumSize(new java.awt.Dimension(113, 170));
 
+        botonAnadir.setBackground(new java.awt.Color(75, 75, 75));
+        botonAnadir.setForeground(new java.awt.Color(220, 220, 220));
         botonAnadir.setText("Añadir");
         botonAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +143,8 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonCancelar.setBackground(new java.awt.Color(75, 75, 75));
+        botonCancelar.setForeground(new java.awt.Color(220, 220, 220));
         botonCancelar.setText("Cancelar");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +152,8 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonEliminar.setBackground(new java.awt.Color(75, 75, 75));
+        botonEliminar.setForeground(new java.awt.Color(220, 220, 220));
         botonEliminar.setText("Eliminar");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,11 +177,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addGap(379, 379, 379))
         );
 

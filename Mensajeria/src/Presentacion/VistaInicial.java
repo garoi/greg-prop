@@ -54,6 +54,8 @@ public class VistaInicial extends javax.swing.JFrame {
 
         jPanel1.setMinimumSize(new java.awt.Dimension(186, 57));
 
+        botonCliente.setBackground(new java.awt.Color(75, 75, 75));
+        botonCliente.setForeground(new java.awt.Color(220, 220, 220));
         botonCliente.setText("Cliente");
         botonCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonCliente.setFocusPainted(false);
@@ -63,6 +65,8 @@ public class VistaInicial extends javax.swing.JFrame {
             }
         });
 
+        botonOperador.setBackground(new java.awt.Color(75, 75, 75));
+        botonOperador.setForeground(new java.awt.Color(220, 220, 220));
         botonOperador.setText("Operador");
         botonOperador.setFocusPainted(false);
         botonOperador.addActionListener(new java.awt.event.ActionListener() {
@@ -85,11 +89,11 @@ public class VistaInicial extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonOperador)
                     .addComponent(botonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botonCliente, botonOperador});
@@ -106,9 +110,9 @@ public class VistaInicial extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

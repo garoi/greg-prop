@@ -128,6 +128,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLogin">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4b" green="4b" red="4b" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="dc" green="dc" red="dc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Login"/>
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
@@ -137,6 +143,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistro">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4b" green="4b" red="4b" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="dc" green="dc" red="dc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Registro"/>
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>

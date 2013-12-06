@@ -10,20 +10,20 @@ package Presentacion;
  *
  * @author Luis García Estrades https://github.com/lgarest
  */
-public class VistaSeleccionarCiudad extends javax.swing.JFrame {
+public class VistaSeleccionCiudad extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
     
     /**
      * Creates new form VistaSeleccionarCiudad
      */
-    public VistaSeleccionarCiudad() {
+    public VistaSeleccionCiudad() {
         initComponents();
     }
     
     /**
      * Creates new form VistaSeleccionarCiudad
      */
-    public VistaSeleccionarCiudad(CtrlPresentacion ctrlp) {
+    public VistaSeleccionCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
         final String [] ciudades = ctrlp.getDominio().getNombresCiudades();
@@ -62,11 +62,22 @@ public class VistaSeleccionarCiudad extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaCiudades);
 
+        btnAnadir.setBackground(new java.awt.Color(75, 75, 75));
+        btnAnadir.setForeground(new java.awt.Color(220, 220, 220));
         btnAnadir.setText("Añadir");
 
+        btnModificar.setBackground(new java.awt.Color(75, 75, 75));
+        btnModificar.setForeground(new java.awt.Color(220, 220, 220));
         btnModificar.setText("Modificar");
 
+        btnSeleccionar.setBackground(new java.awt.Color(75, 75, 75));
+        btnSeleccionar.setForeground(new java.awt.Color(220, 220, 220));
         btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,6 +138,10 @@ public class VistaSeleccionarCiudad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -135,7 +150,7 @@ public class VistaSeleccionarCiudad extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaSeleccionarCiudad().setVisible(true);
+                new VistaSeleccionCiudad().setVisible(true);
             }
         });
     }

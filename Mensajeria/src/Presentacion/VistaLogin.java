@@ -75,6 +75,8 @@ public class VistaLogin extends javax.swing.JFrame {
 
         labelUsuario.setText("Usuario:");
 
+        btnLogin.setBackground(new java.awt.Color(75, 75, 75));
+        btnLogin.setForeground(new java.awt.Color(220, 220, 220));
         btnLogin.setText("Login");
         btnLogin.setFocusPainted(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +85,8 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
 
+        btnRegistro.setBackground(new java.awt.Color(75, 75, 75));
+        btnRegistro.setForeground(new java.awt.Color(220, 220, 220));
         btnRegistro.setText("Registro");
         btnRegistro.setFocusPainted(false);
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {

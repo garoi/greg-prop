@@ -124,6 +124,8 @@ public class VistaMapa extends javax.swing.JFrame {
 
         jLabel3.setText("Turno:");
 
+        btnOk.setBackground(new java.awt.Color(75, 75, 75));
+        btnOk.setForeground(new java.awt.Color(220, 220, 220));
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,8 +133,12 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnCancel.setBackground(new java.awt.Color(75, 75, 75));
+        btnCancel.setForeground(new java.awt.Color(220, 220, 220));
         btnCancel.setText("Cancel");
 
+        comboDestino.setBackground(new java.awt.Color(75, 75, 75));
+        comboDestino.setForeground(new java.awt.Color(220, 220, 220));
         comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
             //ctrlp.getDominio().getDestinos();
             new String[] {"pene"}
@@ -149,6 +155,8 @@ public class VistaMapa extends javax.swing.JFrame {
 
         labelAno.setText("01");
 
+        btnMasDia.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasDia.setForeground(new java.awt.Color(220, 220, 220));
         btnMasDia.setText("^");
         btnMasDia.setToolTipText("");
         btnMasDia.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +165,8 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnMasMes.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasMes.setForeground(new java.awt.Color(220, 220, 220));
         btnMasMes.setText("^");
         btnMasMes.setToolTipText("");
         btnMasMes.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +175,8 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnMasAno.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasAno.setForeground(new java.awt.Color(220, 220, 220));
         btnMasAno.setText("^");
         btnMasAno.setToolTipText("");
         btnMasAno.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +185,8 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnMenosDia.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosDia.setForeground(new java.awt.Color(220, 220, 220));
         btnMenosDia.setText("v");
         btnMenosDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +194,8 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnMenosMes.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosMes.setForeground(new java.awt.Color(220, 220, 220));
         btnMenosMes.setText("v");
         btnMenosMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +203,8 @@ public class VistaMapa extends javax.swing.JFrame {
             }
         });
 
+        btnMenosAno.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosAno.setForeground(new java.awt.Color(220, 220, 220));
         btnMenosAno.setText("v");
         btnMenosAno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +215,8 @@ public class VistaMapa extends javax.swing.JFrame {
         labelTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelTurno.setText("M");
 
+        btnToggleTurno.setBackground(new java.awt.Color(75, 75, 75));
+        btnToggleTurno.setForeground(new java.awt.Color(220, 220, 220));
         btnToggleTurno.setText("*");
         btnToggleTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +226,8 @@ public class VistaMapa extends javax.swing.JFrame {
 
         jLabel8.setText("Ciudad:");
 
+        comboCiudad.setBackground(new java.awt.Color(75, 75, 75));
+        comboCiudad.setForeground(new java.awt.Color(220, 220, 220));
         comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(
             //ctrlp.getDominio().getDestinos();
             new String[] {"pene", "pene2"}

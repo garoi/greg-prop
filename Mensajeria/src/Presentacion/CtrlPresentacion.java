@@ -23,6 +23,8 @@ public class CtrlPresentacion {
     private VistaClientePrincipal vistaCliente;
     private VistaOperadorPrincipal vistaOperador;
     private VistaMapa vistaMapa;
+    private VistaSeleccionTurno vistaTurno;
+    private VistaSeleccionCiudad vistaCiudad;
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
     private String tipoUsuario;
@@ -32,6 +34,7 @@ public class CtrlPresentacion {
      */
     public CtrlPresentacion(){
         ctrld = new ControlDominio();
+//        javax.swing.UIManager.put("ButtonUI", new CustomButton());
         try {
             ctrld.iniControlDominio();
         } catch (IOException ex) {
@@ -127,15 +130,29 @@ public class CtrlPresentacion {
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
 //                setTamanoVentanaSecundaria(-165, 0);
             break;
+                
+            case "vistaTurno":
+                if(vistaTurno == null) vistaTurno = new VistaSeleccionTurno(this);
+                ventanaSecundaria = vistaTurno;
+                ventanaSecundaria.setTitle("Selector de turno");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
+                
+            case "vistaCiudad":
+                if(vistaCiudad == null) vistaCiudad = new VistaSeleccionCiudad(this);
+                ventanaSecundaria = vistaCiudad;
+                ventanaSecundaria.setTitle("Selector de ciudad");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
             
             default:
                 ventanaSecundaria = new VistaMapa(this);
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
             break;
         }
-        ventanaSecundaria.setResizable(false);
         ventanaSecundaria.setLocationRelativeTo(null);
         ventanaSecundaria.setVisible(true);
+        ventanaSecundaria.setResizable(false);
         ventanaSecundaria.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }
     
@@ -168,10 +185,10 @@ public class CtrlPresentacion {
                     vistaLogin = new VistaLogin(this, tipoUsuario);
                 }
                 cambiarContenidoVentanaPrimaria(vistaLogin.getContentPane());
-                ventanaPrimaria.setTitle("Mensajeria | Login");
-                Dimension d0 = new Dimension(vistaLogin.getMinimumSize());
+                ventanaPrimaria.setTitle("Mensajeria | Login | " + tipoUsuario);
+                Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
                 d0.setSize(d0.getWidth()-6, d0.getHeight()+10);
-                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d0);
                 actualizarVentanaPrimaria();
                 break;
@@ -182,9 +199,9 @@ public class CtrlPresentacion {
                 cambiarContenidoVentanaPrimaria(vistaCliente.getContentPane());
                 setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Cliente");
-                Dimension d = new Dimension(vistaCliente.getMinimumSize());
+                Dimension d = new Dimension(vistaCliente.getPreferredSize());
                 d.setSize(d.getWidth()-5, d.getHeight()+15);
-                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d);
                 actualizarVentanaPrimaria();
                 break;
@@ -195,9 +212,9 @@ public class CtrlPresentacion {
                 cambiarContenidoVentanaPrimaria(vistaOperador.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
-                Dimension d2 = new Dimension(vistaOperador.getMinimumSize());
+                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
                 d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
-                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d2);
                 actualizarVentanaPrimaria();
                 break;

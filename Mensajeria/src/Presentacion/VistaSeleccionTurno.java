@@ -11,12 +11,43 @@ package Presentacion;
  * @author Luis García Estrades https://github.com/lgarest
  */
 public class VistaSeleccionTurno extends javax.swing.JFrame {
-
+    private CtrlPresentacion ctrlp;
+    private int dia;
+    private int mes;
+    private int ano;
+    private String turno;
+    private int diaahora;
+    private int mesahora;
+    private int anoahora;
+    private String turnoahora;
+    
     /**
      * Creates new form VistaSeleccionTurno
      */
     public VistaSeleccionTurno() {
         initComponents();
+    }
+
+    VistaSeleccionTurno(CtrlPresentacion ctrlp) {
+        this.ctrlp = ctrlp;
+        initComponents();
+        
+        String[] data = ctrlp.getDominio().fechaHoy();
+        dia = Integer.parseInt(data[0]);
+        mes = Integer.parseInt(data[1]);
+        ano = Integer.parseInt(data[2]);
+        turno = data[3];
+        
+        diaahora = dia;
+        mesahora = mes;
+        anoahora = ano;
+        turnoahora = turno;
+        
+        // inicializamos las labels
+        labelDia.setText(data[0]);
+        labelMes.setText(data[1]);
+        labelAno.setText(data[2]);
+        labelTurno.setText(data[3]);
     }
 
     /**
@@ -28,131 +59,170 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        panelFecha = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        labelMes1 = new javax.swing.JLabel();
+        labelMes = new javax.swing.JLabel();
+        labelAno = new javax.swing.JLabel();
+        labelDia = new javax.swing.JLabel();
+        btnMenosDia = new javax.swing.JButton();
+        btnMasAno = new javax.swing.JButton();
+        btnMasMes = new javax.swing.JButton();
+        btnMasDia = new javax.swing.JButton();
+        btnToggleTurno = new javax.swing.JButton();
+        labelMes2 = new javax.swing.JLabel();
+        labelTurno = new javax.swing.JLabel();
+        btnMenosAno = new javax.swing.JButton();
+        btnMenosMes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        panelHora = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelFecha.setMinimumSize(new java.awt.Dimension(150, 150));
-        panelFecha.setPreferredSize(new java.awt.Dimension(150, 150));
-        panelFecha.setLayout(new java.awt.GridLayout(3, 3));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jButton3.setText("+");
-        jButton3.setPreferredSize(new java.awt.Dimension(21, 15));
-        panelFecha.add(jButton3);
+        labelMes1.setText("/");
 
-        jButton1.setText("+");
-        panelFecha.add(jButton1);
+        labelMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMes.setText("01");
 
-        jButton4.setText("+");
-        panelFecha.add(jButton4);
+        labelAno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAno.setText("01");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("dd");
-        panelFecha.add(jLabel1);
+        labelDia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelDia.setText("01");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("mm");
-        panelFecha.add(jLabel2);
+        btnMenosDia.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosDia.setForeground(new java.awt.Color(220, 220, 220));
+        btnMenosDia.setText("v");
+        btnMenosDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosDiaActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("yy");
-        panelFecha.add(jLabel3);
+        btnMasAno.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasAno.setForeground(new java.awt.Color(220, 220, 220));
+        btnMasAno.setText("^");
+        btnMasAno.setToolTipText("");
+        btnMasAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasAnoActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("-");
-        panelFecha.add(jButton5);
+        btnMasMes.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasMes.setForeground(new java.awt.Color(220, 220, 220));
+        btnMasMes.setText("^");
+        btnMasMes.setToolTipText("");
+        btnMasMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasMesActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("-");
-        panelFecha.add(jButton6);
+        btnMasDia.setBackground(new java.awt.Color(75, 75, 75));
+        btnMasDia.setForeground(new java.awt.Color(220, 220, 220));
+        btnMasDia.setText("^");
+        btnMasDia.setToolTipText("");
+        btnMasDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasDiaActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("-");
-        panelFecha.add(jButton7);
+        btnToggleTurno.setBackground(new java.awt.Color(75, 75, 75));
+        btnToggleTurno.setForeground(new java.awt.Color(220, 220, 220));
+        btnToggleTurno.setText("*");
+        btnToggleTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToggleTurnoActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("+");
+        labelMes2.setText("/");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("hh");
+        labelTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelTurno.setText("M");
 
-        jButton9.setText("-");
+        btnMenosAno.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosAno.setForeground(new java.awt.Color(220, 220, 220));
+        btnMenosAno.setText("v");
+        btnMenosAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosAnoActionPerformed(evt);
+            }
+        });
 
-        jButton10.setText("+");
+        btnMenosMes.setBackground(new java.awt.Color(75, 75, 75));
+        btnMenosMes.setForeground(new java.awt.Color(220, 220, 220));
+        btnMenosMes.setText("v");
+        btnMenosMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenosMesActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("mm");
-
-        jButton11.setText("-");
-
-        javax.swing.GroupLayout panelHoraLayout = new javax.swing.GroupLayout(panelHora);
-        panelHora.setLayout(panelHoraLayout);
-        panelHoraLayout.setHorizontalGroup(
-            panelHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHoraLayout.createSequentialGroup()
-                .addGroup(panelHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(labelDia)
+                    .addComponent(btnMenosDia, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMasDia))
                 .addGap(2, 2, 2)
-                .addGroup(panelHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        panelHoraLayout.setVerticalGroup(
-            panelHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHoraLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panelHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelHoraLayout.createSequentialGroup()
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelHoraLayout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(labelMes1)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnMenosMes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelMes)
+                    .addComponent(btnMasMes))
+                .addGap(2, 2, 2)
+                .addComponent(labelMes2)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnMenosAno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAno)
+                    .addComponent(btnMasAno))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(btnToggleTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(panelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMasAno, btnMasDia, btnMasMes, btnMenosAno, btnMenosDia, btnMenosMes, btnToggleTurno, labelDia});
+
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMasDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMasMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMasAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnToggleTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelMes2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMenosDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMenosMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMenosAno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
-        );
+
+        jButton1.setBackground(new java.awt.Color(75, 75, 75));
+        jButton1.setForeground(new java.awt.Color(220, 220, 220));
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,46 +230,109 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMenosDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosDiaActionPerformed
+        if (dia > 1)
+        dia -= 1;
+        String s = "";
+        if (dia<10) s = "0";
+        labelDia.setText(s + Integer.toString(dia));
+    }//GEN-LAST:event_btnMenosDiaActionPerformed
+
+    private void btnMasAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasAnoActionPerformed
+        if (ano <= 99)
+        ano += 1;
+        String s = "";
+        if (ano<10) s = "0";
+        labelAno.setText(s + Integer.toString(ano));
+    }//GEN-LAST:event_btnMasAnoActionPerformed
+
+    private void btnMasMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasMesActionPerformed
+        if (mes <= 11){
+            mes += 1;
+            int limit = 31;
+            if (mes == 2) limit = 28;
+            else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+            if (dia>limit){
+                dia = limit;
+                labelDia.setText(Integer.toString(dia));
+            }
+        }
+        String s = "";
+        if (mes<10) s = "0";
+        labelMes.setText(s + Integer.toString(mes));
+    }//GEN-LAST:event_btnMasMesActionPerformed
+
+    private void btnMasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasDiaActionPerformed
+        int limit = 31;
+        if (mes == 2) limit = 28;
+        else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+        if (dia < limit)
+        dia += 1;
+        String s = "";
+        if (dia<10) s = "0";
+        labelDia.setText(s + Integer.toString(dia));
+    }//GEN-LAST:event_btnMasDiaActionPerformed
+
+    private void btnToggleTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleTurnoActionPerformed
+        if (turno.equals("tarde")){
+            turno = "manana";
+        }
+        else{
+            turno = "tarde";
+        }
+        labelTurno.setText(turno);
+    }//GEN-LAST:event_btnToggleTurnoActionPerformed
+
+    private void btnMenosAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosAnoActionPerformed
+        if (ano > 0)
+        ano -= 1;
+        String s = "";
+        if (ano<10) s = "0";
+        labelAno.setText(s + Integer.toString(ano));
+    }//GEN-LAST:event_btnMenosAnoActionPerformed
+
+    private void btnMenosMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenosMesActionPerformed
+        if (mes > 1){
+            mes -= 1;
+            int limit = 31;
+            if (mes == 2) limit = 28;
+            else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) limit = 30;
+            if (dia>limit){
+                dia = limit;
+                labelDia.setText(Integer.toString(dia));
+            }
+        }
+        String s = "";
+        if (mes<10) s = "0";
+        labelMes.setText(s + Integer.toString(mes));
+    }//GEN-LAST:event_btnMenosMesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaSeleccionTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaSeleccionTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaSeleccionTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaSeleccionTurno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -210,23 +343,20 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMasAno;
+    private javax.swing.JButton btnMasDia;
+    private javax.swing.JButton btnMasMes;
+    private javax.swing.JButton btnMenosAno;
+    private javax.swing.JButton btnMenosDia;
+    private javax.swing.JButton btnMenosMes;
+    private javax.swing.JButton btnToggleTurno;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel panelFecha;
-    private javax.swing.JPanel panelHora;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelAno;
+    private javax.swing.JLabel labelDia;
+    private javax.swing.JLabel labelMes;
+    private javax.swing.JLabel labelMes1;
+    private javax.swing.JLabel labelMes2;
+    private javax.swing.JLabel labelTurno;
     // End of variables declaration//GEN-END:variables
 }
