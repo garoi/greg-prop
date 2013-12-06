@@ -7,6 +7,7 @@ import java.lang.System;
  * @author Marc Garcia Roig
  */
 public class Ruta implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
     private String[] nombres;
     private float[][] grafo;
     private Integer[] permutacion;

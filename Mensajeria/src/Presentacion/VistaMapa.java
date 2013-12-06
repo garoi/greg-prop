@@ -376,7 +376,7 @@ public class VistaMapa extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_comboDestinoActionPerformed
+    }//GEN-LAST:event_comboCiudadActionPerformed
     
     /**
      * Recoge la opción seleccionada del combox de destinos.
@@ -413,6 +413,7 @@ public class VistaMapa extends javax.swing.JFrame {
                 Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.setVisible(false);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnMasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasDiaActionPerformed

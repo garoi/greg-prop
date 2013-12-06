@@ -11,7 +11,7 @@ package Presentacion;
  * @author Angel Rierola Mora
  */
 public class VistaClientePrincipal extends javax.swing.JFrame {
-    private CtrlPresentacion ctrlp;
+    public CtrlPresentacion ctrlp;
        
     /**
      * Creadora de la clase VistaClientePrincipal.
@@ -24,24 +24,37 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * Creadora de la clase VistaClientePrincipal.
      */
     public VistaClientePrincipal(CtrlPresentacion ctrlp) {
-        this.setTitle("Cliente");
         this.ctrlp = ctrlp;
+        this.setTitle("Cliente");
         initComponents();
+        final String[] enviados = ctrlp.getDominio().getPaquetesEnviados();
         
-//        ctrlp.getDominio().getPaquetesEnviados(idcliente);
-//        ctrlp.getDominio().getPaquetesPendientes(idcliente);
-        int idCliente = 0;
+        
+        // BORRAR
+        String[] paq = ctrlp.getDominio().getPaquetesEspera();
+        System.out.println(paq.length);
+        for (int i = 0; i < paq.length; i++) {
+            System.out.println(paq[i]);
+        }
+        // BORRAR
         
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
-//            String[] strings = this.ctrlp.getDominio().getPaquetesEnviados(idCliente);
-            String[] strings = {"Paquete enviado"};
+            String[] strings = enviados;
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         
+        final String[] espera = ctrlp.getDominio().getPaquetesEspera();
+        
+        // BORRAR
+        System.out.println(espera.length);
+        for (int i = 0; i < espera.length; i++) {
+            System.out.println(espera[i]);
+        }
+        // BORRAR
+        
         listaEspera.setModel(new javax.swing.AbstractListModel() {
-//            String[] strings = this.ctrlp.getDominio().getPaquetesEspera(idCliente);
-            String[] strings = {"Paquete pendiente"};
+            String[] strings = espera;
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -212,7 +225,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         });
         // eliminar paquetes enviados del cliente
         ctrlp.getDominio().eliminarPaquetes();
-        ctrlp.getDominio().eliminarPaquetes();
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
@@ -222,7 +234,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        // TODO add your handling code here:
         int idx = listaEspera.getSelectedIndex();
         System.out.println(idx);
         listaEspera.remove(idx);

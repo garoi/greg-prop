@@ -8,6 +8,7 @@ import java.util.*;
  * @author Angel Rierola Mora
  */
 public class Cliente implements Serializable {
+    private static final long serialVersionUID = 9040177911315386368L;
     private int idCliente;
     private String password;
     private String nombreCliente;
