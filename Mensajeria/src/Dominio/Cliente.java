@@ -88,6 +88,7 @@ public class Cliente implements Serializable {
      * @param p Paquete
      */
     public void anadirPaquete(Paquete p){
+        System.out.println("ANADIR PAK: " + listaPaquetes.size());
         listaPaquetes.add(p);
         
     }
@@ -98,7 +99,7 @@ public class Cliente implements Serializable {
      * @return Si ha podido cancelar el paquete
      */
     public boolean cancelarPaquete(int idPaquete) {
-        System.out.println("SIZE 00: " + listaPaquetes.size());
+        System.out.println("SIZE 00: " + idCliente);
         for (int i = 0; i < listaPaquetes.size(); ++i) {
             
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {

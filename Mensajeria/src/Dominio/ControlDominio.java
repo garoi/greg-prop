@@ -469,7 +469,7 @@ public class ControlDominio {
             lp.cancelarPaquete(idPaquete);
             oper.cancelarPaquete(idPaquete);
             
-           // cp.guardadoGeneral(lc, lp, oper);
+            cp.guardadoGeneral(lc, lp, oper);
             return true;
         }
         else return false;
