@@ -217,6 +217,7 @@ public class VistaLogin extends javax.swing.JFrame {
         else{
             System.out.println("LoginOperador");
             try {
+                System.out.println("miu");
                 if (ctrlp.getDominio().loginOperador(usuario, contrasena)) {
                     ctrlp.setVentanaPrincipal("vistaOperador");
                 }

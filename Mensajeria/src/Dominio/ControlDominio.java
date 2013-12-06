@@ -16,6 +16,7 @@ public class ControlDominio {
     private Operador oper;
     private ListaPaquetes lp;
     private Cliente cl;
+    private ControlUsuario cu;
     private boolean existeOper = true;
     private Mapa map;
     
@@ -27,13 +28,15 @@ public class ControlDominio {
      * 
      */
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
+        cu = new ControlUsuario();
         cp = new ControlPersistencia();
         lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
         
         oper = (Operador) leerOperador();
+        System.out.println("Passo por aqui");
         if(oper == null) {
-            oper = new Operador();
+            System.out.println("Passo por aqui");
             existeOper = false;
         }     
         
@@ -41,14 +44,6 @@ public class ControlDominio {
         if(lp == null) lp = new ListaPaquetes();
     }
     
-    
-    /**
-     * Registramos o logeamos al cliente o al operador
-     * @return retorna si se registra o se loguea
-     * @throws IOException
-     * @throws ClassNotFoundException 
-     */
-
     /**
      * Registramos o logeamos al cliente o al operador
      * @return retorna si se registra o se loguea
@@ -56,10 +51,9 @@ public class ControlDominio {
      * @throws ClassNotFoundException
      */
     public boolean registroCliente(String usuario, String password) throws IOException{
-        Cliente cl = new Cliente();
+        cl = new Cliente();
         cl.setNombre(usuario);
         cl.setPassword(password);
-        ControlUsuario cu = new ControlUsuario();
         boolean reg = cu.registroCliente(usuario, password, cl, lc);
         if(reg){
                 cp.guardarListaClientes(lc);
@@ -69,35 +63,39 @@ public class ControlDominio {
     }
     
     public boolean loginCliente(String usuario, String password){
-        ControlUsuario cu = new ControlUsuario();
-        Cliente cl2 = new Cliente();
-        boolean login =  cu.loginCliente(usuario, password, lc, cl2);
-        if(login){
-            cl = cl2;
-            System.out.println("IDCLIENTTEEE : " + cl.getNombreCliente());
+        //HA DE RETORNAR UN CLIENT
+        int login =  cu.loginCliente(usuario, password, lc, cl);
+        if(login == -1){
+            return false;
+        }
+        else {
+            System.out.println("LLEGO");
+            cl = new Cliente();
+            cl = lc.getCliente(login);
             return true;
         }
-        else return false;
     }
     
     public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
-        ControlUsuario cu = new ControlUsuario();
-        boolean reg = cu.registroOperado(usuario, password, oper);
+        boolean reg = false;
+        if (!existeOper) {
+            System.out.println("reg del registro Operados");
+            oper = new Operador();
+            reg = cu.registroOperado(usuario, password, oper);
+        }
+        System.out.println("reg del registro Operados 2" + reg);
         if(reg){
             cp.guardarOperador(oper);
+            existeOper = true;
+            System.out.println("mmmmmmmmmmmmmmmmmmm " +oper.getNombreOperador() + " " + oper.getPassword());
             return true;
         }
         else return false;
     }
     
     public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
-        System.out.println("OPERADOR CD");
-        //Operador oper = new Operador();
-        System.out.println("OPERADOR CD2");
-        oper = (Operador) leerOperador();
-        System.out.println("OPERADOR CD3");
-        ControlUsuario cu = new ControlUsuario();
-        System.out.println("OPERADOR CD4");
+        System.out.println("simple");
+        System.out.println(oper.getNombreOperador() + " " + oper.getPassword());
         return cu.loginOperador(usuario, password, oper);
     }
 
@@ -271,7 +269,7 @@ public class ControlDominio {
      */
     public Object leerOperador() throws IOException, ClassNotFoundException {
         try {
-            return oper = (Operador) cp.leerOperador();
+            return cp.leerOperador();
         }
         catch (IOException e) {
             return oper = null;

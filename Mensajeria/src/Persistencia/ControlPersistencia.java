@@ -52,6 +52,7 @@ public class ControlPersistencia {
     }
     
     public void guardarOperador(Object oper) throws IOException {
+        System.out.println("guardo oper");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
             oos.writeObject(oper);
         }
@@ -61,7 +62,9 @@ public class ControlPersistencia {
     }
     
     public Object leerOperador() throws IOException, ClassNotFoundException {
+        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Operador.txt"))) {
+            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
             Object oper = ois.readObject();
             return oper;
         }
