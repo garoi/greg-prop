@@ -136,6 +136,11 @@ public class VistaMapa extends javax.swing.JFrame {
         btnCancel.setBackground(new java.awt.Color(75, 75, 75));
         btnCancel.setForeground(new java.awt.Color(220, 220, 220));
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         comboDestino.setBackground(new java.awt.Color(75, 75, 75));
         comboDestino.setForeground(new java.awt.Color(220, 220, 220));
@@ -417,26 +422,42 @@ public class VistaMapa extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        // TODO add your handling code here:
+
         boolean do_it = false;
         if (ano == anoahora){
-            if (mes == mesahora){
-                if (dia == diaahora)
+            if (mes == mesahora) {
+                if (dia == diaahora) {
                     if (turno.equals(turnoahora)) do_it = true;
+                }
                 else if (dia > diaahora) do_it = true;
             }
             else if (mes > mesahora ) do_it = true;
         }
         else if (ano > anoahora) do_it = true;
-        if (do_it){
-            String fecha = Integer.toString(dia) + "." + Integer.toString(mes) + "." + Integer.toString(ano);
+        if (do_it) {
+            String dia1, mes1, ano1;
+            if (dia < 10) {
+                dia1 = '0' + Integer.toString(dia);
+            }
+            else dia1 = Integer.toString(dia);
+            if (mes < 10) {
+                mes1 = '0' + Integer.toString(mes);
+            }
+            else mes1 = Integer.toString(mes);
+            if (ano < 10) {
+                ano1 = '0' + Integer.toString(ano);
+            }
+            else ano1 = Integer.toString(ano);
+            String fecha = dia1 + '.' + mes + '.' + ano;
             try {
+                System.out.println("Voy a añadir un pak");
                 ctrlp.getDominio().anadirPaquete(ciudad, destino, fecha, turno);
             } catch (IOException ex) {
                 Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         this.setVisible(false);
+        ctrlp.actualizarVistaCliente();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnMasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasDiaActionPerformed
@@ -515,6 +536,10 @@ public class VistaMapa extends javax.swing.JFrame {
         }
         labelTurno.setText(turno);
     }//GEN-LAST:event_btnToggleTurnoActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

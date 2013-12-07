@@ -218,7 +218,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
+        System.out.println("Click anadir");
         ctrlp.iniVentanaSecundaria("añadirPaquete");
+        System.out.println("Click anadir2");
     }//GEN-LAST:event_botonAnadirActionPerformed
 
     /**
@@ -256,7 +258,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        listaEspera.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getPaquetesEspera();
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
@@ -287,4 +293,12 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel panelEnviados;
     private javax.swing.JPanel panelEspera;
     // End of variables declaration//GEN-END:variables
+
+    void actualizarlista() {
+        listaEspera.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getPaquetesEspera();
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+    }
 }

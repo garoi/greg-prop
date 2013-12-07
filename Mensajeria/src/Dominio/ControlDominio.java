@@ -437,6 +437,7 @@ public class ControlDominio {
      * @throws ClassNotFoundException
      */
    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
+       System.out.println("Paquete en CD");
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
        Mapa provisional = new Mapa();
@@ -505,6 +506,7 @@ public class ControlDominio {
      * @return los paquetes enviados del cliente seleccionado
      */
     public String[] getPaquetesEnviados(){
+        System.out.println("El ide del cliente es "+ cl.getNombreCliente() + " " + cl.getIdCliente());
         int idCliente = cl.getIdCliente();
         return lc.getPaquetesEnviados(idCliente);
     }

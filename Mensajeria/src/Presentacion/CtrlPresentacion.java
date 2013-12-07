@@ -223,4 +223,8 @@ public class CtrlPresentacion {
                 break;
         }
     }
+
+    void actualizarVistaCliente() {
+        vistaCliente.actualizarlista();
+    }
 }
