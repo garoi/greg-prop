@@ -99,9 +99,8 @@ public class Cliente implements Serializable {
      * @return Si ha podido cancelar el paquete
      */
     public boolean cancelarPaquete(int idPaquete) {
-        System.out.println("SIZE 00: " + idCliente);
+        System.out.println("SIZE 00: " + idPaquete);
         for (int i = 0; i < listaPaquetes.size(); ++i) {
-            
             if (listaPaquetes.get(i).getIdPaquete() == idPaquete) {
                         System.out.println("SIZE 1: " + listaPaquetes.size());
                 if (listaPaquetes.get(i).getEstado().equals("para enviar")) {
@@ -148,7 +147,6 @@ public class Cliente implements Serializable {
                 res.add(listaPaquetes.get(i).getCiudad() + ", " + listaPaquetes.get(i).getDestino() + ", " + 
                         listaPaquetes.get(i).getFecha() + ", " + listaPaquetes.get(i).getTurno() + "-" + 
                         listaPaquetes.get(i).getIdPaquete());
-                System.out.println("mida : " + res.size());
             }
         }
         Collections.sort(res);

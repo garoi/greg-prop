@@ -437,7 +437,6 @@ public class ControlDominio {
      * @throws ClassNotFoundException
      */
    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
-       System.out.println("Paquete en CD");
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
        Mapa provisional = new Mapa();
@@ -452,8 +451,6 @@ public class ControlDominio {
             oper.anadirPaquete(p);
             ArrayList <String> puntosCiudad = new ArrayList <String>();
        }
-       System.out.println("idpakete : " + p.getIdPaquete());
-       System.out.println("destino : " + p.getDestino());
        cp.guardadoGeneral(lc, lp, oper);
     }
     
@@ -461,13 +458,10 @@ public class ControlDominio {
      * El cliente cancela un paquete que aun no se ha enviado
      */
     public boolean cancelarPaquete(int idPaquete) throws IOException{
-        System.out.println("IDcliente!!!! " + cl.getNombreCliente());
-        
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
             lp.cancelarPaquete(idPaquete);
-            oper.cancelarPaquete(idPaquete);
-            
+            boolean ok = oper.cancelarPaquete(idPaquete);
             cp.guardadoGeneral(lc, lp, oper);
             return true;
         }
@@ -506,7 +500,6 @@ public class ControlDominio {
      * @return los paquetes enviados del cliente seleccionado
      */
     public String[] getPaquetesEnviados(){
-        System.out.println("El ide del cliente es "+ cl.getNombreCliente() + " " + cl.getIdCliente());
         int idCliente = cl.getIdCliente();
         return lc.getPaquetesEnviados(idCliente);
     }

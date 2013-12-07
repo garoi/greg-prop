@@ -33,15 +33,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         initComponents();
         final String[] enviados = ctrlp.getDominio().getPaquetesEnviados();
         
-        
-        // BORRAR
-        String[] paq = ctrlp.getDominio().getPaquetesEspera();
-        System.out.println(paq.length);
-        for (int i = 0; i < paq.length; i++) {
-            System.out.println(paq[i]);
-        }
-        // BORRAR
-        
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = enviados;
             public int getSize() { return strings.length; }
@@ -49,13 +40,6 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         });
         
         final String[] espera = ctrlp.getDominio().getPaquetesEspera();
-        
-        // BORRAR
-        System.out.println(espera.length);
-        for (int i = 0; i < espera.length; i++) {
-            System.out.println(espera[i]);
-        }
-        // BORRAR
         
         listaEspera.setModel(new javax.swing.AbstractListModel() {
             String[] strings = espera;
@@ -246,14 +230,10 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
-        int idx = listaEspera.getSelectedIndex();
-        System.out.println(idx);        
+        int idx = listaEspera.getSelectedIndex();      
         String name = (String) listaEspera.getSelectedValue();
-        System.out.println("cosa rara :" + name);
         String idPaquete = name.substring(name.lastIndexOf('-') + 1);
-        System.out.println("shieeeet : " + idPaquete);
         try {
-            //listaEspera.remove(idx);
             ctrlp.getDominio().cancelarPaquete(Integer.parseInt(idPaquete));
         } catch (IOException ex) {
             Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);

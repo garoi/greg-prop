@@ -188,23 +188,18 @@ public class Operador implements Serializable {
      * Cancela el paquete con identificador idPaquete
      * @param idPaquete 
      */
-    public void cancelarPaquete(int idPaquete) {
-        boolean encontrado = false;
-        int i = 0;
-        while (i < listaPaquetesParaEntregar.size() && !encontrado) {
+    public boolean cancelarPaquete(int idPaquete) {
+        System.out.println("SIZE 00: " + idPaquete);
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
                 if (listaPaquetesParaEntregar.get(i).getEstado().equals("para enviar")) {
                     listaPaquetesParaEntregar.remove(i);
-                    encontrado = true;
+                    System.out.println("SIZE 2: " + listaPaquetesParaEntregar.size());
+                    return true;
                 }
             }
-            else {
-                ++i;
-            }
         }
-        if (!encontrado) {
-            System.out.println("Paquete no encontrado para este cliente");
-        }
+        return false;
     }
         
     /**
