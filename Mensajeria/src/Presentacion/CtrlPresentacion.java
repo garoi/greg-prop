@@ -227,4 +227,12 @@ public class CtrlPresentacion {
     void actualizarVistaCliente() {
         vistaCliente.actualizarlista();
     }
+
+    void actualizarVistaOperador(String nombreCiudad) {
+        vistaOperador.actualizarCiudad(nombreCiudad);
+    }
+
+    void actualizarDia(int dia, int mes, int ano, String turno) {
+        vistaOperador.actualizarDia(dia, mes, ano, turno);
+    }
 }

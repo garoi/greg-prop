@@ -12,6 +12,9 @@ package Presentacion;
  */
 public class VistaOperadorPrincipal extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
+    private String Ciudad;
+    private String fecha;
+    private String[] fechaHoy;
         
     /**
      * Creates new form VistaOperadorPrincipal
@@ -19,6 +22,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     public VistaOperadorPrincipal() {
         this.setTitle("Operador");
         initComponents();
+        
     }
     
     /**
@@ -28,6 +32,28 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         this.setTitle("Operador");
         this.ctrlp = ctrlp;
         initComponents();
+        fechaHoy = ctrlp.getDominio().fechaHoy();
+        fecha = fechaHoy[0] + '/' + fechaHoy[1] + '/' + fechaHoy[2];
+        if (fechaHoy[3].equals("manana")) {
+            fecha = fecha + "-" + "M";
+        }
+        else {
+            fecha = fecha + "-" + "T";
+        }
+        labelTurno.setText(fecha);
+        
+        
+        //LISTAS DE MIERDA!!!!!
+        /*
+        listaEnviados.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getPaquetesEnviados();
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });*/
+        
+        
+        
+        
     }
 
     /**
@@ -126,7 +152,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en próxima ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -252,7 +278,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         });
 
         labelTurno.setForeground(new java.awt.Color(0, 0, 0));
-        labelTurno.setText("22/12/13-M");
 
         javax.swing.GroupLayout panelTurnoLayout = new javax.swing.GroupLayout(panelTurno);
         panelTurno.setLayout(panelTurnoLayout);
@@ -277,8 +302,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 panelCiudadMouseClicked(evt);
             }
         });
-
-        labelCiudad.setText("Barcelona");
 
         javax.swing.GroupLayout panelCiudadLayout = new javax.swing.GroupLayout(panelCiudad);
         panelCiudad.setLayout(panelCiudadLayout);
@@ -401,6 +424,34 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         ctrlp.iniVentanaSecundaria("vistaCiudad");
     }//GEN-LAST:event_panelCiudadMouseClicked
 
+    public void actualizarCiudad(String nombreCiudad) {
+        Ciudad = nombreCiudad;
+        labelCiudad.setText(nombreCiudad);
+    }
+    
+    public void actualizarDia(int dia, int mes, int ano, String Turno) {
+        String dia1, mes1, ano1;
+        if (dia < 10) {
+            dia1 = '0' + Integer.toString(dia);
+        }
+        else dia1 = Integer.toString(dia);
+        if (mes < 10) {
+            mes1 = '0' + Integer.toString(mes);
+        }
+        else mes1 = Integer.toString(mes);
+        if (ano < 10) {
+            ano1 = '0' + Integer.toString(ano);
+        }
+        else ano1 = Integer.toString(ano);
+        fecha = dia1 + '/' + mes + '/' + ano;
+        if (Turno.equals("manana")) {
+            fecha = fecha + "-" + "M";
+        }
+        else {
+            fecha = fecha + "-" + "T";
+        }
+        labelTurno.setText(fecha);
+    }
     /**
      * @param args the command line arguments
      */

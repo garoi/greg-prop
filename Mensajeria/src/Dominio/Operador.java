@@ -189,12 +189,10 @@ public class Operador implements Serializable {
      * @param idPaquete 
      */
     public boolean cancelarPaquete(int idPaquete) {
-        System.out.println("SIZE 00: " + idPaquete);
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
                 if (listaPaquetesParaEntregar.get(i).getEstado().equals("para enviar")) {
                     listaPaquetesParaEntregar.remove(i);
-                    System.out.println("SIZE 2: " + listaPaquetesParaEntregar.size());
                     return true;
                 }
             }

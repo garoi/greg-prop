@@ -139,7 +139,10 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
+        int idx = listaCiudades.getSelectedIndex();      
+        String nombreCiudad = (String) listaCiudades.getSelectedValue();
+        this.setVisible(false);
+        ctrlp.actualizarVistaOperador(nombreCiudad);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
