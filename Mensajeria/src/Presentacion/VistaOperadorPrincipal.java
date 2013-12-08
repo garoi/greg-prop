@@ -6,6 +6,11 @@
 
 package Presentacion;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Luis García Estrades https://github.com/lgarest
@@ -14,6 +19,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
     private String Ciudad;
     private String fecha;
+    private String fechaCD;
+    private String nombreRuta;
     private String[] fechaHoy;
         
     /**
@@ -28,32 +35,22 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VistaOperadorPrincipal
      */
-    public VistaOperadorPrincipal(CtrlPresentacion ctrlp) {
+    public VistaOperadorPrincipal(final CtrlPresentacion ctrlp) throws IOException, FileNotFoundException, ClassNotFoundException {
         this.setTitle("Operador");
         this.ctrlp = ctrlp;
         initComponents();
         fechaHoy = ctrlp.getDominio().fechaHoy();
         fecha = fechaHoy[0] + '/' + fechaHoy[1] + '/' + fechaHoy[2];
+        fechaCD = fechaHoy[0] + '.' + fechaHoy[1] + '.' + fechaHoy[2];
         if (fechaHoy[3].equals("manana")) {
             fecha = fecha + "-" + "M";
+            fechaCD = fechaCD + "-" + "M";
         }
         else {
             fecha = fecha + "-" + "T";
+            fechaCD = fechaCD + "-" + "T";
         }
         labelTurno.setText(fecha);
-        
-        
-        //LISTAS DE MIERDA!!!!!
-        /*
-        listaEnviados.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = ctrlp.getDominio().getPaquetesEnviados();
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });*/
-        
-        
-        
-        
     }
 
     /**
@@ -67,7 +64,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaRutas = new javax.swing.JList();
         btnModificarRuta = new javax.swing.JButton();
         btnVerRuta = new javax.swing.JButton();
         btnValidarRuta = new javax.swing.JButton();
@@ -98,12 +95,17 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rutas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        listaRutas.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        listaRutas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaRutasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaRutas);
 
         btnModificarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnModificarRuta.setForeground(new java.awt.Color(220, 220, 220));
@@ -152,13 +154,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)))
         );
 
-        panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en próxima ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -343,7 +345,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         panelPendientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes pendientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         listaPendientes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -424,9 +426,29 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         ctrlp.iniVentanaSecundaria("vistaCiudad");
     }//GEN-LAST:event_panelCiudadMouseClicked
 
+    private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
+        int idx = listaRutas.getSelectedIndex();      
+        nombreRuta = (String) listaRutas.getSelectedValue();
+        try {
+            mostrarPaquetesEnRuta();
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_listaRutasMouseClicked
+
     public void actualizarCiudad(String nombreCiudad) {
         Ciudad = nombreCiudad;
         labelCiudad.setText(nombreCiudad);
+        //LISTAS DE MIERDA!!!!!
+        
+        listaRutas.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getRutas(Ciudad);
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        mostrarPaquetesTurno();
     }
     
     public void actualizarDia(int dia, int mes, int ano, String Turno) {
@@ -444,14 +466,35 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         else ano1 = Integer.toString(ano);
         fecha = dia1 + '/' + mes + '/' + ano;
+        fechaCD = dia1 + '.' + mes + '.' + ano;
         if (Turno.equals("manana")) {
             fecha = fecha + "-" + "M";
+            fechaCD = fechaCD + "-" + "M";
         }
         else {
             fecha = fecha + "-" + "T";
+            fechaCD = fechaCD + "-" + "T";
         }
         labelTurno.setText(fecha);
+        mostrarPaquetesTurno();
     }
+    
+    private void mostrarPaquetesEnRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getPaquetesRuta(nombreRuta);
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+    }
+    
+    private void mostrarPaquetesTurno() {
+        listaPendientes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -477,7 +520,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnVerRuta;
     private javax.swing.JButton eliminarPaquete;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -486,6 +528,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelTurno;
     private javax.swing.JList listaEnRuta;
     private javax.swing.JList listaPendientes;
+    private javax.swing.JList listaRutas;
     private javax.swing.JPanel panelCiudad;
     private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel panelMapa;

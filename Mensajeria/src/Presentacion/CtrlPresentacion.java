@@ -7,6 +7,7 @@
 package Presentacion;
 import Dominio.ControlDominio;
 import java.awt.Dimension;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -178,7 +179,7 @@ public class CtrlPresentacion {
      * Permite el flujo del programa entre vistas.
      * @param nombre el nombre de la ventana que queremos activar. \nPuede ser: vistaLogin, vistaCliente, etc.
      */
-    public void setVentanaPrincipal(String nombre){
+    public void setVentanaPrincipal(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
         switch(nombre){
             case "vistaLogin":
                 if (vistaLogin == null){

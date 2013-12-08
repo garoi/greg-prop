@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class PersistenciaRutas {
     
-    public ArrayList<String> listarRutas(String nombreCiudad) {
+    public ArrayList<String> listarRutasNoVerificadas(String nombreCiudad) {
         System.out.println("Las rutas guardadas son:");
         File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
@@ -26,15 +26,33 @@ public class PersistenciaRutas {
             boolean nombre = nombreFichero.startsWith(nombreCiudad);
             boolean guion = nombreFichero.endsWith("-NO_verificada-ruta.txt");
             if (nombre & guion) {
-                ficheros.add(nombreFichero.substring(0, (nombreFichero.length()-9)));
+                ficheros.add(nombreFichero);
+            }
+        }
+        return ficheros;
+    }
+    
+    public ArrayList<String> listarRutasVerificadas(String nombreCiudad) {
+        System.out.println("Las rutas guardadas son:");
+        File directorio = new File ("Data/Rutas/");
+        File[] nombres = directorio.listFiles();
+        ArrayList<String> ficheros = new ArrayList<>();
+        String nombreFichero;
+        for(File file:nombres) {
+            nombreFichero = file.getName();
+            boolean nombre = nombreFichero.startsWith(nombreCiudad);
+            boolean guion = nombreFichero.endsWith("-verificada-ruta.txt");
+            if (nombre & guion) {
+                ficheros.add(nombreFichero);
             }
         }
         return ficheros;
     }
     
     public Object leerRuta(String nombre) throws FileNotFoundException, IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Rutas/"+nombre+"-ruta.txt"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Rutas/"+nombre))) {
             Object m2 = ois.readObject();
+            System.out.println("DEVOLVER RUTA SELECCIONADA");
             return m2;
         }
     }

@@ -52,7 +52,6 @@ public class ControlPersistencia {
     }
     
     public void guardarOperador(Object oper) throws IOException {
-        System.out.println("guardo oper");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
             oos.writeObject(oper);
         }
@@ -62,9 +61,7 @@ public class ControlPersistencia {
     }
     
     public Object leerOperador() throws IOException, ClassNotFoundException {
-        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Operador.txt"))) {
-            System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLL");
             Object oper = ois.readObject();
             return oper;
         }
@@ -84,8 +81,12 @@ public class ControlPersistencia {
         return pm.leerCiudad(nombre);
     }
     
-    public ArrayList<String> listarRutas(String nombreCiudad) {
-        return pr.listarRutas(nombreCiudad);
+    public ArrayList<String> listarRutasNoVerificadas(String nombreCiudad) {
+        return pr.listarRutasNoVerificadas(nombreCiudad);
+    }
+    
+    public ArrayList<String> listarRutasVerificadas(String nombreCiudad) {
+        return pr.listarRutasVerificadas(nombreCiudad);
     }
     
     public Object leerRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {

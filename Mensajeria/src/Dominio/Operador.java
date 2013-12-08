@@ -145,31 +145,16 @@ public class Operador implements Serializable {
      */
     public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
         ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Selecciona el idPaquete de los paquetes de la siguiente lista:");
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            System.out.println(listaPaquetesParaEntregar.size());
             if (listaPaquetesParaEntregar.get(i).getCiudad().equals(nombreCiudad)) {
                 if (fecha.equals(listaPaquetesParaEntregar.get(i).getFecha())) {
                     if (turno.equals(listaPaquetesParaEntregar.get(i).getTurno())) {
-                        System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
-                        System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-                        System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
-                        System.out.print("Fecha " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
-                        System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
+                        paquetesDestino.add(listaPaquetesParaEntregar.get(i));
+
                     }
                 }
             }
         }
-        System.out.println("Si desea parar de entrar/seleccionar paquetes pulsa -1"); 
-        int idPaquete = sc.nextInt();
-        paquetesDestino.add(buscarPaquete(idPaquete));
-        while (idPaquete > -1) {
-            idPaquete = sc.nextInt();
-            paquetesDestino.add(buscarPaquete(idPaquete));
-        }
-        paquetesDestino.remove(paquetesDestino.size()-1);
-        System.out.println("Has seleccionado " + paquetesDestino.size() + " paquetes");
         return paquetesDestino;
     }
     
