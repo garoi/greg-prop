@@ -6,6 +6,10 @@
 
 package Presentacion;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -137,13 +141,25 @@ public class VistaInicial extends javax.swing.JFrame {
 
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
         ctrlp.setTipoUsuario("Cliente");
-        ctrlp.setVentanaPrincipal("vistaLogin");
+        try {
+            ctrlp.setVentanaPrincipal("vistaLogin");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonClienteActionPerformed
 
     private void botonOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOperadorActionPerformed
         // TODO add your handling code here:
         ctrlp.setTipoUsuario("Operador");
-        ctrlp.setVentanaPrincipal("vistaLogin");
+        try {
+            ctrlp.setVentanaPrincipal("vistaLogin");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonOperadorActionPerformed
 
     /**
