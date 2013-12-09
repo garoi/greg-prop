@@ -507,52 +507,32 @@ public class ControlDominio {
         return lc.getPaquetesEnviados(idCliente);
     }
     
-    public String[] getRutas(String nombreCiudad) {
+    public ArrayList<String> getRutas(String nombreCiudad) {
         ArrayList<String> rutasNoVerificadas = new ArrayList<>();
         rutasNoVerificadas = cp.listarRutasNoVerificadas(nombreCiudad);
         ArrayList<String> rutasVerificadas = new ArrayList<>();
         rutasVerificadas = cp.listarRutasVerificadas(nombreCiudad);
-        String rutasNoVerificadasS[] = new String[rutasNoVerificadas.size()];
-        System.out.println("VOY A ORDENAR");
         //ORDENAR ELS VECTORS DE STRING
         Collections.sort(rutasNoVerificadas);
         Collections.sort(rutasVerificadas);
-        
-        for (int i = 0; i < rutasNoVerificadas.size(); ++i) {
-            rutasNoVerificadasS[i] = rutasNoVerificadas.get(i);
-        }
-        String rutasVerificadasS[] = new String[rutasVerificadas.size()];
-        for (int i = 0; i < rutasVerificadas.size(); ++i) {
-            rutasVerificadasS[i] = rutasVerificadas.get(i);
-        }
-        String[] res = new String[rutasNoVerificadas.size() + rutasVerificadas.size()];
-        int cont = 0;
-        for (int i = 0; i < rutasNoVerificadasS.length; ++i) {
-            res[i] = rutasNoVerificadasS[i];
-            ++cont;
-        }
-        for (int i = 0; i < rutasVerificadasS.length; ++i) {
-            res[cont] = rutasVerificadasS[i];
-            ++cont;
-        }
-        return res;
+
+        rutasNoVerificadas.addAll(rutasVerificadas);
+        return rutasNoVerificadas;
     }
 
-    public String[] getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
-        System.out.println("ESTOY EN CD");
+    public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
 
         ArrayList<Paquete> listaPaquetesRuta = new ArrayList<>();
         listaPaquetesRuta = r.getListaPaquetesRuta();
-        String[] result = new String[listaPaquetesRuta.size()];
+        ArrayList<String>  result = new ArrayList<String>(); 
         for (int i = 0; i < listaPaquetesRuta.size(); ++i) {
-            result[i] = listaPaquetesRuta.get(i).getDestino() + " " + listaPaquetesRuta.get(i).getEstado();
+            result.add(listaPaquetesRuta.get(i).getDestino() + " " + listaPaquetesRuta.get(i).getIdDestino());
         }
         return result;
     }
-    public String[] getPaquetesPendientes(String nombreCiudad, String fecha) {
-        System.out.println("LA FECHA ES " + fecha);
-        ArrayList<Paquete> paquetesPendientes = new ArrayList<>();
+    public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fecha) {
+        ArrayList<Paquete> paquetesPendientes = new ArrayList<Paquete>();
         String turno;
         if (fecha.endsWith("M")) {
             turno = "manana";
@@ -560,9 +540,9 @@ public class ControlDominio {
         else turno = "tarde";
         String fecha2 = fecha.substring(0,fecha.length()-2);
         paquetesPendientes = oper.seleccionarPaquetes(nombreCiudad, fecha2, turno);
-        String[] result = new String[paquetesPendientes.size()];
+        ArrayList<String> result = new ArrayList<String>();
         for (int i = 0; i < paquetesPendientes.size(); ++i) {
-            result[i] = paquetesPendientes.get(i).getDestino() + " " + paquetesPendientes.get(i).getIdCliente();
+            result.add(paquetesPendientes.get(i).getDestino() + " " + paquetesPendientes.get(i).getIdPaquete());
         }
         return result;
     }

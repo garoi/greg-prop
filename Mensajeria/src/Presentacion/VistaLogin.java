@@ -211,7 +211,13 @@ public class VistaLogin extends javax.swing.JFrame {
         if(tipoUsuario == "Cliente"){
             System.out.println("LoginCliente");
             if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
-                ctrlp.setVentanaPrincipal("vistaCliente");
+                try {
+                    ctrlp.setVentanaPrincipal("vistaCliente");
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         else{

@@ -144,7 +144,7 @@ public class Operador implements Serializable {
      * @return Vector con los paquetes seleccionados
      */
     public ArrayList<Paquete> seleccionarPaquetes(String nombreCiudad, String fecha, String turno) {
-        ArrayList<Paquete> paquetesDestino = new ArrayList<Paquete>();
+        ArrayList<Paquete> paquetesDestino = new ArrayList<>();
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             if (listaPaquetesParaEntregar.get(i).getCiudad().equals(nombreCiudad)) {
                 if (fecha.equals(listaPaquetesParaEntregar.get(i).getFecha())) {
