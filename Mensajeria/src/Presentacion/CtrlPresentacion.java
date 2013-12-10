@@ -139,7 +139,21 @@ public class CtrlPresentacion {
                 ventanaSecundaria.setTitle("Selector de turno");
                 setTamanoVentanaSecundaria(0, 0);
             break;
-            
+                
+            case "vistaCiudad":
+                if(vistaCiudad == null) vistaCiudad = new VistaSeleccionCiudad(this);
+                ventanaSecundaria = vistaCiudad;
+                ventanaSecundaria.setTitle("Selector de turno");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
+                
+            case "vistaPaquetes":
+                if(vistaPaquetes == null) vistaPaquetes = new VistaVerPaquetes(this);
+                ventanaSecundaria = vistaPaquetes;
+                ventanaSecundaria.setTitle("Lista de todos los paquetes");
+                setTamanoVentanaSecundaria(0, 0);                
+            break;
+                
             default:
                 ventanaSecundaria = new VistaMapa(this);
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
