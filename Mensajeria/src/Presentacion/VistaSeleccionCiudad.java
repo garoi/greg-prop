@@ -69,6 +69,11 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         btnModificar.setBackground(new java.awt.Color(75, 75, 75));
         btnModificar.setForeground(new java.awt.Color(220, 220, 220));
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnSeleccionar.setBackground(new java.awt.Color(75, 75, 75));
         btnSeleccionar.setForeground(new java.awt.Color(220, 220, 220));
@@ -146,6 +151,10 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         this.setVisible(false);
         ctrlp.actualizarVistaOperador(nombreCiudad);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        ctrlp.iniVentanaSecundaria("vistaModificarCiudad");
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments

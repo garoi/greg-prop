@@ -26,6 +26,7 @@ public class CtrlPresentacion {
     private VistaVerPaquetes vistaPaquetes;
     private VistaMapa vistaMapa;
     private VistaSeleccionTurno vistaTurno;
+    private VistaModificarCiudad vistaModificarCiudad;
     private VistaSeleccionCiudad vistaCiudad;
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
@@ -120,6 +121,7 @@ public class CtrlPresentacion {
             case "añadirPaquete":
                 if(vistaMapa == null) vistaMapa = new VistaMapa(this);
                 ventanaSecundaria = new VistaMapa(this);
+                vistaMapa = null;
                 ventanaSecundaria.setTitle("Añadir Paquete");
             break;
                 
@@ -134,6 +136,7 @@ public class CtrlPresentacion {
             case "vistaTurno":
                 if(vistaTurno == null) vistaTurno = new VistaSeleccionTurno(this);
                 ventanaSecundaria = vistaTurno;
+                vistaTurno = null;
                 ventanaSecundaria.setTitle("Selector de turno");
                 setTamanoVentanaSecundaria(0, 0);
             break;
@@ -149,7 +152,14 @@ public class CtrlPresentacion {
                 if(vistaPaquetes == null) vistaPaquetes = new VistaVerPaquetes(this);
                 ventanaSecundaria = vistaPaquetes;
                 ventanaSecundaria.setTitle("Lista de todos los paquetes");
-                setTamanoVentanaSecundaria(0, 0);                
+                setTamanoVentanaSecundaria(0, 0);     
+            break;
+                
+            case "vistaModificarCiudad":
+                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this);
+                ventanaSecundaria = vistaModificarCiudad;
+                ventanaSecundaria.setTitle("Modificar ciudad");
+                setTamanoVentanaSecundaria(0, 0);
             break;
                 
             default:
@@ -198,6 +208,7 @@ public class CtrlPresentacion {
 //                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d0);
                 actualizarVentanaPrimaria();
+                vistaInicial = null;
                 break;
             case "vistaCliente":
                 if (vistaCliente == null) vistaCliente = new VistaClientePrincipal(this);
@@ -209,6 +220,7 @@ public class CtrlPresentacion {
 //                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d);
                 actualizarVentanaPrimaria();
+                vistaLogin = null;
                 break;
             case "vistaOperador":
                 if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
@@ -220,6 +232,7 @@ public class CtrlPresentacion {
 //                ventanaPrimaria.setResizable(false);
                 ventanaPrimaria.setSize(d2);
                 actualizarVentanaPrimaria();
+                vistaLogin = null;
                 break;
             default:
                 System.out.println("***** ERROR llamada a setVentanaPrincipal con una vista inválida");

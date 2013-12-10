@@ -446,15 +446,6 @@ public class ControlDominio {
         Collections.sort(rutasVerificadas);
 
         rutasNoVerificadas.addAll(rutasVerificadas);
-        
-        // formateamos la lista de las rutas tal como queremos que se muestren las rutas
-        for (int i= 0; i< rutasNoVerificadas.size(); i++){
-            String ruta = rutasNoVerificadas.get(i);
-            ruta = ruta.substring(nombreCiudad.length() + 1, ruta.length()-23);
-//            ruta = ruta.substring(0, ruta.length()-23);
-            ruta = ruta.replace("-", " ");
-            rutasNoVerificadas.set(i, ruta);
-        }
         return rutasNoVerificadas;
     }
 
