@@ -21,7 +21,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private String Ciudad;
     private String fecha;
     private String fechaCD;
-    private String nombreRuta;
+    private String nombreRuta = new String();
     private String anadir;
     private String[] fechaHoy;
     private ArrayList<String> listaPendientesS;
@@ -520,6 +520,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     private boolean checkVerificada(){
         int cont = 0;
+        if(nombreRuta.isEmpty()) return true;
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
