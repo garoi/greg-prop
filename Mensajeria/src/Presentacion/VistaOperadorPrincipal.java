@@ -104,6 +104,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listaRutas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaRutasMouseClicked(evt);
@@ -173,7 +174,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
+<<<<<<< Updated upstream
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+=======
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)))
+>>>>>>> Stashed changes
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -183,6 +188,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listaEnRuta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaEnRuta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaEnRutaMouseClicked(evt);
@@ -386,6 +392,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
         panelPendientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes pendientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
+        listaPendientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaPendientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaPendientesMouseClicked(evt);

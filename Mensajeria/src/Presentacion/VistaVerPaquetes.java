@@ -55,7 +55,10 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButton1.setBackground(new java.awt.Color(75, 75, 75));
+        jButton1.setForeground(new java.awt.Color(220, 220, 220));
         jButton1.setText("OK");
+        jButton1.setFocusPainted(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -67,37 +70,53 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
+        ListaPaquetes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ListaPaquetes);
 
+        idPaquete.setBackground(new java.awt.Color(75, 75, 75));
+        idPaquete.setForeground(new java.awt.Color(220, 220, 220));
         idPaquete.setText("idPaquete");
+        idPaquete.setFocusPainted(false);
         idPaquete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 idPaqueteMouseClicked(evt);
             }
         });
 
+        Fecha.setBackground(new java.awt.Color(75, 75, 75));
+        Fecha.setForeground(new java.awt.Color(220, 220, 220));
         Fecha.setText("Fecha");
+        Fecha.setFocusPainted(false);
         Fecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 FechaMouseClicked(evt);
             }
         });
 
+        Destino.setBackground(new java.awt.Color(75, 75, 75));
+        Destino.setForeground(new java.awt.Color(220, 220, 220));
         Destino.setText("Destino");
+        Destino.setFocusPainted(false);
         Destino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DestinoMouseClicked(evt);
             }
         });
 
+        Ciudad.setBackground(new java.awt.Color(75, 75, 75));
+        Ciudad.setForeground(new java.awt.Color(220, 220, 220));
         Ciudad.setText("Ciudad");
+        Ciudad.setFocusPainted(false);
         Ciudad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CiudadMouseClicked(evt);
             }
         });
 
+        Estado.setBackground(new java.awt.Color(75, 75, 75));
+        Estado.setForeground(new java.awt.Color(220, 220, 220));
         Estado.setText("Estado");
+        Estado.setFocusPainted(false);
         Estado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EstadoMouseClicked(evt);
@@ -110,47 +129,43 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         VerPaquetes.setLayout(VerPaquetesLayout);
         VerPaquetesLayout.setHorizontalGroup(
             VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerPaquetesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerPaquetesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(61, 61, 61))
             .addGroup(VerPaquetesLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(idPaquete)
-                .addGap(18, 18, 18)
-                .addComponent(Fecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Destino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                .addGap(13, 13, 13)
+                .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1)
                     .addGroup(VerPaquetesLayout.createSequentialGroup()
+                        .addComponent(idPaquete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Fecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Destino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Ciudad)
-                        .addGap(18, 18, 18)
-                        .addComponent(Estado)))
-                .addContainerGap(283, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Estado))
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        VerPaquetesLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Ciudad, Destino, Estado, Fecha, idPaquete, jButton1});
+
         VerPaquetesLayout.setVerticalGroup(
             VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerPaquetesLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idPaquete)
                     .addComponent(Fecha)
                     .addComponent(Ciudad)
                     .addComponent(Estado)
                     .addComponent(Destino))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(6, 6, 6))
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
