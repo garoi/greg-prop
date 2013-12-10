@@ -528,11 +528,11 @@ public class VistaMapa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenosAnoActionPerformed
 
     private void btnToggleTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleTurnoActionPerformed
-        if (turno.equals("tarde")){
-            turno = "manana";
+        if (turno.equals("T")){
+            turno = "M";
         }
         else{
-            turno = "tarde";
+            turno = "T";
         }
         labelTurno.setText(turno);
     }//GEN-LAST:event_btnToggleTurnoActionPerformed

@@ -70,6 +70,7 @@ public class Operador implements Serializable {
      * @see Paquete
      */
     public void anadirPaquete(Paquete p) {
+        System.out.println("AÑADO EL PAQUETE" + p.getEstado());
         listaPaquetesParaEntregar.add(p);
     }
     

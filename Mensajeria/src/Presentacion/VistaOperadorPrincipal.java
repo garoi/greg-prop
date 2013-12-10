@@ -46,7 +46,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         fechaHoy = ctrlp.getDominio().fechaHoy();
         fecha = fechaHoy[0] + '/' + fechaHoy[1] + '/' + fechaHoy[2];
         fechaCD = fechaHoy[0] + '.' + fechaHoy[1] + '.' + fechaHoy[2];
-        if (fechaHoy[3].equals("manana")) {
+        if (fechaHoy[3].equals("M")) {
             fecha = fecha + "-" + "M";
             fechaCD = fechaCD + "-" + "M";
         }
@@ -701,7 +701,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         else ano1 = Integer.toString(ano);
         fecha = dia1 + '/' + mes + '/' + ano;
         fechaCD = dia1 + '.' + mes + '.' + ano;
-        if (Turno.equals("manana")) {
+        if (Turno.equals("M")) {
             fecha = fecha + "-" + "M";
             fechaCD = fechaCD + "-" + "M";
         }

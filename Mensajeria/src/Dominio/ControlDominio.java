@@ -453,9 +453,9 @@ public class ControlDominio {
     private String saberTurno(String fecha) {
         String turno;
         if (fecha.endsWith("M")) {
-            turno = "manana";
+            turno = "M";
         }
-        else turno = "tarde";
+        else turno = "T";
         return turno;
     }
     

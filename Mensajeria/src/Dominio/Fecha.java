@@ -103,7 +103,7 @@ public class Fecha {
      * @return string con la franja horaria actual
      */
     public String mananaTarde() {
-        if (date.getHours() >= 9 & date.getHours() <= 15) return "manana";
-        else return "tarde";
+        if (date.getHours() >= 9 & date.getHours() <= 15) return "M";
+        else return "T";
     }
 }
