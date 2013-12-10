@@ -111,7 +111,7 @@ public class Operador implements Serializable {
             ordenarPorFechaTurno();
         }
         else {
-            System.out.println("Mal escrito");
+            System.out.println("**** ERROR Operador.verPaquetes -> op inválido");
         }
         String[][] paquetes = new String[listaPaquetesParaEntregar.size()][4];
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
