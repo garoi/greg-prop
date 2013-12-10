@@ -499,10 +499,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     private void panelTurnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTurnoMouseClicked
         ctrlp.iniVentanaSecundaria("vistaTurno");
+        nombreRuta = null;
     }//GEN-LAST:event_panelTurnoMouseClicked
 
     private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCiudadMouseClicked
         ctrlp.iniVentanaSecundaria("vistaCiudad");
+        nombreRuta = null;
     }//GEN-LAST:event_panelCiudadMouseClicked
 
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
