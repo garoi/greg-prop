@@ -318,8 +318,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         });
 
-        labelTurno.setForeground(new java.awt.Color(0, 0, 0));
-
         javax.swing.GroupLayout panelTurnoLayout = new javax.swing.GroupLayout(panelTurno);
         panelTurno.setLayout(panelTurnoLayout);
         panelTurnoLayout.setHorizontalGroup(
@@ -447,12 +445,38 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private boolean comprobar(int idx){
+        int cont = 0;
+        char[] charsRuta = nombreRuta.toCharArray();
+        boolean encontrado = false;
+        for(int i = 0; i < charsRuta.length && !encontrado; ++i){
+            if(cont == 3){
+                if(charsRuta[i+1] == 'v'){
+                    return false;
+                }
+                else encontrado = true;
+            }
+            if(charsRuta[i] == '-'){
+                ++cont;
+            }
+        }
+        for(int i = 0; i < listaEnRutaS.size();++i){
+            if(listaPendientesS.get(idx).equals(listaEnRutaS.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
     private void btnAnadirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirPaqueteActionPerformed
         int idx = listaPendientes.getSelectedIndex();      
         anadir = (String) listaPendientes.getSelectedValue();
-        listaPendientesS.remove(idx);
-        listaEnRutaS.add(anadir);
-
+        boolean noverificada = checkVerificada();
+        boolean cambio = comprobar(idx);
+        if(cambio && noverificada){
+            listaPendientesS.remove(idx);
+            listaEnRutaS.add(anadir);
+        }
         listaPendientes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = listaPendientesS;
             public int getSize() { return strings.size(); }
@@ -493,12 +517,41 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listaRutasMouseClicked
 
+    
+    private boolean checkVerificada(){
+        int cont = 0;
+        char[] charsRuta = nombreRuta.toCharArray();
+        boolean encontrado = false;
+        for(int i = 0; i < charsRuta.length && !encontrado; ++i){
+            if(cont == 3){
+                if(charsRuta[i] == 'v'){
+                    return false;
+                }
+                else encontrado = true;
+            }
+            if(charsRuta[i] == '-'){
+                ++cont;
+            }
+        }
+        return true;
+    }
+    private boolean compruebaEliminar(int idx){
+            for(int i = 0; i < listaPendientesS.size(); ++i){
+                if(listaEnRutaS.get(idx).equals(listaPendientesS.get(i))){
+                    return false;
+                }
+            }
+        return true;
+    }
     private void eliminarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPaqueteActionPerformed
         int idx = listaEnRuta.getSelectedIndex();      
         anadir = (String) listaEnRuta.getSelectedValue();
-        listaEnRutaS.remove(idx);
-        listaPendientesS.add(anadir);
-
+        boolean noverificada = checkVerificada();
+        boolean cambio = compruebaEliminar(idx);
+        if(cambio && noverificada){
+            listaEnRutaS.remove(idx);
+            listaPendientesS.add(anadir);
+        }
         listaPendientes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = listaPendientesS;
             public int getSize() { return strings.size(); }
@@ -516,9 +569,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             int idx = listaPendientes.getSelectedIndex();      
             anadir = (String) listaPendientes.getSelectedValue();
-            listaPendientesS.remove(idx);
-            listaEnRutaS.add(anadir);
-
+            boolean cambio = comprobar(idx);
+            boolean noverificada = checkVerificada();
+            if(cambio && noverificada){
+                listaPendientesS.remove(idx);
+                listaEnRutaS.add(anadir);
+            }
             listaPendientes.setModel(new javax.swing.AbstractListModel() {
                 ArrayList<String> strings = listaPendientesS;
                 public int getSize() { return strings.size(); }
@@ -537,9 +593,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             int idx = listaEnRuta.getSelectedIndex();      
             anadir = (String) listaEnRuta.getSelectedValue();
-            listaEnRutaS.remove(idx);
-            listaPendientesS.add(anadir);
-
+            boolean cambio = compruebaEliminar(idx);
+            boolean noverificada = checkVerificada();
+            if(cambio && noverificada){
+                listaEnRutaS.remove(idx);
+                listaPendientesS.add(anadir);
+            }
             listaPendientes.setModel(new javax.swing.AbstractListModel() {
                 ArrayList<String> strings = listaPendientesS;
                 public int getSize() { return strings.size(); }
