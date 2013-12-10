@@ -118,6 +118,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnVerRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnVerRuta.setForeground(new java.awt.Color(220, 220, 220));
         btnVerRuta.setText("Ver");
+        btnVerRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerRutaActionPerformed(evt);
+            }
+        });
 
         btnValidarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnValidarRuta.setForeground(new java.awt.Color(220, 220, 220));
@@ -168,7 +173,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -230,6 +235,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnVerPaquetes.setBackground(new java.awt.Color(75, 75, 75));
         btnVerPaquetes.setForeground(new java.awt.Color(220, 220, 220));
         btnVerPaquetes.setText("Ver PKT");
+        btnVerPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerPaquetesActionPerformed(evt);
+            }
+        });
 
         btnRutaOptima.setBackground(new java.awt.Color(75, 75, 75));
         btnRutaOptima.setForeground(new java.awt.Color(220, 220, 220));
@@ -464,7 +474,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         return true;
     }
     private void btnAnadirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirPaqueteActionPerformed
-        int idx = listaPendientes.getSelectedIndex();      
+        int idx = listaPendientes.getSelectedIndex();
         anadir = (String) listaPendientes.getSelectedValue();
         boolean noverificada = checkVerificada();
         boolean cambio = comprobar(idx);
@@ -648,6 +658,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         ctrlp.getDominio().eliminarRuta(ruta);
         actualizarRutas();
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
+
+    private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRutaActionPerformed
+        ctrlp.iniVentanaSecundaria("vistaRuta");
+    }//GEN-LAST:event_btnVerRutaActionPerformed
+
+    private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPaquetesActionPerformed
+        ctrlp.iniVentanaSecundaria("vistaPaquetes");
+    }//GEN-LAST:event_btnVerPaquetesActionPerformed
 
     public void actualizarCiudad(String nombreCiudad) {
         Ciudad = nombreCiudad;

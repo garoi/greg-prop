@@ -20,7 +20,6 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
      * Creates new form VistaVerPaquetes
      */
     public VistaVerPaquetes() {
-        this.setTitle("VerPaquetes");
         initComponents();
         
     }
@@ -28,8 +27,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     /**
      * Creates new form VistaOperadorPrincipal
      */
-    public VistaVerPaquetes(final CtrlPresentacion ctrlp) {
-        this.setTitle("VerPaquetes");
+    public VistaVerPaquetes(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
     }
