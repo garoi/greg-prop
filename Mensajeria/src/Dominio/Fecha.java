@@ -81,7 +81,7 @@ public class Fecha {
         fechaTurno[0] = normalizarDia();
         fechaTurno[1] = normalizarMes();
         fechaTurno[2] = normalizarAno();
-        fechaTurno[3] = mañanaTarde();
+        fechaTurno[3] = mananaTarde();
         return fechaTurno;
         
     }
@@ -102,8 +102,8 @@ public class Fecha {
      * Devuelve la franja horaria actual
      * @return string con la franja horaria actual
      */
-    public String mañanaTarde() {
-        if (date.getHours() >= 9 & date.getHours() <= 15) return "mañana";
+    public String mananaTarde() {
+        if (date.getHours() >= 9 & date.getHours() <= 15) return "manana";
         else return "tarde";
     }
 }

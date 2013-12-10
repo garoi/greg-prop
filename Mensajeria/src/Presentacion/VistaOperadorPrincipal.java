@@ -158,7 +158,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -211,6 +211,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnRutaRapida.setBackground(new java.awt.Color(75, 75, 75));
         btnRutaRapida.setForeground(new java.awt.Color(220, 220, 220));
         btnRutaRapida.setText("Ruta rap.");
+        btnRutaRapida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRutaRapidaActionPerformed(evt);
+            }
+        });
 
         btnVerPaquetes.setBackground(new java.awt.Color(75, 75, 75));
         btnVerPaquetes.setForeground(new java.awt.Color(220, 220, 220));
@@ -529,18 +534,33 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listaEnRutaMouseClicked
 
+    private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
+        try {
+            ctrlp.getDominio().rutaRapida(listaEnRutaS, fechaCD, Ciudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizarRutas();
+    }//GEN-LAST:event_btnRutaRapidaActionPerformed
+
     public void actualizarCiudad(String nombreCiudad) {
         Ciudad = nombreCiudad;
         labelCiudad.setText(nombreCiudad);
         
     //LISTAS DE MIERDA!!!!!
         
+        actualizarRutas();
+        mostrarPaquetesTurno();
+    }
+    
+    public void actualizarRutas() {
         listaRutas.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().getRutas(Ciudad);
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
-        mostrarPaquetesTurno();
     }
     
     public void actualizarDia(int dia, int mes, int ano, String Turno) {
