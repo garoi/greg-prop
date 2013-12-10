@@ -168,7 +168,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -230,11 +230,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnVerPaquetes.setBackground(new java.awt.Color(75, 75, 75));
         btnVerPaquetes.setForeground(new java.awt.Color(220, 220, 220));
         btnVerPaquetes.setText("Ver PKT");
-        btnVerPaquetes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVerPaquetesMouseClicked(evt);
-            }
-        });
 
         btnRutaOptima.setBackground(new java.awt.Color(75, 75, 75));
         btnRutaOptima.setForeground(new java.awt.Color(220, 220, 220));
@@ -653,10 +648,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         ctrlp.getDominio().eliminarRuta(ruta);
         actualizarRutas();
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
-
-    private void btnVerPaquetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerPaquetesMouseClicked
-        ctrlp.iniVentanaSecundaria("verPaquetes");
-    }//GEN-LAST:event_btnVerPaquetesMouseClicked
 
     public void actualizarCiudad(String nombreCiudad) {
         Ciudad = nombreCiudad;

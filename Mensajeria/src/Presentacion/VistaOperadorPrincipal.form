@@ -113,7 +113,7 @@
                           <Component id="btnEliminarRuta" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" pref="287" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="288" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -333,9 +333,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ver PKT"/>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVerPaquetesMouseClicked"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRutaOptima">
           <Properties>
