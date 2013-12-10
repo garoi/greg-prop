@@ -30,9 +30,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-              <Component id="panelEspera" pref="304" max="32767" attributes="0"/>
+              <Component id="panelEspera" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="panelEnviados" pref="304" max="32767" attributes="0"/>
+              <Component id="panelEnviados" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -72,7 +72,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" pref="292" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" alignment="0" pref="288" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -126,7 +126,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane2" alignment="0" pref="292" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" alignment="0" pref="288" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -180,9 +180,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="botonCancelar" alignment="0" pref="113" max="32767" attributes="0"/>
-                      <Component id="botonEliminar" alignment="0" pref="113" max="32767" attributes="0"/>
-                      <Component id="botonAnadir" pref="113" max="32767" attributes="0"/>
+                      <Component id="botonEliminar1" max="32767" attributes="0"/>
+                      <Component id="botonCancelar" alignment="0" pref="133" max="32767" attributes="0"/>
+                      <Component id="botonEliminar" alignment="0" pref="133" max="32767" attributes="0"/>
+                      <Component id="botonAnadir" pref="133" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
@@ -194,10 +195,12 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="botonAnadir" pref="39" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="botonCancelar" pref="39" max="32767" attributes="0"/>
+                  <Component id="botonCancelar" pref="41" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="botonEliminar" pref="41" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="379" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="botonEliminar1" pref="41" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -243,6 +246,21 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="botonEliminar1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4b" green="4b" red="4b" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="dc" green="dc" red="dc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cancelar todos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonEliminar1MouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminar1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -67,6 +67,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         botonAnadir = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
+        botonEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(806, 561));
@@ -86,7 +87,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         panelEspera.setLayout(panelEsperaLayout);
         panelEsperaLayout.setHorizontalGroup(
             panelEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
         );
         panelEsperaLayout.setVerticalGroup(
             panelEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +109,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         panelEnviados.setLayout(panelEnviadosLayout);
         panelEnviadosLayout.setHorizontalGroup(
             panelEnviadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
         );
         panelEnviadosLayout.setVerticalGroup(
             panelEnviadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,6 +146,20 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonEliminar1.setBackground(new java.awt.Color(75, 75, 75));
+        botonEliminar1.setForeground(new java.awt.Color(220, 220, 220));
+        botonEliminar1.setText("Cancelar todos");
+        botonEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonEliminar1MouseClicked(evt);
+            }
+        });
+        botonEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -152,9 +167,10 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                    .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                    .addComponent(botonEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
         jPanel3Layout.setVerticalGroup(
@@ -163,10 +179,12 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(botonAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(botonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(379, 379, 379))
+                .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addGap(326, 326, 326))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,9 +195,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -187,9 +205,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addComponent(panelEnviados, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                    .addComponent(panelEspera, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -246,6 +264,24 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
+    private void botonEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEliminar1ActionPerformed
+
+    private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
+        String[] listaPendientes = ctrlp.getDominio().getPaquetesEspera();
+        for (int i = 0; i < listaPendientes.length; ++i) {
+            String idPaquete = listaPendientes[i].substring(listaPendientes[i].lastIndexOf('-') + 1);
+            try {
+                ctrlp.getDominio().cancelarPaquete(Integer.parseInt(idPaquete));
+            } catch (IOException ex) {
+                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        actualizarlista();
+        
+    }//GEN-LAST:event_botonEliminar1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -265,6 +301,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonAnadir;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonEliminar1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
