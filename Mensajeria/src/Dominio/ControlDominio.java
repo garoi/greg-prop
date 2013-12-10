@@ -381,7 +381,18 @@ public class ControlDominio {
     public boolean cancelarPaquete(int idPaquete) throws IOException{
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
-            lp.cancelarPaquete(idPaquete);
+            lp.eliminarPaquete(idPaquete);
+            boolean ok = oper.eliminaPaquete(idPaquete);
+            cp.guardadoGeneral(lc, lp, oper);
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean eliminarPaquete(int idPaquete) throws IOException{
+        boolean eliminado = cl.eliminarPaquete(idPaquete);
+        if(eliminado){
+            lp.eliminarPaquete(idPaquete);
             boolean ok = oper.cancelarPaquete(idPaquete);
             cp.guardadoGeneral(lc, lp, oper);
             return true;

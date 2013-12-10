@@ -75,6 +75,10 @@ public class ListaPaquetes implements Serializable {
         listaPaquetes.get(idPaquete).setEstado("cancelado");
     }
     
+    public void eliminarPaquete(int idPaquete){
+        listaPaquetes.get(idPaquete).setEstado("eliminado");
+    }
+    
     /**
      * Una vez confirmada la ruta cambia el estado de los paquetes enviados
      * @param paquetesEnviados

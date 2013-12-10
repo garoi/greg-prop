@@ -196,6 +196,30 @@ public class Operador implements Serializable {
         }
         return false;
     }
+    
+    public boolean eliminaPaquete(int idPaquete) {
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
+                if (listaPaquetesParaEntregar.get(i).getEstado().equals("enviado")) {
+                    listaPaquetesParaEntregar.remove(i);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean eliminarPaquete(int idPaquete) {
+        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
+            if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
+                if (listaPaquetesParaEntregar.get(i).getEstado().equals("enviado")) {
+                    listaPaquetesParaEntregar.remove(i);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
         
     /**
      * Crea una ciudad para el operador.

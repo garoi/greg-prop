@@ -173,7 +173,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -482,17 +482,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             listaPendientesS.remove(idx);
             listaEnRutaS.add(anadir);
         }
-        listaPendientes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaPendientesS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
+        actualizarListaPendientes();
+        actualizarListaEnRuta();
         
-        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaEnRutaS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
 
     }//GEN-LAST:event_btnAnadirPaqueteActionPerformed
 
@@ -557,17 +549,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             listaEnRutaS.remove(idx);
             listaPendientesS.add(anadir);
         }
-        listaPendientes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaPendientesS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
-        
-        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaEnRutaS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
+        actualizarListaPendientes();
+        actualizarListaEnRuta();
     }//GEN-LAST:event_eliminarPaqueteActionPerformed
 
     private void listaPendientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPendientesMouseClicked
@@ -580,17 +563,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 listaPendientesS.remove(idx);
                 listaEnRutaS.add(anadir);
             }
-            listaPendientes.setModel(new javax.swing.AbstractListModel() {
-                ArrayList<String> strings = listaPendientesS;
-                public int getSize() { return strings.size(); }
-                public Object getElementAt(int i) { return strings.get(i); }
-            });
-
-            listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-                ArrayList<String> strings = listaEnRutaS;
-                public int getSize() { return strings.size(); }
-                public Object getElementAt(int i) { return strings.get(i); }
-            });
+            actualizarListaPendientes();
+            actualizarListaEnRuta();
         }
     }//GEN-LAST:event_listaPendientesMouseClicked
 
@@ -604,17 +578,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 listaEnRutaS.remove(idx);
                 listaPendientesS.add(anadir);
             }
-            listaPendientes.setModel(new javax.swing.AbstractListModel() {
-                ArrayList<String> strings = listaPendientesS;
-                public int getSize() { return strings.size(); }
-                public Object getElementAt(int i) { return strings.get(i); }
-            });
-
-            listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-                ArrayList<String> strings = listaEnRutaS;
-                public int getSize() { return strings.size(); }
-                public Object getElementAt(int i) { return strings.get(i); }
-            });
+            actualizarListaPendientes();
+            actualizarListaEnRuta();
         }
     }//GEN-LAST:event_listaEnRutaMouseClicked
 
@@ -715,20 +680,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     private void mostrarPaquetesEnRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         listaEnRutaS = ctrlp.getDominio().getPaquetesRuta(nombreRuta);
-        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String>  strings = listaEnRutaS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
+        actualizarListaEnRuta();
     }
     
     private void mostrarPaquetesTurno() {
         listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
-        listaPendientes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaPendientesS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
+        actualizarListaPendientes();
     }
     
     /**
@@ -772,4 +729,20 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel panelProximaRuta;
     private javax.swing.JPanel panelTurno;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarListaPendientes() {
+        listaPendientes.setModel(new javax.swing.AbstractListModel() {
+                ArrayList<String> strings = listaPendientesS;
+                public int getSize() { return strings.size(); }
+                public Object getElementAt(int i) { return strings.get(i); }
+            });
+    }
+
+    private void actualizarListaEnRuta() {
+        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = listaEnRutaS;
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }
 }
