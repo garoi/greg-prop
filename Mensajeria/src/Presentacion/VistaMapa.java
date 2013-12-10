@@ -398,9 +398,11 @@ public class VistaMapa extends javax.swing.JFrame {
         Object selectedItem = comboCiudad.getSelectedItem();
         if (selectedItem != null) ciudad = selectedItem.toString();
         try {
+            String[] destinos = ctrlp.getDominio().getDestinosCiudad(ciudad);
             comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-                ctrlp.getDominio().getDestinosCiudad(ciudad)
+                destinos
             ));
+            destino = destinos[0];
         } catch (IOException ex) {
             Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -411,6 +413,7 @@ public class VistaMapa extends javax.swing.JFrame {
      * @param evt el evento de click sobre el combox.
      */
     private void comboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDestinoActionPerformed
+        System.out.println("NO");
         Object selectedItem = comboDestino.getSelectedItem();
         if (selectedItem != null) destino = selectedItem.toString();
     }//GEN-LAST:event_comboDestinoActionPerformed
