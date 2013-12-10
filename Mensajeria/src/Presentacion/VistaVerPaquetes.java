@@ -132,8 +132,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             .addGroup(VerPaquetesLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1)
                     .addGroup(VerPaquetesLayout.createSequentialGroup()
                         .addComponent(idPaquete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,7 +143,8 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
                         .addComponent(Ciudad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Estado))
-                    .addComponent(jLabel1))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -153,8 +153,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         VerPaquetesLayout.setVerticalGroup(
             VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerPaquetesLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idPaquete)
                     .addComponent(Fecha)

@@ -142,6 +142,7 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
 
         labelTurno.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelTurno.setText("M");
+        labelTurno.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnMenosAno.setBackground(new java.awt.Color(75, 75, 75));
         btnMenosAno.setForeground(new java.awt.Color(220, 220, 220));
@@ -184,10 +185,13 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
                     .addComponent(btnMenosAno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelAno)
                     .addComponent(btnMasAno))
-                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                    .addComponent(btnToggleTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnToggleTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(labelTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMasAno, btnMasDia, btnMasMes, btnMenosAno, btnMenosDia, btnMenosMes, btnToggleTurno, labelDia});
