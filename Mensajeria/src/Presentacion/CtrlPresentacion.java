@@ -23,6 +23,7 @@ public class CtrlPresentacion {
     private VistaLogin vistaLogin;
     private VistaClientePrincipal vistaCliente;
     private VistaOperadorPrincipal vistaOperador;
+    private VistaVerPaquetes vistaPaquetes;
     private VistaMapa vistaMapa;
     private VistaSeleccionTurno vistaTurno;
     private VistaSeleccionCiudad vistaCiudad;
@@ -136,13 +137,6 @@ public class CtrlPresentacion {
                 if(vistaTurno == null) vistaTurno = new VistaSeleccionTurno(this);
                 ventanaSecundaria = vistaTurno;
                 ventanaSecundaria.setTitle("Selector de turno");
-                setTamanoVentanaSecundaria(0, 0);
-            break;
-                
-            case "vistaCiudad":
-                if(vistaCiudad == null) vistaCiudad = new VistaSeleccionCiudad(this);
-                ventanaSecundaria = vistaCiudad;
-                ventanaSecundaria.setTitle("Selector de ciudad");
                 setTamanoVentanaSecundaria(0, 0);
             break;
             

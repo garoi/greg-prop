@@ -97,10 +97,10 @@ public class Operador implements Serializable {
     /**
      * Muestra los paquetes por pantalla segun el criterio que se pida.
      */
-    public void verPaquetes() {
+    public String[][] verPaquetes() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino 3 Para ver segun feha y turno.");
-        int op = sc.nextInt();
+        int op = 0 ;// = sc.nextInt();
         if (op == 1) {
             ordenarPorIdPaquete();
         }
@@ -113,13 +113,14 @@ public class Operador implements Serializable {
         else {
             System.out.println("Mal escrito");
         }
+        String[][] paquetes = new String[listaPaquetesParaEntregar.size()][4];
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            System.out.print("ID Paquete " + listaPaquetesParaEntregar.get(i).getIdPaquete() + " ");
-            System.out.print("ID Cliente " + listaPaquetesParaEntregar.get(i).getIdCliente() + " ");
-            System.out.print("Destino " + listaPaquetesParaEntregar.get(i).getDestino() + " ");
-            System.out.print("Fecha " + listaPaquetesParaEntregar.get(i).getFecha() + " ");
-            System.out.println("Turno " + listaPaquetesParaEntregar.get(i).getTurno() + " ");
+            paquetes[i][0] = String.valueOf(listaPaquetesParaEntregar.get(i).getIdPaquete());
+            paquetes[i][1] = listaPaquetesParaEntregar.get(i).getFecha();
+            paquetes[i][2] = listaPaquetesParaEntregar.get(i).getCiudad();
+            paquetes[i][3] = listaPaquetesParaEntregar.get(i).getEstado();
         }
+        return paquetes;
     }
     
     /**

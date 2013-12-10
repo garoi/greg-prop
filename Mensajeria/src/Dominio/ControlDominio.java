@@ -113,7 +113,6 @@ public class ControlDominio {
         Fecha date = new Fecha();
         if (fecha.equals(date.fechaActual())) {
             if (turno.equals(date.mananaTarde())) {
-                r.acceptarRuta();
                 r.setFecha(fecha);
                 r.setTurno(turno);
                 String nombreRuta = fecha+"-"+turno;
@@ -257,8 +256,8 @@ public class ControlDominio {
     /**
      * Muestra los paquetes disponibles del operador
      */
-    public void verPaquetesOperador(){
-        oper.verPaquetes();
+    public String[][] verPaquetesOperador(){
+        return oper.verPaquetes();
     }
     
     /**
@@ -275,35 +274,6 @@ public class ControlDominio {
     private void modificarCiudad() {
        oper.modificarCiudad(map);
    }
-
-    /**
-     * Una vez el operador ha seleccionado la ciudad podemos escoger varias 
-     * opciones, para trabajar sobre la ciudad escogida
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
-     */
-   private void opcionesOperador(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
-        Scanner sc = new Scanner(System.in);
-        System.out.println("pulse 1 para calcular una ruta nueva");
-        System.out.println("2 para recalcular una ruta existente pero no confirmada");
-        System.out.println("3 para modificar una ruta");
-        System.out.println("4 para modificar una ciudad");
-        int op = sc.nextInt();
-        if(op == 1){
-            Ruta r = new Ruta();
-            iniciarRuta(r);
-        }
-        else if (op == 2){
-            recalcularRuta(nombre);
-        }
-        else if (op == 3) {
-            modificarRuta(nombre);
-        }
-        else {
-            modificarCiudad();
-        }
-    }
    
     private void modificarRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
