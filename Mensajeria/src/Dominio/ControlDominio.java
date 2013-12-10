@@ -256,8 +256,8 @@ public class ControlDominio {
     /**
      * Muestra los paquetes disponibles del operador
      */
-    public String[][] verPaquetesOperador(){
-        return oper.verPaquetes();
+    public ArrayList<String> verPaquetesOperador(String orden){
+        return oper.verPaquetes(orden);
     }
     
     /**

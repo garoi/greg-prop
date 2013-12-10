@@ -8,6 +8,7 @@ package Presentacion;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,56 +43,114 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     private void initComponents() {
 
         VerPaquetes = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaPaquetes = new javax.swing.JTable();
+        ListaPaquetes = new javax.swing.JList();
+        idPaquete = new javax.swing.JButton();
+        Fecha = new javax.swing.JButton();
+        Destino = new javax.swing.JButton();
+        Ciudad = new javax.swing.JButton();
+        Estado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tablaPaquetes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "idPaquete", "Fecha", "Ciudad", "Estado"
-            }
-        ));
-        tablaPaquetes.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tablaPaquetesAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+        jButton1.setText("OK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablaPaquetes);
 
-        jLabel1.setText("Ver Paquetes");
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("idPaquete");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+        jScrollPane1.setViewportView(ListaPaquetes);
+
+        idPaquete.setText("idPaquete");
+        idPaquete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                idPaqueteMouseClicked(evt);
+            }
+        });
+
+        Fecha.setText("Fecha");
+        Fecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FechaMouseClicked(evt);
+            }
+        });
+
+        Destino.setText("Destino");
+        Destino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DestinoMouseClicked(evt);
+            }
+        });
+
+        Ciudad.setText("Ciudad");
+        Ciudad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CiudadMouseClicked(evt);
+            }
+        });
+
+        Estado.setText("Estado");
+        Estado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstadoMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText("Ordena por:");
 
         javax.swing.GroupLayout VerPaquetesLayout = new javax.swing.GroupLayout(VerPaquetes);
         VerPaquetes.setLayout(VerPaquetesLayout);
         VerPaquetesLayout.setHorizontalGroup(
             VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerPaquetesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerPaquetesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerPaquetesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(61, 61, 61))
             .addGroup(VerPaquetesLayout.createSequentialGroup()
-                .addGap(255, 255, 255)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(idPaquete)
+                .addGap(18, 18, 18)
+                .addComponent(Fecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Destino)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(VerPaquetesLayout.createSequentialGroup()
+                        .addComponent(Ciudad)
+                        .addGap(18, 18, 18)
+                        .addComponent(Estado)))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         VerPaquetesLayout.setVerticalGroup(
             VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerPaquetesLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel1)
-                .addGap(3, 3, 3)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerPaquetesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idPaquete)
+                    .addComponent(Fecha)
+                    .addComponent(Ciudad)
+                    .addComponent(Estado)
+                    .addComponent(Destino))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(6, 6, 6))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,18 +167,50 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tablaPaquetesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaPaquetesAncestorAdded
-        String[][] paquetes =ctrlp.getDominio().verPaquetesOperador();
-        tablaPaquetes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {paquetes}
-            },
-            new String [] {
-                "idPaquete", "Fecha", "Ciudad", "Estado"
-            }
-        ));
-    }//GEN-LAST:event_tablaPaquetesAncestorAdded
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1MouseClicked
 
+    private void idPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idPaqueteMouseClicked
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("idPaquete");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }//GEN-LAST:event_idPaqueteMouseClicked
+
+    private void FechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FechaMouseClicked
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("fecha");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }//GEN-LAST:event_FechaMouseClicked
+
+    private void DestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DestinoMouseClicked
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("destino");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }//GEN-LAST:event_DestinoMouseClicked
+
+    private void CiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CiudadMouseClicked
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("ciudad");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }//GEN-LAST:event_CiudadMouseClicked
+
+    private void EstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadoMouseClicked
+        ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("estado");
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }//GEN-LAST:event_EstadoMouseClicked
+   
     /**
      * @param args the command line arguments
      */
@@ -129,6 +220,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
+        
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -156,10 +250,16 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Ciudad;
+    private javax.swing.JButton Destino;
+    private javax.swing.JButton Estado;
+    private javax.swing.JButton Fecha;
+    private javax.swing.JList ListaPaquetes;
     private javax.swing.JPanel VerPaquetes;
+    private javax.swing.JButton idPaquete;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaPaquetes;
     // End of variables declaration//GEN-END:variables
 
 }

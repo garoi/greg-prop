@@ -76,49 +76,59 @@ public class Operador implements Serializable {
     /**
      * Ordena los paquetes por identificador.
      */
-    public void ordenarPorIdPaquete() {
+    private void ordenarPorIdPaquete() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
     }
     
     /**
      * Ordena por paquetes por destino.
      */
-    public void ordenarPorDestino() {
+    private void ordenarPorDestino() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
     }
     
     /**
      * Ordena los paquetes por fecha y turno.
      */
-    public void ordenarPorFechaTurno() {
+    private void ordenarPorFechaTurno() {
         Collections.sort(listaPaquetesParaEntregar, new Paquete.FechaTurnoComparator());
+    }
+    
+    private void ordenarPorCiudad() {
+        Collections.sort(listaPaquetesParaEntregar, new Paquete.CiudadComparator());
+    }
+    
+    private void ordenarPorEstado() {
+        Collections.sort(listaPaquetesParaEntregar, new Paquete.EstadoComparator());
     }
     
     /**
      * Muestra los paquetes por pantalla segun el criterio que se pida.
      */
-    public String[][] verPaquetes() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1 Para ver segun idCliente 2 Para ver segun Destino 3 Para ver segun feha y turno.");
-        int op = 0 ;// = sc.nextInt();
-        if (op == 1) {
+    public ArrayList<String> verPaquetes(String orden) {
+        if (orden.equals("idPaquete")) {
             ordenarPorIdPaquete();
         }
-        else if (op == 2) {
+        else if (orden.equals("destino")) {
             ordenarPorDestino();
         }
-        else if (op == 3) {
+        else if (orden.equals("fecha")) {
             ordenarPorFechaTurno();
         }
-        else {
-            System.out.println("Mal escrito");
+        else if (orden.equals("ciudad")){
+            ordenarPorCiudad();
         }
-        String[][] paquetes = new String[listaPaquetesParaEntregar.size()][4];
+        else if (orden.equals("estado")){
+            ordenarPorEstado();
+        }
+        ArrayList<String> paquetes = new ArrayList<>();
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            paquetes[i][0] = String.valueOf(listaPaquetesParaEntregar.get(i).getIdPaquete());
-            paquetes[i][1] = listaPaquetesParaEntregar.get(i).getFecha();
-            paquetes[i][2] = listaPaquetesParaEntregar.get(i).getCiudad();
-            paquetes[i][3] = listaPaquetesParaEntregar.get(i).getEstado();
+            String paqs = String.valueOf(listaPaquetesParaEntregar.get(i).getIdPaquete()) + "    " ;
+            paqs = paqs + listaPaquetesParaEntregar.get(i).getFecha() + "    ";
+            paqs = paqs + listaPaquetesParaEntregar.get(i).getDestino() + "    ";
+            paqs = paqs + listaPaquetesParaEntregar.get(i).getCiudad() + "    ";
+            paqs = paqs + listaPaquetesParaEntregar.get(i).getEstado() + "    ";
+            paquetes.add(paqs);
         }
         return paquetes;
     }

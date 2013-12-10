@@ -195,4 +195,18 @@ public class Paquete implements Serializable{
             else return -1;
         }
     }
+    
+    public static class CiudadComparator implements Comparator<Paquete> {
+        @Override public int compare(Paquete p1, Paquete p2) {
+            if (p1.getCiudad().compareTo(p2.getCiudad()) < 0) return 1;
+            else return -1;
+        }
+    }
+    
+    public static class EstadoComparator implements Comparator<Paquete> {
+        @Override public int compare(Paquete p1, Paquete p2) {
+            if (p1.getEstado().compareTo(p2.getEstado()) < 0) return 1;
+            else return -1;
+        }
+    }
 }
