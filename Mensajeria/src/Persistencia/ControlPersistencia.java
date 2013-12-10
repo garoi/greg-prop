@@ -128,4 +128,8 @@ public class ControlPersistencia {
         }
         return null;
     }
+
+    public void elimnarRuta(String ruta) {
+        pr.eliminarRuta(ruta);
+    }
 }

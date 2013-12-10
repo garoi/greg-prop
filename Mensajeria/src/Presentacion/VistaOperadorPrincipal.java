@@ -122,10 +122,20 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnValidarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnValidarRuta.setForeground(new java.awt.Color(220, 220, 220));
         btnValidarRuta.setText("Validar");
+        btnValidarRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarRutaActionPerformed(evt);
+            }
+        });
 
         btnEliminarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminarRuta.setForeground(new java.awt.Color(220, 220, 220));
         btnEliminarRuta.setText("Eliminar");
+        btnEliminarRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarRutaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,7 +168,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -224,6 +234,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnRutaOptima.setBackground(new java.awt.Color(75, 75, 75));
         btnRutaOptima.setForeground(new java.awt.Color(220, 220, 220));
         btnRutaOptima.setText("Ruta opt.");
+        btnRutaOptima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRutaOptimaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout accionesPanelLayout = new javax.swing.GroupLayout(accionesPanel);
         accionesPanel.setLayout(accionesPanelLayout);
@@ -516,27 +531,27 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void listaEnRutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEnRutaMouseClicked
         if (evt.getClickCount() == 2) {
             int idx = listaEnRuta.getSelectedIndex();      
-        anadir = (String) listaEnRuta.getSelectedValue();
-        listaEnRutaS.remove(idx);
-        listaPendientesS.add(anadir);
+            anadir = (String) listaEnRuta.getSelectedValue();
+            listaEnRutaS.remove(idx);
+            listaPendientesS.add(anadir);
 
-        listaPendientes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaPendientesS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
-        
-        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaEnRutaS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
+            listaPendientes.setModel(new javax.swing.AbstractListModel() {
+                ArrayList<String> strings = listaPendientesS;
+                public int getSize() { return strings.size(); }
+                public Object getElementAt(int i) { return strings.get(i); }
+            });
+
+            listaEnRuta.setModel(new javax.swing.AbstractListModel() {
+                ArrayList<String> strings = listaEnRutaS;
+                public int getSize() { return strings.size(); }
+                public Object getElementAt(int i) { return strings.get(i); }
+            });
         }
     }//GEN-LAST:event_listaEnRutaMouseClicked
 
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
         try {
-            ctrlp.getDominio().rutaRapida(listaEnRutaS, fechaCD, Ciudad);
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, Ciudad, "rapidamente");
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -544,6 +559,36 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         actualizarRutas();
     }//GEN-LAST:event_btnRutaRapidaActionPerformed
+
+    private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, Ciudad, "lentamente");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRutaOptimaActionPerformed
+
+    private void btnValidarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarRutaActionPerformed
+        int idx = listaRutas.getSelectedIndex();      
+        String ruta = (String) listaRutas.getSelectedValue();
+        try {
+            ctrlp.getDominio().acceptarRuta(ruta, fechaCD, Ciudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnValidarRutaActionPerformed
+
+    private void btnEliminarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRutaActionPerformed
+        int idx = listaRutas.getSelectedIndex();      
+        String ruta = (String) listaRutas.getSelectedValue();
+        System.out.println("LA RUTA ES " + ruta);
+        ctrlp.getDominio().eliminarRuta(ruta);
+        actualizarRutas();
+    }//GEN-LAST:event_btnEliminarRutaActionPerformed
 
     public void actualizarCiudad(String nombreCiudad) {
         Ciudad = nombreCiudad;

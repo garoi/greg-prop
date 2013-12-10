@@ -81,4 +81,9 @@ public class PersistenciaRutas {
             }
         }
     }
+
+    void eliminarRuta(String ruta) {
+        File fichero = new File("Data/Rutas/"+ruta);
+        fichero.delete();
+    }
 }

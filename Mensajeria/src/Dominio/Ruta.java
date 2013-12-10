@@ -194,15 +194,7 @@ public class Ruta implements Serializable {
      * @param
      */
     public void acceptarRuta() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Verificas la ruta. s/n");
-        String ord = sc.nextLine();
-        if (ord.equals("s")) {
-            verificada = true;
-        }
-        else {
-            verificada = false;
-        }
+        verificada = true;
     }
     
     /**

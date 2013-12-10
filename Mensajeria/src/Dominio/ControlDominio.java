@@ -501,7 +501,7 @@ public class ControlDominio {
         return result;
     }
 
-    public void rutaRapida(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = new Ruta();
         String turno = saberTurno(fecha);
         String fecha2 = fecha.substring(0,fecha.length()-2);
@@ -515,7 +515,16 @@ public class ControlDominio {
             p = oper.buscarPaquete(idPaquete);
             paquetesSeleccionados.add(p);
         }
-        String tipo = "rapidamente";
         calcularRuta(paquetesSeleccionados, fecha2, turno, r, tipo);
+    }
+
+    public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Ruta rval = (Ruta) cp.leerRuta(ruta);
+        rval.acceptarRuta();
+        cp.guardarRuta(rval, fecha, rval.isVerificada(), nombreCiudad);
+    }
+
+    public void eliminarRuta(String ruta) {
+        cp.elimnarRuta(ruta);
     }
 }
