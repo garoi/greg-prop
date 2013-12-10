@@ -23,7 +23,6 @@ public class CtrlPresentacion {
     private VistaLogin vistaLogin;
     private VistaClientePrincipal vistaCliente;
     private VistaOperadorPrincipal vistaOperador;
-    private VistaVerPaquetes vistaPaquetes;
     private VistaMapa vistaMapa;
     private VistaSeleccionTurno vistaTurno;
     private VistaSeleccionCiudad vistaCiudad;
