@@ -238,9 +238,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
-        System.out.println("Click anadir");
         ctrlp.iniVentanaSecundaria("añadirPaquete");
-        System.out.println("Click anadir2");
     }//GEN-LAST:event_botonAnadirActionPerformed
 
     /**
