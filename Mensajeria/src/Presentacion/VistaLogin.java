@@ -168,7 +168,6 @@ public class VistaLogin extends javax.swing.JFrame {
             String contrasena = new String(fieldContrasena.getPassword());
             
             // if campos validos switch modo
-            System.out.println("Falta Validar Campos del Registro");
             if(tipoUsuario=="Cliente"){
                 try {
                     ctrlp.getDominio().registroCliente(usuario, contrasena);
@@ -195,21 +194,15 @@ public class VistaLogin extends javax.swing.JFrame {
             this.cambiarModo();
         }
         jPanel2.repaint();
-        System.out.println(modo);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO loguear para operador o para usuario
         
-        System.out.println("Si los campos son validos:");
-        System.out.println("   hacer login.");
-        System.out.println("si no:");
-        System.out.println("   vaciar los campos y mostrar un mensaje de error.");
         String usuario = fieldUsuario.getText();
         String contrasena = new String(fieldContrasena.getPassword());
         
         if(tipoUsuario == "Cliente"){
-            System.out.println("LoginCliente");
             if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
                 try {
                     ctrlp.setVentanaPrincipal("vistaCliente");
@@ -221,9 +214,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         }
         else{
-            System.out.println("LoginOperador");
             try {
-                System.out.println("miu");
                 if (ctrlp.getDominio().loginOperador(usuario, contrasena)) {
                     ctrlp.setVentanaPrincipal("vistaOperador");
                 }

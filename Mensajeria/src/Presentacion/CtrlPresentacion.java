@@ -109,14 +109,12 @@ public class CtrlPresentacion {
         ventanaPrimaria.setLocationRelativeTo(null);
         ventanaPrimaria.repaint();
     }
-
-//    /**
-//     * Actualiza la ventana secundaria redibujando sus componentes
-//     */
-//    public void actualizarVentanaSecundaria(){
-//        ventanaSecundaria.repaint();        
-//    }
     
+    
+    /**
+     * Permite mostrar una ventana secundaria.
+     * @param nuevaVentana el selector de la ventana secundaria que se va a abrir.
+     */
     public void iniVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
@@ -155,10 +153,12 @@ public class CtrlPresentacion {
             break;
                 
             default:
+                System.out.println("***** ERROR iniVentanaSecundaria llamada inválida");
                 ventanaSecundaria = new VistaMapa(this);
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
             break;
         }
+        System.out.println("setrelative null");
         ventanaSecundaria.setLocationRelativeTo(null);
         ventanaSecundaria.setVisible(true);
         ventanaSecundaria.setResizable(false);
@@ -166,7 +166,7 @@ public class CtrlPresentacion {
     }
     
     /**
-     * Aumenta o disminuye el tamaño de la ventana primaria.
+     * Aumenta o disminuye el tamaño de la ventana primaria según su tamaño.
      * @param w el ancho con el que aumenta o disminuye la ventana primaria.
      * @param h el alto con el que aumenta o disminuye la ventana primaria.
      */
@@ -175,7 +175,7 @@ public class CtrlPresentacion {
     }
     
     /**
-     * Aumenta o disminuye el tamaño de la ventana secundaria.
+     * Aumenta o disminuye el tamaño de la ventana secundaria según su tamaño.
      * @param w el ancho con el que aumenta o disminuye la ventana secundaria.
      * @param h el alto con el que aumenta o disminuye la ventana secundaria.
      */
@@ -190,9 +190,7 @@ public class CtrlPresentacion {
     public void setVentanaPrincipal(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
         switch(nombre){
             case "vistaLogin":
-                if (vistaLogin == null){
-                    vistaLogin = new VistaLogin(this, tipoUsuario);
-                }
+                if (vistaLogin == null) vistaLogin = new VistaLogin(this, tipoUsuario);
                 cambiarContenidoVentanaPrimaria(vistaLogin.getContentPane());
                 ventanaPrimaria.setTitle("Mensajeria | Login | " + tipoUsuario);
                 Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
@@ -202,9 +200,7 @@ public class CtrlPresentacion {
                 actualizarVentanaPrimaria();
                 break;
             case "vistaCliente":
-                if (vistaCliente == null){
-                    vistaCliente = new VistaClientePrincipal(this);
-                }
+                if (vistaCliente == null) vistaCliente = new VistaClientePrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaCliente.getContentPane());
                 setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Cliente");
@@ -215,9 +211,7 @@ public class CtrlPresentacion {
                 actualizarVentanaPrimaria();
                 break;
             case "vistaOperador":
-                if (vistaOperador == null){
-                    vistaOperador = new VistaOperadorPrincipal(this);
-                }
+                if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaOperador.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
@@ -228,20 +222,50 @@ public class CtrlPresentacion {
                 actualizarVentanaPrimaria();
                 break;
             default:
-                System.out.println("derp");
+                System.out.println("***** ERROR llamada a setVentanaPrincipal con una vista inválida");
                 break;
         }
     }
-
+    
+    /**
+     * Gestiona todas las actualizaciones necesarias en la vista del cliente.
+     */
     void actualizarVistaCliente() {
-        vistaCliente.actualizarlista();
+        if (vistaCliente != null)
+            vistaCliente.actualizarlista();
     }
 
+    
+    /**
+     * Permite actualizar el nombre de la ciudad seleccionada por el operador.
+     * @param nombreCiudad el nombre de la ciudad seleccionada.
+     */
     void actualizarVistaOperador(String nombreCiudad) {
-        vistaOperador.actualizarCiudad(nombreCiudad);
+        if (vistaOperador != null)
+            vistaOperador.actualizarCiudad(nombreCiudad);
     }
 
+    /**
+     * Permite actualizar la fecha y turno de la vista del operador.
+     * @param dia dia al que se actualiza
+     * @param mes mes al que se actualiza
+     * @param ano año al que se actualiza
+     * @param turno turno al que se actualiza
+     */
     void actualizarDia(int dia, int mes, int ano, String turno) {
-        vistaOperador.actualizarDia(dia, mes, ano, turno);
+        if (vistaOperador != null)
+            vistaOperador.actualizarDia(dia, mes, ano, turno);
+    }
+    
+    
+    /**
+     * Devuelve un string con la primera letra en mayúscula
+     * @param s el string que se quiere convertir
+     * @return un string con su primera letra en mayúscula y el resto en minúscula
+     */
+    String titularizar(String s){
+        if (s.length()>=1)
+            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+        return "";
     }
 }
