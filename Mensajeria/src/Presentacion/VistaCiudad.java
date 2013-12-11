@@ -101,6 +101,7 @@ public class VistaCiudad extends javax.swing.JFrame {
         
         super.paint(g);
         g.setColor(Color.red);
+        
         g.drawOval (20, 50, 630, 630);
 
         g.setColor (Color.blue);
