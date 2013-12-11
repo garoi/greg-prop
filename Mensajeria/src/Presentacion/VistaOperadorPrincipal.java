@@ -174,7 +174,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -274,7 +274,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(accionesPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAnadirPaquete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(eliminarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRutaRapida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +313,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -485,6 +485,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             listaPendientesS.remove(idx);
             listaEnRutaS.add(anadir);
         }
+        listaPendientesS =ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
         actualizarListaPendientes();
         actualizarListaEnRuta();
         
@@ -499,17 +500,19 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     private void panelTurnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTurnoMouseClicked
         ctrlp.iniVentanaSecundaria("vistaTurno");
-        nombreRuta = null;
+        nombreRuta = new String();
     }//GEN-LAST:event_panelTurnoMouseClicked
 
     private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCiudadMouseClicked
         ctrlp.iniVentanaSecundaria("vistaCiudad");
-        nombreRuta = null;
+        nombreRuta = new String();
     }//GEN-LAST:event_panelCiudadMouseClicked
 
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
         int idx = listaRutas.getSelectedIndex();      
         nombreRuta = (String) listaRutas.getSelectedValue();
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        actualizarListaPendientes();
         try {
             mostrarPaquetesEnRuta();
         } catch (IOException ex) {
@@ -608,11 +611,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        actualizarRutas();
     }//GEN-LAST:event_btnRutaOptimaActionPerformed
 
     private void btnValidarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarRutaActionPerformed
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
+        actualizarListaPendientes();
         try {
             ctrlp.getDominio().acceptarRuta(ruta, fechaCD, Ciudad);
         } catch (IOException ex) {
@@ -625,9 +630,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnEliminarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRutaActionPerformed
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
-        System.out.println("LA RUTA ES " + ruta);
+        actualizarListaPendientes();
         ctrlp.getDominio().eliminarRuta(ruta);
         actualizarRutas();
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        actualizarListaPendientes();
+        nombreRuta = new String();
+        listaEnRutaS.removeAll(listaEnRutaS);
+        actualizarListaEnRuta();
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
 
     private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRutaActionPerformed

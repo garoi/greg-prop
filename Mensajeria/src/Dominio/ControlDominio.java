@@ -30,6 +30,7 @@ public class ControlDominio {
     public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
         cu = new ControlUsuario();
         cp = new ControlPersistencia();
+        cp.crearDirectorios();
         lc = (ListaClientes) leerListaClientes();
         if(lc == null) lc = new ListaClientes();
         
@@ -109,25 +110,11 @@ public class ControlDominio {
             r.calcularChristofides();
             //Llamar a la optimizacion
         }
-        r.mostrarRuta();
-        Fecha date = new Fecha();
-        if (fecha.equals(date.fechaActual())) {
-            if (turno.equals(date.mananaTarde())) {
-                r.setFecha(fecha);
-                r.setTurno(turno);
-                String nombreRuta = fecha+"-"+turno;
-                cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
-                if (r.isVerificada()) {
-                    paquetesEnviados(r);
-                }
-            }
-        }
-        else {
-            r.setFecha(fecha);
-            String nombreRuta = fecha+"-"+turno;
-            cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
-        }
-        
+        r.setFecha(fecha);
+        r.setTurno(turno);
+        String nombreRuta = fecha+"-"+turno;
+        System.out.println("LLEGO PARA GUARDAR");
+        cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     
     private void paquetesEnviados(Ruta r) throws IOException {

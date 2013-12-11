@@ -50,7 +50,7 @@ public class CtrlPresentacion {
             vistaInicial = new VistaInicial(this);
             ventanaPrimaria = vistaInicial;
             vistaInicial=null;
-            ImageIcon img = new ImageIcon("Data/Resource/icono.png");
+            ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/icono.png"));
             ventanaPrimaria.setIconImage(img.getImage());
             ventanaPrimaria.setLocationRelativeTo(null);
             ventanaPrimaria.setVisible(true);

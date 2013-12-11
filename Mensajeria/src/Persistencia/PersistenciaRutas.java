@@ -65,16 +65,19 @@ public class PersistenciaRutas {
             nombreFichero = file.getName();
             boolean borrar = nombreFichero.endsWith(data+"-NO_verificada-ruta.txt");
             if (borrar) {
+                System.out.println("Entro1");
                 file.delete();
             }
         }
         if (verificada) {
-            String nombreRuta = nombreCiudad + "-" + data + "-verificada-ruta.txt";
+            System.out.println("Entro2");
+            String nombreRuta = nombreCiudad + "-" + data + "-Verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             }
         }
         else {
+            System.out.println("Entro3");
             String nombreRuta = nombreCiudad + "-" + data + "-NO_verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
