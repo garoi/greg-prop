@@ -99,9 +99,10 @@ public class ControlDominio {
      * @param r
      * @throws IOException 
      */
-    private void calcularRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
+    private void calculaRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
+        System.out.println("VOY A CREAR EL GRAFO");
         r.crearGrafo(paquetesSeleccionados, map);
-        
+        System.out.println("VOY A CREAR EL GRAFO");
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
         }
@@ -111,6 +112,7 @@ public class ControlDominio {
             r.calcularChristofides();
         }
         r.distanciaRuta();
+        System.out.println("voy a crear cosillas");
         r.setFecha(fecha);
         r.setTurno(turno);
         String nombreRuta = fecha+"-"+turno;
@@ -118,7 +120,6 @@ public class ControlDominio {
     }
     
     public void paquetesEnviados(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
-        System.out.println("Cambio de estado");
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
         oper.cambiarEstadoPaquetes(paquetesEnviados);
@@ -160,25 +161,6 @@ public class ControlDominio {
             puntos[i] = destinos.get(i);
         }
         return puntos;
-    }
-    
-    /**
-     * Lee una ruta
-     * @return Ruta
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
-     */
-    private Object leerRuta(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<String> rutas = new ArrayList<>();
-        rutas = cp.listarRutasNoVerificadas(nombreCiudad);
-        for(int i = 0; i < rutas.size(); ++i) {
-            System.out.println(rutas.get(i));
-        }
-        System.out.println("Elige la ruta:");
-        String nombre = sc.nextLine();
-        return cp.leerRuta(nombre);
     }
     
     /**
@@ -246,7 +228,7 @@ public class ControlDominio {
      * Muestra los paquetes disponibles del operador
      */
     public ArrayList<String> verPaquetesOperador(String orden){
-        return oper.verPaquetes(orden);
+        return lp.verPaquetes(orden);
     }
     
     /**
@@ -266,7 +248,7 @@ public class ControlDominio {
    
     private void modificarRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
-        Ruta r = (Ruta) leerRuta(nombre);
+        Ruta r = new Ruta();//Ruta r = (Ruta) leerRuta(nombre);
         Mapa maptem = r.getMapa();
         ArrayList<String> nombresCiu = maptem.getNombres();
         Integer[] puntosRuta = r.getPermutacion();
@@ -322,8 +304,8 @@ public class ControlDominio {
     public boolean cancelarPaquete(int idPaquete) throws IOException{
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
-            lp.eliminarPaquete(idPaquete);
-            boolean ok = oper.eliminaPaquete(idPaquete);
+            lp.cancelarPaquete(idPaquete);
+            boolean ok = oper.cancelarPaquete(idPaquete);
             cp.guardadoGeneral(lc, lp, oper);
             return true;
         }
@@ -334,7 +316,7 @@ public class ControlDominio {
         boolean eliminado = cl.eliminarPaquete(idPaquete);
         if(eliminado){
             lp.eliminarPaquete(idPaquete);
-            boolean ok = oper.cancelarPaquete(idPaquete);
+            boolean ok = oper.eliminarPaquete(idPaquete);
             cp.guardadoGeneral(lc, lp, oper);
             return true;
         }
@@ -437,7 +419,7 @@ public class ControlDominio {
             p = oper.buscarPaquete(idPaquete);
             paquetesSeleccionados.add(p);
         }
-        calcularRuta(paquetesSeleccionados, fecha2, turno, r, tipo);
+        calculaRuta(paquetesSeleccionados, fecha2, turno, r, tipo);
     }
 
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -448,5 +430,13 @@ public class ControlDominio {
 
     public void eliminarRuta(String ruta) {
         cp.elimnarRuta(ruta);
+    }
+    
+    public ArrayList<String> getNombresCiudad() {
+        return map.getNombres();
+    }
+    
+    public ArrayList<ArrayList<Float>> getDistanciaCiudad() {
+        return map.getCiudad();
     }
 }

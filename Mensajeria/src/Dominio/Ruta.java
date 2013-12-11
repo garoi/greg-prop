@@ -158,7 +158,13 @@ public class Ruta implements Serializable {
         ch.setGrafo(grafo);
         ch.setNombres(nombres);
         ch.setMST(MSTK);
-        permutacion = ch.buscaPermutacion();
+        Integer[] aux = ch.buscaPermutacion();
+        Integer[] aux2 = new Integer[aux.length - 2];
+        for (int i = 0; i < aux2.length; ++i) {
+            aux2[i] = aux[i];
+        }
+        
+        permutacion = aux2;
     }
     
     /**
@@ -182,8 +188,10 @@ public class Ruta implements Serializable {
     
     public void distanciaRuta() {
         int suma = 0;
+        System.out.println("Tamany " + permutacion.length);
         for (int i = 0; i < permutacion.length; ++i) {
             if (i + 1 < permutacion.length) {
+                System.out.println("Tmuuuu");
                 suma += grafo[i][i+1];
             }
             else {
@@ -193,6 +201,7 @@ public class Ruta implements Serializable {
                 }
             }
         }
+        System.out.println("Salgo del for");
         costeRuta = suma;
     }
     

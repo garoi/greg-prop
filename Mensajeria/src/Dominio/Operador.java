@@ -75,66 +75,6 @@ public class Operador implements Serializable {
     }
     
     /**
-     * Ordena los paquetes por identificador.
-     */
-    private void ordenarPorIdPaquete() {
-        Collections.sort(listaPaquetesParaEntregar, new Paquete.IdPaqueteComparator());
-    }
-    
-    /**
-     * Ordena por paquetes por destino.
-     */
-    private void ordenarPorDestino() {
-        Collections.sort(listaPaquetesParaEntregar, new Paquete.DestinoComparator());
-    }
-    
-    /**
-     * Ordena los paquetes por fecha y turno.
-     */
-    private void ordenarPorFechaTurno() {
-        Collections.sort(listaPaquetesParaEntregar, new Paquete.FechaTurnoComparator());
-    }
-    
-    private void ordenarPorCiudad() {
-        Collections.sort(listaPaquetesParaEntregar, new Paquete.CiudadComparator());
-    }
-    
-    private void ordenarPorEstado() {
-        Collections.sort(listaPaquetesParaEntregar, new Paquete.EstadoComparator());
-    }
-    
-    /**
-     * Muestra los paquetes por pantalla segun el criterio que se pida.
-     */
-    public ArrayList<String> verPaquetes(String orden) {
-        if (orden.equals("idPaquete")) {
-            ordenarPorIdPaquete();
-        }
-        else if (orden.equals("destino")) {
-            ordenarPorDestino();
-        }
-        else if (orden.equals("fecha")) {
-            ordenarPorFechaTurno();
-        }
-        else if (orden.equals("ciudad")){
-            ordenarPorCiudad();
-        }
-        else if (orden.equals("estado")){
-            ordenarPorEstado();
-        }
-        ArrayList<String> paquetes = new ArrayList<>();
-        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            String paqs = String.valueOf(listaPaquetesParaEntregar.get(i).getIdPaquete()) + "    " ;
-            paqs = paqs + listaPaquetesParaEntregar.get(i).getFecha() + "    ";
-            paqs = paqs + listaPaquetesParaEntregar.get(i).getDestino() + "    ";
-            paqs = paqs + listaPaquetesParaEntregar.get(i).getCiudad() + "    ";
-            paqs = paqs + listaPaquetesParaEntregar.get(i).getEstado() + "    ";
-            paquetes.add(paqs);
-        }
-        return paquetes;
-    }
-    
-    /**
      * Devuelve el paquete de id "idPaquete" pasado por referencia.
      * @param idPaquete entero que identifica un paquete.
      * @return el paquete con el identificador idPaquete pasado por referencia
@@ -189,18 +129,6 @@ public class Operador implements Serializable {
         for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
             if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
                 if (listaPaquetesParaEntregar.get(i).getEstado().equals("para enviar")) {
-                    listaPaquetesParaEntregar.remove(i);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-    public boolean eliminaPaquete(int idPaquete) {
-        for (int i = 0; i < listaPaquetesParaEntregar.size(); ++i) {
-            if (listaPaquetesParaEntregar.get(i).getIdPaquete() == idPaquete) {
-                if (listaPaquetesParaEntregar.get(i).getEstado().equals("enviado")) {
                     listaPaquetesParaEntregar.remove(i);
                     return true;
                 }
