@@ -24,17 +24,7 @@ public class Main {
 
             @Override
             public void run() {
-                Scanner sc = new Scanner(System.in);
-                System.out.println("1 para arrancar la interfaz.");
-//                System.out.println("2 para ejecutar el programa por terminal.");
-                System.out.println("3 para cerrar el programa.");
-                int i = sc.nextInt();
-                if( i == 1) ctrlp = new CtrlPresentacion();
-//                else if(i==2){ 
-//                    msn = new Mensajeria();
-//                    msn.main(args);
-//                }
-                else System.exit(0);
+                ctrlp = new CtrlPresentacion();
             }
         });
     }
