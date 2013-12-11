@@ -41,7 +41,7 @@ public class PersistenciaRutas {
         for(File file:nombres) {
             nombreFichero = file.getName();
             boolean nombre = nombreFichero.startsWith(nombreCiudad);
-            boolean guion = nombreFichero.endsWith("-verificada-ruta.txt");
+            boolean guion = nombreFichero.endsWith("-Verificada-ruta.txt");
             if (nombre & guion) {
                 ficheros.add(nombreFichero);
             }
@@ -52,7 +52,6 @@ public class PersistenciaRutas {
     public Object leerRuta(String nombre) throws FileNotFoundException, IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Rutas/"+nombre))) {
             Object m2 = ois.readObject();
-            System.out.println("DEVOLVER RUTA SELECCIONADA");
             return m2;
         }
     }
@@ -69,7 +68,7 @@ public class PersistenciaRutas {
             }
         }
         if (verificada) {
-            String nombreRuta = nombreCiudad + "-" + data + "-verificada-ruta.txt";
+            String nombreRuta = nombreCiudad + "-" + data + "-Verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             }
