@@ -106,18 +106,20 @@ public class ControlDominio {
             r.calcularRapida();
         }
         else {
+            //Llamar a la optimizacion
             r.calcularMinSpaTree();
             r.calcularChristofides();
-            //Llamar a la optimizacion
         }
+        r.distanciaRuta();
         r.setFecha(fecha);
         r.setTurno(turno);
         String nombreRuta = fecha+"-"+turno;
-        System.out.println("LLEGO PARA GUARDAR");
         cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     
-    private void paquetesEnviados(Ruta r) throws IOException {
+    public void paquetesEnviados(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+        System.out.println("Cambio de estado");
+        Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
         oper.cambiarEstadoPaquetes(paquetesEnviados);
         for(int i =0; i < paquetesEnviados.size();++i){
@@ -289,54 +291,6 @@ public class ControlDominio {
         r.calcularRapida();
         r.mostrarRuta();
     }
-    
-    /**
-     * Recalcula una ruta ya guardada previamente
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
-     */
-    private void recalcularRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
-        Ruta r = (Ruta) leerRuta(nombre);
-        ArrayList<Paquete> paquetes = new ArrayList<>();
-        paquetes = r.getListaPaquetesRuta();
-        System.out.println("Paquetes de recalculo");
-        paquetes = oper.modificaListaPaquetes(paquetes);
-        map = r.getMapa();
-        System.out.println("Procedemos al recalculo de la ruta");
-        calcularRuta(paquetes, r.getFecha(), r.getTurno(), r, null);
-        
-   }
-    
-    /**
-     * Inialicializa el proceso de creacion de una ruta
-     * @param fecha
-     * @param r
-     * @throws IOException 
-     */
-    private void iniciarRuta(Ruta r) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Quieres calcular la ruta de hoy y de este turno? s/n");
-        String ord = sc.nextLine();
-        Fecha date = new Fecha();
-        if (ord.equals("s")) {
-            ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(map.getNombreCiudad(), date.fechaActual(), date.mananaTarde());;
-            String fechaactual = date.fechaActual();
-            String turno = date.mananaTarde();
-            calcularRuta(paquetesSeleccionados, fechaactual, turno, r, null);     
-        }
-        else {
-            System.out.println("Entra la fecha (dd.mm.aa)");
-            String fecharuta = sc.nextLine();
-            if (date.comprobarFecha(fecharuta)) {
-                System.out.println("Entra el turno (manana/tarde)");
-                String turno = sc.nextLine();
-                ArrayList <Paquete> paquetesSeleccionados = oper.seleccionarPaquetes(map.getNombreCiudad(), fecharuta, turno);
-                calcularRuta(paquetesSeleccionados, fecharuta, turno, r, null);
-            }
-        }
-    }
-    
     
     /**
      * El cliente añade un paquete para enviar

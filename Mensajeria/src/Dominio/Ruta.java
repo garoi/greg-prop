@@ -16,6 +16,7 @@ public class Ruta implements Serializable {
     private Mapa mapa;
     private String fecha;
     private String turno;
+    private float costeRuta;
 
     private ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
 
@@ -179,6 +180,22 @@ public class Ruta implements Serializable {
         System.out.println();
     }
     
+    public void distanciaRuta() {
+        int suma = 0;
+        for (int i = 0; i < permutacion.length; ++i) {
+            if (i + 1 < permutacion.length) {
+                suma += grafo[i][i+1];
+            }
+            else {
+                //O ES UN SOL PUNT O L'ULTIM ELEMENT
+                if (permutacion.length == 1) {
+                    suma += grafo[i][i];
+                }
+            }
+        }
+        costeRuta = suma;
+    }
+    
     /**
      * Verifica una ruta
      * @param
@@ -209,15 +226,6 @@ public class Ruta implements Serializable {
                 // Ahora se accede de esta manera a las distancias.
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
-            
-        }
-        System.out.println("Este es el subgrafo");
-        for(int i = 0; i < grafo.length; ++i){
-            System.out.println("nombres[i] :" + nombres[i]);
-            for(int j = 0; j < grafo.length; ++j){
-                System.out.print(grafo[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 }
