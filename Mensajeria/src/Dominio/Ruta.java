@@ -165,6 +165,9 @@ public class Ruta implements Serializable {
         }
         
         permutacion = aux2;
+        Optimizacion op = new Optimizacion();
+        op.inicializa(permutacion, nombres, grafo, costeRuta);
+        boolean mejor = op.pruebaOptimizar();
     }
     
     /**
