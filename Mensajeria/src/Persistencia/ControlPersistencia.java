@@ -150,15 +150,16 @@ public class ControlPersistencia {
                 else escribir_buffer.write(" " + nombres.get(i));
             }
             escribir_buffer.newLine();
-            boolean b = false; //para no duplicar los datos
-            for(int i = 0; i < ciudad.size(); ++i){
-                for(int j = 0; j < ciudad.get(i).size(); ++j){
-                    if(b){
+            //boolean b = false; //para no duplicar los datos
+            for(int i = 0; i < ciudad.size() - 1; ++i){
+                for(int j = i+1; j < ciudad.get(i).size(); ++j){
+                    /*if(b){
                         escribir_buffer.write(nombres.get(i) + " " + nombres.get(j) + " " + ciudad.get(i).get(j));
                     }
-                    if(ciudad.get(i).get(j).equals(0.0)) b = true;
+                    if(ciudad.get(i).get(j).equals(0.0)) b = true;*/
+                    escribir_buffer.write(nombres.get(i) + " " + nombres.get(j) + " " + ciudad.get(i).get(j));
                 }
-                b = false;
+                //b = false;
                 escribir_buffer.newLine();
             }
         } catch (Exception e) {
