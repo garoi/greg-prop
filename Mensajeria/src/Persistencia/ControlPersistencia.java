@@ -177,4 +177,14 @@ public class ControlPersistencia {
             
         }
     }
+    
+    public void crearFichero(String nomFichero){
+        try{
+            File file = new File("Data/Mapas/" + nomFichero + "-mapa.txt");
+            if(file.createNewFile()) System.out.print("Fichero creado correctamente");
+            else System.out.print("No se ha creado el fichero");
+        }catch(Exception e){
+            
+        }
+    }
 }
