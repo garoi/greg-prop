@@ -432,7 +432,8 @@ public class ControlDominio {
         cp.elimnarRuta(ruta);
     }
     
-    public ArrayList<String> getNombresCiudad() {
+    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+        map = (Mapa) cp.leerCiudad(nombreCiudad);
         return map.getNombres();
     }
     

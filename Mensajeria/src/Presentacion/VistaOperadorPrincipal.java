@@ -772,7 +772,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         });
     }
 
-    String getCiudad() {
+    public String getCiudad() {
         return nombreCiudad;
     }
 }

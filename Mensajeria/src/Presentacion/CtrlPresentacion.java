@@ -150,7 +150,7 @@ public class CtrlPresentacion {
             break;
                 
             case "verDibujoCiudad":
-                if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this, getCiudadOperador());
+                if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this);
                 ventanaSecundaria = dibujoCiudad;
                 ventanaSecundaria.setTitle("Dibujo de la ciudad");
                 setTamanoVentanaSecundaria(0, 0);
@@ -290,7 +290,7 @@ public class CtrlPresentacion {
         return "";
     }
 
-    private String getCiudadOperador() {
+    public String getCiudadOperador() {
         return vistaOperador.getCiudad();
     }
 }
