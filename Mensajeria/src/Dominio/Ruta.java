@@ -166,29 +166,12 @@ public class Ruta implements Serializable {
         
         permutacion = aux2;
         Optimizacion op = new Optimizacion();
-        permutacion[0] = 1;
-        permutacion[1] = 0;
-        permutacion[2] = 2;
-        permutacion[3] = 3;
-        costeRuta = 21;
-        System.out.println("permutacionlengt : " + permutacion.length);
         op.inicializa(permutacion, nombres, grafo, costeRuta);
-        for(int i = 0; i < permutacion.length;++i){
-            System.out.print(permutacion[i]);
-        }
-        System.out.println();
         boolean cambio = op.randSwap();
         if(cambio){
             permutacion = op.getSolucion();
             costeRuta = op.getComparador();
-            System.out.println("el coste es este :" + costeRuta);
-            for(int i = 0; i < permutacion.length; ++i){
-                System.out.print(permutacion[i]+ " ");
-            }
-            System.out.println();
         }
-        
-        //posibleSolucion = op.pruebaOptimizar();
     }
     
     /**
@@ -212,19 +195,17 @@ public class Ruta implements Serializable {
     
     public void distanciaRuta() {
         float suma = 0;
-        System.out.println("Tamany " + permutacion.length);
         for (int i = 0; i < permutacion.length; ++i) {
             if (i + 1 < permutacion.length) {
-                suma += grafo[i][i+1];
+                suma += grafo[permutacion[i]][permutacion[i+1]];
             }
             else {
                 //O ES UN SOL PUNT O L'ULTIM ELEMENT
                 if (permutacion.length == 1) {
-                    suma += grafo[i][i];
+                    suma += grafo[permutacion[i]][permutacion[i]];
                 }
             }
         }
-        System.out.println("Salgo del for");
         costeRuta = suma;
     }
     
