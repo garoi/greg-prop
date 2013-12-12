@@ -1,5 +1,6 @@
 package Persistencia;
 
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -164,6 +165,26 @@ public class ControlPersistencia {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void abrirFichero(String nomFichero) throws IOException{
+        try{
+            File file = new File("Data/Mapas/" + nomFichero);
+            Desktop.getDesktop().open(file);
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    public void crearFichero(String nomFichero){
+        try{
+            File file = new File("Data/Mapas/" + nomFichero + "-mapa.txt");
+            if(file.createNewFile()) System.out.print("Fichero creado correctamente");
+            else System.out.print("No se ha creado el fichero");
+        }catch(Exception e){
+            
         }
     }
 }
