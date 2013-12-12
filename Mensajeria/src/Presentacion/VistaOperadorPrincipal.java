@@ -494,17 +494,18 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     private void panelMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMapaMouseClicked
         // TODO add your handling code here:
-        if (ctrlp != null)
-        ctrlp.iniVentanaSecundaria("vistaMapa");
+        if (ctrlp != null) ctrlp.iniVentanaSecundaria("verDibujoCiudad");
     }//GEN-LAST:event_panelMapaMouseClicked
 
     private void panelTurnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTurnoMouseClicked
-        ctrlp.iniVentanaSecundaria("vistaTurno");
-        nombreRuta = new String();
+        if (ctrlp != null){
+            ctrlp.iniVentanaSecundaria("vistaTurno");
+            nombreRuta = new String();
+        }
     }//GEN-LAST:event_panelTurnoMouseClicked
 
     private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCiudadMouseClicked
-        ctrlp.iniVentanaSecundaria("vistaCiudad");
+        if (ctrlp != null) ctrlp.iniVentanaSecundaria("vistaCiudad");
         nombreRuta = new String();
     }//GEN-LAST:event_panelCiudadMouseClicked
 

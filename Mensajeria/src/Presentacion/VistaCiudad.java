@@ -30,7 +30,6 @@ public class VistaCiudad extends javax.swing.JFrame {
      * @param ctrlp
      */
     public VistaCiudad(CtrlPresentacion ctrlp) {
-        this.setTitle("Ciudad");
         this.ctrlp = ctrlp;
         initComponents();
     }
@@ -52,12 +51,12 @@ public class VistaCiudad extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(242, 241, 140));
         jPanel1.setPreferredSize(new java.awt.Dimension(790, 740));
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
