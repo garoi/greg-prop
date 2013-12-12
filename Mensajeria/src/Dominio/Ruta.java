@@ -159,15 +159,36 @@ public class Ruta implements Serializable {
         ch.setNombres(nombres);
         ch.setMST(MSTK);
         Integer[] aux = ch.buscaPermutacion();
-        Integer[] aux2 = new Integer[aux.length - 2];
+        Integer[] aux2 = new Integer[aux.length - 1];
         for (int i = 0; i < aux2.length; ++i) {
             aux2[i] = aux[i];
         }
         
         permutacion = aux2;
         Optimizacion op = new Optimizacion();
+        permutacion[0] = 1;
+        permutacion[1] = 0;
+        permutacion[2] = 2;
+        permutacion[3] = 3;
+        costeRuta = 21;
+        System.out.println("permutacionlengt : " + permutacion.length);
         op.inicializa(permutacion, nombres, grafo, costeRuta);
-        boolean mejor = op.pruebaOptimizar();
+        for(int i = 0; i < permutacion.length;++i){
+            System.out.print(permutacion[i]);
+        }
+        System.out.println();
+        boolean cambio = op.randSwap();
+        if(cambio){
+            permutacion = op.getSolucion();
+            costeRuta = op.getComparador();
+            System.out.println("el coste es este :" + costeRuta);
+            for(int i = 0; i < permutacion.length; ++i){
+                System.out.print(permutacion[i]+ " ");
+            }
+            System.out.println();
+        }
+        
+        //posibleSolucion = op.pruebaOptimizar();
     }
     
     /**
@@ -190,11 +211,10 @@ public class Ruta implements Serializable {
     }
     
     public void distanciaRuta() {
-        int suma = 0;
+        float suma = 0;
         System.out.println("Tamany " + permutacion.length);
         for (int i = 0; i < permutacion.length; ++i) {
             if (i + 1 < permutacion.length) {
-                System.out.println("Tmuuuu");
                 suma += grafo[i][i+1];
             }
             else {
