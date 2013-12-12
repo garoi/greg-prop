@@ -12,10 +12,11 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Luis García Estrades
  */
 public class VistaCiudad extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
+    private String ciudad;
     
     /**
      * Creates new form Mierdas
@@ -28,8 +29,9 @@ public class VistaCiudad extends javax.swing.JFrame {
      * Creates new form PrimeraVista
      * @param ctrlp
      */
-    public VistaCiudad(CtrlPresentacion ctrlp) {
+    public VistaCiudad(CtrlPresentacion ctrlp, String nombreCiudad) {
         this.ctrlp = ctrlp;
+        ciudad = nombreCiudad;
         initComponents();
     }
 
@@ -50,12 +52,12 @@ public class VistaCiudad extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
