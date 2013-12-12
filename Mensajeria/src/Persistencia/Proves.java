@@ -19,8 +19,18 @@ public class Proves {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        ControlPersistencia cp = new ControlPersistencia();
-        cp.abrirFichero("muu-mapa.txt");
+         ControlPersistencia cp = new ControlPersistencia();
+        try{
+            cp.crearFichero("sanhi");           
+        }
+        catch(Exception e){
+            
+        }
+        try{
+            cp.abrirFichero("sanhi-mapa.txt");
+        }catch(IOException e){
+            
+        }
         
     }
     

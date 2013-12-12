@@ -80,6 +80,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnRutaRapida = new javax.swing.JButton();
         btnVerPaquetes = new javax.swing.JButton();
         btnRutaOptima = new javax.swing.JButton();
+        btnRutaRapOptima = new javax.swing.JButton();
         panelMapa = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelInfo = new javax.swing.JPanel();
@@ -172,7 +173,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(89, 89, 89))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)))
         );
 
         panelProximaRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquetes en la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -194,7 +195,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         panelProximaRuta.setLayout(panelProximaRutaLayout);
         panelProximaRutaLayout.setHorizontalGroup(
             panelProximaRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelProximaRutaLayout.setVerticalGroup(
             panelProximaRutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,19 +251,29 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnRutaRapOptima.setBackground(new java.awt.Color(75, 75, 75));
+        btnRutaRapOptima.setForeground(new java.awt.Color(220, 220, 220));
+        btnRutaRapOptima.setText("Ruta rap. opt.");
+        btnRutaRapOptima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRutaRapOptimaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout accionesPanelLayout = new javax.swing.GroupLayout(accionesPanel);
         accionesPanel.setLayout(accionesPanelLayout);
         accionesPanelLayout.setHorizontalGroup(
             accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accionesPanelLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addContainerGap()
                 .addGroup(accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnVerPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRutaOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRutaRapida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnadirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2))
+                    .addComponent(btnAnadirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRutaRapOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         accionesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAnadirPaquete, btnRutaOptima, btnRutaRapida, btnVerPaquetes, eliminarPaquete});
@@ -270,17 +281,17 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         accionesPanelLayout.setVerticalGroup(
             accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accionesPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnAnadirPaquete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eliminarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRutaRapida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRutaOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRutaRapOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVerPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnRutaOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnVerPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         accionesPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAnadirPaquete, btnRutaOptima, btnRutaRapida, btnVerPaquetes, eliminarPaquete});
@@ -302,7 +313,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         panelMapaLayout.setHorizontalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMapaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -311,7 +322,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -475,18 +486,16 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         return true;
     }
     private void btnAnadirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirPaqueteActionPerformed
-        int idx = listaPendientes.getSelectedIndex();
+        int idx = listaPendientes.getSelectedIndex();      
         anadir = (String) listaPendientes.getSelectedValue();
-        boolean noverificada = checkVerificada();
         boolean cambio = comprobar(idx);
+        boolean noverificada = checkVerificada();
         if(cambio && noverificada){
             listaPendientesS.remove(idx);
             listaEnRutaS.add(anadir);
         }
-        listaPendientesS =ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
         actualizarListaPendientes();
         actualizarListaEnRuta();
-        
 
     }//GEN-LAST:event_btnAnadirPaqueteActionPerformed
 
@@ -602,17 +611,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarRutas();
     }//GEN-LAST:event_btnRutaRapidaActionPerformed
 
-    private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
-        try {
-            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        actualizarRutas();
-    }//GEN-LAST:event_btnRutaOptimaActionPerformed
-
     private void btnValidarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarRutaActionPerformed
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
@@ -657,6 +655,28 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPaquetesActionPerformed
         ctrlp.iniVentanaSecundaria("vistaPaquetes");
     }//GEN-LAST:event_btnVerPaquetesActionPerformed
+
+    private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizarRutas();
+    }//GEN-LAST:event_btnRutaOptimaActionPerformed
+
+    private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapOptimaActionPerformed
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizarRutas();
+    }//GEN-LAST:event_btnRutaRapOptimaActionPerformed
 
     public void actualizarCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
@@ -733,6 +753,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarRuta;
     private javax.swing.JButton btnModificarRuta;
     private javax.swing.JButton btnRutaOptima;
+    private javax.swing.JButton btnRutaRapOptima;
     private javax.swing.JButton btnRutaRapida;
     private javax.swing.JButton btnValidarRuta;
     private javax.swing.JButton btnVerPaquetes;
