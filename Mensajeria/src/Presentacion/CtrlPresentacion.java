@@ -31,6 +31,7 @@ public class CtrlPresentacion {
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
     private String tipoUsuario;
+    private String ciudad;
     
     /**
      * Permite un control sobre la capa de presentación del programa.
@@ -280,5 +281,13 @@ public class CtrlPresentacion {
         if (s.length()>=1)
             return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
         return "";
+    }
+
+    private String getCiudadOperador() {
+        return vistaOperador.getCiudad();
+    }
+    void setCiudad(String nombreCiudad) {
+        this.ciudad = nombreCiudad;
+        if (this.vistaModificarCiudad != null) this.vistaModificarCiudad.setCiudad(this.ciudad);
     }
 }

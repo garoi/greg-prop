@@ -152,8 +152,17 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ctrlp.actualizarVistaOperador(nombreCiudad);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
+    /**
+     * Añade un evento cuando se hace click sobre el botón Modificar.
+     * El evento muestra una ventana para seleccionar las opciones de modificación de la ciudad.
+     * @param evt el evento de click sobre el botón.
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        
         ctrlp.iniVentanaSecundaria("vistaModificarCiudad");
+        int idx = listaCiudades.getSelectedIndex();      
+        String nombreCiudad = (String) listaCiudades.getSelectedValue();
+        ctrlp.setCiudad(nombreCiudad);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
