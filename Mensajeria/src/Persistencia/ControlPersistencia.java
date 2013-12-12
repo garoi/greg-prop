@@ -1,12 +1,15 @@
 package Persistencia;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -131,5 +134,35 @@ public class ControlPersistencia {
 
     public void elimnarRuta(String ruta) {
         pr.eliminarRuta(ruta);
+    }
+    
+    public void pasarAFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try{
+            fichero = new FileWriter("Data/Mapas/" + nomFichero);
+            //pw = new PrintWriter(fichero);
+            BufferedWriter escribir_buffer = new BufferedWriter(fichero);
+            escribir_buffer.write(nomCiudad);
+            escribir_buffer.newLine();
+            for(int i = 0; i < nombres.size(); ++i){
+                if(i == 0) escribir_buffer.write(nombres.get(i));
+                else escribir_buffer.write(" " + nombres.get(i));
+            }
+            escribir_buffer.newLine();
+            boolean b = false; //para no duplicar los datos
+            for(int i = 0; i < ciudad.size(); ++i){
+                for(int j = 0; j < ciudad.get(i).size(); ++j){
+                    if(b){
+                        escribir_buffer.write(nombres.get(i) + " " + nombres.get(j) + " " + ciudad.get(i).get(j));
+                    }
+                    if(ciudad.get(i).get(j).equals(0.0)) b = true;
+                }
+                b = false;
+                escribir_buffer.newLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
