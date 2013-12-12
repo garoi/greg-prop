@@ -138,6 +138,18 @@ public class Ruta implements Serializable {
         permutacion = sg.solve();
     }
     
+    public void rapidaOptimizada(){
+        SolveGreedy sg = new SolveGreedy(grafo);
+        permutacion = sg.solve();
+        Optimizacion op = new Optimizacion();
+        op.inicializa(permutacion, nombres, grafo, costeRuta);
+        boolean cambio = op.randSwap();
+        if(cambio){
+            permutacion = op.getSolucion();
+            costeRuta = op.getComparador();
+        }
+    }
+    
     /**
      * Calcula el arbol de expansion minima de un grafo
      * @param

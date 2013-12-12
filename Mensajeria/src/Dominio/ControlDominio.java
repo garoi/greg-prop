@@ -106,6 +106,9 @@ public class ControlDominio {
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
         }
+        else if (tipo.equals("rapidaOptima")) {
+            r.rapidaOptimizada();
+        }
         else {
             //Llamar a la optimizacion
             r.calcularMinSpaTree();
