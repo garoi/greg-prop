@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class VistaOperadorPrincipal extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
-    private String Ciudad;
+    private String ciudad;
     private String fecha;
     private String fechaCD;
     private String nombreRuta = new String();
@@ -485,7 +485,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             listaPendientesS.remove(idx);
             listaEnRutaS.add(anadir);
         }
-        listaPendientesS =ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        listaPendientesS =ctrlp.getDominio().getPaquetesPendientes(ciudad, fechaCD);
         actualizarListaPendientes();
         actualizarListaEnRuta();
         
@@ -511,7 +511,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
         int idx = listaRutas.getSelectedIndex();      
         nombreRuta = (String) listaRutas.getSelectedValue();
-        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(ciudad, fechaCD);
         actualizarListaPendientes();
         try {
             mostrarPaquetesEnRuta();
@@ -594,7 +594,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
         try {
-            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, Ciudad, "rapidamente");
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, ciudad, "rapidamente");
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -605,7 +605,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
         try {
-            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, Ciudad, "lentamente");
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, ciudad, "lentamente");
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -626,14 +626,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            ctrlp.getDominio().acceptarRuta(ruta, fechaCD, Ciudad);
+            ctrlp.getDominio().acceptarRuta(ruta, fechaCD, ciudad);
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(ciudad, fechaCD);
         actualizarListaPendientes();
         actualizarRutas();
     }//GEN-LAST:event_btnValidarRutaActionPerformed
@@ -644,7 +644,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarListaPendientes();
         ctrlp.getDominio().eliminarRuta(ruta);
         actualizarRutas();
-        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(ciudad, fechaCD);
         actualizarListaPendientes();
         nombreRuta = new String();
         listaEnRutaS.removeAll(listaEnRutaS);
@@ -660,7 +660,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerPaquetesActionPerformed
 
     public void actualizarCiudad(String nombreCiudad) {
-        Ciudad = nombreCiudad;
+        ciudad = nombreCiudad;
         labelCiudad.setText(nombreCiudad);
         
     //LISTAS DE MIERDA!!!!!
@@ -671,7 +671,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     public void actualizarRutas() {
         listaRutas.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().getRutas(Ciudad);
+            ArrayList<String> strings = ctrlp.getDominio().getRutas(ciudad);
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -711,7 +711,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }
     
     private void mostrarPaquetesTurno() {
-        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(Ciudad, fechaCD);
+        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(ciudad, fechaCD);
         actualizarListaPendientes();
     }
     
@@ -771,5 +771,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
+    }
+
+    String getCiudad() {
+        return ciudad;
     }
 }

@@ -12,6 +12,7 @@ package Presentacion;
  */
 public class VistaModificarCiudad extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
+    private String ciudad;
     
     /**
      * Creates new form VistaModificarCiudad
@@ -175,4 +176,8 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 }
