@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Luis García Estrades
+ * @author Marc Garcia Roig
  */
 public class VistaCiudad extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
@@ -107,7 +107,6 @@ public class VistaCiudad extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ArrayList<ArrayList<Float>> distanciaCiudad = ctrlp.getDominio().getDistanciaCiudad();
         
         super.paint(g);
         g.setColor(Color.red);

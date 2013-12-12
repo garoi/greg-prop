@@ -436,8 +436,4 @@ public class ControlDominio {
         map = (Mapa) cp.leerCiudad(nombreCiudad);
         return map.getNombres();
     }
-    
-    public ArrayList<ArrayList<Float>> getDistanciaCiudad() {
-        return map.getCiudad();
-    }
 }
