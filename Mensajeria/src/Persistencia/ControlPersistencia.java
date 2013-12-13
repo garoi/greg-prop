@@ -61,7 +61,6 @@ public class ControlPersistencia {
             oos.writeObject(oper);
         }
         catch(Exception e){
-            System.out.printf("Catch");
         }
     }
     
@@ -129,7 +128,6 @@ public class ControlPersistencia {
                     return leerCiudad(nombre);
         }
         catch(Exception e){
-            System.out.printf("Catch");
         }
         return null;
     }

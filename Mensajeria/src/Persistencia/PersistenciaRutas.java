@@ -82,11 +82,9 @@ public class PersistenciaRutas {
     void eliminarRuta(String ruta) {
         File fichero = new File("Data/Rutas/"+ruta);
         fichero.delete();
-        System.out.println("La ruta eliminada "+ ruta);
     }
 
     public ArrayList<String> leerRutasComparadas(String fecha, String nombreCiudad) {
-        System.out.println("MARICONES TODOS");
         File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
         ArrayList<String> ficheros = new ArrayList<>();
@@ -97,15 +95,12 @@ public class PersistenciaRutas {
             boolean guion = nombreFichero.endsWith("-NO_verificada-ruta.txt");
             if (nombre && guion) {
                 if (nombreFichero.startsWith(nombreCiudad + "-" + fecha + "-" + "lentamente")) {
-                    System.out.println("MARICONES TODOS1");
                     ficheros.add(nombreFichero);
                 }
                 else if (nombreFichero.startsWith(nombreCiudad + "-" + fecha + "-" + "rapidamente")) {
-                    System.out.println("MARICONES TODOS2");
                     ficheros.add(nombreFichero);
                 }
                 else if (nombreFichero.startsWith(nombreCiudad + "-" + fecha + "-" + "rapidaOptima")) {
-                    System.out.println("MARICONES TODOS3");
                     ficheros.add(nombreFichero);
                 }
             }
@@ -119,18 +114,14 @@ public class PersistenciaRutas {
         ArrayList<String> ficheros = new ArrayList<>();
         String nombreFichero;
         for(File file:nombres) {
-            System.out.println("BOOOOOROROROEWRORSDOQWAR");
             nombreFichero = file.getName();
             boolean nombre2 = nombreFichero.startsWith(inicioRuta);
             boolean guion = nombreFichero.endsWith("-NO_verificada-ruta.txt");
-            System.out.println(nombre2 + " ");
             if (nombre2 && guion) {
                 if (nombreRuta == null) {
-                    System.out.println("BORAR 22222");
                     file.delete();
                 }
                 else if (!nombreRuta.equals(nombreFichero)) {
-                    System.out.println("ENTRO " + nombreRuta + " " + nombreFichero);
                     file.delete();
                 }
             }

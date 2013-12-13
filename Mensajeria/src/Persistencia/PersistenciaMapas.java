@@ -33,8 +33,6 @@ public class PersistenciaMapas {
             return m2;
         }
         catch(Exception e){
-           System.out.println(e);
-           System.out.println("Atencion: no se ha cargado el mapa");
            return null;
         }    
     }
@@ -64,7 +62,6 @@ public class PersistenciaMapas {
             String s;
             if((s = br.readLine())!= null){
                 nomCiudad = s;
-                System.out.println(nomCiudad);
             }
             if((s = br.readLine())!= null){
                 temp = s.split(delimiter);
@@ -95,15 +92,12 @@ public class PersistenciaMapas {
                         ciudad.get(destino).set(origen, dist);
                     }
                     catch(Exception e){
-                        System.out.println(e);
                     }
                 }
             }
             //for(int i = 0; i < nombres.size(); ++i) ciudad.get(i).set(i,zero);
         }
         catch(Exception e){
-           System.out.println("Atencion: no se ha leido el archivo");
-           System.out.println(e);
         }    
     }
 
