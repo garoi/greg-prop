@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Luis García Estrades https://github.com/lgarest
  */
-public class VistaMapa extends javax.swing.JFrame {
+public class VistaAnadirPaquete extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
     private int dia;
     private int mes;
@@ -29,16 +29,16 @@ public class VistaMapa extends javax.swing.JFrame {
     private String destino;
     
     /**
-     * Creadora de la clase VistaMapa
+     * Creadora de la clase VistaAnadirPaquete
      */
-    public VistaMapa() {
+    public VistaAnadirPaquete() {
         initComponents();
     }
     
     /**
-     * Creadora de la clase VistaMapa
+     * Creadora de la clase VistaAnadirPaquete
      */
-    public VistaMapa(CtrlPresentacion ctrlp) {
+    public VistaAnadirPaquete(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
         
@@ -77,7 +77,7 @@ public class VistaMapa extends javax.swing.JFrame {
                 ));
                 destino = destinos[0];
             } catch (IOException ex) {
-                Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -293,7 +293,7 @@ public class VistaMapa extends javax.swing.JFrame {
                     .addGroup(sidebar1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(sidebar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)))
                 .addContainerGap())
@@ -404,7 +404,7 @@ public class VistaMapa extends javax.swing.JFrame {
             ));
             destino = destinos[0];
         } catch (IOException ex) {
-            Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_comboCiudadActionPerformed
     
@@ -456,7 +456,7 @@ public class VistaMapa extends javax.swing.JFrame {
                 System.out.println("Voy a añadir un pak");
                 ctrlp.getDominio().anadirPaquete(ciudad, destino, fecha, turno);
             } catch (IOException ex) {
-                Logger.getLogger(VistaMapa.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         this.setVisible(false);
@@ -552,7 +552,7 @@ public class VistaMapa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaMapa().setVisible(true);
+                new VistaAnadirPaquete().setVisible(true);
             }
         });
     }

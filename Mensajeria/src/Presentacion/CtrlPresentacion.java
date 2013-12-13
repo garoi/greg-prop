@@ -25,7 +25,7 @@ public class CtrlPresentacion {
     private VistaClientePrincipal vistaCliente;
     private VistaOperadorPrincipal vistaOperador;
     private VistaVerPaquetes vistaPaquetes;
-    private VistaMapa vistaMapa;
+    private VistaAnadirPaquete vistaAnadirPaquete;
     private VistaCiudad dibujoCiudad;
     private VistaSeleccionTurno vistaTurno;
     private VistaModificarCiudad vistaModificarCiudad;
@@ -98,16 +98,6 @@ public class CtrlPresentacion {
         ventanaPrimaria.setSize(c2.getSize().width +10, c2.getSize().height+10);
     }
     
-//    /**
-//     *  Reemplaza todo el contenido de la ventana secundaria por el contenido pasado por parámetro.
-//     * @param c2 el contenido con el que se reemplaza.
-//     */
-//    public void cambiarContenidoVentanaSecundaria(java.awt.Container c2){
-//        ventanaSecundaria.getContentPane().removeAll();
-//        ventanaSecundaria.getContentPane().add(c2);
-//        ventanaSecundaria.setSize(c2.getSize().width +10, c2.getSize().height+10);
-//    }
-    
     /**
      * Actualiza la ventana primaria redibujando sus componentes
      */
@@ -124,61 +114,56 @@ public class CtrlPresentacion {
     public void iniVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
-                if(vistaMapa == null) vistaMapa = new VistaMapa(this);
-                ventanaSecundaria = new VistaMapa(this);
-                vistaMapa = null;
+                if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
+                ventanaSecundaria = new VistaAnadirPaquete(this);
+                vistaAnadirPaquete = null;
                 ventanaSecundaria.setTitle("Añadir Paquete");
             break;
                 
-            case "vistaMapa":
-                if(vistaMapa == null) vistaMapa = new VistaMapa(this);
-                vistaMapa.getContentPane().remove(vistaMapa.getSidebar());
-                ventanaSecundaria = vistaMapa;
-                ventanaSecundaria.setTitle("Mapa de la ciudad");
-//                setTamanoVentanaSecundaria(-165, 0);
-            break;
+//            case "vistaAnadirPaquete":
+//                if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
+//                vistaAnadirPaquete.getContentPane().remove(vistaAnadirPaquete.getSidebar());
+//                ventanaSecundaria = vistaAnadirPaquete;
+//                ventanaSecundaria.setTitle("Mapa de la ciudad");
+////                setTamanoVentanaSecundaria(-165, 0);
+//            break;
                 
             case "vistaTurno":
                 if(vistaTurno == null) vistaTurno = new VistaSeleccionTurno(this);
                 ventanaSecundaria = vistaTurno;
                 vistaTurno = null;
                 ventanaSecundaria.setTitle("Selector de turno");
-                setTamanoVentanaSecundaria(0, 0);
             break;
                 
             case "vistaCiudad":
                 if(vistaCiudad == null) vistaCiudad = new VistaSeleccionCiudad(this);
                 ventanaSecundaria = vistaCiudad;
                 ventanaSecundaria.setTitle("Selector de turno");
-                setTamanoVentanaSecundaria(0, 0);
             break;
                 
             case "verDibujoCiudad":
                 if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this);
                 ventanaSecundaria = dibujoCiudad;
                 ventanaSecundaria.setTitle("Dibujo de la ciudad");
-                setTamanoVentanaSecundaria(0, 0);
             break;
                 
             case "vistaPaquetes":
                 if(vistaPaquetes == null) vistaPaquetes = new VistaVerPaquetes(this);
                 ventanaSecundaria = vistaPaquetes;
                 ventanaSecundaria.setTitle("Lista de todos los paquetes");
-                setTamanoVentanaSecundaria(0, 0);     
             break;
                 
             case "vistaModificarCiudad":
                 if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this);
                 ventanaSecundaria = vistaModificarCiudad;
                 ventanaSecundaria.setTitle("Modificar ciudad");
-                setTamanoVentanaSecundaria(0, 0);
             break;
                 
             case "vistaCompararRutas":
                 if (vistaCompararRutas == null) vistaCompararRutas = new VistaComparacionRutas(this);
                 ventanaSecundaria = vistaCompararRutas;
                 ventanaSecundaria.setTitle("Comparar Rutas");
-                setTamanoVentanaSecundaria(0, 0);
+                
             break;
                 
             case "advertencia":
@@ -190,10 +175,11 @@ public class CtrlPresentacion {
                 
             default:
                 System.out.println("***** ERROR iniVentanaSecundaria llamada inválida");
-                ventanaSecundaria = new VistaMapa(this);
+                ventanaSecundaria = new VistaAnadirPaquete(this);
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
             break;
         }
+        setTamanoVentanaSecundaria(0, 0);
         System.out.println("setrelative null");
         ventanaSecundaria.setLocationRelativeTo(null);
         ventanaSecundaria.setVisible(true);

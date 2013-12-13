@@ -115,7 +115,7 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="btnVerRuta" pref="46" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCompararRutas" pref="46" max="32767" attributes="0"/>
+                          <Component id="btnCompararRutas" pref="48" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnEliminarRuta" pref="47" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
