@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Marc Garcia Roig
+ * @author Luis García Estrades https://github.com/lgarest
  */
 public class VistaVerPaquetes extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
@@ -22,16 +22,16 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
      */
     public VistaVerPaquetes() {
         initComponents();
-        
     }
     
+    // <editor-fold defaultstate="collapsed" desc="public VistaVerPaquetes(CtrlPresentacion ctrlp)">    
     /**
      * Creates new form VistaOperadorPrincipal
      */
     public VistaVerPaquetes(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
-    }
+    }// </editor-fold> 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,10 +183,13 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="private void jButton1MouseClicked(java.awt.event.MouseEvent evt)">    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
-
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="private void idPaqueteMouseClicked(java.awt.event.MouseEvent evt)">    
     private void idPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idPaqueteMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("idPaquete");
@@ -194,7 +197,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }//GEN-LAST:event_idPaqueteMouseClicked
-
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="private void FechaMouseClicked(java.awt.event.MouseEvent evt">    
     private void FechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FechaMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("fecha");
@@ -202,7 +207,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }//GEN-LAST:event_FechaMouseClicked
-
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="private void DestinoMouseClicked(java.awt.event.MouseEvent evt">    
     private void DestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DestinoMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("destino");
@@ -210,7 +217,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }//GEN-LAST:event_DestinoMouseClicked
-
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="private void CiudadMouseClicked(java.awt.event.MouseEvent evt)">    
     private void CiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CiudadMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("ciudad");
@@ -218,7 +227,9 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }//GEN-LAST:event_CiudadMouseClicked
-
+    // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="private void EstadoMouseClicked(java.awt.event.MouseEvent evt">    
     private void EstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadoMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("estado");
@@ -226,7 +237,8 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }//GEN-LAST:event_EstadoMouseClicked
-   
+    // </editor-fold> 
+    
     /**
      * @param args the command line arguments
      */

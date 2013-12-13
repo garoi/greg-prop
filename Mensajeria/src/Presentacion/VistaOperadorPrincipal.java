@@ -34,7 +34,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         initComponents();
         
     }
-    
+    // <editor-fold defaultstate="collapsed" desc="public VistaOperadorPrincipal(final CtrlPresentacion ctrlp)">  
     /**
      * Creates new form VistaOperadorPrincipal
      */
@@ -54,6 +54,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         labelTurno.setText(fecha);
     }
+    // </editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -479,7 +480,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    // <editor-fold defaultstate="collapsed" desc="private boolean comprobar(int idx)">  
     private boolean comprobar(int idx){
         int cont = 0;
         char[] charsRuta = nombreRuta.toCharArray();
@@ -502,6 +503,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         return true;
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnAnadirPaqueteActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnAnadirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirPaqueteActionPerformed
         int idx = listaPendientes.getSelectedIndex();      
         anadir = (String) listaPendientes.getSelectedValue();
@@ -515,24 +519,32 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarListaEnRuta();
 
     }//GEN-LAST:event_btnAnadirPaqueteActionPerformed
-
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void panelMapaMouseClicked(java.awt.event.MouseEvent evt)">  
     private void panelMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMapaMouseClicked
         // TODO add your handling code here:
         if (ctrlp != null) ctrlp.iniVentanaSecundaria("verDibujoCiudad");
     }//GEN-LAST:event_panelMapaMouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void panelTurnoMouseClicked(java.awt.event.MouseEvent evt)">  
     private void panelTurnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelTurnoMouseClicked
         if (ctrlp != null){
             ctrlp.iniVentanaSecundaria("vistaTurno");
             nombreRuta = new String();
         }
     }//GEN-LAST:event_panelTurnoMouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt)">  
     private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCiudadMouseClicked
         if (ctrlp != null) ctrlp.iniVentanaSecundaria("vistaCiudad");
         nombreRuta = new String();
     }//GEN-LAST:event_panelCiudadMouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void listaRutasMouseClicked(java.awt.event.MouseEvent evt)">  
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
         int idx = listaRutas.getSelectedIndex();      
         nombreRuta = (String) listaRutas.getSelectedValue();
@@ -546,8 +558,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_listaRutasMouseClicked
-
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="private boolean checkVerificada()">  
     private boolean checkVerificada(){
         int cont = 0;
         if(nombreRuta.isEmpty()) return true;
@@ -566,6 +579,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         return true;
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private boolean compruebaEliminar(int idx)e">  
     private boolean compruebaEliminar(int idx){
             for(int i = 0; i < listaPendientesS.size(); ++i){
                 if(listaEnRutaS.get(idx).equals(listaPendientesS.get(i))){
@@ -574,6 +590,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         return true;
     }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnEliminarPaqueteActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnEliminarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPaqueteActionPerformed
         int idx = listaEnRuta.getSelectedIndex();      
         anadir = (String) listaEnRuta.getSelectedValue();
@@ -586,7 +605,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarListaPendientes();
         actualizarListaEnRuta();
     }//GEN-LAST:event_btnEliminarPaqueteActionPerformed
-
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void listaPendientesMouseClicked(java.awt.event.MouseEvent evt">  
     private void listaPendientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPendientesMouseClicked
         if (evt.getClickCount() == 2) {
             int idx = listaPendientes.getSelectedIndex();      
@@ -601,7 +622,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             actualizarListaEnRuta();
         }
     }//GEN-LAST:event_listaPendientesMouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void listaEnRutaMouseClicked(java.awt.event.MouseEvent evt)e">  
     private void listaEnRutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEnRutaMouseClicked
         if (evt.getClickCount() == 2) {
             int idx = listaEnRuta.getSelectedIndex();      
@@ -616,7 +639,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             actualizarListaEnRuta();
         }
     }//GEN-LAST:event_listaEnRutaMouseClicked
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
@@ -627,7 +652,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         actualizarRutas();
     }//GEN-LAST:event_btnRutaRapidaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnValidarRutaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnValidarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarRutaActionPerformed
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
@@ -651,7 +678,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarListaPendientes();
         actualizarRutas();
     }//GEN-LAST:event_btnValidarRutaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnEliminarRutaActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnEliminarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRutaActionPerformed
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
@@ -664,15 +693,21 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         listaEnRutaS.removeAll(listaEnRutaS);
         actualizarListaEnRuta();
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRutaActionPerformed
         ctrlp.iniVentanaSecundaria("vistaRuta");
     }//GEN-LAST:event_btnVerRutaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) ">  
     private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPaquetesActionPerformed
         ctrlp.iniVentanaSecundaria("vistaPaquetes");
     }//GEN-LAST:event_btnVerPaquetesActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
@@ -683,7 +718,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         actualizarRutas();
     }//GEN-LAST:event_btnRutaOptimaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapOptimaActionPerformed
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
@@ -694,18 +731,24 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         actualizarRutas();
     }//GEN-LAST:event_btnRutaRapOptimaActionPerformed
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararRutasActionPerformed
         ctrlp.iniVentanaSecundaria("vistaCompararRutas");
     }//GEN-LAST:event_btnCompararRutasActionPerformed
-
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="public void actualizarCiudad(String nombreCiudad) ">  
     public void actualizarCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
         labelCiudad.setText(nombreCiudad);
         actualizarRutas();
         mostrarPaquetesTurno();
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="public void actualizarRutas()e">  
     public void actualizarRutas() {
         listaRutas.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.getDominio().getRutas(nombreCiudad);
@@ -713,7 +756,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="public void actualizarDia(int dia, int mes, int ano, String Turno)">  
     public void actualizarDia(int dia, int mes, int ano, String Turno) {
         String dia1, mes1, ano1;
         if (dia < 10) {
@@ -741,17 +786,23 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         labelTurno.setText(fecha);
         mostrarPaquetesTurno();
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="private void mostrarPaquetesEnRuta()e">  
     private void mostrarPaquetesEnRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         listaEnRutaS = ctrlp.getDominio().getPaquetesRuta(nombreRuta);
         actualizarListaEnRuta();
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="private void mostrarPaquetesTurno()">  
     private void mostrarPaquetesTurno() {
         listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
         actualizarListaPendientes();
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="public static void main(String args[])">  
     /**
      * @param args the command line arguments
      */
@@ -764,7 +815,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="private void actualizarListaPendientes()">  
     private void actualizarListaPendientes() {
         listaPendientes.setModel(new javax.swing.AbstractListModel() {
                 ArrayList<String> strings = listaPendientesS;
@@ -772,7 +825,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 public Object getElementAt(int i) { return strings.get(i); }
             });
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private void actualizarListaEnRuta()e">  
     private void actualizarListaEnRuta() {
         listaEnRuta.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = listaEnRutaS;
@@ -780,11 +835,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings.get(i); }
         });
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="public String getCiudad() ">  
     public String getCiudad() {
         return nombreCiudad;
     }
-
+    // </editor-fold>
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accionesPanel;
     private javax.swing.JButton btnAnadirPaquete;
