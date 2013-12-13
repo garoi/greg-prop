@@ -70,6 +70,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         btnModificarRuta = new javax.swing.JButton();
         btnVerRuta = new javax.swing.JButton();
         btnValidarRuta = new javax.swing.JButton();
+        btnCompararRutas = new javax.swing.JButton();
         btnEliminarRuta = new javax.swing.JButton();
         panelProximaRuta = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -93,8 +94,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         listaPendientes = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(800, 700));
-        setPreferredSize(new java.awt.Dimension(800, 700));
+        setMinimumSize(new java.awt.Dimension(800, 710));
+        setPreferredSize(new java.awt.Dimension(800, 710));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rutas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -133,6 +134,15 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCompararRutas.setBackground(new java.awt.Color(75, 75, 75));
+        btnCompararRutas.setForeground(new java.awt.Color(220, 220, 220));
+        btnCompararRutas.setText("Comparar");
+        btnCompararRutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompararRutasActionPerformed(evt);
+            }
+        });
+
         btnEliminarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminarRuta.setForeground(new java.awt.Color(220, 220, 220));
         btnEliminarRuta.setText("Eliminar");
@@ -148,12 +158,15 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValidarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVerRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnValidarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
         );
 
@@ -165,14 +178,16 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                        .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                        .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                        .addGap(89, 89, 89))
+                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addGap(70, 70, 70))
                     .addComponent(jScrollPane1)))
         );
 
@@ -266,13 +281,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accionesPanelLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnVerPaquetes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRutaOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRutaRapida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnadirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRutaRapOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAnadirPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(accionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(btnVerPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(btnRutaOptima, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(btnRutaRapida, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(btnEliminarPaquete, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(btnRutaRapOptima, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)))
                 .addGap(2, 2, 2))
         );
 
@@ -314,7 +330,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         panelMapaLayout.setHorizontalGroup(
             panelMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMapaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
@@ -323,7 +339,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -679,12 +695,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         actualizarRutas();
     }//GEN-LAST:event_btnRutaRapOptimaActionPerformed
 
+    private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararRutasActionPerformed
+        ctrlp.iniVentanaSecundaria("vistaCompararRutas");
+    }//GEN-LAST:event_btnCompararRutasActionPerformed
+
     public void actualizarCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
         labelCiudad.setText(nombreCiudad);
-        
-    //LISTAS DE MIERDA!!!!!
-        
         actualizarRutas();
         mostrarPaquetesTurno();
     }
@@ -747,10 +764,31 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void actualizarListaPendientes() {
+        listaPendientes.setModel(new javax.swing.AbstractListModel() {
+                ArrayList<String> strings = listaPendientesS;
+                public int getSize() { return strings.size(); }
+                public Object getElementAt(int i) { return strings.get(i); }
+            });
+    }
+
+    private void actualizarListaEnRuta() {
+        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = listaEnRutaS;
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
+    }
+
+    public String getCiudad() {
+        return nombreCiudad;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accionesPanel;
     private javax.swing.JButton btnAnadirPaquete;
+    private javax.swing.JButton btnCompararRutas;
     private javax.swing.JButton btnEliminarPaquete;
     private javax.swing.JButton btnEliminarRuta;
     private javax.swing.JButton btnModificarRuta;
@@ -778,23 +816,4 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel panelTurno;
     // End of variables declaration//GEN-END:variables
 
-    private void actualizarListaPendientes() {
-        listaPendientes.setModel(new javax.swing.AbstractListModel() {
-                ArrayList<String> strings = listaPendientesS;
-                public int getSize() { return strings.size(); }
-                public Object getElementAt(int i) { return strings.get(i); }
-            });
-    }
-
-    private void actualizarListaEnRuta() {
-        listaEnRuta.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = listaEnRutaS;
-            public int getSize() { return strings.size(); }
-            public Object getElementAt(int i) { return strings.get(i); }
-        });
-    }
-
-    public String getCiudad() {
-        return nombreCiudad;
-    }
 }

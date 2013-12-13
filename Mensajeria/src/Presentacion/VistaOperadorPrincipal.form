@@ -4,10 +4,10 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 700]"/>
+      <Dimension value="[800, 710]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 700]"/>
+      <Dimension value="[800, 710]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -40,7 +40,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="accionesPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelProximaRuta" max="32767" attributes="0"/>
                   </Group>
                   <Component id="panelMapa" max="32767" attributes="0"/>
@@ -87,12 +87,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="257" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnEliminarRuta" linkSize="10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="btnVerRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="btnValidarRuta" linkSize="10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                      <Component id="btnModificarRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnVerRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="btnValidarRuta" linkSize="10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="btnModificarRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnCompararRutas" min="-2" pref="115" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnEliminarRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
@@ -104,14 +109,16 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnModificarRuta" pref="53" max="32767" attributes="0"/>
+                          <Component id="btnModificarRuta" pref="46" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnValidarRuta" pref="54" max="32767" attributes="0"/>
+                          <Component id="btnValidarRuta" pref="43" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="btnVerRuta" pref="53" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEliminarRuta" pref="53" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="btnVerRuta" pref="46" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnCompararRutas" pref="46" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnEliminarRuta" pref="46" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
@@ -177,6 +184,20 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnValidarRutaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCompararRutas">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4b" green="4b" red="4b" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="dc" green="dc" red="dc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Comparar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompararRutasActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminarRuta">
@@ -256,13 +277,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="btnVerPaquetes" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnRutaOptima" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnRutaRapida" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnEliminarPaquete" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnAnadirPaquete" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="btnRutaRapOptima" linkSize="16" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnAnadirPaquete" linkSize="16" min="-2" pref="118" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="btnVerPaquetes" linkSize="16" alignment="2" pref="100" max="32767" attributes="0"/>
+                          <Component id="btnRutaOptima" linkSize="16" alignment="2" pref="100" max="32767" attributes="0"/>
+                          <Component id="btnRutaRapida" linkSize="16" alignment="2" pref="100" max="32767" attributes="0"/>
+                          <Component id="btnEliminarPaquete" linkSize="16" alignment="2" pref="100" max="32767" attributes="0"/>
+                          <Component id="btnRutaRapOptima" linkSize="16" alignment="2" pref="100" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
@@ -281,7 +304,7 @@
                   <Component id="btnRutaRapOptima" linkSize="17" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnRutaOptima" linkSize="17" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnVerPaquetes" linkSize="17" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -390,7 +413,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="43" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="310" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -401,7 +424,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="299" max="-2" attributes="0"/>
-                  <EmptySpace pref="95" max="32767" attributes="0"/>
+                  <EmptySpace pref="96" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
