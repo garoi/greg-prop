@@ -24,7 +24,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private String nombreRuta = new String();
     private String anadir;
     private String[] fechaHoy;
+    private boolean advertencia;
     private ArrayList<String> listaPendientesS;
+    private ArrayList<String> listaRutasS = new ArrayList<String>();
     private ArrayList<String> listaEnRutaS = new ArrayList<String>();
         
     /**
@@ -41,6 +43,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     public VistaOperadorPrincipal(final CtrlPresentacion ctrlp) throws IOException, FileNotFoundException, ClassNotFoundException {
         this.ctrlp = ctrlp;
         initComponents();
+        advertencia = false;
         fechaHoy = ctrlp.getDominio().fechaHoy();
         fecha = fechaHoy[0] + '/' + fechaHoy[1] + '/' + fechaHoy[2];
         fechaCD = fechaHoy[0] + '.' + fechaHoy[1] + '.' + fechaHoy[2];
@@ -180,13 +183,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                         .addGap(70, 70, 70))
                     .addComponent(jScrollPane1)))
         );
@@ -339,7 +342,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -479,14 +482,17 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setAdvertencia(boolean advertencia) {
+        this.advertencia = advertencia;
+    }
     
     private boolean comprobar(int idx){
         int cont = 0;
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 3){
-                if(charsRuta[i+1] == 'v'){
+            if(cont == 5){
+                if(charsRuta[i+1] == 'V'){
                     return false;
                 }
                 else encontrado = true;
@@ -534,16 +540,18 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_panelCiudadMouseClicked
 
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
-        int idx = listaRutas.getSelectedIndex();      
-        nombreRuta = (String) listaRutas.getSelectedValue();
-        listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
-        actualizarListaPendientes();
-        try {
-            mostrarPaquetesEnRuta();
-        } catch (IOException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if (!listaRutasS.isEmpty()) {
+            int idx = listaRutas.getSelectedIndex();      
+            nombreRuta = (String) listaRutas.getSelectedValue();
+            listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
+            actualizarListaPendientes();
+            try {
+                mostrarPaquetesEnRuta();
+            } catch (IOException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_listaRutasMouseClicked
 
@@ -554,8 +562,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 3){
-                if(charsRuta[i] == 'v'){
+            if(cont == 5){
+                if(charsRuta[i] == 'V'){
                     return false;
                 }
                 else encontrado = true;
@@ -618,6 +626,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_listaEnRutaMouseClicked
 
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
+        ctrlp.getDominio().eliminarRutaComp(nombreRuta, null);
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
         } catch (IOException ex) {
@@ -632,24 +641,55 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         int idx = listaRutas.getSelectedIndex();      
         String ruta = (String) listaRutas.getSelectedValue();
         actualizarListaPendientes();
-        try {
-            ctrlp.getDominio().paquetesEnviados(nombreRuta);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        actualizarRutas();
+        if (listaPendientesS.size() != listaEnRutaS.size()) {
+            ctrlp.iniVentanaSecundaria("advertencia");
+            if (advertencia) {
+                try {
+                    ctrlp.getDominio().paquetesEnviados(nombreRuta);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    ctrlp.getDominio().acceptarRuta(ruta, fechaCD, nombreCiudad);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
+                actualizarListaPendientes();
+                actualizarRutas();
+            }
+            
         }
-        try {
-            ctrlp.getDominio().acceptarRuta(ruta, fechaCD, nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        else {
+            try {
+                ctrlp.getDominio().paquetesEnviados(nombreRuta);
+            } catch (IOException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                ctrlp.getDominio().acceptarRuta(ruta, fechaCD, nombreCiudad);
+            } catch (IOException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
+            actualizarListaPendientes();
+            actualizarRutas();
         }
-        
         listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
         actualizarListaPendientes();
         actualizarRutas();
+        advertencia = false;
     }//GEN-LAST:event_btnValidarRutaActionPerformed
 
     private void btnEliminarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRutaActionPerformed
@@ -674,6 +714,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerPaquetesActionPerformed
 
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
+        ctrlp.getDominio().eliminarRutaComp(nombreRuta, null);
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
         } catch (IOException ex) {
@@ -685,6 +726,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRutaOptimaActionPerformed
 
     private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapOptimaActionPerformed
+        ctrlp.getDominio().eliminarRutaComp(nombreRuta, null);
         try {
             ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
         } catch (IOException ex) {
@@ -696,7 +738,30 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRutaRapOptimaActionPerformed
 
     private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararRutasActionPerformed
+        ctrlp.getDominio().eliminarRutaComp(nombreRuta, null);
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ctrlp.iniVentanaSecundaria("vistaCompararRutas");
+        
     }//GEN-LAST:event_btnCompararRutasActionPerformed
 
     public void actualizarCiudad(String nombreCiudad) {
@@ -707,8 +772,9 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }
     
     public void actualizarRutas() {
+        listaRutasS = ctrlp.getDominio().getRutas(nombreCiudad);
         listaRutas.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().getRutas(nombreCiudad);
+            ArrayList<String> strings = listaRutasS;
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -783,6 +849,10 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
     public String getCiudad() {
         return nombreCiudad;
+    }
+    
+    public String getFecha() {
+        return fechaCD;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

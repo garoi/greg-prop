@@ -1,5 +1,6 @@
 package Persistencia;
 
+import Presentacion.VistaOperadorPrincipal;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -133,7 +134,7 @@ public class ControlPersistencia {
         return null;
     }
 
-    public void elimnarRuta(String ruta) {
+    public void eliminarRuta(String ruta) {
         pr.eliminarRuta(ruta);
     }
     
@@ -186,5 +187,13 @@ public class ControlPersistencia {
         }catch(Exception e){
             
         }
+    }
+
+    public ArrayList<String> leerRutasComparadas(String fecha, String nombreCiudad) {
+        return pr.leerRutasComparadas(fecha, nombreCiudad);
+    }
+
+    public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
+        pr.eliminarRutaComp(inicioRuta, nombreRuta);
     }
 }

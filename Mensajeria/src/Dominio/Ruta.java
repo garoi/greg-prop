@@ -16,6 +16,7 @@ public class Ruta implements Serializable {
     private Mapa mapa;
     private String fecha;
     private String turno;
+    private String tipo;
     private float costeRuta;
 
     private ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
@@ -24,6 +25,17 @@ public class Ruta implements Serializable {
         this.MSTK = MSTK;
     }
     
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    public float getCosteRuta() {
+        return costeRuta;
+    }
 
     public String getTurno() {
         return turno;

@@ -4,12 +4,17 @@
  */
 package Presentacion;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Luis
  */
 public class VistaComparacionRutas extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
+    private String fecha;
+    private String nombreCiudad;
+    private ArrayList<String> listasComparadas;
     
     /**
      * Creates new form VistaComparacionRutas
@@ -21,9 +26,19 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
     /**
      * Creates new form VistaComparacionRutas
      */
-    public VistaComparacionRutas(CtrlPresentacion ctrlp) {
+    public VistaComparacionRutas(final CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
+        
+        //CIUDAD FECHA TURNO BUSCAR LAS RUTAS DE COMPARACION
+        fecha = ctrlp.getFechaOperador();
+        nombreCiudad = ctrlp.getCiudadOperador();
+        listasComparadas = ctrlp.getDominio().rutasComparadas(fecha, nombreCiudad);
+        listRutas.setModel(new javax.swing.AbstractListModel() {
+            ArrayList<String> strings = ctrlp.getDominio().rutasComparadas(fecha, nombreCiudad);
+            public int getSize() { return strings.size(); }
+            public Object getElementAt(int i) { return strings.get(i); }
+        });
     }
 
     /**
@@ -44,16 +59,16 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        listRutas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listRutas);
 
         btnGuardar.setBackground(new java.awt.Color(75, 75, 75));
         btnGuardar.setForeground(new java.awt.Color(240, 240, 240));
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnVer.setBackground(new java.awt.Color(75, 75, 75));
         btnVer.setForeground(new java.awt.Color(240, 240, 240));
@@ -62,13 +77,18 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         btnClose.setBackground(new java.awt.Color(75, 75, 75));
         btnClose.setForeground(new java.awt.Color(240, 240, 240));
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,8 +123,8 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,6 +136,21 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        for (int i = 0; i < listasComparadas.size(); ++i) {
+            ctrlp.getDominio().eliminarRuta(listasComparadas.get(i));
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        int idx = listRutas.getSelectedIndex();      
+        String nombreRuta = (String) listRutas.getSelectedValue();
+        ctrlp.getDominio().eliminarRutaComp(nombreCiudad + "-" + fecha, nombreRuta);
+        ctrlp.actualizarRutasOperador();
+        this.dispose();
+    }//GEN-LAST:event_btnGuardarActionPerformed
     
     
     

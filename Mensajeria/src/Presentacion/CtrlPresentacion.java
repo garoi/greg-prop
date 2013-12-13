@@ -31,6 +31,7 @@ public class CtrlPresentacion {
     private VistaModificarCiudad vistaModificarCiudad;
     private VistaComparacionRutas vistaCompararRutas;
     private VistaSeleccionCiudad vistaCiudad;
+    private Advertencia vistaAdvertencia;
     
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
@@ -180,6 +181,13 @@ public class CtrlPresentacion {
                 setTamanoVentanaSecundaria(0, 0);
             break;
                 
+            case "advertencia":
+                if (vistaAdvertencia == null) vistaAdvertencia = new Advertencia(this);
+                ventanaSecundaria = vistaAdvertencia;
+                ventanaSecundaria.setTitle("Error");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
+                
             default:
                 System.out.println("***** ERROR iniVentanaSecundaria llamada inválida");
                 ventanaSecundaria = new VistaMapa(this);
@@ -307,5 +315,17 @@ public class CtrlPresentacion {
      */
     public String getCiudadOperador() {
         return vistaOperador.getCiudad();
+    }
+    
+    public String getFechaOperador() {
+        return vistaOperador.getFecha();
+    }
+    
+    public void actualizarRutasOperador() {
+        vistaOperador.actualizarRutas();
+    }
+    
+    public void setAdvertencia(boolean advertencia) {
+        vistaOperador.setAdvertencia(advertencia);
     }
 }

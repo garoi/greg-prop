@@ -100,9 +100,7 @@ public class ControlDominio {
      * @throws IOException 
      */
     private void calculaRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
-        System.out.println("VOY A CREAR EL GRAFO");
         r.crearGrafo(paquetesSeleccionados, map);
-        System.out.println("VOY A CREAR EL GRAFO");
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
         }
@@ -110,15 +108,14 @@ public class ControlDominio {
             r.rapidaOptimizada();
         }
         else {
-            //Llamar a la optimizacion
             r.calcularMinSpaTree();
             r.calcularChristofides();
         }
         r.distanciaRuta();
-        System.out.println("voy a crear cosillas");
         r.setFecha(fecha);
         r.setTurno(turno);
-        String nombreRuta = fecha+"-"+turno;
+        r.setTipo(tipo);
+        String nombreRuta = fecha + "-" + turno + "-" + tipo + "-Coste:" + Float.toString(r.getCosteRuta());
         cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     
@@ -428,11 +425,12 @@ public class ControlDominio {
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta rval = (Ruta) cp.leerRuta(ruta);
         rval.acceptarRuta();
-        cp.guardarRuta(rval, fecha, rval.isVerificada(), nombreCiudad);
+        String nombreRuta = fecha + "-" + rval.getTipo() + "-Coste:" + Float.toString(rval.getCosteRuta());
+        cp.guardarRuta(rval, nombreRuta, rval.isVerificada(), nombreCiudad);
     }
 
     public void eliminarRuta(String ruta) {
-        cp.elimnarRuta(ruta);
+        cp.eliminarRuta(ruta);
     }
     
     public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -445,5 +443,22 @@ public class ControlDominio {
             System.out.println();
         }
         return map.getNombres();
+    }
+
+    public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {
+        return cp.leerRutasComparadas(fecha, nombreCiudad);
+    }
+    
+    public Integer[] getRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Ruta r = (Ruta) cp.leerRuta(nombreRuta);
+        return r.getPermutacion();
+    }
+    public String[] getNombresRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Ruta r = (Ruta) cp.leerRuta(nombreRuta);
+        return r.getNombres();
+    }
+
+    public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
+        cp.eliminarRutaComp(inicioRuta, nombreRuta);
     }
 }
