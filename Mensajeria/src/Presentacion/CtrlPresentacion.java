@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
  */
 public class CtrlPresentacion {
     private ControlDominio ctrld;
+    // Declaración de las vistas
     private VistaInicial vistaInicial;
     private VistaLogin vistaLogin;
     private VistaClientePrincipal vistaCliente;
@@ -28,7 +29,9 @@ public class CtrlPresentacion {
     private VistaCiudad dibujoCiudad;
     private VistaSeleccionTurno vistaTurno;
     private VistaModificarCiudad vistaModificarCiudad;
+    private VistaComparacionRutas vistaCompararRutas;
     private VistaSeleccionCiudad vistaCiudad;
+    
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
     private String tipoUsuario;
@@ -151,7 +154,7 @@ public class CtrlPresentacion {
             break;
                 
             case "verDibujoCiudad":
-                if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this, getCiudadOperador());
+                if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this);
                 ventanaSecundaria = dibujoCiudad;
                 ventanaSecundaria.setTitle("Dibujo de la ciudad");
                 setTamanoVentanaSecundaria(0, 0);
@@ -168,6 +171,13 @@ public class CtrlPresentacion {
                 if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this);
                 ventanaSecundaria = vistaModificarCiudad;
                 ventanaSecundaria.setTitle("Modificar ciudad");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
+                
+            case "vistaCompararRutas":
+                if (vistaCompararRutas == null) vistaCompararRutas = new VistaComparacionRutas(this);
+                ventanaSecundaria = vistaCompararRutas;
+                ventanaSecundaria.setTitle("Comparar Rutas");
                 setTamanoVentanaSecundaria(0, 0);
             break;
                 
@@ -291,7 +301,12 @@ public class CtrlPresentacion {
         return "";
     }
 
-    private String getCiudadOperador() {
+    
+    /**
+     * jfewiaop
+     * @return 
+     */
+    public String getCiudadOperador() {
         return vistaOperador.getCiudad();
     }
     void setCiudad(String nombreCiudad) {

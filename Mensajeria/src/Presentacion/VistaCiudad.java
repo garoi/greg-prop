@@ -8,15 +8,18 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author Luis García Estrades
+ * @author Marc Garcia Roig
  */
 public class VistaCiudad extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
-    private String ciudad;
+    private String nombreCiudad;
     
     /**
      * Creates new form Mierdas
@@ -29,9 +32,9 @@ public class VistaCiudad extends javax.swing.JFrame {
      * Creates new form PrimeraVista
      * @param ctrlp
      */
-    public VistaCiudad(CtrlPresentacion ctrlp, String nombreCiudad) {
+    public VistaCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
-        ciudad = nombreCiudad;
+        nombreCiudad = ctrlp.getCiudadOperador();
         initComponents();
     }
 
@@ -94,40 +97,34 @@ public class VistaCiudad extends javax.swing.JFrame {
 
    
     public void paint (Graphics g) {
-        System.out.println("Entra paint");
-        /*ArrayList<String> nombresCiudad = ctrlp.getDominio().getNombresCiudad();
-        int tamCiudad = nombresCiudad.size();
-        ArrayList<ArrayList<Float>> distanciaCiudad = ctrlp.getDominio().getDistanciaCiudad();*/
-
-        float longitudCirculototal = (float) ((Math.PI) * 740);
-
+        ArrayList<String> nombresCiudad = null;
+        int n = 0;
+        try {
+            nombresCiudad = ctrlp.getDominio().getNombresCiudad(nombreCiudad);
+            n = nombresCiudad.size();
+        } catch (IOException ex) {
+            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         super.paint(g);
         g.setColor(Color.red);
         int maxWidth = this.getWidth();
         int maxHeight = this.getHeight();
 
-//        g.drawOval (20, 50, 630, 630);
-
         g.setColor (Color.black);
-//        g.drawLine (0, 70, 100, 70);
-//        g.drawRect (150, 70, 50, 70);
-//        g.drawRoundRect (250, 70, 50, 70, 6, 6);
-//        g.drawOval(esquina, esquina, anchox, anchoy);
-//        g.drawOval (350, 70, 50, 70);
         float factor = maxWidth;
         float diametro = factor*0.8f;
         if(maxWidth<maxHeight) factor = maxHeight;
-        // circunferencia
-//        g.drawOval(Math.round(factor*0.1f), Math.round(factor*0.15f), Math.round(diametro), Math.round(diametro));
         int origx = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
         int origy = Math.round(factor*0.15f) - 5;
-        // n=numero puntos
-        int n = 12;
+
         double angulo = 360 / n;
         double radio = diametro / 2;
         int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
         int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) - 5;
-//        g.drawOval(centrox,centroy,10,10);
+        
         ArrayList<int[]> puntos = new ArrayList();
         double auxAngulo = 0.0f;
         for(int i = 0; i < n; i++){
@@ -145,38 +142,34 @@ public class VistaCiudad extends javax.swing.JFrame {
             int auxy = p1y + centroy;
             int[] auxPair = {auxx, auxy};
             puntos.add(auxPair);
-
+            
             g.setColor (Color.black);
+            g.drawString(nombresCiudad.get(i), auxx -5, auxy-5);
+            
             g.fillOval(auxx,auxy,10,10);
-            g.setColor (Color.white);
+            g.setColor (Color.blue);
             g.fillOval(auxx+2,auxy+2,6,6);
             auxAngulo += angulo;
         }
-//            g.drawOval(origx, origy, 10, 10);
 
-//        g.drawOval(Math.round((float) p1x), Math.round((float)p1y), 5, 5);
-
-
-
-
-//        int [] vx1 = {500, 550, 450};
-//        int [] vy1 = {70, 120, 120};
-//        g.drawPolygon (vx1, vy1, 3);
-
-        g.setColor (Color.red);
-//        g.fillRect (150, 270, 50, 70);
-//        g.fillRoundRect (250, 270, 50, 70, 6, 6);
-//        g.fillOval (350, 270, 50, 70);
-//        int [] vx2 = {500, 550, 450};
-//        int [] vy2 = {270, 320, 320};
-//        g.fillPolygon (vx2, vy2, 3);
+        g.setColor(Color.black);
+        for (int i = 0; i < puntos.size(); ++i) {
+            for (int j = i+1; j < puntos.size(); ++j) {
+                int[] auxi = puntos.get(i);
+                int xi = auxi[0]+3;
+                int yi = auxi[1]+3;
+                int[] auxj = puntos.get(j);
+                int xj = auxj[0]+3;
+                int yj = auxj[1]+3;
+                g.drawLine(xi, yi, xj, yj);
+            }
+        }
     }
     
     
     
     private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
         Graphics g = null;
-//        paint(g);
     }//GEN-LAST:event_jPanel1AncestorAdded
 
     /**

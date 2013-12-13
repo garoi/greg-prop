@@ -106,6 +106,9 @@ public class ControlDominio {
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
         }
+        else if (tipo.equals("rapidaOptima")) {
+            r.rapidaOptimizada();
+        }
         else {
             //Llamar a la optimizacion
             r.calcularMinSpaTree();
@@ -433,11 +436,15 @@ public class ControlDominio {
         cp.elimnarRuta(ruta);
     }
     
-    public ArrayList<String> getNombresCiudad() {
+    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+        map = (Mapa) cp.leerCiudad(nombreCiudad);
+        ArrayList<ArrayList<Float>> ciudad = map.getCiudad();
+        for(int i = 0; i < ciudad.size();++i){
+            for(int j = 0; j < ciudad.size(); ++j){
+                System.out.print(ciudad.get(i).get(j)+ " ");
+            }
+            System.out.println();
+        }
         return map.getNombres();
-    }
-    
-    public ArrayList<ArrayList<Float>> getDistanciaCiudad() {
-        return map.getCiudad();
     }
 }

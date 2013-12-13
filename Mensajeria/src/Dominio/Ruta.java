@@ -138,6 +138,18 @@ public class Ruta implements Serializable {
         permutacion = sg.solve();
     }
     
+    public void rapidaOptimizada(){
+        SolveGreedy sg = new SolveGreedy(grafo);
+        permutacion = sg.solve();
+        Optimizacion op = new Optimizacion();
+        op.inicializa(permutacion, nombres, grafo, costeRuta);
+        boolean cambio = op.randSwap();
+        if(cambio){
+            permutacion = op.getSolucion();
+            costeRuta = op.getComparador();
+        }
+    }
+    
     /**
      * Calcula el arbol de expansion minima de un grafo
      * @param
@@ -159,7 +171,7 @@ public class Ruta implements Serializable {
         ch.setNombres(nombres);
         ch.setMST(MSTK);
         Integer[] aux = ch.buscaPermutacion();
-        Integer[] aux2 = new Integer[aux.length - 2];
+        Integer[] aux2 = new Integer[aux.length - 1];
         for (int i = 0; i < aux2.length; ++i) {
             aux2[i] = aux[i];
         }
@@ -167,7 +179,11 @@ public class Ruta implements Serializable {
         permutacion = aux2;
         Optimizacion op = new Optimizacion();
         op.inicializa(permutacion, nombres, grafo, costeRuta);
-        boolean mejor = op.pruebaOptimizar();
+        boolean cambio = op.randSwap();
+        if(cambio){
+            permutacion = op.getSolucion();
+            costeRuta = op.getComparador();
+        }
     }
     
     /**
@@ -190,21 +206,18 @@ public class Ruta implements Serializable {
     }
     
     public void distanciaRuta() {
-        int suma = 0;
-        System.out.println("Tamany " + permutacion.length);
+        float suma = 0;
         for (int i = 0; i < permutacion.length; ++i) {
             if (i + 1 < permutacion.length) {
-                System.out.println("Tmuuuu");
-                suma += grafo[i][i+1];
+                suma += grafo[permutacion[i]][permutacion[i+1]];
             }
             else {
                 //O ES UN SOL PUNT O L'ULTIM ELEMENT
                 if (permutacion.length == 1) {
-                    suma += grafo[i][i];
+                    suma += grafo[permutacion[i]][permutacion[i]];
                 }
             }
         }
-        System.out.println("Salgo del for");
         costeRuta = suma;
     }
     
