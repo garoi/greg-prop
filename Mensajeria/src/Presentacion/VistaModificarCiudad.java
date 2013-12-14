@@ -6,6 +6,12 @@
 
 package Presentacion;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luis García Estrades https://github.com/lgarest
@@ -24,13 +30,10 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
     /**
      * Creates new form VistaModificarCiudad
      */
-    public VistaModificarCiudad(CtrlPresentacion ctrlp) {
+    public VistaModificarCiudad(CtrlPresentacion ctrlp, String nombreCiudad) {
         this.ctrlp = ctrlp;
+        this.ciudad = nombreCiudad;
         initComponents();
-        buttonGroup1.add(btnAnadir);
-        buttonGroup1.add(btnCancelar);
-        buttonGroup1.add(btnDistancia);
-        buttonGroup1.add(btnFichero);
     }
 
 
@@ -45,85 +48,85 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        btnAnadir = new javax.swing.JRadioButton();
-        btnEliminar = new javax.swing.JRadioButton();
-        btnDistancia = new javax.swing.JRadioButton();
-        btnFichero = new javax.swing.JRadioButton();
-        btnOk = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnAnadir = new javax.swing.JButton();
+        btnRenombrar = new javax.swing.JButton();
+        btnDistancia = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnFichero = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modificar ciudad", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        btnAnadir.setText("Añadir un punto");
-
-        btnEliminar.setText("Eliminar un punto");
-
-        btnDistancia.setText("Cambiar la distancia entre dos puntos");
-
-        btnFichero.setText("Desde fichero");
-
-        btnOk.setBackground(new java.awt.Color(75, 75, 75));
-        btnOk.setForeground(new java.awt.Color(220, 220, 220));
-        btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setBackground(new java.awt.Color(75, 75, 75));
         btnCancelar.setForeground(new java.awt.Color(220, 220, 220));
         btnCancelar.setText("Cancelar");
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
             }
         });
+
+        btnAnadir.setBackground(new java.awt.Color(75, 75, 75));
+        btnAnadir.setForeground(new java.awt.Color(220, 220, 220));
+        btnAnadir.setText("Añadir punto");
+
+        btnRenombrar.setBackground(new java.awt.Color(75, 75, 75));
+        btnRenombrar.setForeground(new java.awt.Color(220, 220, 220));
+        btnRenombrar.setText("Renombrar punto");
+        btnRenombrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRenombrarActionPerformed(evt);
+            }
+        });
+
+        btnDistancia.setBackground(new java.awt.Color(75, 75, 75));
+        btnDistancia.setForeground(new java.awt.Color(220, 220, 220));
+        btnDistancia.setText("Modificar distancia");
+
+        btnEliminar.setBackground(new java.awt.Color(75, 75, 75));
+        btnEliminar.setForeground(new java.awt.Color(220, 220, 220));
+        btnEliminar.setText("Eliminar punto");
+
+        btnFichero.setBackground(new java.awt.Color(75, 75, 75));
+        btnFichero.setForeground(new java.awt.Color(220, 220, 220));
+        btnFichero.setText("Desde fichero");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAnadir)
-                        .addContainerGap(193, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEliminar)
-                        .addContainerGap(184, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnDistancia)
-                        .addContainerGap(49, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnFichero)
-                        .addContainerGap(210, Short.MAX_VALUE))))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFichero, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDistancia, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRenombrar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAnadir, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(btnAnadir)
+                .addContainerGap()
+                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminar)
+                .addComponent(btnRenombrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDistancia)
+                .addComponent(btnDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFichero)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFichero, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAnadir, btnCancelar, btnDistancia, btnEliminar, btnRenombrar});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,14 +148,26 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-        System.out.println(evt.getActionCommand());
-    }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCancelarMouseClicked
+    private void btnRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenombrarActionPerformed
+        String nombre1 = JOptionPane.showInputDialog("Introduce el nombre del punto a renombrar:");
+        try {
+            if(ctrlp.getDominio().getNombresCiudad(ciudad).contains(nombre1)){
+                System.out.println("FUCKYEA");
+                String nombre2 = JOptionPane.showInputDialog("Introduce el nuevo nombre:");
+//                ctrlp.getDominio().renombrarPunto(nombre1, nombre2);
+            }
+            else this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnRenombrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,12 +182,12 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton btnAnadir;
+    private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JRadioButton btnDistancia;
-    private javax.swing.JRadioButton btnEliminar;
-    private javax.swing.JRadioButton btnFichero;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnDistancia;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnFichero;
+    private javax.swing.JButton btnRenombrar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
