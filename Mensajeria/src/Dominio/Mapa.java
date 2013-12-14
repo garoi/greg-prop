@@ -146,7 +146,7 @@ public class Mapa implements Serializable {
      * @return true si se ha añadido correctamente.
      */
     private boolean anadirPunto(String nombre, float[] distancias){
-        if (nombres.contains(nombre)) return false;
+        if (!nombres.contains(nombre)) return false;
         // Añadimos el nombre
         nombres.add(nombre);
         // Y espacio para el nuevo punto
@@ -187,6 +187,13 @@ public class Mapa implements Serializable {
         return true;
     }
 
+    public boolean ctrlCrearCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos){
+        if (!crearCiudad(nombre, n)) return false;
+        if (!setNombrePuntos(nombreNodos)) return false;
+        if (!setDistancias(distanciasNodos)) return false;
+        return true;
+    }
+    
     /**
      * Creadora de la ciudad, se le atribuye un nombre a la ciudad, se introduce 
  el número de puntos que la forman, los nombres y distancias entre los puntos.
@@ -195,27 +202,43 @@ public class Mapa implements Serializable {
      * @return devuelve true si se ha creado correctamente la ciudad
      */
     public boolean crearCiudad(String nombre, int n){
-        if (n >= 0) tamCiudad = n;
-        else return false;
-        if (nombre != null) setNombreCiudad(nombre);
-        else return false;
-        
-        inicializarCiudad();
-        
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < n; i++) {
-            System.out.printf("Escribe el nombre del punto %d:\n", i+1);
-            String nombreNodo = sc.next();
-            nombres.add(nombreNodo);
+        System.out.println("crearCiudad");
+        if (n >= 0 && nombre != null){
+            setTamCiudad(n);
+            setNombreCiudad(nombre);
+            inicializarCiudad();
+            return true;
         }
+        else return false;
+    }
+    
+    public boolean setNombrePuntos(ArrayList<String> nombresparam){
+        System.out.println("setNombrePuntos");
+        if (tamCiudad == 0 || nombresparam == null || nombresparam.size() == 0) return false;
+        for (int i=0; i<tamCiudad; i++){
+            nombres.add(nombresparam.get(i));
+        }
+        return true;
+    }
+    
+    public boolean setDistancias(float[] distancias){
+        System.out.println("entra setDistancias");
+//        System.out.println(distancias.length);
+//        System.out.println(tamCiudad);
+//        System.out.println(ciudad);
+        if (tamCiudad == 0 || distancias == null || distancias.length == 0 || ciudad == null) return false;
+//        Scanner sc = new Scanner(System.in);
+//        for (int i = 0; i < n; i++) {
+//            System.out.printf("Escribe el nombre del punto %d:\n", i+1);
+//            String nombreNodo = sc.next();
+//            nombres.add(nombreNodo);
+//        }
         setD(0,0,0.0f);
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
+        for (int i = 0; i < distancias.length; i++) {
+            float distancia = distancias[i];
+            for (int j = i; j < distancias.length; j++) {
                 setD(i,i,0.0f);
                 if(getD(i,j) == -1.0f){
-                    System.out.printf("Distancia del punto \"%s\" al punto \"%s\": ",
-                                    nombres.get(i), nombres.get(j));
-                    int distancia= sc.nextInt();
                     setD(i,j,distancia);
                     setD(j,i,distancia);
                 }                

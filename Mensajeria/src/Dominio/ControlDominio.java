@@ -236,9 +236,9 @@ public class ControlDominio {
      * @throws ClassNotFoundException
      * @throws IOException 
      */
-    public void anadirCiudad() throws ClassNotFoundException, IOException{
+    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException{
         map = new Mapa();
-        map = oper.anadirCiudad(map);
+        map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
