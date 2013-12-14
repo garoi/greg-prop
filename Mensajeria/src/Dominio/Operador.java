@@ -148,23 +148,6 @@ public class Operador implements Serializable {
         }
         return false;
     }
-        
-    /**
-     * Crea una ciudad para el operador.
-     * @param map mapa vacío.
-     * @return Mapa el mapa de la ciudad ya inicializado.
-     * @throws IOException
-     * @throws ClassNotFoundException 
-     */
-    public Mapa anadirCiudad(Mapa map) throws IOException, ClassNotFoundException{
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el nombre de la ciudad:");
-        String name = sc.next();
-        System.out.println("Introduce el número de puntos de la ciudad:");
-        int n = sc.nextInt();
-        map.crearCiudad(name, n);
-        return map;
-    }
     
     /**
      * Elimina el paquete de la lista de paquetes de la ruta que 
