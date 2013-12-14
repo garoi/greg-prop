@@ -694,7 +694,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                     Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                listaPendientesS = ctrlp.getDominio().getPaquetesPendientes(nombreCiudad, fechaCD);
+                listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
                 actualizarListaPendientes();
                 actualizarRutas();
             }
@@ -702,7 +702,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         }
         else {
             try {
-                ctrlp.getDominio().paquetesEnviados(nombreRuta);
+                ctrlp.paquetesEnviados(nombreRuta);
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -795,14 +795,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
+            ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            ctrlp.getDominio().calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
+            ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
         } catch (IOException ex) {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
