@@ -160,6 +160,12 @@ public class Ruta implements Serializable {
             permutacion = op.getSolucion();
             costeRuta = op.getComparador();
         }
+        Optimus opt = new Optimus();
+        opt.setPermutacion(permutacion);
+        opt.setM(grafo);
+        opt.opt(2, 30);
+        permutacion = opt.getPermutacion();
+        distanciaRuta();
     }
     
     /**

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 import Dominio.ControlDominio;
 import java.awt.Dimension;
@@ -328,7 +322,8 @@ public class CtrlPresentacion {
     
     public void actualizarListaEnRuta() {
         vistaOperador.actualizarListaEnRuta();
-
+    }
+    
     public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fechaCD) {
         return ctrld.getPaquetesPendientes(nombreCiudad, fechaCD);
     }
