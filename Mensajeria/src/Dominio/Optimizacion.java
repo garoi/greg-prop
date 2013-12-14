@@ -69,12 +69,6 @@ public class Optimizacion {
         return suma;
     }
     
-    private void swap(int num, int num2, Integer[] copia){
-        
-        
-       
-    }
-    
     public boolean randSwap(){      
         cambio = false; 
         for(int i = 0; i < solucion.length*2 ; ++i){
@@ -94,6 +88,7 @@ public class Optimizacion {
         }
         return cambio;
     }
+    
      public void inicializa(Integer[] permutacion, String[] nombres, float[][] grafo, float costeRuta){
         setNombres(nombres);
         setSolucion(permutacion);

@@ -199,13 +199,6 @@ public class Ruta implements Serializable {
     }
     
     /**
-     * Optimiza la ruta encontrada
-     */
-    public void optimizar() {
-        
-    }
-    
-    /**
      * Muestra los puntos del mapa por donde pasara la ruta
      * @param
      */

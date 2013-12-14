@@ -141,6 +141,9 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         for (int i = 0; i < listasComparadas.size(); ++i) {
             ctrlp.getDominio().eliminarRuta(listasComparadas.get(i));
         }
+        ArrayList<String> listaEnRutaS = new ArrayList<>();
+        ctrlp.setListaEnRutaS(listaEnRutaS);
+        ctrlp.actualizarListaEnRuta();
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 

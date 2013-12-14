@@ -1,16 +1,4 @@
 package Dominio;
-/* Hay que aplicar esta función sobre el MST para que Christofides funcione (llamar desde el controlador, por ej).
- * Quita los aristas que hacen bucle sobre un mismo nodo.
-
-    private void quitaBucles(ArrayList<ArrayList<Pair>> mst) {
-        for (int i = 0; i < mst.size(); ++i) {
-            for (int j = 0; j < mst.get(i).size(); ++j) {
-                if (mst.get(i).get(j).first() == i) mst.get(i).remove(j);
-            }
-        }
-    }
-
-*/
 
 import java.util.ArrayList;
 import java.util.Arrays;

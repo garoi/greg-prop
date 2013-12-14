@@ -9,6 +9,7 @@ import Dominio.ControlDominio;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -313,5 +314,13 @@ public class CtrlPresentacion {
     
     public void setAdvertencia(boolean advertencia) {
         vistaOperador.setAdvertencia(advertencia);
+    }
+
+    public void setListaEnRutaS(ArrayList<String> listaEnRutaS) {
+        vistaOperador.setListaEnRutaS(listaEnRutaS);
+    }
+    
+    public void actualizarListaEnRuta() {
+        vistaOperador.actualizarListaEnRuta();
     }
 }
