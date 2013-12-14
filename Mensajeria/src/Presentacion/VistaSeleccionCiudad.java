@@ -149,7 +149,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         int idx = listaCiudades.getSelectedIndex();      
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
         this.setVisible(false);
-        ctrlp.actualizarVistaOperador(nombreCiudad);
+        ctrlp.setOperador(nombreCiudad);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
