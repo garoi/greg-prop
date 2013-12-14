@@ -91,7 +91,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnVerRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
                               <Component id="btnValidarRuta" linkSize="10" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               <Component id="btnModificarRuta" linkSize="10" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
@@ -113,16 +112,14 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="btnModificarRuta" pref="49" max="32767" attributes="0"/>
+                          <Component id="btnModificarRuta" pref="54" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnValidarRuta" pref="50" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="btnVerRuta" pref="49" max="32767" attributes="0"/>
+                          <Component id="btnValidarRuta" pref="53" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCompararRutas" pref="49" max="32767" attributes="0"/>
+                          <Component id="btnCompararRutas" pref="52" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnEliminarRuta" pref="50" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnEliminarRuta" pref="53" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                           <Component id="btnAyuda" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
@@ -161,21 +158,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="dc" green="dc" red="dc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Mod"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVerRuta">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="4b" green="4b" red="4b" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="dc" green="dc" red="dc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ver"/>
+            <Property name="text" type="java.lang.String" value="Ver / Mod"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerRutaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarRutaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnValidarRuta">

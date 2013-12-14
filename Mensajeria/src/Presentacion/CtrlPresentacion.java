@@ -26,12 +26,14 @@ public class CtrlPresentacion {
     private VistaModificarCiudad vistaModificarCiudad;
     private VistaComparacionRutas vistaCompararRutas;
     private VistaSeleccionCiudad vistaCiudad;
+    private VistaModificarRuta vistaModificarRuta;
     private Advertencia vistaAdvertencia;
     
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
     private String tipoUsuario;
     private String ciudad;
+    private String ruta;
     
     /**
      * Permite un control sobre la capa de presentación del programa.
@@ -127,6 +129,15 @@ public class CtrlPresentacion {
                 ventanaSecundaria.setTitle("Añadir Paquete");
             break;
                 
+            case "vistaModificarRuta":
+                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
+                ventanaSecundaria = new VistaModificarRuta(this, getDestinosRuta());
+                vistaModificarRuta = null;
+                ventanaSecundaria.setTitle("Ver / Editar Ruta");
+                
+//                    VistaModificarRuta vistaModificarRuta
+            break;
+                
 //            case "vistaAnadirPaquete":
 //                if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
 //                vistaAnadirPaquete.getContentPane().remove(vistaAnadirPaquete.getSidebar());
@@ -187,7 +198,8 @@ public class CtrlPresentacion {
             break;
         }
         setTamanoVentanaSecundaria(0, 0);
-        System.out.println("setrelative null");
+        ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/icono.png"));
+        ventanaSecundaria.setIconImage(img.getImage());
         ventanaSecundaria.setLocationRelativeTo(null);
         ventanaSecundaria.setVisible(true);
         ventanaSecundaria.setResizable(false);
@@ -366,6 +378,10 @@ public class CtrlPresentacion {
         return ctrld.getRutas(nombreCiudad);
     }
     
+    private String[] getDestinosRuta() {
+        return ctrld.getDestinosRuta(ruta);
+    }
+    
     public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
         return ctrld.getPaquetesRuta(nombreRuta);
     }
@@ -468,5 +484,8 @@ public class CtrlPresentacion {
     
     public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
         ctrld.eliminarPunto(nombre1);
+    }
+    void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 }
