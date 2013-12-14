@@ -426,7 +426,7 @@ public class ControlDominio {
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta rval = (Ruta) cp.leerRuta(ruta);
         rval.acceptarRuta();
-        String nombreRuta = fecha + "-" + rval.getTipo() + "-Coste:" + Float.toString(rval.getCosteRuta());
+        String nombreRuta = fecha + "-" + rval.getTipo() + "-Coste-" + Float.toString(rval.getCosteRuta());
         cp.guardarRuta(rval, nombreRuta, rval.isVerificada(), nombreCiudad);
     }
 
