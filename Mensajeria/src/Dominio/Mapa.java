@@ -11,6 +11,7 @@ public class Mapa implements Serializable {
     private String nombreCiudad;
     private ArrayList<String> nombres;
     private ArrayList<ArrayList<Float>> ciudad;
+
     private int tamCiudad;
     
     public Mapa(){
@@ -21,7 +22,11 @@ public class Mapa implements Serializable {
         return tamCiudad;
     }
     
-    private void setTamCiudad(int tamCiudad){
+    public void setCiudad(ArrayList<ArrayList<Float>> ciudad) {
+        this.ciudad = ciudad;
+    }
+    
+    public void setTamCiudad(int tamCiudad){
         this.tamCiudad = tamCiudad;
     }
     
@@ -53,7 +58,7 @@ public class Mapa implements Serializable {
      * Atribuye a la ciudad un nombre.
      * @param nombre un nombre de ciudad.
      */
-    private void setNombreCiudad(String nombre){
+    public void setNombreCiudad(String nombre){
         nombreCiudad = nombre;
     }
  

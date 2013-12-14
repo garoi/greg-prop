@@ -462,4 +462,27 @@ public class ControlDominio {
     public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
         cp.eliminarRutaComp(inicioRuta, nombreRuta);
     }
+    
+    public void crearFichero(String nombreFichero) throws IOException{
+        cp.crearFichero(nombreFichero);
+    }
+    
+     public Object leerCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+       return cp.leerCiudad(nombreCiudad);
+    }
+    
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+        cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
+    }
+    
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
+        Mapa m = new Mapa();
+        m.setNombreCiudad(nomCiudad);
+        m.setNombrePuntos(nombres);
+        m.setCiudad(ciudad);
+        m.setTamCiudad(nombres.size());
+        cp.guardarMapas(m, nomCiudad);
+    }
+     
+    
 }
