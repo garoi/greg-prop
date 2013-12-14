@@ -48,7 +48,7 @@ public class ListaClientes implements Serializable {
      * @param nombre
      * @return idCliente que corresponde al cliente con nombre nombre
      */
-    public int encontrarCliente(String nombre){
+    private int encontrarCliente(String nombre){
         for(int i = 0; i < listaClientes.size(); ++i){
             if(listaClientes.get(i).getNombreCliente().equals(nombre)){
                 System.out.println("ID cliente es "+ listaClientes.get(i).getIdCliente());
@@ -65,7 +65,7 @@ public class ListaClientes implements Serializable {
      * Devuelve el numero de clientes total
      * @return tamano de la lista de clientes
      */
-    public int tamanoListaClientes(){
+    private int tamanoListaClientes(){
         return listaClientes.size();
     }
     

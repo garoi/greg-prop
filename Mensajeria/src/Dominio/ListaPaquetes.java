@@ -10,7 +10,7 @@ public class ListaPaquetes implements Serializable {
     private static final long serialVersionUID = 9040177911315386368L;
      ArrayList<Paquete> listaPaquetes = new ArrayList<Paquete>();
      int idPaquete = 0;
-    public ArrayList<Paquete> getListaPaquetes() {
+    private ArrayList<Paquete> getListaPaquetes() {
         return listaPaquetes;
     }
      
@@ -29,7 +29,7 @@ public class ListaPaquetes implements Serializable {
      * @param idCliente 
      * 
      */
-    public void packsCliente(int idCliente){
+    private void packsCliente(int idCliente){
         for(int i = 0; i < listaPaquetes.size(); ++i){
             if(listaPaquetes.get(i).getIdCliente() == idCliente){
                 escribirPaquete(i);
@@ -41,7 +41,7 @@ public class ListaPaquetes implements Serializable {
      * Devuelve el tamaño de la lista de paquetes
      * @return tamano de la lista de paquetes
      */
-    public int tamanoListaPaquetes(){
+    private int tamanoListaPaquetes(){
         return listaPaquetes.size();
     }
     
@@ -50,7 +50,7 @@ public class ListaPaquetes implements Serializable {
      * @param idPaquete 
      * 
      */
-    public void escribirPaquete(int idPaquete){
+    private void escribirPaquete(int idPaquete){
         if(idPaquete > tamanoListaPaquetes()){
             System.out.print("El paquete no existe");
         }

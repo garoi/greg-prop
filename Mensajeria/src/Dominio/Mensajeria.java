@@ -8,18 +8,18 @@ import java.lang.System;
  */
 public class Mensajeria {
 
-    public void main(String[] args) {
+    private void main(String[] args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   /*  
-    public static void infoOperador() {
+    private static void infoOperador() {
         System.out.println("1 ver paquetes");
         System.out.println("2 añadir ciudad");
         System.out.println("3 seleccionar ciudad y sus opciones");
         System.out.println("0 Salir");
     }
     
-    public static void infoCliente() {
+    private static void infoCliente() {
         System.out.println("1 anadir paquetes");
         System.out.println("2 ver paquetes");
         System.out.println("3 cancelar envio");
@@ -28,7 +28,7 @@ public class Mensajeria {
     }
     
 
-    public static void funcCliente(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
+    private static void funcCliente(ControlDominio cd) throws IOException, FileNotFoundException, ClassNotFoundException{
         Scanner sc = new Scanner(System.in);
         infoCliente();
         int op = sc.nextInt();
@@ -52,7 +52,7 @@ public class Mensajeria {
     }
     
 
-    public static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
+    private static void funcOperador(ControlDominio cd) throws ClassNotFoundException, IOException {
         Scanner sc = new Scanner(System.in);
         infoOperador();
         int op = sc.nextInt();
@@ -73,7 +73,7 @@ public class Mensajeria {
         cd.guardadoGeneral();
     }
     
-    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
+    private static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ControlDominio cd = new ControlDominio();
         cd.iniControlDominio();

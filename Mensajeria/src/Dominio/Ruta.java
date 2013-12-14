@@ -21,7 +21,7 @@ public class Ruta implements Serializable {
 
     private ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
 
-    public void setMSTK(ArrayList<ArrayList<Pair>> MSTK) {
+    private void setMSTK(ArrayList<ArrayList<Pair>> MSTK) {
         this.MSTK = MSTK;
     }
     
@@ -37,7 +37,7 @@ public class Ruta implements Serializable {
         return costeRuta;
     }
 
-    public String getTurno() {
+    private String getTurno() {
         return turno;
     }
 
@@ -49,7 +49,7 @@ public class Ruta implements Serializable {
      * 
      * @param nombres 
      */
-    public void setNombres(String[] nombres) {
+    private void setNombres(String[] nombres) {
         this.nombres = nombres;
     }
     
@@ -57,7 +57,7 @@ public class Ruta implements Serializable {
      * 
      * @param grafo 
      */
-    public void setGrafo(float[][] grafo) {
+    private void setGrafo(float[][] grafo) {
         this.grafo = grafo;
     }
     
@@ -73,7 +73,7 @@ public class Ruta implements Serializable {
      * 
      * @param verificada 
      */
-    public void setVerificada(boolean verificada) {
+    private void setVerificada(boolean verificada) {
         this.verificada = verificada;
     }
     
@@ -89,7 +89,7 @@ public class Ruta implements Serializable {
      * 
      * @return grafo
      */
-    public float[][] getGrafo() {
+    private float[][] getGrafo() {
         return grafo;
     }
     
@@ -137,7 +137,7 @@ public class Ruta implements Serializable {
      * 
      * @return fecha
      */
-    public String getFecha() {
+    private String getFecha() {
         return fecha;
     }
     
@@ -201,7 +201,7 @@ public class Ruta implements Serializable {
     /**
      * Optimiza la ruta encontrada
      */
-    public void optimizar() {
+    private void optimizar() {
         
     }
     

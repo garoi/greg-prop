@@ -17,11 +17,11 @@ public class Mapa implements Serializable {
         nombres = new ArrayList<>();
     }
 
-    public int getTamCiudad(){
+    private int getTamCiudad(){
         return tamCiudad;
     }
     
-    public void setTamCiudad(int tamCiudad){
+    private void setTamCiudad(int tamCiudad){
         this.tamCiudad = tamCiudad;
     }
     
@@ -53,7 +53,7 @@ public class Mapa implements Serializable {
      * Atribuye a la ciudad un nombre.
      * @param nombre un nombre de ciudad.
      */
-    public void setNombreCiudad(String nombre){
+    private void setNombreCiudad(String nombre){
         nombreCiudad = nombre;
     }
  

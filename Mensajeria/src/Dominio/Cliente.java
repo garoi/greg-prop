@@ -65,7 +65,7 @@ public class Cliente implements Serializable {
      * 
      * @return Lista de paquetes del cliente
      */
-    public ArrayList<Paquete> getListaPaquetes() {
+    private ArrayList<Paquete> getListaPaquetes() {
         return listaPaquetes;
 
     }
@@ -74,7 +74,7 @@ public class Cliente implements Serializable {
      * Lee los datos del cliente
      * 
      */
-    public void leerCliente(){
+    private void leerCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del client"
                 + "e");

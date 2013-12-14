@@ -50,7 +50,7 @@ public class PersistenciaMapas {
         return ficheros;
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    private void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
         InputStream is = null;
 	BufferedReader br = null;
         String[] temp;

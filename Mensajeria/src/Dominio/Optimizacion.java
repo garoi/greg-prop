@@ -22,29 +22,29 @@ public class Optimizacion {
         return solucion;
     }
 
-    public String[] getNombres() {
+    private String[] getNombres() {
         return nombres;
     }
 
-    public void setSolucion(Integer[] solucion) {
+    private void setSolucion(Integer[] solucion) {
         this.solucion = solucion;
     }
 
-    public void setNombres(String[] nombres) {
+    private void setNombres(String[] nombres) {
         this.nombres = nombres;
     }
     
-    public void setSubgrafo(float[][] subgrafo) {
+    private void setSubgrafo(float[][] subgrafo) {
         this.subgrafo = subgrafo;
     }
 
-    public void setComparador(float comparador) {
+    private void setComparador(float comparador) {
         this.comparador = comparador;
     }
 
     
     
-    public float[][] getSubgrafo() {
+    private float[][] getSubgrafo() {
         return subgrafo;
     }
 
