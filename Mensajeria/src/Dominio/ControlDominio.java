@@ -462,4 +462,8 @@ public class ControlDominio {
     public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
         cp.eliminarRutaComp(inicioRuta, nombreRuta);
     }
+    
+    public void eliminarCiudad(String nombreCiudad){
+        cp.eliminarCiudad(nombreCiudad);
+    }
 }

@@ -436,4 +436,8 @@ public class CtrlPresentacion {
     public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException {
         ctrld.anadirCiudad(nombre, n, nombreNodos, distanciasNodos);
     }
+    
+    public void eliminarCiudad(String nombreCiudad){
+        ctrld.eliminarCiudad(nombreCiudad);
+    }
 }

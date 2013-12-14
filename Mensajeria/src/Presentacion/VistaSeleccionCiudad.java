@@ -68,6 +68,11 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listaCiudades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaCiudadesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaCiudades);
 
         btnAnadir.setBackground(new java.awt.Color(75, 75, 75));
@@ -248,8 +253,21 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ctrlp.actualizarVentanaSecundaria();
     }//GEN-LAST:event_btnAnadirActionPerformed
 
+    private void actualizarListaCiudades(){
+        final String [] ciudades = ctrlp.getNombresCiudades();
+        listaCiudades.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = ciudades;
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+    }
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        // Eliminar una ciudad de la lista.
+        int idx = listaCiudades.getSelectedIndex();
+        String nombreCiudad = (String) listaCiudades.getSelectedValue();
+        System.out.println("nombreeeee : " + nombreCiudad);
+        ctrlp.eliminarCiudad(nombreCiudad);
+        actualizarListaCiudades();       
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -260,6 +278,10 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
         String nombreCiudad = JOptionPane.showInputDialog("Introduce un nombre para la ciudad:");
     }//GEN-LAST:event_btnFicheroActionPerformed
+
+    private void listaCiudadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCiudadesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaCiudadesMouseClicked
 
     /**
      * @param args the command line arguments

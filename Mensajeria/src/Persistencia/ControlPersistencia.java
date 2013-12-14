@@ -194,4 +194,8 @@ public class ControlPersistencia {
     public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
         pr.eliminarRutaComp(inicioRuta, nombreRuta);
     }
+    
+    public void eliminarCiudad(String nombreCiudad){
+        pm.eliminarCiudad(nombreCiudad);
+    }
 }
