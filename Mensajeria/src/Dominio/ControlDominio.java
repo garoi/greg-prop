@@ -469,4 +469,8 @@ public class ControlDominio {
     public void renombrarPunto(String nombre1, String nombre2){
         map.renombrarPunto(nombre1, nombre2);
     }
+    
+    public void modificaDistancia(String nombre1, String nombre2, float dist){
+        map.setDistancia(nombre1, nombre2, dist);
+    }
 }

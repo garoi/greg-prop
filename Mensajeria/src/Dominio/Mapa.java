@@ -109,7 +109,7 @@ public class Mapa implements Serializable {
      * @param nombre2 nombre del segundo punto
      * @param d distancia nueva que tendrán los puntos.
      */
-    private void setDistancia(String nombre1, String nombre2, float distancia){
+    public void setDistancia(String nombre1, String nombre2, float distancia){
         
         if (!nombre1.equals(nombre2)) {
             // si los nombres son diferentes

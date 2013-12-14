@@ -444,4 +444,9 @@ public class CtrlPresentacion {
     public void renombrarPunto(String nombre1, String nombre2){
         ctrld.renombrarPunto(nombre1, nombre2);
     }
+    
+    public void modificaDistancia(String nombre1, String nombre2, String dist){
+       float dist2 =  Float.parseFloat(dist);
+       ctrld.modificaDistancia(nombre1, nombre2, dist2);
+    }
 }

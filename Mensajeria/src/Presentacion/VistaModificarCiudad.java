@@ -172,10 +172,23 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         try {
             if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
                 String nombre2 = JOptionPane.showInputDialog("introduce el segundo punto:");
-                ctrlp.renombrarPunto(nombre1, nombre2);
+                try{
+                    if(ctrlp.getNombresCiudad(ciudad).contains(nombre2)){
+                        String dist = JOptionPane.showInputDialog("introduce la nueva distancia:");
+                        ctrlp.modificaDistancia(nombre1, nombre2, dist);
+                    }
+                    else this.dispose();
+                    
+                }   catch (IOException ex) {
+                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                }   catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             }
             else this.dispose();
-        } catch (IOException ex) {
+        }
+            catch (IOException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
