@@ -242,7 +242,13 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
-        ctrlp.iniVentanaSecundaria("añadirPaquete");
+        try {
+            ctrlp.iniVentanaSecundaria("añadirPaquete");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAnadirActionPerformed
 
     /**

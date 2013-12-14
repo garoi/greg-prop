@@ -214,8 +214,13 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        ctrlp.iniVentanaSecundaria("vistaModificarCiudad");
+        try {
+            ctrlp.iniVentanaSecundaria("vistaModificarCiudad");
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int idx = listaCiudades.getSelectedIndex();      
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
         ctrlp.setCiudad(nombreCiudad);

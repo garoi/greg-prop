@@ -120,7 +120,7 @@ public class CtrlPresentacion {
      * Permite mostrar una ventana secundaria.
      * @param nuevaVentana el selector de la ventana secundaria que se va a abrir.
      */
-    public void iniVentanaSecundaria(String nuevaVentana){
+    public void iniVentanaSecundaria(String nuevaVentana) throws IOException, FileNotFoundException, ClassNotFoundException{
         switch(nuevaVentana){
             case "añadirPaquete":
                 if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
@@ -378,7 +378,7 @@ public class CtrlPresentacion {
         return ctrld.getRutas(nombreCiudad);
     }
     
-    private String[] getDestinosRuta() {
+    private String[] getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         return ctrld.getDestinosRuta(ruta);
     }
     

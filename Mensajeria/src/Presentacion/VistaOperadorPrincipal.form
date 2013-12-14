@@ -116,9 +116,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnValidarRuta" pref="53" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCompararRutas" pref="52" max="32767" attributes="0"/>
+                          <Component id="btnCompararRutas" pref="53" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnEliminarRuta" pref="53" max="32767" attributes="0"/>
+                          <Component id="btnEliminarRuta" pref="55" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                           <Component id="btnAyuda" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -421,7 +421,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="299" max="-2" attributes="0"/>
-                  <EmptySpace pref="126" max="32767" attributes="0"/>
+                  <EmptySpace pref="139" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
