@@ -487,11 +487,18 @@ public class ControlDominio {
     public void eliminarCiudad(String nombreCiudad){
         cp.eliminarCiudad(nombreCiudad);
     }
-    public void renombrarPunto(String nombre1, String nombre2){
+    public void renombrarPunto(String nombre1, String nombre2) throws IOException, IOException, ClassNotFoundException{
         map.renombrarPunto(nombre1, nombre2);
+        cp.guardarMapas(map, map.getNombreCiudad());
     }
     
-    public void modificaDistancia(String nombre1, String nombre2, float dist){
+    public void modificaDistancia(String nombre1, String nombre2, float dist) throws IOException, ClassNotFoundException{
         map.setDistancia(nombre1, nombre2, dist);
+        cp.guardarMapas(map, map.getNombreCiudad());
+    }
+    
+    public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
+        map.eliminarPunto(nombre1);
+        cp.guardarMapas(map, map.getNombreCiudad());
     }
 }

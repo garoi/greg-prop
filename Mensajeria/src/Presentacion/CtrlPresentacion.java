@@ -457,12 +457,16 @@ public class CtrlPresentacion {
         ctrld.eliminarCiudad(nombreCiudad);
     }
     
-    public void renombrarPunto(String nombre1, String nombre2){
+    public void renombrarPunto(String nombre1, String nombre2) throws IOException, ClassNotFoundException{
         ctrld.renombrarPunto(nombre1, nombre2);
     }
     
-    public void modificaDistancia(String nombre1, String nombre2, String dist){
+    public void modificaDistancia(String nombre1, String nombre2, String dist) throws IOException, ClassNotFoundException{
        float dist2 =  Float.parseFloat(dist);
        ctrld.modificaDistancia(nombre1, nombre2, dist2);
+    }
+    
+    public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
+        ctrld.eliminarPunto(nombre1);
     }
 }
