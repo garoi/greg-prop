@@ -294,11 +294,7 @@ public class CtrlPresentacion {
         return "";
     }
 
-    
-    /**
-     * jfewiaop
-     * @return 
-     */
+
     public String getCiudadOperador() {
         return vistaOperador.getCiudad();
     }

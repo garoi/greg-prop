@@ -160,12 +160,6 @@ public class Ruta implements Serializable {
             permutacion = op.getSolucion();
             costeRuta = op.getComparador();
         }
-        Optimus opt = new Optimus();
-        opt.setPermutacion(permutacion);
-        opt.setM(grafo);
-        opt.opt(2, 30);
-        permutacion = opt.getPermutacion();
-        distanciaRuta();
     }
     
     /**
@@ -200,21 +194,12 @@ public class Ruta implements Serializable {
         boolean cambio = op.randSwap();
         if(cambio){
             permutacion = op.getSolucion();
-            costeRuta = op.getComparador();
+            distanciaRuta();
         }
+        System.out.println("COSTE DE LA RUTA " + costeRuta);
     }
     
     /**
-<<<<<<< HEAD
-=======
-     * Optimiza la ruta encontrada
-     */
-    private void optimizar() {
-        
-    }
-    
-    /**
->>>>>>> 91be676104b6a2e5616b44ee51aaf8564f52206c
      * Muestra los puntos del mapa por donde pasara la ruta
      * @param
      */
