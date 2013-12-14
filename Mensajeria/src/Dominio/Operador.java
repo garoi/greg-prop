@@ -20,7 +20,7 @@ public class Operador implements Serializable {
      * 
      * @param checkExistencia 
      */
-    public void setCheckExistencia(boolean checkExistencia) {
+    private void setCheckExistencia(boolean checkExistencia) {
         this.checkExistencia = checkExistencia;
     }
 
@@ -28,7 +28,7 @@ public class Operador implements Serializable {
      * 
      * @return checkExistencia
      */
-    public boolean isCheckExistencia() {
+    private boolean isCheckExistencia() {
         return checkExistencia;
     }
     
@@ -113,7 +113,7 @@ public class Operador implements Serializable {
     /**
      * Lee los parametros del operador y los inicializa.
      */
-    public void leerOperador() {
+    private void leerOperador() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Anadir el nombre del operador");
         nombreOperador = sc.next();
@@ -203,7 +203,7 @@ public class Operador implements Serializable {
      * @param paquetes 
      * @return ArrayList<Paquete>
      */
-    public ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes) {
+    private ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes) {
         System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
 
@@ -252,7 +252,7 @@ public class Operador implements Serializable {
      * Muestra la ciudad del operador
      * @param map ciudad.
      */
-    public void verCiudad(Mapa map) {
+    private void verCiudad(Mapa map) {
         map.imprimirCiudad();
     }
 }

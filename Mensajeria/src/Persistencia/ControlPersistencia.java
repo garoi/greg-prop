@@ -30,7 +30,7 @@ public class ControlPersistencia {
         pr = new PersistenciaRutas();
     }
     
-    public void guardarListaPaquetes(Object lp) throws IOException {
+    private void guardarListaPaquetes(Object lp) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaPaquetes/ListaPaquetes.txt"))) {
             oos.writeObject(lp);
         }
@@ -136,7 +136,7 @@ public class ControlPersistencia {
         pr.eliminarRuta(ruta);
     }
     
-    public void pasarAFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    private void pasarAFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
         FileWriter fichero = null;
         PrintWriter pw = null;
         try{

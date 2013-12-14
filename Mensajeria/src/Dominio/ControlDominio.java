@@ -137,7 +137,7 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    public void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
+    private void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
         cp.guardarMapas(map, nombreciudad);
     }
     
@@ -170,7 +170,7 @@ public class ControlDominio {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
+    private Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
         try {
             return lp = (ListaPaquetes) cp.leerListaPaquetes();
         }
@@ -189,7 +189,7 @@ public class ControlDominio {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
+    private Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
         try {
             return lc = (ListaClientes) cp.leerListaClientes();
         }
@@ -207,7 +207,7 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    public Object leerOperador() throws IOException, ClassNotFoundException {
+    private Object leerOperador() throws IOException, ClassNotFoundException {
         try {
             return cp.leerOperador();
         }
@@ -220,7 +220,7 @@ public class ControlDominio {
      * Guarda los clientes, los paquetes y el operador
      * @throws IOException 
      */
-    public void guardadoGeneral() throws IOException {
+    private void guardadoGeneral() throws IOException {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
@@ -236,7 +236,7 @@ public class ControlDominio {
      * @throws ClassNotFoundException
      * @throws IOException 
      */
-    public void anadirCiudad() throws ClassNotFoundException, IOException{
+    private void anadirCiudad() throws ClassNotFoundException, IOException{
         map = new Mapa();
         map = oper.anadirCiudad(map);
         cp.guardarMapas(map, map.getNombreCiudad());
@@ -450,11 +450,11 @@ public class ControlDominio {
         return cp.leerRutasComparadas(fecha, nombreCiudad);
     }
     
-    public Integer[] getRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    private Integer[] getRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         return r.getPermutacion();
     }
-    public String[] getNombresRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    private String[] getNombresRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         return r.getNombres();
     }

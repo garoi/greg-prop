@@ -164,14 +164,14 @@ public class VistaLogin extends javax.swing.JFrame {
             // if campos validos switch modo
             if(tipoUsuario=="Cliente"){
                 try {
-                    ctrlp.getDominio().registroCliente(usuario, contrasena);
+                    ctrlp.registroCliente(usuario, contrasena);
                 } catch (IOException ex) {
                     Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else if(tipoUsuario=="Operador"){
                 try {
-                    ctrlp.getDominio().registroOperador(usuario, contrasena);
+                    ctrlp.registroOperador(usuario, contrasena);
                 } catch (IOException ex) {
                     Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -197,19 +197,23 @@ public class VistaLogin extends javax.swing.JFrame {
         String contrasena = new String(fieldContrasena.getPassword());
         
         if(tipoUsuario == "Cliente"){
-            if (ctrlp.getDominio().loginCliente(usuario, contrasena)) {
-                try {
-                    ctrlp.setVentanaPrincipal("vistaCliente");
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (ctrlp.loginCliente(usuario, contrasena)) {
+                    try {
+                        ctrlp.setVentanaPrincipal("vistaCliente");
+                    } catch (IOException ex) {
+                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else{
             try {
-                if (ctrlp.getDominio().loginOperador(usuario, contrasena)) {
+                if (ctrlp.loginOperador(usuario, contrasena)) {
                     ctrlp.setVentanaPrincipal("vistaOperador");
                 }
             } catch (IOException ex) {

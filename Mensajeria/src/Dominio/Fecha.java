@@ -47,7 +47,7 @@ public class Fecha {
      * @param fecha
      * @returntrue si el paramatro fecha es superior o igual a la fecha actual
      */   
-    public boolean comprobarFecha(String fecha) {
+    private boolean comprobarFecha(String fecha) {
         String ano = fecha.substring(6,fecha.length());
         String mes = fecha.substring(3, fecha.length()-3);
         String dia = fecha.substring(0, fecha.length()-6);
@@ -90,7 +90,7 @@ public class Fecha {
      * Devuelve el dia mes y año al que estamos
      * @return una string con la fecha actual
      */
-    public String fechaActual() {
+    private String fechaActual() {
         String ano = String.valueOf(date.getYear()-100);
         String mes = String.valueOf(date.getMonth()+1);
         String dia = String.valueOf(date.getDate());
@@ -102,7 +102,7 @@ public class Fecha {
      * Devuelve la franja horaria actual
      * @return string con la franja horaria actual
      */
-    public String mananaTarde() {
+    private String mananaTarde() {
         if (date.getHours() >= 9 & date.getHours() <= 15) return "M";
         else return "T";
     }

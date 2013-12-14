@@ -17,7 +17,7 @@ public class MinSpaTree {
      * 
      * @return nombres
      */
-    public String[] getNombres() {
+    private String[] getNombres() {
         return nombres;
     }
 
@@ -33,7 +33,7 @@ public class MinSpaTree {
      * 
      * @return grafo
      */
-    public float[][] getGrafo() {
+    private float[][] getGrafo() {
         return grafo;
     }
 

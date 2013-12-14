@@ -26,7 +26,7 @@ public class VistaSeleccionTurno extends javax.swing.JFrame {
         this.ctrlp = ctrlp;
         initComponents();
         
-        String[] data = ctrlp.getDominio().fechaHoy();
+        String[] data = ctrlp.fechaHoy();
         dia = Integer.parseInt(data[0]);
         mes = Integer.parseInt(data[1]);
         ano = Integer.parseInt(data[2]);
