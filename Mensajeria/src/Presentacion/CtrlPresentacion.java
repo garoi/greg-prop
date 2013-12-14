@@ -9,6 +9,7 @@ import Dominio.ControlDominio;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -313,5 +314,41 @@ public class CtrlPresentacion {
     
     public void setAdvertencia(boolean advertencia) {
         vistaOperador.setAdvertencia(advertencia);
+    }
+    
+    public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fechaCD){
+        return ctrld.getPaquetesPendientes(nombreCiudad, fechaCD);
+    }
+    
+    public String[] fechaHoy(){
+        return ctrld.fechaHoy();
+    }
+    
+    public void eliminarRutaComp(String inicioRuta, String nombreRuta){
+        ctrld.eliminarRutaComp(inicioRuta, nombreRuta);
+    }
+    
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo) throws IOException, FileNotFoundException, ClassNotFoundException{
+        ctrld.calcularRuta(listaEnRutaS, fecha, nombreCiudad, tipo);
+    }
+    
+    public void paquetesEnviados(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
+        ctrld.paquetesEnviados(nombreRuta);
+    }
+    
+    public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+        ctrld.acceptarRuta(ruta, fecha, nombreCiudad);
+    }
+    
+    public void eliminarRuta(String ruta){
+        ctrld.eliminarRuta(ruta);
+    }
+    
+    public ArrayList<String> getRutas(String nombreCiudad){
+        return ctrld.getRutas(nombreCiudad);
+    }
+    
+    public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
+        return ctrld.getPaquetesRuta(nombreRuta);
     }
 }
