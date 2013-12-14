@@ -437,6 +437,22 @@ public class CtrlPresentacion {
         ctrld.anadirCiudad(nombre, n, nombreNodos, distanciasNodos);
     }
     
+    public void crearFichero(String nombreFichero) throws IOException{
+        ctrld.crearFichero(nombreFichero);
+    }
+    
+    public void leerCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+        ctrld.leerCiudad(nombreCiudad);
+    }
+
+    public void leerMapaFichero(String nomFichero, String nombreCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) {
+        ctrld.leerMapaFichero(nomFichero,nombreCiudad,nombres,ciudad);
+    }
+    
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
+        ctrld.pasarAObjeto(nomCiudad, nombres, ciudad);
+    }
+    
     public void eliminarCiudad(String nombreCiudad){
         ctrld.eliminarCiudad(nombreCiudad);
     }

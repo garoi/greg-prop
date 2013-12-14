@@ -167,7 +167,7 @@ public class ControlPersistencia {
         }
     }
     
-    public void abrirFichero(String nomFichero) throws IOException{
+    private void abrirFichero(String nomFichero) throws IOException{
         try{
             File file = new File("Data/Mapas/" + nomFichero);
             Desktop.getDesktop().open(file);
@@ -177,7 +177,7 @@ public class ControlPersistencia {
         }
     }
     
-    public void crearFichero(String nomFichero){
+    public void crearFichero(String nomFichero) throws IOException{
         try{
             File file = new File("Data/Mapas/" + nomFichero + "-mapa.txt");
             if(file.createNewFile()) System.out.print("Fichero creado correctamente");
@@ -185,6 +185,7 @@ public class ControlPersistencia {
         }catch(Exception e){
             
         }
+        abrirFichero(nomFichero + "-mapa.txt");
     }
 
     public ArrayList<String> leerRutasComparadas(String fecha, String nombreCiudad) {
@@ -193,6 +194,10 @@ public class ControlPersistencia {
 
     public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
         pr.eliminarRutaComp(inicioRuta, nombreRuta);
+    }
+    
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombre, ArrayList<ArrayList<Float>> ciudad) {
+        pm.leerMapaFichero(nomFichero, nomCiudad, nombre, ciudad);
     }
     
     public void eliminarCiudad(String nombreCiudad){
