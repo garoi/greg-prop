@@ -140,21 +140,21 @@ public class Mapa implements Serializable {
     }
     
     /**
-     * Añade un punto de nombre "nombre" a la ciudad.
+     * Añade un punto de nombre "nombre" a la ciudad con sus distancias respecto al resto de puntos.
      * @param nombre el nombre que se le dará al punto.
+     * @param distancias las distancias al resto de puntos.
      * @return true si se ha añadido correctamente.
      */
-    private boolean anadirPunto(String nombre){
+    private boolean anadirPunto(String nombre, float[] distancias){
         if (nombres.contains(nombre)) return false;
-        Scanner sc = new Scanner(System.in);
         // Añadimos el nombre
         nombres.add(nombre);
         // Y espacio para el nuevo punto
         ciudad.add(tamCiudad, new ArrayList());
         for (int i = 0; i < tamCiudad; i++) {
-            System.out.printf("Distancia del punto \"%s\" al punto \"%s\": ",
-                              nombres.get(i), nombres.get(nombres.size()-1));
-            float distancia= sc.nextFloat();
+//            System.out.printf("Distancia del punto \"%s\" al punto \"%s\": ",
+//                              nombres.get(i), nombres.get(nombres.size()-1));
+            float distancia= distancias[i];
             // añadimos la distancia desde el otro punto al punto nuevo
             ((ArrayList) ciudad.get(tamCiudad)).add(distancia);
             // añadimos la distancia desde el punto nuevo al otro
@@ -251,90 +251,90 @@ public class Mapa implements Serializable {
         System.out.println("0: Salir de la modificacion de la ciudad manualmente.");
     }
     
-    /**
-     * Permite modificar la ciudad:
-     *  - modificar la distancia entre dos puntos.
-     *  - añadir puntos.
-     *  - eliminar puntos.
-     *  - renombrar puntos.
-     */
-    public void modificarCiudad() {
-        if (ciudad!=null){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("1 Modificar ciudad manualmente.");
-            System.out.println("2 Modificar ciudad con los datos de un fichero.");
-            int op = sc.nextInt();
-            if (op == 2) {
-                System.out.println("Hasta que no tengamos esta parte de la Persistencia de Datos no lo podemos hacer");
-                //Abrir y modifiar el fichero de la ciudad
-            }
-            if (op == 1) {
-                infoModificarCiudad();
-                int ord = sc.nextInt();
-                while (ord != 0) {
-                    switch (ord){
-                        case 1:
-//                            "1: Modificar la distancia entre dos puntos."
-                            System.out.println("Necesitas ver los nombres? si/no");
-                            String necnom = sc.next();
-                            if (necnom.equals("si")) {
-                                for (int i = 0; i < tamCiudad; ++i) {
-                                    System.out.println(nombres.get(i));
-                                }
-                            }
-                            if (nombres.size()>1){
-                                System.out.println("¿Entre qué dos puntos quieres modificar la distancia?");
-                                System.out.println("Introduce el nombre del primer punto:");
-                                String punto1 = sc.next();
-                                System.out.println("Introduce el nombre del segundo punto:");
-                                String punto2 = sc.next();
-                                System.out.println("Introduce la nueva distancia entre los puntos:");
-                                float distancia = sc.nextFloat();
-                                setDistancia(punto1, punto2, distancia);
-                            }
-                        break;
-                        case 2:
-    //                      "2: Añadir un punto a la ciudad."
-                            System.out.println("Escribe el nombre del punto a añadir:");
-                            String addNombreNodo = sc.next();
-                            if (anadirPunto(addNombreNodo))
-                                System.out.println("El punto se ha añadido correctamente.");
-                            else System.out.println("El punto ya existe.");
-                        break;
-                        case 3:
-    //                      "3: Eliminar un punto de la ciudad."
-                            System.out.println("Escribe el nombre del punto a eliminar:");
-                            String remNombreNodo = sc.next();
-                            if(!nombres.contains(remNombreNodo))
-                                System.out.println("El punto no existe.");
-                            else eliminarPunto(remNombreNodo);
-                        break;
-                        case 4:
-    //                      "4: Renombrar un punto de la ciudad."
-                            System.out.println("Escribe el nombre del punto a renombrar:");
-                            System.out.println("Los puntos son:");
-                            for (int i = 0; i < tamCiudad; ++i) {
-                                    System.out.println(nombres.get(i));
-                            }
-                            String renNombreNodo = sc.next();
-                            if(nombres.contains(renNombreNodo)){
-                                int idx = nombres.indexOf(renNombreNodo);
-                                System.out.println("Escribe el nombre que tendrá el punto:");
-                                String ren2NombreNodo = sc.next();
-                                nombres.set(idx, ren2NombreNodo);
-                            }
-                            else{
-                                System.out.println("El punto no existe.");
-                            }
-                        default:
-                        break;
-
-                    }
-                    infoModificarCiudad();
-                    ord = sc.nextInt();
-                }
-            }
-            else System.out.println("La ciudad no ha sido creada todavía");
-        }
-    }
+//    /**
+//     * Permite modificar la ciudad:
+//     *  - modificar la distancia entre dos puntos.
+//     *  - añadir puntos.
+//     *  - eliminar puntos.
+//     *  - renombrar puntos.
+//     */
+//    public void modificarCiudad() {
+//        if (ciudad!=null){
+//            Scanner sc = new Scanner(System.in);
+//            System.out.println("1 Modificar ciudad manualmente.");
+//            System.out.println("2 Modificar ciudad con los datos de un fichero.");
+//            int op = sc.nextInt();
+//            if (op == 2) {
+//                System.out.println("Hasta que no tengamos esta parte de la Persistencia de Datos no lo podemos hacer");
+//                //Abrir y modifiar el fichero de la ciudad
+//            }
+//            if (op == 1) {
+//                infoModificarCiudad();
+//                int ord = sc.nextInt();
+//                while (ord != 0) {
+//                    switch (ord){
+//                        case 1:
+////                            "1: Modificar la distancia entre dos puntos."
+//                            System.out.println("Necesitas ver los nombres? si/no");
+//                            String necnom = sc.next();
+//                            if (necnom.equals("si")) {
+//                                for (int i = 0; i < tamCiudad; ++i) {
+//                                    System.out.println(nombres.get(i));
+//                                }
+//                            }
+//                            if (nombres.size()>1){
+//                                System.out.println("¿Entre qué dos puntos quieres modificar la distancia?");
+//                                System.out.println("Introduce el nombre del primer punto:");
+//                                String punto1 = sc.next();
+//                                System.out.println("Introduce el nombre del segundo punto:");
+//                                String punto2 = sc.next();
+//                                System.out.println("Introduce la nueva distancia entre los puntos:");
+//                                float distancia = sc.nextFloat();
+//                                setDistancia(punto1, punto2, distancia);
+//                            }
+//                        break;
+//                        case 2:
+//    //                      "2: Añadir un punto a la ciudad."
+//                            System.out.println("Escribe el nombre del punto a añadir:");
+//                            String addNombreNodo = sc.next();
+//                            if (anadirPunto(addNombreNodo))
+//                                System.out.println("El punto se ha añadido correctamente.");
+//                            else System.out.println("El punto ya existe.");
+//                        break;
+//                        case 3:
+//    //                      "3: Eliminar un punto de la ciudad."
+//                            System.out.println("Escribe el nombre del punto a eliminar:");
+//                            String remNombreNodo = sc.next();
+//                            if(!nombres.contains(remNombreNodo))
+//                                System.out.println("El punto no existe.");
+//                            else eliminarPunto(remNombreNodo);
+//                        break;
+//                        case 4:
+//    //                      "4: Renombrar un punto de la ciudad."
+//                            System.out.println("Escribe el nombre del punto a renombrar:");
+//                            System.out.println("Los puntos son:");
+//                            for (int i = 0; i < tamCiudad; ++i) {
+//                                    System.out.println(nombres.get(i));
+//                            }
+//                            String renNombreNodo = sc.next();
+//                            if(nombres.contains(renNombreNodo)){
+//                                int idx = nombres.indexOf(renNombreNodo);
+//                                System.out.println("Escribe el nombre que tendrá el punto:");
+//                                String ren2NombreNodo = sc.next();
+//                                nombres.set(idx, ren2NombreNodo);
+//                            }
+//                            else{
+//                                System.out.println("El punto no existe.");
+//                            }
+//                        default:
+//                        break;
+//
+//                    }
+//                    infoModificarCiudad();
+//                    ord = sc.nextInt();
+//                }
+//            }
+//            else System.out.println("La ciudad no ha sido creada todavía");
+//        }
+//    }
 }
