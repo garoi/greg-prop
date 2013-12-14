@@ -503,7 +503,14 @@ public class ControlDominio {
         cp.guardarMapas(map, map.getNombreCiudad());
     }
 
-    public String[] getDestinosRuta(String ruta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String[] getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Ruta r = (Ruta) cp.leerRuta(ruta);
+        String[] nombres = r.getNombres();
+        Integer[] permutacion = r.getPermutacion();
+        String[] rutaNombres = new String[nombres.length];
+        for (int i = 0; i < rutaNombres.length; ++i) {
+            rutaNombres[i] = nombres[permutacion[i]];
+        }
+        return rutaNombres;
     }
 }
