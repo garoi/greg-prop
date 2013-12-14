@@ -43,7 +43,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         initComponents();
         
         // cogemos la fecha y horas del sistema
-        String[] data = ctrlp.getDominio().fechaHoy();
+        String[] data = ctrlp.fechaHoy();
         dia = Integer.parseInt(data[0]);
         mes = Integer.parseInt(data[1]);
         ano = Integer.parseInt(data[2]);
@@ -61,7 +61,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         labelTurno.setText(data[3]);
         
         // Cogemos las ciudades del sistema
-        String [] ciudades = ctrlp.getDominio().getNombresCiudades();
+        String [] ciudades = ctrlp.getNombresCiudades();
         if (ciudades.length >0){
             try {
                 ciudad = ciudades[0];
@@ -69,10 +69,10 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
                 comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(ciudades));
                 
                 // Cogemos los nombres de los destinos de la ciudad
-                String[] destinos = ctrlp.getDominio().getDestinosCiudad(ciudad);
+                String[] destinos = ctrlp.getDestinosCiudad(ciudad);
                 // inicializamos el combobox de destino con los destinos
                 comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-//                    ctrlp.getDominio().getDestinosCiudad(ciudad)
+//                    ctrlp.getDestinosCiudad(ciudad)
                     destinos
                 ));
                 destino = destinos[0];
@@ -398,7 +398,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         Object selectedItem = comboCiudad.getSelectedItem();
         if (selectedItem != null) ciudad = selectedItem.toString();
         try {
-            String[] destinos = ctrlp.getDominio().getDestinosCiudad(ciudad);
+            String[] destinos = ctrlp.getDestinosCiudad(ciudad);
             comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
                 destinos
             ));
@@ -454,7 +454,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
             String fecha = dia1 + '.' + mes + '.' + ano;
             try {
                 System.out.println("Voy a añadir un pak");
-                ctrlp.getDominio().anadirPaquete(ciudad, destino, fecha, turno);
+                ctrlp.anadirPaquete(ciudad, destino, fecha, turno);
             } catch (IOException ex) {
                 Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
             }

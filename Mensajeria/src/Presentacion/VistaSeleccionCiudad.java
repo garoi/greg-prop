@@ -26,7 +26,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     public VistaSeleccionCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
-        final String [] ciudades = ctrlp.getDominio().getNombresCiudades();
+        final String [] ciudades = ctrlp.getNombresCiudades();
         listaCiudades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ciudades;
             public int getSize() { return strings.length; }

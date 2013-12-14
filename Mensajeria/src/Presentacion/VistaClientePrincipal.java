@@ -31,7 +31,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         this.ctrlp = ctrlp;
         this.setTitle("Cliente");
         initComponents();
-        final String[] enviados = ctrlp.getDominio().getPaquetesEnviados();
+        final String[] enviados = ctrlp.getPaquetesEnviados();
         
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = enviados;
@@ -39,7 +39,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         
-        final String[] espera = ctrlp.getDominio().getPaquetesEspera();
+        final String[] espera = ctrlp.getPaquetesEspera();
         
         listaEspera.setModel(new javax.swing.AbstractListModel() {
             String[] strings = espera;
@@ -264,7 +264,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         // eliminar paquetes enviados del cliente
-        ctrlp.getDominio().eliminarPaquetes();
+        ctrlp.eliminarPaquetes();
         
     }//GEN-LAST:event_botonEliminarActionPerformed
 
@@ -278,7 +278,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         String name = (String) listaEspera.getSelectedValue();
         String idPaquete = name.substring(name.lastIndexOf('-') + 1);
         try {
-            ctrlp.getDominio().cancelarPaquete(Integer.parseInt(idPaquete));
+            ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
         } catch (IOException ex) {
             Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -291,11 +291,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEliminar1ActionPerformed
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
-        String[] listaPendientes = ctrlp.getDominio().getPaquetesEspera();
+        String[] listaPendientes = ctrlp.getPaquetesEspera();
         for (int i = 0; i < listaPendientes.length; ++i) {
             String idPaquete = listaPendientes[i].substring(listaPendientes[i].lastIndexOf('-') + 1);
             try {
-                ctrlp.getDominio().cancelarPaquete(Integer.parseInt(idPaquete));
+                ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
             } catch (IOException ex) {
                 Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -308,7 +308,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         String name = (String) listaEnviados.getSelectedValue();
         String idPaquete = name.substring(name.lastIndexOf('-') + 1);
         try {
-            ctrlp.getDominio().eliminarPaquete(Integer.parseInt(idPaquete));
+            ctrlp.eliminarPaquete(Integer.parseInt(idPaquete));
         } catch (IOException ex) {
             Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -348,7 +348,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
     void actualizarlista() {
         listaEspera.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = ctrlp.getDominio().getPaquetesEspera();
+            String[] strings = ctrlp.getPaquetesEspera();
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -356,7 +356,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
     private void actualizarListaEnviados() {
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = ctrlp.getDominio().getPaquetesEnviados();
+            String[] strings = ctrlp.getPaquetesEnviados();
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });

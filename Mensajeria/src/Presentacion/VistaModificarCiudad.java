@@ -155,7 +155,7 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
     private void btnRenombrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenombrarActionPerformed
         String nombre1 = JOptionPane.showInputDialog("Introduce el nombre del punto a renombrar:");
         try {
-            if(ctrlp.getDominio().getNombresCiudad(ciudad).contains(nombre1)){
+            if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
                 System.out.println("FUCKYEA");
                 String nombre2 = JOptionPane.showInputDialog("Introduce el nuevo nombre:");
 //                ctrlp.getDominio().renombrarPunto(nombre1, nombre2);
