@@ -115,7 +115,7 @@ public class ControlDominio {
         r.setFecha(fecha);
         r.setTurno(turno);
         r.setTipo(tipo);
-        String nombreRuta = fecha + "-" + turno + "-" + tipo + "-Coste:" + Float.toString(r.getCosteRuta());
+        String nombreRuta = fecha + "-" + turno + "-" + tipo + "-Coste-" + Float.toString(r.getCosteRuta());
         cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     

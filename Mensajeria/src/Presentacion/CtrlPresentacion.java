@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 import Dominio.ControlDominio;
 import java.awt.Dimension;
@@ -62,10 +56,6 @@ public class CtrlPresentacion {
             ventanaPrimaria.setLocationRelativeTo(null);
             ventanaPrimaria.setVisible(true);
         }
-    }
-    
-    public ControlDominio getDominio(){
-        return ctrld;
     }
     
     /**
@@ -304,11 +294,7 @@ public class CtrlPresentacion {
         return "";
     }
 
-    
-    /**
-     * jfewiaop
-     * @return 
-     */
+
     public String getCiudadOperador() {
         return vistaOperador.getCiudad();
     }
@@ -324,8 +310,17 @@ public class CtrlPresentacion {
     public void setAdvertencia(boolean advertencia) {
         vistaOperador.setAdvertencia(advertencia);
     }
+
+
+    public void setListaEnRutaS(ArrayList<String> listaEnRutaS) {
+        vistaOperador.setListaEnRutaS(listaEnRutaS);
+    }
     
-    public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fechaCD){
+    public void actualizarListaEnRuta() {
+        vistaOperador.actualizarListaEnRuta();
+    }
+    
+    public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fechaCD) {
         return ctrld.getPaquetesPendientes(nombreCiudad, fechaCD);
     }
     
@@ -363,5 +358,65 @@ public class CtrlPresentacion {
     void setCiudad(String nombreCiudad) {
         this.ciudad = nombreCiudad;
         if (this.vistaModificarCiudad != null) this.vistaModificarCiudad.setCiudad(this.ciudad);
+    }
+    
+    public String[] getNombresCiudades(){
+        return ctrld.getNombresCiudades();
+    }
+    
+    public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
+        return ctrld.getDestinosCiudad(nombreCiudad);
+    }
+    
+    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
+        ctrld.anadirPaquete(nombreCiudad, destino, fecha, turno);
+    }
+    
+    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+        return ctrld.getNombresCiudad(nombreCiudad);
+    }
+    
+    public String[] getPaquetesEnviados(){
+        return ctrld.getPaquetesEnviados();
+    }
+    
+    public String[] getPaquetesEspera(){
+        return ctrld.getPaquetesEspera();
+    }
+    
+    public void eliminarPaquetes(){
+        ctrld.eliminarPaquetes();
+    }
+    
+    public boolean cancelarPaquete(int idPaquete) throws IOException{
+        return ctrld.cancelarPaquete(idPaquete);
+    }
+    
+    public boolean eliminarPaquete(int idPaquete) throws IOException{
+        return ctrld.eliminarPaquete(idPaquete);
+    }
+    
+    public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad){
+        return ctrld.rutasComparadas(fecha, nombreCiudad);
+    }
+    
+    public boolean registroCliente(String usuario, String password) throws IOException{
+        return ctrld.registroCliente(usuario, password);
+    }
+    
+    public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+        return ctrld.registroOperador(usuario, password);
+    }
+    
+    public boolean loginCliente(String usuario, String password) throws IOException{
+        return ctrld.loginCliente(usuario, password);
+    }
+    
+    public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+        return ctrld.loginOperador(usuario, password);
+    }
+    
+    public ArrayList<String> verPaquetesOperador(String orden){
+        return ctrld.verPaquetesOperador(orden);
     }
 }

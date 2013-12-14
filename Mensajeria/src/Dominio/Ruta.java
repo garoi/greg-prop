@@ -194,15 +194,9 @@ public class Ruta implements Serializable {
         boolean cambio = op.randSwap();
         if(cambio){
             permutacion = op.getSolucion();
-            costeRuta = op.getComparador();
+            distanciaRuta();
         }
-    }
-    
-    /**
-     * Optimiza la ruta encontrada
-     */
-    private void optimizar() {
-        
+        System.out.println("COSTE DE LA RUTA " + costeRuta);
     }
     
     /**

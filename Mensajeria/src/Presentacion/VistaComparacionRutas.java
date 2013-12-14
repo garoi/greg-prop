@@ -33,9 +33,9 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         //CIUDAD FECHA TURNO BUSCAR LAS RUTAS DE COMPARACION
         fecha = ctrlp.getFechaOperador();
         nombreCiudad = ctrlp.getCiudadOperador();
-        listasComparadas = ctrlp.getDominio().rutasComparadas(fecha, nombreCiudad);
+        listasComparadas = ctrlp.rutasComparadas(fecha, nombreCiudad);
         listRutas.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().rutasComparadas(fecha, nombreCiudad);
+            ArrayList<String> strings = ctrlp.rutasComparadas(fecha, nombreCiudad);
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -139,15 +139,18 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         for (int i = 0; i < listasComparadas.size(); ++i) {
-            ctrlp.getDominio().eliminarRuta(listasComparadas.get(i));
+            ctrlp.eliminarRuta(listasComparadas.get(i));
         }
+        ArrayList<String> listaEnRutaS = new ArrayList<>();
+        ctrlp.setListaEnRutaS(listaEnRutaS);
+        ctrlp.actualizarListaEnRuta();
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         int idx = listRutas.getSelectedIndex();      
         String nombreRuta = (String) listRutas.getSelectedValue();
-        ctrlp.getDominio().eliminarRutaComp(nombreCiudad + "-" + fecha, nombreRuta);
+        ctrlp.eliminarRutaComp(nombreCiudad + "-" + fecha, nombreRuta);
         ctrlp.actualizarRutasOperador();
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed

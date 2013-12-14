@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 
 import java.awt.Color;
@@ -57,12 +51,12 @@ public class VistaCiudad extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -102,7 +96,7 @@ public class VistaCiudad extends javax.swing.JFrame {
         ArrayList<String> nombresCiudad = null;
         int n = 0;
         try {
-            nombresCiudad = ctrlp.getDominio().getNombresCiudad(nombreCiudad);
+            nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
             n = nombresCiudad.size();
         } catch (IOException ex) {
             Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);

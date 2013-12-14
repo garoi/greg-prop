@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 
 import java.io.FileNotFoundException;
@@ -66,7 +60,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
         });
 
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("idPaquete");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("idPaquete");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -192,7 +186,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void idPaqueteMouseClicked(java.awt.event.MouseEvent evt)">    
     private void idPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idPaqueteMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("idPaquete");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("idPaquete");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -202,7 +196,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void FechaMouseClicked(java.awt.event.MouseEvent evt">    
     private void FechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FechaMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("fecha");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("fecha");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -212,7 +206,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void DestinoMouseClicked(java.awt.event.MouseEvent evt">    
     private void DestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DestinoMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("destino");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("destino");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -222,7 +216,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void CiudadMouseClicked(java.awt.event.MouseEvent evt)">    
     private void CiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CiudadMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("ciudad");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("ciudad");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });
@@ -232,7 +226,7 @@ public class VistaVerPaquetes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void EstadoMouseClicked(java.awt.event.MouseEvent evt">    
     private void EstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadoMouseClicked
         ListaPaquetes.setModel(new javax.swing.AbstractListModel() {
-            ArrayList<String> strings = ctrlp.getDominio().verPaquetesOperador("estado");
+            ArrayList<String> strings = ctrlp.verPaquetesOperador("estado");
             public int getSize() { return strings.size(); }
             public Object getElementAt(int i) { return strings.get(i); }
         });

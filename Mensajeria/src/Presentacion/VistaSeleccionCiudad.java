@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 
 /**
@@ -26,7 +20,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     public VistaSeleccionCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
-        final String [] ciudades = ctrlp.getDominio().getNombresCiudades();
+        final String [] ciudades = ctrlp.getNombresCiudades();
         listaCiudades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ciudades;
             public int getSize() { return strings.length; }

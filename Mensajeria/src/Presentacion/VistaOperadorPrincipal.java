@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Presentacion;
 
 import java.io.FileNotFoundException;
@@ -190,13 +184,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAyuda)
                         .addGap(39, 39, 39))
@@ -351,7 +345,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -495,13 +489,17 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         this.advertencia = advertencia;
     }
     
+    public void setListaEnRutaS(ArrayList<String> listaEnRutaS) {
+        this.listaEnRutaS = listaEnRutaS;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="private boolean comprobar(int idx)">  
     private boolean comprobar(int idx){
         int cont = 0;
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 5){
+            if(cont == 6){
                 if(charsRuta[i+1] == 'V'){
                     return false;
                 }
@@ -584,7 +582,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 5){
+            if(cont == 6){
                 if(charsRuta[i] == 'V'){
                     return false;
                 }
@@ -811,7 +809,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         ctrlp.iniVentanaSecundaria("vistaCompararRutas");
-        
+        actualizarListaEnRuta();
     }//GEN-LAST:event_btnCompararRutasActionPerformed
 // </editor-fold>
     
@@ -905,7 +903,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="private void actualizarListaEnRuta()e">  
-    private void actualizarListaEnRuta() {
+    public void actualizarListaEnRuta() {
         listaEnRuta.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = listaEnRutaS;
             public int getSize() { return strings.size(); }
