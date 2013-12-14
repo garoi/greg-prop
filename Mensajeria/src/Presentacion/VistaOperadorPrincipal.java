@@ -184,7 +184,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -345,7 +345,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             .addGroup(panelMapaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Más información", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -499,7 +499,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 5){
+            if(cont == 6){
                 if(charsRuta[i+1] == 'V'){
                     return false;
                 }
@@ -582,7 +582,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         char[] charsRuta = nombreRuta.toCharArray();
         boolean encontrado = false;
         for(int i = 0; i < charsRuta.length && !encontrado; ++i){
-            if(cont == 5){
+            if(cont == 6){
                 if(charsRuta[i] == 'V'){
                     return false;
                 }
