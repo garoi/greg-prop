@@ -37,6 +37,7 @@ public class CtrlPresentacion {
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
     private String tipoUsuario;
+    private String ciudad;
     
     /**
      * Permite un control sobre la capa de presentación del programa.
@@ -99,6 +100,15 @@ public class CtrlPresentacion {
         ventanaPrimaria.setSize(c2.getSize().width +10, c2.getSize().height+10);
     }
     
+    public void cambiarContenidoPanel(javax.swing.JPanel p1, javax.swing.JPanel p2){
+        p1.removeAll();
+        for (int i = 0; i< p2.getComponentCount(); i++){
+            p1.add(p2.getComponent(i));
+        }
+        p1.getParent().repaint();
+//        p1.repaint();
+    }
+    
     /**
      * Actualiza la ventana primaria redibujando sus componentes
      */
@@ -106,7 +116,6 @@ public class CtrlPresentacion {
         ventanaPrimaria.setLocationRelativeTo(null);
         ventanaPrimaria.repaint();
     }
-    
     
     /**
      * Permite mostrar una ventana secundaria.
@@ -155,7 +164,7 @@ public class CtrlPresentacion {
             break;
                 
             case "vistaModificarCiudad":
-                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this);
+                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this, getCiudadOperador());
                 ventanaSecundaria = vistaModificarCiudad;
                 ventanaSecundaria.setTitle("Modificar ciudad");
             break;
@@ -216,41 +225,41 @@ public class CtrlPresentacion {
                 if (vistaLogin == null) vistaLogin = new VistaLogin(this, tipoUsuario);
                 cambiarContenidoVentanaPrimaria(vistaLogin.getContentPane());
                 ventanaPrimaria.setTitle("Mensajeria | Login | " + tipoUsuario);
-                Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
-                d0.setSize(d0.getWidth()-6, d0.getHeight()+10);
-//                ventanaPrimaria.setResizable(false);
-                ventanaPrimaria.setSize(d0);
-                actualizarVentanaPrimaria();
+//                Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
+//                d0.setSize(d0.getWidth()-6, d0.getHeight()+10);
+                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.setSize(d0);
                 vistaInicial = null;
                 break;
             case "vistaCliente":
                 if (vistaCliente == null) vistaCliente = new VistaClientePrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaCliente.getContentPane());
-                setTamanoVentanaPrimaria(-8, 15);
+//                setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Cliente");
-                Dimension d = new Dimension(vistaCliente.getPreferredSize());
-                d.setSize(d.getWidth()-5, d.getHeight()+15);
+//                Dimension d = new Dimension(vistaCliente.getPreferredSize());
+//                d.setSize(d.getWidth()-5, d.getHeight()+15);
 //                ventanaPrimaria.setResizable(false);
-                ventanaPrimaria.setSize(d);
-                actualizarVentanaPrimaria();
-                vistaLogin = null;
+//                ventanaPrimaria.setSize(d);
+                vistaLogin.dispose();
                 break;
             case "vistaOperador":
                 if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaOperador.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
-                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
-                d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
+//                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
+//                d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
 //                ventanaPrimaria.setResizable(false);
-                ventanaPrimaria.setSize(d2);
-                actualizarVentanaPrimaria();
-                vistaLogin = null;
+//                ventanaPrimaria.setSize(d2);
+                vistaLogin.dispose();
                 break;
             default:
                 System.out.println("***** ERROR llamada a setVentanaPrincipal con una vista inválida");
                 break;
+                
         }
+        setTamanoVentanaPrimaria(0,0);
+        actualizarVentanaPrimaria();
     }
     
     /**
@@ -266,7 +275,7 @@ public class CtrlPresentacion {
      * Permite actualizar el nombre de la ciudad seleccionada por el operador.
      * @param nombreCiudad el nombre de la ciudad seleccionada.
      */
-    void actualizarVistaOperador(String nombreCiudad) {
+    void setOperador(String nombreCiudad) {
         if (vistaOperador != null)
             vistaOperador.actualizarCiudad(nombreCiudad);
     }
@@ -350,5 +359,9 @@ public class CtrlPresentacion {
     
     public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
         return ctrld.getPaquetesRuta(nombreRuta);
+    }
+    void setCiudad(String nombreCiudad) {
+        this.ciudad = nombreCiudad;
+        if (this.vistaModificarCiudad != null) this.vistaModificarCiudad.setCiudad(this.ciudad);
     }
 }

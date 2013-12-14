@@ -243,7 +243,8 @@ public class ControlDominio {
     }
     
     private void modificarCiudad() {
-       oper.modificarCiudad(map);
+        // Hace falta definir cómo se va a modificar la ciudad
+       //oper.modificarCiudad(map);
    }
    
     private void modificarRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
