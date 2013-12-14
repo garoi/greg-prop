@@ -155,7 +155,7 @@ public class CtrlPresentacion {
             break;
                 
             case "vistaModificarCiudad":
-                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this);
+                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this, getCiudadOperador());
                 ventanaSecundaria = vistaModificarCiudad;
                 ventanaSecundaria.setTitle("Modificar ciudad");
             break;
