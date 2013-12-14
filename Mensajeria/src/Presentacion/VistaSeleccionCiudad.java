@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
  * @author Luis García Estrades https://github.com/lgarest
  */
 public class VistaSeleccionCiudad extends javax.swing.JFrame {
-    CtrlPresentacion ctrlp;
+    private CtrlPresentacion ctrlp;
+    private String[] ciudades;
     
     /**
      * Creates new form VistaSeleccionarCiudad
@@ -26,7 +27,11 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     public VistaSeleccionCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         initComponents();
-        final String [] ciudades = ctrlp.getNombresCiudades();
+        actualizarListaCiudades();
+    }
+    
+    public void actualizarListaCiudades(){
+        ciudades = ctrlp.getNombresCiudades();
         listaCiudades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ciudades;
             public int getSize() { return strings.length; }
@@ -212,7 +217,6 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ArrayList<String> nombreNodos = new ArrayList();
         String nombreCiudad = JOptionPane.showInputDialog("Introduce el nombre de la ciudad:");
         String strnNodos = JOptionPane.showInputDialog("Introduce el número de puntos:");
-//        ArrayList<ArrayList<Float>> distancias = new ArrayList();
         int nNodos = Integer.parseInt(strnNodos);
         int auxdistancias = (nNodos*(nNodos-1))/2;
         float[] distancias = new float[auxdistancias];
@@ -222,24 +226,26 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             while(nombreNodos.contains(nombreNodo) || nombreNodo == ""){
                 nombreNodo = JOptionPane.showInputDialog("Introduce un nombre que no hayas introducido:");
             }
-//            nombreNodos.add(nombreNodo);
             nombreNodos.add(nombreNodo);
         }
         for (int i = 0; i < auxdistancias; i++) {
             String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", "pene", "pene"));
-            distancias[i] = Float.parseFloat(distanciaEntreNodos);
-        }
-        for (int i = 0; i < distancias.length; i++) {
-            System.out.println(distancias[i]);
+            float auxDistancia = Float.parseFloat(distanciaEntreNodos);
+            while(auxDistancia <= 0.0f){
+                distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
+                auxDistancia = Float.parseFloat(distanciaEntreNodos);
+            }
+            distancias[i] = auxDistancia;
         }
         try {
-            ctrlp.getDominio().anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
+            ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.dispose();
+        ctrlp.actualizarVistaSelCiudades();
+        ctrlp.actualizarVentanaSecundaria();
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -248,6 +254,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
