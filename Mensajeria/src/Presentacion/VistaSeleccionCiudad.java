@@ -233,7 +233,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             System.out.println(distancias[i]);
         }
         try {
-            ctrlp.getDominio().anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
+            ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
