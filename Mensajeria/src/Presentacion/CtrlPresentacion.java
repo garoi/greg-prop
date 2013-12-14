@@ -452,4 +452,12 @@ public class CtrlPresentacion {
     public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
         ctrld.pasarAObjeto(nomCiudad, nombres, ciudad);
     }
+    
+    public void eliminarCiudad(String nombreCiudad){
+        ctrld.eliminarCiudad(nombreCiudad);
+    }
+    
+    public void renombrarPunto(String nombre1, String nombre2){
+        ctrld.renombrarPunto(nombre1, nombre2);
+    }
 }

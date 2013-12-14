@@ -365,4 +365,10 @@ public class Mapa implements Serializable {
 //            else System.out.println("La ciudad no ha sido creada todavía");
 //        }
 //    }
+    public void renombrarPunto(String nombre1, String nombre2){
+        if(nombres.contains(nombre1)){
+            int idx = nombres.indexOf(nombre1);
+            nombres.set(idx, nombre2);
+        }
+    }
 }

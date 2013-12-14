@@ -199,4 +199,8 @@ public class ControlPersistencia {
     public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombre, ArrayList<ArrayList<Float>> ciudad) {
         pm.leerMapaFichero(nomFichero, nomCiudad, nombre, ciudad);
     }
+    
+    public void eliminarCiudad(String nombreCiudad){
+        pm.eliminarCiudad(nombreCiudad);
+    }
 }

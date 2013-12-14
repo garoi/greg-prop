@@ -101,6 +101,9 @@ public class PersistenciaMapas {
         }    
     }
 
-    
+    public void eliminarCiudad(String nombreCiudad){
+        File fichero = new File("Data/Mapas/"+nombreCiudad+"-mapa.txt");
+        fichero.delete();
+    }
     
 }
