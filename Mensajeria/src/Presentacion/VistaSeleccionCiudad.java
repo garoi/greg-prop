@@ -258,7 +258,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
-        // TODO add your handling code here:
+        String nombreCiudad = JOptionPane.showInputDialog("Introduce un nombre para la ciudad:");
     }//GEN-LAST:event_btnFicheroActionPerformed
 
     /**

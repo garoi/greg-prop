@@ -386,7 +386,7 @@ public class CtrlPresentacion {
         ctrld.anadirPaquete(nombreCiudad, destino, fecha, turno);
     }
     
-    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException, IOException, IOException, IOException, IOException, IOException, IOException, IOException{
         return ctrld.getNombresCiudad(nombreCiudad);
     }
     
@@ -433,10 +433,7 @@ public class CtrlPresentacion {
     public ArrayList<String> verPaquetesOperador(String orden){
         return ctrld.verPaquetesOperador(orden);
     }
-
-    void anadirCiudad(String nombreCiudad, int nNodos, ArrayList<String> nombreNodos, float[] distancias) throws ClassNotFoundException, IOException {
-        ctrld.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
+    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException {
+        ctrld.anadirCiudad(nombre, n, nombreNodos, distanciasNodos);
     }
-
-    
 }
