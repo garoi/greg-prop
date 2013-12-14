@@ -107,6 +107,13 @@ public class CtrlPresentacion {
         ventanaPrimaria.repaint();
     }
     
+    
+    void actualizarVentanaSecundaria() {
+        ventanaSecundaria.setLocationRelativeTo(null);
+        ventanaSecundaria.repaint();
+    }
+    
+    
     /**
      * Permite mostrar una ventana secundaria.
      * @param nuevaVentana el selector de la ventana secundaria que se va a abrir.
@@ -258,6 +265,13 @@ public class CtrlPresentacion {
     void actualizarVistaCliente() {
         if (vistaCliente != null)
             vistaCliente.actualizarlista();
+    }
+    
+    void actualizarVistaSelCiudades() {
+        if(vistaCiudad != null){
+            System.out.println("vistaCiudad != null");
+            vistaCiudad.actualizarListaCiudades();
+        }
     }
 
     
