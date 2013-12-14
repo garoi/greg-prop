@@ -553,6 +553,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt)">  
     private void panelCiudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCiudadMouseClicked
         if (ctrlp != null) ctrlp.iniVentanaSecundaria("vistaCiudad");
+        ctrlp.actualizarVentanaSecundaria();
         nombreRuta = new String();
     }//GEN-LAST:event_panelCiudadMouseClicked
     // </editor-fold>
