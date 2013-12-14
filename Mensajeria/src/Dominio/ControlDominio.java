@@ -466,4 +466,7 @@ public class ControlDominio {
     public void eliminarCiudad(String nombreCiudad){
         cp.eliminarCiudad(nombreCiudad);
     }
+    public void renombrarPunto(String nombre1, String nombre2){
+        map.renombrarPunto(nombre1, nombre2);
+    }
 }

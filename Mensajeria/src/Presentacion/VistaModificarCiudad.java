@@ -78,6 +78,11 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         btnDistancia.setBackground(new java.awt.Color(75, 75, 75));
         btnDistancia.setForeground(new java.awt.Color(220, 220, 220));
         btnDistancia.setText("Modificar distancia");
+        btnDistancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDistanciaActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminar.setForeground(new java.awt.Color(220, 220, 220));
@@ -151,7 +156,7 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         try {
             if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
                 String nombre2 = JOptionPane.showInputDialog("Introduce el nuevo nombre:");
-//                ctrlp.getDominio().renombrarPunto(nombre1, nombre2);
+                ctrlp.renombrarPunto(nombre1, nombre2);
             }
             else this.dispose();
         } catch (IOException ex) {
@@ -161,6 +166,21 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnRenombrarActionPerformed
+
+    private void btnDistanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistanciaActionPerformed
+        String nombre1 = JOptionPane.showInputDialog("introduce el primer punto:");
+        try {
+            if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
+                String nombre2 = JOptionPane.showInputDialog("introduce el segundo punto:");
+                ctrlp.renombrarPunto(nombre1, nombre2);
+            }
+            else this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDistanciaActionPerformed
 
     /**
      * @param args the command line arguments

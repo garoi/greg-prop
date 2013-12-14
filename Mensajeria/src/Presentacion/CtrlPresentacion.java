@@ -440,4 +440,8 @@ public class CtrlPresentacion {
     public void eliminarCiudad(String nombreCiudad){
         ctrld.eliminarCiudad(nombreCiudad);
     }
+    
+    public void renombrarPunto(String nombre1, String nombre2){
+        ctrld.renombrarPunto(nombre1, nombre2);
+    }
 }

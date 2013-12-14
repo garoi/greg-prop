@@ -253,14 +253,6 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ctrlp.actualizarVentanaSecundaria();
     }//GEN-LAST:event_btnAnadirActionPerformed
 
-    private void actualizarListaCiudades(){
-        final String [] ciudades = ctrlp.getNombresCiudades();
-        listaCiudades.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = ciudades;
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-    }
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // Eliminar una ciudad de la lista.
         int idx = listaCiudades.getSelectedIndex();
