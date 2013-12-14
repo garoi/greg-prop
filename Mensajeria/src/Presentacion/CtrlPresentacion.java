@@ -473,11 +473,7 @@ public class CtrlPresentacion {
         ctrld.eliminarCiudad(nombreCiudad);
     }
     
-    public void renombrarPunto(String nombre1, String nombre2) {
-        ctrld.renombrarPunto(nombre1, nombre2);
-    }
-    
-    public void renombrarPunto(String nombre1, String nombre2) throws IOException, ClassNotFoundException{
+    public void renombrarPunto(String nombre1, String nombre2) throws IOException, ClassNotFoundException {
         ctrld.renombrarPunto(nombre1, nombre2);
     }
     

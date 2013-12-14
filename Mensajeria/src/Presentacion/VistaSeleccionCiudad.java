@@ -282,7 +282,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             ciudadAnadidaFichero();
         }
         else {
-            //eliminar el fichero!
+            ctrlp.eliminarCiudad(nombreCiudad);
         }
     }//GEN-LAST:event_btnFicheroActionPerformed
 

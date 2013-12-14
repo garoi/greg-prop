@@ -487,6 +487,7 @@ public class ControlDominio {
     public void eliminarCiudad(String nombreCiudad){
         cp.eliminarCiudad(nombreCiudad);
     }
+    
     public void renombrarPunto(String nombre1, String nombre2) throws IOException, IOException, ClassNotFoundException{
         map.renombrarPunto(nombre1, nombre2);
         cp.guardarMapas(map, map.getNombreCiudad());
@@ -500,5 +501,9 @@ public class ControlDominio {
     public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
         map.eliminarPunto(nombre1);
         cp.guardarMapas(map, map.getNombreCiudad());
+    }
+
+    public String[] getDestinosRuta(String ruta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
