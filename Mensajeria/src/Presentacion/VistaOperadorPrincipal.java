@@ -66,7 +66,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaRutas = new javax.swing.JList();
         btnModificarRuta = new javax.swing.JButton();
-        btnVerRuta = new javax.swing.JButton();
         btnValidarRuta = new javax.swing.JButton();
         btnCompararRutas = new javax.swing.JButton();
         btnEliminarRuta = new javax.swing.JButton();
@@ -113,14 +112,10 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
         btnModificarRuta.setBackground(new java.awt.Color(75, 75, 75));
         btnModificarRuta.setForeground(new java.awt.Color(220, 220, 220));
-        btnModificarRuta.setText("Mod");
-
-        btnVerRuta.setBackground(new java.awt.Color(75, 75, 75));
-        btnVerRuta.setForeground(new java.awt.Color(220, 220, 220));
-        btnVerRuta.setText("Ver");
-        btnVerRuta.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarRuta.setText("Ver / Mod");
+        btnModificarRuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerRutaActionPerformed(evt);
+                btnModificarRutaActionPerformed(evt);
             }
         });
 
@@ -163,7 +158,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVerRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnValidarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnModificarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnCompararRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,7 +168,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 .addGap(2, 2, 2))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEliminarRuta, btnModificarRuta, btnValidarRuta, btnVerRuta});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEliminarRuta, btnModificarRuta, btnValidarRuta});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,16 +176,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                        .addComponent(btnModificarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                        .addComponent(btnValidarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCompararRutas, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarRuta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                        .addGap(59, 59, 59)
                         .addComponent(btnAyuda)
                         .addGap(39, 39, 39))
                     .addComponent(jScrollPane1)))
@@ -743,11 +735,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt)">  
-    private void btnVerRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerRutaActionPerformed
-        ctrlp.iniVentanaSecundaria("vistaRuta");
-    }//GEN-LAST:event_btnVerRutaActionPerformed
-    // </editor-fold>
+   // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) ">  
     private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPaquetesActionPerformed
@@ -812,6 +800,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         ctrlp.iniVentanaSecundaria("vistaCompararRutas");
         actualizarListaEnRuta();
     }//GEN-LAST:event_btnCompararRutasActionPerformed
+
+    private void btnModificarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarRutaActionPerformed
+        String ruta = (String) listaRutas.getSelectedValue();
+        ctrlp.setRuta(ruta);
+        ctrlp.iniVentanaSecundaria("vistaModificarRuta");
+    }//GEN-LAST:event_btnModificarRutaActionPerformed
 // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void actualizarCiudad(String nombreCiudad) ">  
@@ -937,7 +931,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRutaRapida;
     private javax.swing.JButton btnValidarRuta;
     private javax.swing.JButton btnVerPaquetes;
-    private javax.swing.JButton btnVerRuta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

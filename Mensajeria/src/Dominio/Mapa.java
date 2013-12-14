@@ -114,7 +114,7 @@ public class Mapa implements Serializable {
      * @param nombre2 nombre del segundo punto
      * @param d distancia nueva que tendrán los puntos.
      */
-    private void setDistancia(String nombre1, String nombre2, float distancia){
+    public void setDistancia(String nombre1, String nombre2, float distancia){
         
         if (!nombre1.equals(nombre2)) {
             // si los nombres son diferentes
@@ -150,7 +150,7 @@ public class Mapa implements Serializable {
      * @param distancias las distancias al resto de puntos.
      * @return true si se ha añadido correctamente.
      */
-    private boolean anadirPunto(String nombre, float[] distancias){
+    public boolean anadirPunto(String nombre, float[] distancias){
         if (!nombres.contains(nombre)) return false;
         // Añadimos el nombre
         nombres.add(nombre);
@@ -176,7 +176,7 @@ public class Mapa implements Serializable {
      * Elimina un punto del mapa.
      * @param nombre del punto a borrar.
      */
-    private boolean eliminarPunto(String nombre){
+    public boolean eliminarPunto(String nombre){
         if(!nombres.contains(nombre)) return false;
         int idx = nombres.indexOf(nombre);
         System.out.println(idx);

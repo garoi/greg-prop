@@ -87,6 +87,11 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         btnEliminar.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminar.setForeground(new java.awt.Color(220, 220, 220));
         btnEliminar.setText("Eliminar punto");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnFichero.setBackground(new java.awt.Color(75, 75, 75));
         btnFichero.setForeground(new java.awt.Color(220, 220, 220));
@@ -172,7 +177,35 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         try {
             if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
                 String nombre2 = JOptionPane.showInputDialog("introduce el segundo punto:");
-                ctrlp.renombrarPunto(nombre1, nombre2);
+                try{
+                    if(ctrlp.getNombresCiudad(ciudad).contains(nombre2)){
+                        String dist = JOptionPane.showInputDialog("introduce la nueva distancia:");
+                        ctrlp.modificaDistancia(nombre1, nombre2, dist);
+                    }
+                    else this.dispose();
+                    
+                }   catch (IOException ex) {
+                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                }   catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else this.dispose();
+        }
+            catch (IOException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDistanciaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Eliminar punto
+        String nombre1 = JOptionPane.showInputDialog("introduce el nombre del punto que desea eliminar");
+        try {
+            if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
+                ctrlp.eliminarPunto(nombre1);
             }
             else this.dispose();
         } catch (IOException ex) {
@@ -180,7 +213,10 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnDistanciaActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
