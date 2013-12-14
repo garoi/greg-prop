@@ -18,7 +18,7 @@ public class Mapa implements Serializable {
         nombres = new ArrayList<>();
     }
 
-    private int getTamCiudad(){
+    public int getTamCiudad(){
         return tamCiudad;
     }
     

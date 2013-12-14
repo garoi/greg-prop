@@ -113,7 +113,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btnCancel" max="32767" attributes="0"/>
+                              <Component id="btnCancel" pref="170" max="32767" attributes="0"/>
                               <Component id="btnOk" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>

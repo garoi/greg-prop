@@ -14,8 +14,6 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
 
     CtrlPresentacion ctrlp;
     private String nombreCiudad;
-
-    
     private String[] ciudades;
 
     
@@ -268,31 +266,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        ArrayList<String> nombres = new ArrayList<>();
-        ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
-        ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
-        System.out.println("----> " + nombreCiudad);
-        for(int i = 0; i < nombres.size(); ++i) System.out.println("----> " + nombres.get(i));
-        for(int i = 0; i < ciudad.size(); ++i){
-            for(int j = 0; j < ciudad.get(i).size(); ++j){
-                System.out.print(ciudad.get(i).get(j) + " ");
-            }
-            System.out.println("");
-        }
-        try {
-            ctrlp.leerCiudad(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
@@ -302,6 +276,13 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             ctrlp.crearFichero(nombreCiudad);
         } catch (IOException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String accep = JOptionPane.showInputDialog("Has terminado de guardar la ciudad? si/no:");
+        if (accep.equals("si")) {
+            ciudadAnadidaFichero();
+        }
+        else {
+            //eliminar el fichero!
         }
     }//GEN-LAST:event_btnFicheroActionPerformed
 
@@ -320,6 +301,27 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
                 new VistaSeleccionCiudad().setVisible(true);
             }
         });
+    }
+    
+    public void ciudadAnadidaFichero() {
+        ArrayList<String> nombres = new ArrayList<>();
+        ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
+        ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
+        try {
+            ctrlp.leerCiudad(nombreCiudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizarListaCiudades();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -66,7 +66,6 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
                 String[] destinos = ctrlp.getDestinosCiudad(ciudad);
                 // inicializamos el combobox de destino con los destinos
                 comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-//                    ctrlp.getDestinosCiudad(ciudad)
                     destinos
                 ));
                 destino = destinos[0];
@@ -389,6 +388,13 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
      * @param evt el evento de click sobre el combox.
      */
     private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
+        String[] destinoss = null;
+        try {
+            destinoss = ctrlp.getDestinosCiudad(ciudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("EL TAMANYO ES " + destinoss.length);
         Object selectedItem = comboCiudad.getSelectedItem();
         if (selectedItem != null) ciudad = selectedItem.toString();
         try {

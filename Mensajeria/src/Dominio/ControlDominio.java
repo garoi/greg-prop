@@ -477,10 +477,10 @@ public class ControlDominio {
     
     public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
         Mapa m = new Mapa();
+        m.setTamCiudad(nombres.size());
         m.setNombreCiudad(nomCiudad);
         m.setNombrePuntos(nombres);
         m.setCiudad(ciudad);
-        m.setTamCiudad(nombres.size());
         cp.guardarMapas(m, nomCiudad);
     }
        
