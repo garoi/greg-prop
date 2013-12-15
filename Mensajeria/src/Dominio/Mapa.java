@@ -12,6 +12,7 @@ public class Mapa implements Serializable {
     private ArrayList<String> nombres;
     private ArrayList<ArrayList<Float>> ciudad;
     private int tamCiudad;
+    private String[] fechaMod;
     
     public Mapa(){
         nombres = new ArrayList<>();
@@ -19,6 +20,14 @@ public class Mapa implements Serializable {
 
     public int getTamCiudad(){
         return tamCiudad;
+    }
+    
+    public String[] getFechaMod() {
+        return fechaMod;
+    }
+
+    public void setFechaMod(String[] fechaMod) {
+        this.fechaMod = fechaMod;
     }
     
     public void setCiudad(ArrayList<ArrayList<Float>> ciudad) {

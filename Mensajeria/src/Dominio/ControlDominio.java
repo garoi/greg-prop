@@ -102,6 +102,7 @@ public class ControlDominio {
     private void calculaRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
         r.crearGrafo(paquetesSeleccionados, map);
         if (tipo.equals("rapidamente")) {
+            System.out.println("entro al id fe control de dominio");
             r.calcularRapida();
         }
         else if (tipo.equals("rapidaOptima")) {
@@ -128,17 +129,6 @@ public class ControlDominio {
             lp.cambiarEstadoPaquetes(paquetesEnviados);
             guardadoGeneral();
         }
-    }
-    
-    /**
-     * Guarda un mapa en el disco
-     * @param map
-     * @param nombreciudad
-     * @throws IOException
-     * @throws ClassNotFoundException 
-     */
-    private void guardarMapa(Mapa map, String nombreciudad) throws IOException, ClassNotFoundException{
-        cp.guardarMapas(map, nombreciudad);
     }
     
     public String[] getNombresCiudades(){
@@ -238,6 +228,8 @@ public class ControlDominio {
      */
     public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException{
         map = new Mapa();
+        Fecha f = new Fecha();
+        map.setFechaMod(f.fechaDeHoy());
         map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
@@ -410,14 +402,12 @@ public class ControlDominio {
     
     public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
         map = (Mapa) cp.leerCiudad(nombreCiudad);
-//        ArrayList<ArrayList<Float>> ciudad = map.getCiudad();
-//        for(int i = 0; i < ciudad.size();++i){
-//            for(int j = 0; j < ciudad.size(); ++j){
-//                System.out.print(ciudad.get(i).get(j)+ " ");
-//            }
-//            System.out.println();
-//        }
         return map.getNombres();
+    }
+    
+    public ArrayList<ArrayList<Float>> pesosAristas(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+        map = (Mapa) cp.leerCiudad(nombreCiudad);
+        return map.getCiudad();
     }
 
     public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {
@@ -451,6 +441,8 @@ public class ControlDominio {
     
     public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
         Mapa m = new Mapa();
+        Fecha f = new Fecha();
+        m.setFechaMod(f.fechaDeHoy());
         m.setTamCiudad(nombres.size());
         m.setNombreCiudad(nomCiudad);
         m.setNombrePuntos(nombres);
@@ -464,16 +456,23 @@ public class ControlDominio {
     
     public void renombrarPunto(String nombre1, String nombre2) throws IOException, IOException, ClassNotFoundException{
         map.renombrarPunto(nombre1, nombre2);
+        Fecha f = new Fecha();
+        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
     public void modificaDistancia(String nombre1, String nombre2, float dist) throws IOException, ClassNotFoundException{
         map.setDistancia(nombre1, nombre2, dist);
+        System.out.println("oink oink");
+        Fecha f = new Fecha();
+        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
     public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
         map.eliminarPunto(nombre1);
+        Fecha f = new Fecha();
+        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
 
@@ -504,22 +503,35 @@ public class ControlDominio {
         cp.abrirFichero(nombreFichero); 
     }
 
-    public void modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = (Ruta) cp.leerRuta(ruta);
-        ArrayList<String> nombreRuta = new ArrayList<>();
-        StringTokenizer tokens = new StringTokenizer(res);
-        for (int i = 0; tokens.hasMoreTokens(); ++i) {
-            nombreRuta.add(tokens.nextToken());
+        String[] fechaMod = map.getFechaMod();
+        String fecha = r.getFecha();
+        String ano = fecha.substring(6,fecha.length());
+        String mes = fecha.substring(3, fecha.length()-3);
+        String dia = fecha.substring(0, fecha.length()-6);
+        if (Integer.parseInt(fechaMod[2]) >= Integer.parseInt(ano)) {
+            if (Integer.parseInt(fechaMod[1]) >= Integer.parseInt(mes)) {
+                if (Integer.parseInt(fechaMod[0]) > Integer.parseInt(dia)) {
+                    ArrayList<String> nombreRuta = new ArrayList<>();
+                    StringTokenizer tokens = new StringTokenizer(res);
+                    for (int i = 0; tokens.hasMoreTokens(); ++i) {
+                        nombreRuta.add(tokens.nextToken());
+                    }
+                    String[]nombreRutaS = new String[nombreRuta.size()];
+                    for (int i = 0; i < nombreRuta.size(); ++i) {
+                        nombreRutaS[i] = nombreRuta.get(i);
+                    }
+                    r.setNombres(nombreRutaS);
+                    r.crearGrafoMod(map);
+                    String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
+                    cp.guardarRuta(r, nombresRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
         }
-        String[]nombreRutaS = new String[nombreRuta.size()];
-        for (int i = 0; i < nombreRuta.size(); ++i) {
-            nombreRutaS[i] = nombreRuta.get(i);
-        }
-        r.setNombres(nombreRutaS);
-        System.out.println("Llego hasta aki");
-        r.crearGrafoMod(map);
-        System.out.println("Llego hasta aki");
-        String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
-        cp.guardarRuta(r, nombresRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
+        else return false;
     }
 }

@@ -171,6 +171,7 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularMinSpaTree() {
+        System.out.println("Entro al minSpatree");
         MinSpaTree mst = new MinSpaTree();
         mst.setGrafo(grafo);
         mst.setNombres(nombres);
@@ -182,25 +183,30 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularChristofides() {
-        Christofides ch = new Christofides();
-        ch.setGrafo(grafo);
-        ch.setNombres(nombres);
-        ch.setMST(MSTK);
-        Integer[] aux = ch.buscaPermutacion();
-        Integer[] aux2 = new Integer[aux.length - 1];
-        for (int i = 0; i < aux2.length; ++i) {
-            aux2[i] = aux[i];
+        System.out.println("entro a crhis");
+        if (nombres.length > 3) {
+            Christofides ch = new Christofides();
+            ch.setGrafo(grafo);
+            ch.setNombres(nombres);
+            ch.setMST(MSTK);
+            Integer[] aux = ch.buscaPermutacion();
+            Integer[] aux2 = new Integer[aux.length - 1];
+
+            for (int i = 0; i < aux2.length; ++i) {
+                aux2[i] = aux[i];
+            }
+            permutacion = aux2;
+            Optimizacion op = new Optimizacion();
+            op.inicializa(permutacion, nombres, grafo, costeRuta);
+            boolean cambio = op.randSwap();
+            if(cambio){
+                permutacion = op.getSolucion();
+            }
         }
-        
-        permutacion = aux2;
-        Optimizacion op = new Optimizacion();
-        op.inicializa(permutacion, nombres, grafo, costeRuta);
-        boolean cambio = op.randSwap();
-        if(cambio){
-            permutacion = op.getSolucion();
-            distanciaRuta();
+        else {
+            SolveGreedy sg = new SolveGreedy(grafo);
+            permutacion = sg.solve();
         }
-        System.out.println("COSTE DE LA RUTA " + costeRuta);
     }
     
     /**
@@ -247,6 +253,7 @@ public class Ruta implements Serializable {
      * 
      */
     public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
+        System.out.println("creo grfo");
         mapa = map; 
         if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList <>();
         if (grafo != null) grafo = null;
@@ -261,6 +268,7 @@ public class Ruta implements Serializable {
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
+        System.out.println("salgo de crear grafo");
     }
     
     public void crearGrafoMod(Mapa map) {
