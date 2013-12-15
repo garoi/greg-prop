@@ -102,6 +102,7 @@ public class ControlDominio {
     private void calculaRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
         r.crearGrafo(paquetesSeleccionados, map);
         if (tipo.equals("rapidamente")) {
+            System.out.println("entro al id fe control de dominio");
             r.calcularRapida();
         }
         else if (tipo.equals("rapidaOptima")) {

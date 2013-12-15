@@ -110,15 +110,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 listaRutasMouseClicked(evt);
             }
         });
-        listaRutas.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                listaRutasAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         jScrollPane1.setViewportView(listaRutas);
 
         btnModificarRuta.setBackground(new java.awt.Color(75, 75, 75));
@@ -572,12 +563,39 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="private void listaRutasMouseClicked(java.awt.event.MouseEvent evt)">  
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
+        if (evt.getClickCount() == 1) {
+            if (!listaRutasS.isEmpty()) {
+                int idx = listaRutas.getSelectedIndex();
+                nombreRuta = (String) listaRutas.getSelectedValue();
+                listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+                actualizarListaPendientes();
+                try {
+                    mostrarPaquetesEnRuta();
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         if (evt.getClickCount() == 2) {
-            String ruta = (String) listaRutas.getSelectedValue();
-            if(ruta == null)
+            if (!listaRutasS.isEmpty()) {
+                int idx = listaRutas.getSelectedIndex();
+                nombreRuta = (String) listaRutas.getSelectedValue();
+                listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+                actualizarListaPendientes();
+                try {
+                    mostrarPaquetesEnRuta();
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(nombreRuta == null)
                 JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
             else{
-                ctrlp.setRuta(ruta);
+                ctrlp.setRuta(nombreRuta);
                 try {
                     ctrlp.iniVentanaSecundaria("vistaModificarRuta");
                 } catch (IOException ex) {
@@ -771,11 +789,13 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararRutasActionPerformed
         listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+        System.out.println("AMSDJGSEGRJASDH");
         if (!listaEnRutaS.isEmpty()) {
             actualizarListaPendientes();
             ctrlp.eliminarRutaComp(nombreRuta, null);
             try {
                 ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
+                System.out.println("lenta");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -783,6 +803,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
             try {
                 ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidamente");
+                System.out.println("rapida");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -790,12 +811,14 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
             try {
                 ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "rapidaOptima");
+                System.out.println("rapopt");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
+                System.out.println("AMSDJGSEGRJASDH");
                 ctrlp.iniVentanaSecundaria("vistaCompararRutas");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -839,22 +862,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAyudaActionPerformed
-
-    private void listaRutasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaRutasAncestorAdded
-        if (!listaRutasS.isEmpty()) {
-            int idx = listaRutas.getSelectedIndex();      
-            nombreRuta = (String) listaRutas.getSelectedValue();
-            listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-            actualizarListaPendientes();
-            try {
-                mostrarPaquetesEnRuta();
-            } catch (IOException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_listaRutasAncestorAdded
 // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void actualizarCiudad(String nombreCiudad) ">  

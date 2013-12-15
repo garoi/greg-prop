@@ -79,6 +79,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         btnEliminar.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminar.setForeground(new java.awt.Color(240, 240, 240));
         btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(75, 75, 75));
         btnCancelar.setForeground(new java.awt.Color(240, 240, 240));
@@ -187,6 +192,13 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        if (ruta != null) {
+            ctrlp.eliminarRuta(ruta);
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     /**
      * @param args the command line arguments
