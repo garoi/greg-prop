@@ -131,7 +131,7 @@ public class CtrlPresentacion {
                 
             case "vistaModificarRuta":
 //                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
-                ventanaSecundaria = new VistaModificarRuta(this, getDestinosRuta());
+                ventanaSecundaria = new VistaModificarRuta(this);
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
                 
@@ -162,7 +162,7 @@ public class CtrlPresentacion {
             case "verDibujoCiudad":
                 if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this);
                 ventanaSecundaria = dibujoCiudad;
-                ventanaSecundaria.setTitle("Dibujo de la ciudad");
+                ventanaSecundaria.setTitle(titularizar(ciudad));
             break;
                 
             case "vistaPaquetes":
@@ -233,10 +233,12 @@ public class CtrlPresentacion {
             case "vistaLogin":
                 if (vistaLogin == null) vistaLogin = new VistaLogin(this, tipoUsuario);
                 cambiarContenidoVentanaPrimaria(vistaLogin.getContentPane());
+                setTamanoVentanaPrimaria(20,10);
                 ventanaPrimaria.setTitle("Mensajeria | Login | " + tipoUsuario);
 //                Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
 //                d0.setSize(d0.getWidth()-6, d0.getHeight()+10);
-                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.setResizable(false);
+//                ventanaPrimaria.pack();
 //                ventanaPrimaria.setSize(d0);
                 vistaInicial = null;
                 break;
@@ -244,6 +246,7 @@ public class CtrlPresentacion {
                 if (vistaCliente == null) vistaCliente = new VistaClientePrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaCliente.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
+                setTamanoVentanaPrimaria(0,0);
                 ventanaPrimaria.setTitle("Mensajeria | Cliente");
 //                Dimension d = new Dimension(vistaCliente.getPreferredSize());
 //                d.setSize(d.getWidth()-5, d.getHeight()+15);
@@ -255,6 +258,7 @@ public class CtrlPresentacion {
                 if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaOperador.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
+                setTamanoVentanaPrimaria(-110,30);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
 //                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
 //                d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
@@ -267,7 +271,6 @@ public class CtrlPresentacion {
                 break;
                 
         }
-        setTamanoVentanaPrimaria(0,0);
         actualizarVentanaPrimaria();
     }
     
@@ -297,6 +300,7 @@ public class CtrlPresentacion {
             vistaOperador.actualizarCiudad(nombreCiudad);
         if (dibujoCiudad != null)
             dibujoCiudad.setCiudad(nombreCiudad);
+        setCiudad(nombreCiudad);
     }
 
     /**
@@ -386,16 +390,17 @@ public class CtrlPresentacion {
         return ctrld.getRutas(nombreCiudad);
     }
     
-    private String[] getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return ctrld.getDestinosRuta(ruta);
-    }
+//    private String[] getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+//        return ctrld.getDestinosRuta(ruta);
+//    }
     
     public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
         return ctrld.getPaquetesRuta(nombreRuta);
     }
     void setCiudad(String nombreCiudad) {
-        this.ciudad = nombreCiudad;
-        if (this.vistaModificarCiudad != null) this.vistaModificarCiudad.setCiudad(this.ciudad);
+        ciudad = nombreCiudad;
+        System.out.println("Ciudad " + ciudad + " seleccionada");
+//        if (this.vistaModificarCiudad != null) this.vistaModificarCiudad.setCiudad(this.ciudad);
     }
     
     public String[] getNombresCiudades(){
@@ -509,7 +514,7 @@ public class CtrlPresentacion {
         ctrld.modificarCiudad(ciudad);
     }
 
-    public String getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public String getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
         return ctrld.getDestinosRuta(ruta);
     }
 
