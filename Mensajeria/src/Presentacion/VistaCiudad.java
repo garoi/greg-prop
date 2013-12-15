@@ -30,6 +30,7 @@ public class VistaCiudad extends javax.swing.JFrame {
     public VistaCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
         nombreCiudad = ctrlp.getCiudad();
+        System.out.println(nombreCiudad);
         initComponents();
     }
     // </editor-fold> 
@@ -50,8 +51,8 @@ public class VistaCiudad extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(300, 300));
-        setPreferredSize(new java.awt.Dimension(300, 300));
+        setMinimumSize(new java.awt.Dimension(600, 600));
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -68,11 +69,11 @@ public class VistaCiudad extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 578, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,14 +82,14 @@ public class VistaCiudad extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -102,65 +103,65 @@ public class VistaCiudad extends javax.swing.JFrame {
         try {
             nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
             n = nombresCiudad.size();
+            super.paint(g);
+            g.setColor(Color.red);
+            int maxWidth = this.getWidth();
+            int maxHeight = this.getHeight();
+
+            g.setColor (Color.black);
+            float factor = maxWidth;
+            float diametro = factor*0.8f;
+            if(maxWidth<maxHeight) factor = maxHeight;
+
+            double angulo = 360 / n;
+            double radio = diametro / 2;
+            int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
+            int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) - 5;
+
+            ArrayList<int[]> puntos = new ArrayList();
+            double auxAngulo = 0.0f;
+            for(int i = 0; i < n; i++){
+                int p1x = (int) (Math.cos(Math.toRadians(auxAngulo))*radio);
+                int p1y = (int) (Math.sin(Math.toRadians(auxAngulo))*radio);
+                
+                
+                if(auxAngulo > 270){
+                    p1x *= -1;
+                    p1x *= -1;
+                }
+                else if(auxAngulo > 180) p1y *= -1;
+                else if(auxAngulo >= 90) p1y *= -1;
+
+                int auxx = p1x + centrox;
+                int auxy = p1y + centroy;
+                int[] auxPair = {auxx, auxy};
+                puntos.add(auxPair);
+
+                g.setColor (Color.black);
+                g.drawString(nombresCiudad.get(i), auxx -5, auxy-5);
+
+                g.fillOval(auxx,auxy,10,10);
+                g.setColor (Color.blue);
+                g.fillOval(auxx+2,auxy+2,6,6);
+                auxAngulo += angulo;
+            }
+
+            g.setColor(Color.black);
+            for (int i = 0; i < puntos.size(); ++i) {
+                for (int j = i+1; j < puntos.size(); ++j) {
+                    int[] auxi = puntos.get(i);
+                    int xi = auxi[0]+3;
+                    int yi = auxi[1]+3;
+                    int[] auxj = puntos.get(j);
+                    int xj = auxj[0]+3;
+                    int yj = auxj[1]+3;
+                    g.drawLine(xi, yi, xj, yj);
+                }
+            }
         } catch (IOException ex) {
             Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        super.paint(g);
-        g.setColor(Color.red);
-        int maxWidth = this.getWidth();
-        int maxHeight = this.getHeight();
-
-        g.setColor (Color.black);
-        float factor = maxWidth;
-        float diametro = factor*0.8f;
-        if(maxWidth<maxHeight) factor = maxHeight;
-
-        double angulo = 360 / n;
-        double radio = diametro / 2;
-        int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
-        int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) - 5;
-        
-        ArrayList<int[]> puntos = new ArrayList();
-        double auxAngulo = 0.0f;
-        for(int i = 0; i < n; i++){
-            int p1x = (int) (Math.cos(Math.toRadians(auxAngulo))*radio);
-            int p1y = (int) (Math.sin(Math.toRadians(auxAngulo))*radio);
-
-            if(auxAngulo > 240){
-                p1x *= -1;
-                p1x *= -1;
-            }
-            else if(auxAngulo > 180) p1y *= -1;
-            else if(auxAngulo > 90) p1y *= -1;
-
-            int auxx = p1x + centrox;
-            int auxy = p1y + centroy;
-            int[] auxPair = {auxx, auxy};
-            puntos.add(auxPair);
-            
-            g.setColor (Color.black);
-            g.drawString(nombresCiudad.get(i), auxx -5, auxy-5);
-            
-            g.fillOval(auxx,auxy,10,10);
-            g.setColor (Color.blue);
-            g.fillOval(auxx+2,auxy+2,6,6);
-            auxAngulo += angulo;
-        }
-
-        g.setColor(Color.black);
-        for (int i = 0; i < puntos.size(); ++i) {
-            for (int j = i+1; j < puntos.size(); ++j) {
-                int[] auxi = puntos.get(i);
-                int xi = auxi[0]+3;
-                int yi = auxi[1]+3;
-                int[] auxj = puntos.get(j);
-                int xj = auxj[0]+3;
-                int yj = auxj[1]+3;
-                g.drawLine(xi, yi, xj, yj);
-            }
         }
     }
     // </editor-fold>  
