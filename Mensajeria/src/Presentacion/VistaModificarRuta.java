@@ -83,6 +83,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         btnCancelar.setBackground(new java.awt.Color(75, 75, 75));
         btnCancelar.setForeground(new java.awt.Color(240, 240, 240));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setBackground(new java.awt.Color(75, 75, 75));
         btnModificar.setForeground(new java.awt.Color(240, 240, 240));
@@ -166,7 +171,9 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         if (label.length() > res.length()) JOptionPane.showMessageDialog(rootPane, "!No puedes quitar paquetes de una ruta");
         if (label.length() < res.length()) {
             try {
-                ctrlp.modificarRuta(ruta, res);
+                if(!ctrlp.modificarRuta(ruta, res)) {
+                    JOptionPane.showMessageDialog(rootPane, "No puedes modificar una ciudad si antes has modificado la ciudad");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -176,6 +183,10 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

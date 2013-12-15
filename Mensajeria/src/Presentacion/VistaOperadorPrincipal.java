@@ -735,9 +735,12 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
+        System.out.println("Llego aki");
         if (!listaEnRutaS.isEmpty()) {
+            System.out.println("Entro al if");
             ctrlp.eliminarRutaComp(nombreRuta, null);
             try {
+                System.out.println("Entro al try");
                 ctrlp.calcularRuta(listaEnRutaS, fechaCD, nombreCiudad, "lentamente");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);

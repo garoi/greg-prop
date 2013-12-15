@@ -1,5 +1,4 @@
 package Dominio;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
@@ -75,7 +74,6 @@ public class Christofides {
      * @return array de enteros ordenados
      */
     public Integer[] buscaPermutacion() {
-        System.out.println("TAMANY despres de enviar " + MST.size());
         int tam = MST.size();
         if (tam > 2) {
             if (es_estrella() && centro_impar()) {
@@ -490,5 +488,3 @@ public class Christofides {
         return cicleH;
     }
 }
-
-

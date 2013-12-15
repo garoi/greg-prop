@@ -519,7 +519,7 @@ public class CtrlPresentacion {
         return ctrld.getDestinosRuta(ruta);
     }
 
-    void modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
-        ctrld.modificarRuta(ruta, res);
+    public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+        return ctrld.modificarRuta(ruta, res);
     }
 }

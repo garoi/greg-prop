@@ -182,25 +182,31 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularChristofides() {
-        Christofides ch = new Christofides();
-        ch.setGrafo(grafo);
-        ch.setNombres(nombres);
-        ch.setMST(MSTK);
-        Integer[] aux = ch.buscaPermutacion();
-        Integer[] aux2 = new Integer[aux.length - 1];
-        for (int i = 0; i < aux2.length; ++i) {
-            aux2[i] = aux[i];
-        }
-        
-        permutacion = aux2;
-        Optimizacion op = new Optimizacion();
-        op.inicializa(permutacion, nombres, grafo, costeRuta);
-        boolean cambio = op.randSwap();
-        if(cambio){
-            permutacion = op.getSolucion();
+        if (nombres.length > 3) {
+            Christofides ch = new Christofides();
+            ch.setGrafo(grafo);
+            ch.setNombres(nombres);
+            ch.setMST(MSTK);
+            Integer[] aux = ch.buscaPermutacion();
+            Integer[] aux2 = new Integer[aux.length - 1];
+
+            for (int i = 0; i < aux2.length; ++i) {
+                aux2[i] = aux[i];
+            }
+            permutacion = aux2;
+            Optimizacion op = new Optimizacion();
+            op.inicializa(permutacion, nombres, grafo, costeRuta);
+            boolean cambio = op.randSwap();
+            if(cambio){
+                permutacion = op.getSolucion();
+            }
             distanciaRuta();
         }
-        System.out.println("COSTE DE LA RUTA " + costeRuta);
+        else {
+            SolveGreedy sg = new SolveGreedy(grafo);
+            permutacion = sg.solve();
+            distanciaRuta();
+        }
     }
     
     /**
