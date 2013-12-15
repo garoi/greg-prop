@@ -737,8 +737,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarRutaActionPerformed
     // </editor-fold>
     
-   // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) ">  
     private void btnVerPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPaquetesActionPerformed
         try {
@@ -979,17 +977,23 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public String getCiudad() ">  
+    /**
+     * Devuelve la ciudad seleccionada por el operador
+     * @return 
+     */
     public String getCiudad() {
         return nombreCiudad;
-    }
+    }// </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="public String getFecha()">  
+    /**
+     * Devuelve la fecha seleccionada por el operador.
+     * @return 
+     */
     public String getFecha() {
         return fechaCD;
-    }
+    }// </editor-fold>
 
-
-    // </editor-fold>
-    
     public void validarRuta(String ruta){
         actualizarListaPendientes();
             actualizarRutas();

@@ -230,6 +230,11 @@ public class ControlDominio {
         map = new Mapa();
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
+        System.out.println("[ctrlD anadirCiudad]");
+        for (int i = 0; i < distanciasNodos.length; i++) {
+            System.out.print(distanciasNodos[i] + ", ");
+        }
+        System.out.print("\n");
         map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
@@ -413,8 +418,24 @@ public class ControlDominio {
 //    }
     public Float getDistancia(String ciudad, String a, String b) throws FileNotFoundException, IOException, ClassNotFoundException {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        map = (Mapa) cp.leerCiudad(ciudad);
-        return map.getDistancia(a,b);
+        if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
+        else System.out.println("[getDistancia] " + map.getDistancia(a,b));
+        if (map != null) return map.getDistancia(a,b);
+        return 1f;
+    }
+    
+    public Float getMax(String ciudad) throws FileNotFoundException, IOException, ClassNotFoundException{
+        System.out.println("ciudad: " + map);
+        if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
+        System.out.println("[getMax] max" + map.getMax());
+        if (map != null) return map.getMax();
+        return 1f;
+    }
+    public Float getMin(String ciudad) throws FileNotFoundException, IOException, ClassNotFoundException{
+        if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
+        System.out.println("[getMin] min" + map.getMin());
+        if (map != null) return map.getMin();
+        return 1f;
     }
 
     public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {

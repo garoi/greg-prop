@@ -155,6 +155,8 @@ public class VistaCiudad extends javax.swing.JFrame {
                     int[] auxj = puntos.get(j);
                     int xj = auxj[0]+3;
                     int yj = auxj[1]+3;
+                    float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                    g.setColor(ctrlp.getColorDistancia(fcolor));
                     g.drawLine(xi, yi, xj, yj);
                 }
             }

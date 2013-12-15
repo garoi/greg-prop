@@ -37,6 +37,8 @@ public class CtrlPresentacion {
     private String tipoUsuario;
     private String ciudad;
     private String ruta;
+    private float max;
+    private float min;
     // </editor-fold>
     
     /* CREADORA */
@@ -63,6 +65,8 @@ public class CtrlPresentacion {
             ventanaPrimaria.setLocationRelativeTo(null);
             ventanaPrimaria.setVisible(true);
         }
+        max = -1f;
+        min = -1f;
     } // </editor-fold>
     
     /* GETTERS */
@@ -481,6 +485,11 @@ public class CtrlPresentacion {
      * @throws IOException 
      */
     public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException {
+        System.out.println("[anadirCiudad]");
+        for (int i = 0; i < distanciasNodos.length; i++) {
+            System.out.print(distanciasNodos[i] + ", ");
+        }
+        System.out.print("\n");
         ctrld.anadirCiudad(nombre, n, nombreNodos, distanciasNodos);
     } // </editor-fold>
     
@@ -786,10 +795,25 @@ public class CtrlPresentacion {
      * @param d la distancia de la cual se quiere obtener el color
      * @return el color proporcional
      */
-    public Color getColorDistancia(float max, float min, float d){
+    public Color getColorDistancia(float d) throws FileNotFoundException, IOException, ClassNotFoundException{
+        max = ctrld.getMax(ciudad);
+        min = ctrld.getMin(ciudad);
+//        System.out.println("\nmax " + max);
+//        System.out.println("min " + min);
+//        System.out.println("d " + d);
         float proporcion = (d-min)*100f/(max-min);
-	float rd = 255 * (proporcion/100f);
-	float gd = 255 * ((100f-proporcion)/100f);
+//        System.out.println("proporcion " + proporcion);
+	float rd = 1f;
+	float gd = 1f;
+        float media = (max+min)/2f;
+//        System.out.println("media " + media);
+	if (d > media) gd = ((100f-proporcion)/100f);
+        else if (d == media);
+        else rd = (proporcion/100f);
+//        System.out.println("rd " + rd);
+//        System.out.println("gd " + gd);
+//        System.out.println("rd " + rd);
+//        System.out.println("gd " + gd);
         return new Color(rd, gd, 0f);
     } // </editor-fold>
     
