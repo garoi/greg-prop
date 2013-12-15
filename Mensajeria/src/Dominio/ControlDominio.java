@@ -469,6 +469,7 @@ public class ControlDominio {
     
     public void modificaDistancia(String nombre1, String nombre2, float dist) throws IOException, ClassNotFoundException{
         map.setDistancia(nombre1, nombre2, dist);
+        System.out.println("oink oink");
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     

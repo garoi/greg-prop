@@ -184,24 +184,26 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRenombrarActionPerformed
 
     private void btnDistanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistanciaActionPerformed
+        String[] parNombres;
+        parNombres = new String[2];
         String nombre1 = JOptionPane.showInputDialog("introduce el primer punto:");
-        try {
-            if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
-                String nombre2 = JOptionPane.showInputDialog("introduce el segundo punto:");
-                try{
-                    if(ctrlp.getNombresCiudad(ciudad).contains(nombre2)){
-                        String dist = JOptionPane.showInputDialog("introduce la nueva distancia:");
-                        ctrlp.modificaDistancia(nombre1, nombre2, dist);
-                    }
-                    else this.dispose();
-                    
-                }   catch (IOException ex) {
-                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                }   catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        parNombres[0] = nombre1;
+        String nombre2 = JOptionPane.showInputDialog("introduce el segundo punto:");
+        parNombres[1] = nombre2;
+        for(int i = 0; i < parNombres.length; ++i){
+            try {
+            if(ctrlp.getNombresCiudad(ciudad).contains(parNombres[i])){
             }
             else this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        String dist = JOptionPane.showInputDialog("introduce la distancia");
+        try {
+            ctrlp.modificaDistancia(nombre1, nombre2, dist);
         } catch (IOException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
