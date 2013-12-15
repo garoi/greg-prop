@@ -234,9 +234,11 @@ public class ControlDominio {
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
-    public void anadirPunto(String nombre, float[] distanciasNodos){
-        if (map != null)
+    public void anadirPunto(String nombre, float[] distanciasNodos) throws IOException, ClassNotFoundException{
+        if (map != null){
             map.anadirPunto(nombre, distanciasNodos);
+            cp.guardarMapas(map, map.getNombreCiudad());
+        }
     }
     
    

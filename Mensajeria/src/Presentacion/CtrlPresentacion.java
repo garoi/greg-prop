@@ -499,8 +499,9 @@ public class CtrlPresentacion {
      * @param nombre nombre que se le ha asignado al punto
      * @param distancias distancias desde el punto al resto de puntos
      */
-    public void anadirPunto(String nombre, float[] distancias) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void anadirPunto(String nombre, float[] distancias) throws IOException, ClassNotFoundException {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ctrld.anadirPunto(nombre, distancias);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void renombrarPunto(String nombre1, String nombre2)"> 

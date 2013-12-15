@@ -159,7 +159,7 @@ public class Mapa implements Serializable {
      * @return true si se ha añadido correctamente.
      */
     public boolean anadirPunto(String nombre, float[] distancias){
-        if (!nombres.contains(nombre)) return false;
+        if (nombres.contains(nombre)) return false;
         // Añadimos el nombre
         nombres.add(nombre);
         // Y espacio para el nuevo punto

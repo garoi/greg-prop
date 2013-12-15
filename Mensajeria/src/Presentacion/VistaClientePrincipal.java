@@ -276,13 +276,15 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         int idx = listaEspera.getSelectedIndex();      
         String name = (String) listaEspera.getSelectedValue();
-        String idPaquete = name.substring(name.lastIndexOf('-') + 1);
-        try {
-            ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
-        } catch (IOException ex) {
-            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if(name != null){
+            String idPaquete = name.substring(name.lastIndexOf('-') + 1);
+            try {
+                ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
+            } catch (IOException ex) {
+                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            actualizarlista();
         }
-        actualizarlista();
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
@@ -306,13 +308,15 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private void botonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar2ActionPerformed
         int idx = listaEnviados.getSelectedIndex();      
         String name = (String) listaEnviados.getSelectedValue();
-        String idPaquete = name.substring(name.lastIndexOf('-') + 1);
-        try {
-            ctrlp.eliminarPaquete(Integer.parseInt(idPaquete));
-        } catch (IOException ex) {
-            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if(name != null){
+            String idPaquete = name.substring(name.lastIndexOf('-') + 1);
+            try {
+                ctrlp.eliminarPaquete(Integer.parseInt(idPaquete));
+            } catch (IOException ex) {
+                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            actualizarListaEnviados();
         }
-        actualizarListaEnviados();
     }//GEN-LAST:event_botonEliminar2ActionPerformed
 
     /**

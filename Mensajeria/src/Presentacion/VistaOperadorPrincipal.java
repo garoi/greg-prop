@@ -110,15 +110,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 listaRutasMouseClicked(evt);
             }
         });
-        listaRutas.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                listaRutasAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         jScrollPane1.setViewportView(listaRutas);
 
         btnModificarRuta.setBackground(new java.awt.Color(75, 75, 75));
