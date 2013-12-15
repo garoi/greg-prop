@@ -519,6 +519,7 @@ public class ControlDominio {
         System.out.println("Llego hasta aki");
         r.crearGrafoMod(map);
         System.out.println("Llego hasta aki");
+        System.out.println("EL NOMBRE GUARDADO EN LA CLASE MAPA ES " + map.getNombreCiudad());
         String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
         cp.guardarRuta(r, nombresRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
