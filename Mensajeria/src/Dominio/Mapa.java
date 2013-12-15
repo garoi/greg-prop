@@ -383,4 +383,8 @@ public class Mapa implements Serializable {
     public ArrayList<ArrayList<Float>> getDistanciasCiudad() {
         return ciudad;
     }
+
+    Float getDistancia(String a, String b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
