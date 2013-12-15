@@ -313,13 +313,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
         ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
-        try {
-            ctrlp.leerCiudad(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
         } catch (IOException ex) {
@@ -327,6 +321,15 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            ctrlp.leerCiudad(nombreCiudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         actualizarListaCiudades();
     }
 

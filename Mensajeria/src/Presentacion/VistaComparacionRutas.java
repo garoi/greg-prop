@@ -4,7 +4,11 @@
  */
 package Presentacion;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +77,11 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         btnVer.setBackground(new java.awt.Color(75, 75, 75));
         btnVer.setForeground(new java.awt.Color(240, 240, 240));
         btnVer.setText("Ver");
+        btnVer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVerMouseClicked(evt);
+            }
+        });
 
         btnClose.setBackground(new java.awt.Color(75, 75, 75));
         btnClose.setForeground(new java.awt.Color(240, 240, 240));
@@ -154,6 +163,22 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         ctrlp.actualizarRutasOperador();
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerMouseClicked
+        /*String ruta = (String) listRutas.getSelectedValue();
+        if(ruta == null)
+            JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
+        else{
+            ctrlp.setRuta(ruta);
+            try {
+                ctrlp.setVentanaSecundaria("vistaModificarRuta");
+            } catch (IOException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }*/
+    }//GEN-LAST:event_btnVerMouseClicked
     
     
     
