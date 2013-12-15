@@ -75,6 +75,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         btnValidar.setBackground(new java.awt.Color(75, 75, 75));
         btnValidar.setForeground(new java.awt.Color(240, 240, 240));
         btnValidar.setText("Validar");
+        btnValidar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnValidarMouseClicked(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(75, 75, 75));
         btnEliminar.setForeground(new java.awt.Color(240, 240, 240));
@@ -196,9 +201,19 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         if (ruta != null) {
             ctrlp.eliminarRuta(ruta);
+            ctrlp.actualizarRutasOperador();
+            ArrayList<String> listaEnRutaS = new ArrayList<>();
+            ctrlp.setListaEnRutaS(listaEnRutaS);
+            ctrlp.actualizarListaEnRuta();
         }
         this.dispose();
     }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnValidarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValidarMouseClicked
+        ctrlp.setRuta(ruta);
+        ctrlp.validarRuta(ruta);
+        this.dispose();
+    }//GEN-LAST:event_btnValidarMouseClicked
 
     /**
      * @param args the command line arguments
