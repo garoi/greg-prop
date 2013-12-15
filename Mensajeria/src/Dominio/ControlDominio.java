@@ -401,14 +401,12 @@ public class ControlDominio {
     
     public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
         map = (Mapa) cp.leerCiudad(nombreCiudad);
-        ArrayList<ArrayList<Float>> ciudad = map.getCiudad();
-        for(int i = 0; i < ciudad.size();++i){
-            for(int j = 0; j < ciudad.size(); ++j){
-                System.out.print(ciudad.get(i).get(j)+ " ");
-            }
-            System.out.println();
-        }
         return map.getNombres();
+    }
+    
+    public ArrayList<ArrayList<Float>> pesosAristas(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+        map = (Mapa) cp.leerCiudad(nombreCiudad);
+        return map.getCiudad();
     }
 
     public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {
