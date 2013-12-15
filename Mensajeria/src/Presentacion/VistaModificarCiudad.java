@@ -102,6 +102,11 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         btnFichero.setBackground(new java.awt.Color(75, 75, 75));
         btnFichero.setForeground(new java.awt.Color(220, 220, 220));
         btnFichero.setText("Desde fichero");
+        btnFichero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFicheroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,6 +224,7 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         String nombre = JOptionPane.showInputDialog("Introduce el nombre del punto que desea añadir:");
         ArrayList<String> nombres;
@@ -247,6 +253,45 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAnadirActionPerformed
+
+    private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
+        try {
+            ctrlp.modificarCiudad(ciudad); 
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String accep = JOptionPane.showInputDialog("Has terminado de guardar la ciudad? si/no:");
+        if (accep.equals("si")) {
+            ciudadAnadidaFichero();
+        }
+        else {
+            ctrlp.eliminarCiudad(ciudad);
+        }
+    }//GEN-LAST:event_btnFicheroActionPerformed
+
+    public void ciudadAnadidaFichero() {
+        ArrayList<String> nombres = new ArrayList<>();
+        ArrayList<ArrayList<Float>> ciudadDist = new ArrayList<>();
+        ctrlp.leerMapaFichero(ciudad+"-mapa.txt", ciudad, nombres, ciudadDist);
+        try {
+            ctrlp.leerCiudad(ciudad);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ctrlp.pasarAObjeto(ciudad, nombres, ciudadDist);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
 
     /**
      * @param args the command line arguments

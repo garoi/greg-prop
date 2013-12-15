@@ -499,6 +499,9 @@ public class CtrlPresentacion {
 
     void anadirPunto(String nombre, float[] distancias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+
+    
+    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException{ 
+        ctrld.modificarCiudad(ciudad); 
     }
 }

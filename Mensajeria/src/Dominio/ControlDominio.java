@@ -518,4 +518,16 @@ public class ControlDominio {
         }
         return rutaNombres;
     }
+    
+    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException { 
+        Mapa m = (Mapa) cp.leerCiudad(ciudad); 
+        String nombreFichero = m.getNombreCiudad() + "-mapa.txt"; 
+        String nombreCiudad = m.getNombreCiudad(); 
+        ArrayList<String> nombres = m.getNombres(); 
+        ArrayList<ArrayList<Float>> city = m.getDistanciasCiudad();
+        int tamany = m.getTamCiudad(); 
+        cp.pasarAFichero(nombreFichero, nombreCiudad, nombres, city); 
+        cp.abrirFichero(nombreFichero); 
+        
+    }
 }

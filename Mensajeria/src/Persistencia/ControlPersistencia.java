@@ -136,7 +136,7 @@ public class ControlPersistencia {
         pr.eliminarRuta(ruta);
     }
     
-    private void pasarAFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    public void pasarAFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
         FileWriter fichero = null;
         PrintWriter pw = null;
         try{
@@ -162,12 +162,14 @@ public class ControlPersistencia {
                 //b = false;
                 escribir_buffer.newLine();
             }
+            escribir_buffer.flush(); 
+            escribir_buffer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    private void abrirFichero(String nomFichero) throws IOException{
+    public void abrirFichero(String nomFichero) throws IOException{
         try{
             File file = new File("Data/Mapas/" + nomFichero);
             Desktop.getDesktop().open(file);
