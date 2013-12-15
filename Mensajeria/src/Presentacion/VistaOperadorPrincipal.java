@@ -187,7 +187,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addComponent(btnValidarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCompararRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)))
         );
@@ -348,6 +348,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 panelCiudadMouseClicked(evt);
             }
         });
+
+        labelCiudad.setText("---");
 
         javax.swing.GroupLayout panelCiudadLayout = new javax.swing.GroupLayout(panelCiudad);
         panelCiudad.setLayout(panelCiudadLayout);
@@ -695,62 +697,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
         else{
             ctrlp.setRuta(ruta);
-            actualizarListaPendientes();
-            actualizarRutas();
-            if (listaPendientesS.size() != listaEnRutaS.size()) {
-                try {
-                    ctrlp.iniVentanaSecundaria("advertencia");
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (advertencia) {
-                    try {
-                        ctrlp.paquetesEnviados(nombreRuta);
-                    } catch (IOException ex) {
-                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try {
-                        ctrlp.aceptarRuta(ruta, fechaCD, nombreCiudad);
-                    } catch (IOException ex) {
-                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-                    actualizarListaPendientes();
-                    actualizarRutas();
-                }
-
-            }
-            else {
-                try {
-                    ctrlp.paquetesEnviados(nombreRuta);
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
-                    ctrlp.aceptarRuta(ruta, fechaCD, nombreCiudad);
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-                actualizarListaPendientes();
-                actualizarRutas();
-            }
-            listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-            actualizarListaPendientes();
-            actualizarRutas();
-            advertencia = false;
+            validarRuta(ruta);
         }
     }//GEN-LAST:event_btnValidarRutaActionPerformed
     // </editor-fold>
@@ -1017,6 +964,65 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
 
 
     // </editor-fold>
+    
+    public void validarRuta(String ruta){
+        actualizarListaPendientes();
+            actualizarRutas();
+            if (listaPendientesS.size() != listaEnRutaS.size()) {
+                try {
+                    ctrlp.iniVentanaSecundaria("advertencia");
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (advertencia) {
+                    try {
+                        ctrlp.paquetesEnviados(nombreRuta);
+                    } catch (IOException ex) {
+                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        ctrlp.aceptarRuta(ruta, fechaCD, nombreCiudad);
+                    } catch (IOException ex) {
+                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+                    actualizarListaPendientes();
+                    actualizarRutas();
+                }
+
+            }
+            else {
+                try {
+                    ctrlp.paquetesEnviados(nombreRuta);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    ctrlp.aceptarRuta(ruta, fechaCD, nombreCiudad);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+                actualizarListaPendientes();
+                actualizarRutas();
+            }
+            listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+            actualizarListaPendientes();
+            actualizarRutas();
+            advertencia = false;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accionesPanel;

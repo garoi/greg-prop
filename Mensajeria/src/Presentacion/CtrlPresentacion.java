@@ -258,7 +258,7 @@ public class CtrlPresentacion {
                 if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
                 cambiarContenidoVentanaPrimaria(vistaOperador.getContentPane());
 //                setTamanoVentanaPrimaria(-8, 15);
-                setTamanoVentanaPrimaria(-110,30);
+                setTamanoVentanaPrimaria(-90,40);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
 //                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
 //                d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
@@ -384,6 +384,7 @@ public class CtrlPresentacion {
     
     public void eliminarRuta(String ruta){
         ctrld.eliminarRuta(ruta);
+        if (this.ruta == ruta) this.ruta = null;
     }
     
     public ArrayList<String> getRutas(String nombreCiudad){
