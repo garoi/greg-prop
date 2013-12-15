@@ -37,7 +37,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         initComponents();
         
         // cogemos la fecha y horas del sistema
-        String[] data = ctrlp.fechaHoy();
+        String[] data = ctrlp.getFechaAhora();
         dia = Integer.parseInt(data[0]);
         mes = Integer.parseInt(data[1]);
         ano = Integer.parseInt(data[2]);

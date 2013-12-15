@@ -205,7 +205,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         int idx = listaCiudades.getSelectedIndex();      
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
         this.setVisible(false);
-        ctrlp.setOperador(nombreCiudad);
+        ctrlp.setCiudad(nombreCiudad);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
@@ -215,7 +215,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
      */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
-            ctrlp.iniVentanaSecundaria("vistaModificarCiudad");
+            ctrlp.setVentanaSecundaria("vistaModificarCiudad");
         } catch (IOException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -229,7 +229,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         ArrayList<String> nombreNodos = new ArrayList();
         String nombreCiudad = JOptionPane.showInputDialog("Introduce el nombre de la ciudad:");
-        nombreCiudad = ctrlp.titularizar(nombreCiudad);
+        nombreCiudad = nombreCiudad;
         String strnNodos = JOptionPane.showInputDialog("Introduce el número de puntos:");
         int nNodos = Integer.parseInt(strnNodos);
         int auxdistancias = (nNodos*(nNodos-1))/2;

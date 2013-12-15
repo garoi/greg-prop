@@ -256,7 +256,7 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
 
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
         try {
-            ctrlp.modificarCiudad(ciudad); 
+            ctrlp.modificarCiudadFichero(ciudad); 
         } catch (IOException ex) {
             Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
