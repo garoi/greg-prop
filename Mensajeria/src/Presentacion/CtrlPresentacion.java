@@ -522,4 +522,8 @@ public class CtrlPresentacion {
     public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
         return ctrld.modificarRuta(ruta, res);
     }
+    
+    public void validarRuta(String nombreRuta) {
+        vistaOperador.validarRuta(nombreRuta);
+    }
 }

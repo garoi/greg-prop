@@ -253,14 +253,15 @@ public class Ruta implements Serializable {
      * 
      */
     public void crearGrafo(ArrayList<Paquete> paquetesSeleccionados, Mapa map) {
-        System.out.println("creo grfo");
-        mapa = map; 
+        mapa = map;
         if (listaPaquetesRuta != null) listaPaquetesRuta = new ArrayList <>();
         if (grafo != null) grafo = null;
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         if (nombres != null) nombres = null;
         nombres = new String[paquetesSeleccionados.size()];
-        ArrayList<ArrayList<Float>> ciudad = mapa.getCiudad();
+        System.out.println("CREAR GRAFO "+ nombres.length);
+        ArrayList<ArrayList<Float>> ciudads = mapa.getCiudad();
+        System.out.println("CREAR GRAFO");
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));
@@ -268,7 +269,6 @@ public class Ruta implements Serializable {
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
-        System.out.println("salgo de crear grafo");
     }
     
     public void crearGrafoMod(Mapa map) {
