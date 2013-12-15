@@ -131,7 +131,7 @@ public class CtrlPresentacion {
                 
             case "vistaModificarRuta":
 //                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
-                ventanaSecundaria = new VistaModificarRuta(this, getDestinosRuta());
+                ventanaSecundaria = new VistaModificarRuta(this, getRuta());
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
                 
@@ -386,10 +386,6 @@ public class CtrlPresentacion {
         return ctrld.getRutas(nombreCiudad);
     }
     
-    private String[] getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
-        return ctrld.getDestinosRuta(ruta);
-    }
-    
     public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
         return ctrld.getPaquetesRuta(nombreRuta);
     }
@@ -493,15 +489,28 @@ public class CtrlPresentacion {
     public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
         ctrld.eliminarPunto(nombre1);
     }
-    void setRuta(String ruta) {
+    public void setRuta(String ruta) {
         this.ruta = ruta;
     }
+    
+    public String getRuta() {
+        return ruta;
+    }
 
-    void anadirPunto(String nombre, float[] distancias) {
+    public void anadirPunto(String nombre, float[] distancias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
+    }
     
-    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException{ 
-        ctrld.modificarCiudad(ciudad); 
+    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException { 
+        ctrld.modificarCiudad(ciudad);
+    }
+
+    public String getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
+        return ctrld.getDestinosRuta(ruta);
+    }
+
+    void modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+        ctrld.modificarRuta(ruta, res);
     }
 }

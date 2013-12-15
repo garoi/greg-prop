@@ -247,38 +247,7 @@ public class ControlDominio {
             map.anadirPunto(nombre, distanciasNodos);
     }
     
-    private void modificarCiudad() {
-        // Hace falta definir cómo se va a modificar la ciudad
-       //oper.modificarCiudad(map);
-   }
    
-    private void modificarRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in);
-        Ruta r = new Ruta();//Ruta r = (Ruta) leerRuta(nombre);
-        Mapa maptem = r.getMapa();
-        ArrayList<String> nombresCiu = maptem.getNombres();
-        Integer[] puntosRuta = r.getPermutacion();
-        ArrayList<Paquete> listaPaquetesRutaTemp= new ArrayList<>();
-        listaPaquetesRutaTemp = r.getListaPaquetesRuta();
-        System.out.println("Por que puntos de la ciudad te gustaria pasar?");
-        for (int i = 0; i < nombresCiu.size(); ++i) {
-            System.out.println(i + " " + nombresCiu.get(i));
-        }
-        System.out.println("Para indicar que ya no quieres añadir mas puntos pulsa -1");
-        System.out.println("entra el id destino");
-        int nuevoPunto = sc.nextInt();
-        while (nuevoPunto > -1) {
-            Paquete p = new Paquete();
-            p.setDestino(nombresCiu.get(nuevoPunto));
-            p.setIdDestino(nuevoPunto);
-            listaPaquetesRutaTemp.add(p);
-            nuevoPunto = sc.nextInt();
-        }
-        r.setListaPaquetesRuta(listaPaquetesRutaTemp);
-        r.crearGrafo(listaPaquetesRutaTemp, map);
-        r.calcularRapida();
-        r.mostrarRuta();
-    }
     
     /**
      * El cliente añade un paquete para enviar
@@ -508,13 +477,18 @@ public class ControlDominio {
         cp.guardarMapas(map, map.getNombreCiudad());
     }
 
-    public String[] getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public String getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
         Ruta r = (Ruta) cp.leerRuta(ruta);
         String[] nombres = r.getNombres();
         Integer[] permutacion = r.getPermutacion();
-        String[] rutaNombres = new String[nombres.length];
-        for (int i = 0; i < rutaNombres.length; ++i) {
-            rutaNombres[i] = nombres[permutacion[i]];
+        String rutaNombres = null;
+        for (int i = 0; i < permutacion.length; ++i) {
+            if (rutaNombres == null) {
+                rutaNombres = nombres[permutacion[i]] + " ";
+            }
+            else {
+                rutaNombres = rutaNombres + nombres[permutacion[i]] + " ";
+            }
         }
         return rutaNombres;
     }
@@ -528,6 +502,24 @@ public class ControlDominio {
         int tamany = m.getTamCiudad(); 
         cp.pasarAFichero(nombreFichero, nombreCiudad, nombres, city); 
         cp.abrirFichero(nombreFichero); 
-        
+    }
+
+    public void modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+        Ruta r = (Ruta) cp.leerRuta(ruta);
+        ArrayList<String> nombreRuta = new ArrayList<>();
+        StringTokenizer tokens = new StringTokenizer(res);
+        for (int i = 0; tokens.hasMoreTokens(); ++i) {
+            nombreRuta.add(tokens.nextToken());
+        }
+        String[]nombreRutaS = new String[nombreRuta.size()];
+        for (int i = 0; i < nombreRuta.size(); ++i) {
+            nombreRutaS[i] = nombreRuta.get(i);
+        }
+        r.setNombres(nombreRutaS);
+        System.out.println("Llego hasta aki");
+        r.crearGrafoMod(map);
+        System.out.println("Llego hasta aki");
+        String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
+        cp.guardarRuta(r, nombresRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
 }

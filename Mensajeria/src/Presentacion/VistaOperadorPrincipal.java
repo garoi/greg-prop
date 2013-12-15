@@ -110,6 +110,15 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                 listaRutasMouseClicked(evt);
             }
         });
+        listaRutas.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                listaRutasAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(listaRutas);
 
         btnModificarRuta.setBackground(new java.awt.Color(75, 75, 75));
@@ -178,7 +187,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
                         .addComponent(btnValidarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCompararRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(btnEliminarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)))
         );
@@ -561,17 +570,19 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="private void listaRutasMouseClicked(java.awt.event.MouseEvent evt)">  
     private void listaRutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaRutasMouseClicked
-        if (!listaRutasS.isEmpty()) {
-            int idx = listaRutas.getSelectedIndex();      
-            nombreRuta = (String) listaRutas.getSelectedValue();
-            listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-            actualizarListaPendientes();
-            try {
-                mostrarPaquetesEnRuta();
-            } catch (IOException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if (evt.getClickCount() == 2) {
+            String ruta = (String) listaRutas.getSelectedValue();
+            if(ruta == null)
+                JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
+            else{
+                ctrlp.setRuta(ruta);
+                try {
+                    ctrlp.iniVentanaSecundaria("vistaModificarRuta");
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_listaRutasMouseClicked
@@ -876,6 +887,22 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAyudaActionPerformed
+
+    private void listaRutasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaRutasAncestorAdded
+        if (!listaRutasS.isEmpty()) {
+            int idx = listaRutas.getSelectedIndex();      
+            nombreRuta = (String) listaRutas.getSelectedValue();
+            listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
+            actualizarListaPendientes();
+            try {
+                mostrarPaquetesEnRuta();
+            } catch (IOException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_listaRutasAncestorAdded
 // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void actualizarCiudad(String nombreCiudad) ">  

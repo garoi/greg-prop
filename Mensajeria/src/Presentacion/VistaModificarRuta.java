@@ -6,10 +6,12 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +20,8 @@ import java.util.logging.Logger;
 public class VistaModificarRuta extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
     private String nombreCiudad;
+    private String label;
+    private String ruta;
     /**
      * Creates new form VistaModificarRuta
      */
@@ -25,10 +29,14 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         initComponents();
     }
     
-    public VistaModificarRuta(CtrlPresentacion ctrlp, String[] ruta){
+    public VistaModificarRuta(CtrlPresentacion ctrlp, String ruta) throws IOException, FileNotFoundException, ClassNotFoundException{
         this.ctrlp = ctrlp;
         nombreCiudad = ctrlp.getCiudad();
         initComponents();
+        this.ruta = ruta;
+        label = ctrlp.getDestinosRuta(ruta);
+        fieldRuta.setText(label);
+        
     }
 
     /**
@@ -80,6 +88,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         btnModificar.setBackground(new java.awt.Color(75, 75, 75));
         btnModificar.setForeground(new java.awt.Color(240, 240, 240));
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,6 +160,23 @@ public class VistaModificarRuta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        String res = fieldRuta.getText();
+        if (label.length() == res.length()) JOptionPane.showMessageDialog(rootPane, "!No has hecho ningun cambio!");
+        if (label.length() > res.length()) JOptionPane.showMessageDialog(rootPane, "!No puedes quitar paquetes de una ruta");
+        if (label.length() < res.length()) {
+            try {
+                ctrlp.modificarRuta(ruta, res);
+            } catch (IOException ex) {
+                Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        this.dispose();
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments

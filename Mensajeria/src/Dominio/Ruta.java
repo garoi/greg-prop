@@ -21,8 +21,12 @@ public class Ruta implements Serializable {
 
     private ArrayList< ArrayList<Pair> > MSTK = new ArrayList<>();
 
-    private void setMSTK(ArrayList<ArrayList<Pair>> MSTK) {
+    public void setMSTK(ArrayList<ArrayList<Pair>> MSTK) {
         this.MSTK = MSTK;
+    }
+    
+    public void setPermutacion(Integer[] permutacion) {
+        this.permutacion = permutacion;
     }
     
     public String getTipo() {
@@ -37,7 +41,7 @@ public class Ruta implements Serializable {
         return costeRuta;
     }
 
-    private String getTurno() {
+    public String getTurno() {
         return turno;
     }
 
@@ -49,7 +53,7 @@ public class Ruta implements Serializable {
      * 
      * @param nombres 
      */
-    private void setNombres(String[] nombres) {
+    public void setNombres(String[] nombres) {
         this.nombres = nombres;
     }
     
@@ -57,7 +61,7 @@ public class Ruta implements Serializable {
      * 
      * @param grafo 
      */
-    private void setGrafo(float[][] grafo) {
+    public void setGrafo(float[][] grafo) {
         this.grafo = grafo;
     }
     
@@ -73,7 +77,7 @@ public class Ruta implements Serializable {
      * 
      * @param verificada 
      */
-    private void setVerificada(boolean verificada) {
+    public void setVerificada(boolean verificada) {
         this.verificada = verificada;
     }
     
@@ -89,7 +93,7 @@ public class Ruta implements Serializable {
      * 
      * @return grafo
      */
-    private float[][] getGrafo() {
+    public float[][] getGrafo() {
         return grafo;
     }
     
@@ -137,7 +141,7 @@ public class Ruta implements Serializable {
      * 
      * @return fecha
      */
-    private String getFecha() {
+    public String getFecha() {
         return fecha;
     }
     
@@ -254,9 +258,39 @@ public class Ruta implements Serializable {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
-                // Ahora se accede de esta manera a las distancias.
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
+    }
+    
+    public void crearGrafoMod(Mapa map) {
+        mapa = map; 
+        Integer[] idNombres = encontrarIdNombres();
+        if (grafo != null) grafo = null;
+        grafo = new float[nombres.length][nombres.length];
+        ArrayList<ArrayList<Float>> ciudad = mapa.getCiudad();
+        for (int i = 0; i < nombres.length; ++i) {
+            for (int j = 0; j < nombres.length; ++j){
+                grafo[i][j] = mapa.getD(idNombres[i], idNombres[j]);
+            }
+        }
+        setPermutacion(idNombres);
+        distanciaRuta();
+    }
+    
+    private Integer[] encontrarIdNombres() {
+        Integer[] idNombres = new Integer[nombres.length];
+        ArrayList<String> nombres1 = mapa.getNombres();
+        boolean encontrado = false;
+        for (int i = 0; i < nombres.length; ++i) {
+            for (int j = 0; !encontrado; ++j) {
+                if (nombres1.get(j).equals(nombres[i])) {
+                    idNombres[i] = j;
+                    encontrado = true;
+                }
+            }
+            encontrado = false;
+        }
+        return idNombres;
     }
 }

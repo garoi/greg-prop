@@ -60,7 +60,7 @@ public class PersistenciaRutas {
         String nombreFichero;
         for(File file:nombres) {
             nombreFichero = file.getName();
-            boolean borrar = nombreFichero.endsWith(nombreCiudad + "-" + data+"-NO_verificada-ruta.txt");
+            boolean borrar = nombreFichero.startsWith(nombreCiudad + "-" + data);
             if (borrar) {
                 file.delete();
             }
