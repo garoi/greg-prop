@@ -11,7 +11,6 @@ public class Mapa implements Serializable {
     private String nombreCiudad;
     private ArrayList<String> nombres;
     private ArrayList<ArrayList<Float>> ciudad;
-
     private int tamCiudad;
     
     public Mapa(){
@@ -370,5 +369,9 @@ public class Mapa implements Serializable {
             int idx = nombres.indexOf(nombre1);
             nombres.set(idx, nombre2);
         }
+    }
+    
+    public ArrayList<ArrayList<Float>> getDistanciasCiudad() {
+        return ciudad;
     }
 }

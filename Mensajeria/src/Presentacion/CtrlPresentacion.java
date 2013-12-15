@@ -488,4 +488,8 @@ public class CtrlPresentacion {
     void setRuta(String ruta) {
         this.ruta = ruta;
     }
+    
+    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException{ 
+        ctrld.modificarCiudad(ciudad); 
+    }
 }
