@@ -29,14 +29,13 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         initComponents();
     }
     
-    public VistaModificarRuta(CtrlPresentacion ctrlp, String ruta) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public VistaModificarRuta(CtrlPresentacion ctrlp) throws IOException, FileNotFoundException, ClassNotFoundException{
         this.ctrlp = ctrlp;
         nombreCiudad = ctrlp.getCiudad();
         initComponents();
-        this.ruta = ruta;
-        label = ctrlp.getDestinosRuta(ruta);
+        this.ruta = ctrlp.getRuta();
+        label = ctrlp.getDestinosRuta();
         fieldRuta.setText(label);
-        
     }
 
     /**

@@ -158,9 +158,10 @@ public class ControlPersistencia {
                     }
                     if(ciudad.get(i).get(j).equals(0.0)) b = true;*/
                     escribir_buffer.write(nombres.get(i) + " " + nombres.get(j) + " " + ciudad.get(i).get(j));
+                    escribir_buffer.newLine();
                 }
                 //b = false;
-                escribir_buffer.newLine();
+               // escribir_buffer.newLine();
             }
             escribir_buffer.flush(); 
             escribir_buffer.close();
