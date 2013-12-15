@@ -2,6 +2,7 @@ package Presentacion;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -65,6 +66,11 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         btnAnadir.setBackground(new java.awt.Color(75, 75, 75));
         btnAnadir.setForeground(new java.awt.Color(220, 220, 220));
         btnAnadir.setText("Añadir punto");
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirActionPerformed(evt);
+            }
+        });
 
         btnRenombrar.setBackground(new java.awt.Color(75, 75, 75));
         btnRenombrar.setForeground(new java.awt.Color(220, 220, 220));
@@ -189,11 +195,9 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
                 }   catch (ClassNotFoundException ex) {
                     Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            
             }
             else this.dispose();
-        }
-            catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,7 +206,7 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // Eliminar punto
-        String nombre1 = JOptionPane.showInputDialog("introduce el nombre del punto que desea eliminar");
+        String nombre1 = JOptionPane.showInputDialog("Introduce el nombre del punto que desea eliminar:");
         try {
             if(ctrlp.getNombresCiudad(ciudad).contains(nombre1)){
                 ctrlp.eliminarPunto(nombre1);
@@ -213,10 +217,36 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        String nombre = JOptionPane.showInputDialog("Introduce el nombre del punto que desea añadir:");
+        ArrayList<String> nombres;
+        try {
+            nombres = ctrlp.getNombresCiudad(ciudad);
+            int auxdistancias = (nombres.size()*(nombres.size()-1))/2;
+        
+            float[] distancias = new float[auxdistancias];
+            while(nombres.contains(nombre) || nombre==null || nombre.isEmpty()){
+                nombre = JOptionPane.showInputDialog("Introduce un nombre que no esté en la ciudad");
+            }
+            for (int i = 0; i < auxdistancias; i++) {
+                String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", "pene", "pene"));
+                float auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                while(auxDistancia <= 0.0f){
+                    distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
+                    auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                }
+                distancias[i] = auxDistancia;
+            }
+
+            ctrlp.anadirPunto(nombre, distancias);
+        } catch (IOException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAnadirActionPerformed
 
     /**
      * @param args the command line arguments

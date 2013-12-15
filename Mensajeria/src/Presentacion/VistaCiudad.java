@@ -29,11 +29,15 @@ public class VistaCiudad extends javax.swing.JFrame {
      */
     public VistaCiudad(CtrlPresentacion ctrlp) {
         this.ctrlp = ctrlp;
-        nombreCiudad = ctrlp.getCiudadOperador();
+        nombreCiudad = ctrlp.getCiudad();
         initComponents();
     }
     // </editor-fold> 
-
+    
+    public void setCiudad(String nombreCiudad){
+        this.nombreCiudad = nombreCiudad;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,8 +117,6 @@ public class VistaCiudad extends javax.swing.JFrame {
         float factor = maxWidth;
         float diametro = factor*0.8f;
         if(maxWidth<maxHeight) factor = maxHeight;
-        int origx = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
-        int origy = Math.round(factor*0.15f) - 5;
 
         double angulo = 360 / n;
         double radio = diametro / 2;

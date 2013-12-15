@@ -242,6 +242,11 @@ public class ControlDominio {
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
+    public void anadirPunto(String nombre, float[] distanciasNodos){
+        if (map != null)
+            map.anadirPunto(nombre, distanciasNodos);
+    }
+    
     private void modificarCiudad() {
         // Hace falta definir cómo se va a modificar la ciudad
        //oper.modificarCiudad(map);

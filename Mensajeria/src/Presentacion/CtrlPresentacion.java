@@ -130,7 +130,7 @@ public class CtrlPresentacion {
             break;
                 
             case "vistaModificarRuta":
-                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
+//                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
                 ventanaSecundaria = new VistaModificarRuta(this, getDestinosRuta());
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
@@ -172,7 +172,7 @@ public class CtrlPresentacion {
             break;
                 
             case "vistaModificarCiudad":
-                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this, getCiudadOperador());
+                if (vistaModificarCiudad == null) vistaModificarCiudad = new VistaModificarCiudad(this, getCiudad());
                 ventanaSecundaria = vistaModificarCiudad;
                 ventanaSecundaria.setTitle("Modificar ciudad");
             break;
@@ -292,8 +292,11 @@ public class CtrlPresentacion {
      * @param nombreCiudad el nombre de la ciudad seleccionada.
      */
     void setOperador(String nombreCiudad) {
+        
         if (vistaOperador != null)
             vistaOperador.actualizarCiudad(nombreCiudad);
+        if (dibujoCiudad != null)
+            dibujoCiudad.setCiudad(nombreCiudad);
     }
 
     /**
@@ -321,8 +324,13 @@ public class CtrlPresentacion {
     }
 
 
-    public String getCiudadOperador() {
-        return vistaOperador.getCiudad();
+    public String getCiudad() {
+        if (vistaOperador != null){
+            String ret = vistaOperador.getCiudad();
+            setCiudad(ret);
+            return ret;
+        }
+        return ciudad;
     }
     
     public String getFechaOperador() {
@@ -366,7 +374,7 @@ public class CtrlPresentacion {
         ctrld.paquetesEnviados(nombreRuta);
     }
     
-    public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void aceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
         ctrld.acceptarRuta(ruta, fecha, nombreCiudad);
     }
     
@@ -487,5 +495,10 @@ public class CtrlPresentacion {
     }
     void setRuta(String ruta) {
         this.ruta = ruta;
+    }
+
+    void anadirPunto(String nombre, float[] distancias) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

@@ -32,7 +32,7 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         
         //CIUDAD FECHA TURNO BUSCAR LAS RUTAS DE COMPARACION
         fecha = ctrlp.getFechaOperador();
-        nombreCiudad = ctrlp.getCiudadOperador();
+        nombreCiudad = ctrlp.getCiudad();
         listasComparadas = ctrlp.rutasComparadas(fecha, nombreCiudad);
         listRutas.setModel(new javax.swing.AbstractListModel() {
             ArrayList<String> strings = ctrlp.rutasComparadas(fecha, nombreCiudad);
