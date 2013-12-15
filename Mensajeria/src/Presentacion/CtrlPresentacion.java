@@ -131,7 +131,7 @@ public class CtrlPresentacion {
                 
             case "vistaModificarRuta":
 //                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
-                ventanaSecundaria = new VistaModificarRuta(this, getRuta());
+                ventanaSecundaria = new VistaModificarRuta(this, getDestinosRuta());
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
                 
@@ -386,6 +386,10 @@ public class CtrlPresentacion {
         return ctrld.getRutas(nombreCiudad);
     }
     
+    private String[] getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+        return ctrld.getDestinosRuta(ruta);
+    }
+    
     public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
         return ctrld.getPaquetesRuta(nombreRuta);
     }
@@ -499,7 +503,6 @@ public class CtrlPresentacion {
 
     public void anadirPunto(String nombre, float[] distancias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
     }
     
     public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException { 
