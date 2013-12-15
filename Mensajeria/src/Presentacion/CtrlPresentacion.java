@@ -445,6 +445,19 @@ public class CtrlPresentacion {
         return ctrld.getNombresCiudad(nombreCiudad);
     } // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="public ArrayList<ArrayList<Float>> getDistancias(String nombreCiudad)"> 
+    /**
+     * Devuelve 
+     * @return
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException 
+     */
+    public Float getDistancias(String a ,String b) throws FileNotFoundException, IOException, ClassNotFoundException {
+//        return ctrld.pesosAristas(ciudad);
+        return ctrld.getDistancia(ciudad,a,b);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="public void modificarCiudadFichero(String ciudad)"> 
     /**
      * Modifica una ciudad desde fichero
@@ -726,8 +739,8 @@ public class CtrlPresentacion {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public void modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
-        ctrld.modificarRuta(ruta, res);
+    public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+         return ctrld.modificarRuta(ruta, res);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void eliminarRutaComp(String inicioRuta, String nombreRuta)"> 

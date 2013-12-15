@@ -405,9 +405,14 @@ public class ControlDominio {
         return map.getNombres();
     }
     
-    public ArrayList<ArrayList<Float>> pesosAristas(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
-        map = (Mapa) cp.leerCiudad(nombreCiudad);
-        return map.getCiudad();
+//    public ArrayList<ArrayList<Float>> pesosAristas(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+//        map = (Mapa) cp.leerCiudad(nombreCiudad);
+//        return map.getCiudad();
+//    }
+    public Float getDistancia(String ciudad, String a, String b) throws FileNotFoundException, IOException, ClassNotFoundException {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        map = (Mapa) cp.leerCiudad(ciudad);
+        return map.getDistancia(a,b);
     }
 
     public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {
