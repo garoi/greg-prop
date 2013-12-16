@@ -214,7 +214,8 @@ public class CtrlPresentacion {
                 
             case "vistaModificarRuta":
 //                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
-                if (ventanaSecundaria == null) ventanaSecundaria = new VistaModificarRuta(this);
+                if (vistaModificarRuta == null) vistaModificarRuta = new VistaModificarRuta(this);
+                ventanaSecundaria = vistaModificarRuta;
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
                 
