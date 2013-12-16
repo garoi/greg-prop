@@ -656,7 +656,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
         if (!listaEnRutas.isEmpty()) {
-            ctrlp.eliminarRutaComp(nombreRuta, null);
+            //ctrlp.eliminarRutaComp(nombreRuta, null);
             ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente");
             actualizarRutas();
         }
@@ -701,11 +701,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt)e">  
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
-        System.out.println("Llego aki");
         if (!listaEnRutas.isEmpty()) {
-            System.out.println("Entro al if");
-            ctrlp.eliminarRutaComp(nombreRuta, null);
-            System.out.println("Entro al try");
+            //ctrlp.eliminarRutaComp(nombreRuta, null);
             ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente");
             actualizarRutas();
         }
@@ -715,7 +712,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapOptimaActionPerformed
         if (!listaEnRutas.isEmpty()) {
-            ctrlp.eliminarRutaComp(nombreRuta, null);
+            //ctrlp.eliminarRutaComp(nombreRuta, null);
             ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima");
             actualizarRutas();
         }

@@ -1,94 +1,143 @@
 package Dominio;
-
 import java.util.*;
-import static java.lang.Math.*;
+
 /**
  *
- * @author ivich
+ * @author David
  */
 public class Optimizacion {
-    private float[][] subgrafo;
-    private float comparador;
-    private Integer[] solucion;
-    private String[] nombres;
-    private Integer[][] hijosTotales;
-    private boolean cambio;
     
-    public Integer[] getSolucion() {
-        return solucion;
-    }
-
-    private String[] getNombres() {
-        return nombres;
-    }
-
-    private void setSolucion(Integer[] solucion) {
-        this.solucion = solucion;
-    }
-
-    private void setNombres(String[] nombres) {
-        this.nombres = nombres;
-    }
+    //  GLOBAL
+    //  ======
     
-    private void setSubgrafo(float[][] subgrafo) {
-        this.subgrafo = subgrafo;
-    }
-
-    private void setComparador(float comparador) {
-        this.comparador = comparador;
-    }
-
+    /**
+     * @param M Grafo completo.
+     */
+    private float[][] M         = new float[0][0];
     
+    /**
+     * @param permutacion Permutacion de los nodos.
+     */
+    private Integer[] order = new Integer[0];
     
-    private float[][] getSubgrafo() {
-        return subgrafo;
-    }
-
-    public float getComparador() {
-        return comparador;
+    /**
+     * @param c Coste de la permutacion actual.
+     */
+    private float c;
+    
+    /**
+     * Setter del grafo
+     * @param M Matriz de costes del grafo completo.
+     */
+    public void setM(float[][] M) {
+        this.M = M;
     }
     
-    private float calculaCoste(Integer[] copia){
-        float suma = 0;
+    /**
+     * Setter de permutacion
+     * @param permutacion Permutacion inicial a mejorar.
+     */
+    public void setPermutacion(Integer[] permutacion) {
+        this.order = permutacion;
+    }
+    
+    /**
+     * 
+     * @return Devuelve el valor de la permutacion.
+     */
+    public Integer[] getPermutacion(){
+        return order;
+    }
+    
+    /**
+     * 
+     * @return Devuelve el coste de la permutacion.
+     */
+    public float cost(){
+        return c;
+    }
+    private float Coste(int node, int pos){
+        float costa;
+        if (pos==0){
+            costa = 0;
+        }
+        else costa= M[order[pos-1]][node];
         
-        for (int i = 0; i < copia.length; ++i) {
-            if (i + 1 < copia.length) {
-                suma += subgrafo[copia[i]][copia[i+1]];
-            }
-            else {
-                //O ES UN SOL PUNT O L'ULTIM ELEMENT
-                if (solucion.length == 1) {
-                    suma += subgrafo[copia[i]][copia[i]];
-                }
-            }
+        float costb;
+        if (pos==order.length-1){
+            costb = 0;
         }
-        return suma;
+        else costb= M[node][order[pos+1]];
+       
+        return costa + costb;
     }
     
-    public boolean randSwap(){      
-        cambio = false; 
-        for(int i = 0; i < solucion.length*2 ; ++i){
-            Integer[] copia;
-            copia = solucion;
-            int num = 0 + (int)(Math.random() * (((solucion.length-1) - 0) + 1));
-            int num2 = 0 + (int)(Math.random() * (((solucion.length-1) - 0) + 1));        
-            int aux = copia[num];
-            copia[num] = copia[num2];
-            copia[num2] = aux;
-            float costeNuevo = calculaCoste(copia);
-            if(costeNuevo < comparador){
-                cambio = true;
-                comparador = costeNuevo;
-                solucion = copia;
-            }
+    /**
+     * 
+     * @param node
+     * @param pos
+     * @param flag Dice si el grafo es un camino abierto (false) o cerrado (true).
+     * @param shadownode
+     * @return Dado un swap de node con shadownode sobre el orden actual, el coste de 
+     * tener al nodo "a" en la posicion "pos".
+     */
+    private float CosteEditado(int node, int pos,int shadownode){
+        float costa;
+        if (pos==0){
+           costa = 0;
         }
-        return cambio;
+        if (order[pos-1] == node) costa = M[shadownode][node];
+        else costa= M[order[pos-1]][node];
+        
+        float costb;
+        if (pos==order.length-1){
+              costb = 0;
+        }
+        if (order[pos+1] == node) costb = M[node][shadownode];
+        else costb= M[node][order[pos+1]];
+       
+        return costa + costb;
     }
     
-     public void inicializa(Integer[] permutacion, String[] nombres, float[][] grafo, float costeRuta){
-        setNombres(nombres);
-        setSolucion(permutacion);
-        setSubgrafo(grafo);
-        setComparador(costeRuta);
+    /**
+     * 
+     * @param a
+     * @param b
+     * @param flag
+     * @return Ganancia entre el estado anterior y el resultante de cambiar 'a' por 'b'.
+     */
+    private float BuenSwap(int a, int b){
+        float pre = Coste(order[a], a)+Coste(order[b], b);
+        float post = CosteEditado(order[a], b, order[b])+CosteEditado(order[b], a,order[a]);
+        return pre - post;
+    }
+    
+    /**
+     * Intercambia el 'a'-esimo elemento de 'order' con el 'b'-esimo.
+     * @param a
+     * @param b 
+     */
+    private void Swap(int a, int b){
+        int temp = order[a];
+        order[a] = order[b];
+        order[b] = temp;
+    }
+    //  RANDSWAP
+    //  --------    
+     
+    /**
+     * Cambia la permutacion por otra mejorada mediante random swaps.
+     */
+    public void RandSwap(int b){
+        for(int i = 0; i < b ; ++i){
+            Random gen = new Random(System.currentTimeMillis());
+            int one = Math.abs(gen.nextInt() % order.length);
+            int two = Math.abs(gen.nextInt() % order.length);
+            float x = BuenSwap(one, two);
+            if ( x > 0 ){
+                c -= x;
+                Swap(one,two);
+            }
+        }
     }
 }

@@ -59,7 +59,7 @@ public class PersistenciaRutas {
         return null;
     }
     
-    public void guardarRuta(Object x, String data, boolean verificada, String nombreCiudad) {
+    public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad) {
          File directorio = new File ("Data/Rutas/");
          System.out.println("LLEGO");
         File[] nombres = directorio.listFiles();
@@ -77,7 +77,7 @@ public class PersistenciaRutas {
             }
         }
         if (verificada) {
-            String nombreRuta = nombreCiudad + "-" + data + "-Verificada-ruta.txt";
+            String nombreRuta = nombreCiudad + "-" + data + coste + "-Verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             } catch (IOException ex) {
@@ -85,7 +85,7 @@ public class PersistenciaRutas {
             }
         }
         else {
-            String nombreRuta = nombreCiudad + "-" + data + "-NO_verificada-ruta.txt";
+            String nombreRuta = nombreCiudad + "-" + data + coste + "-NO_verificada-ruta.txt";
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Rutas/"+nombreRuta))) {
                 oos.writeObject(x);
             } catch (IOException ex) {

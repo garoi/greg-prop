@@ -157,13 +157,13 @@ public class Ruta implements Serializable {
     public void rapidaOptimizada(){
         SolveGreedy sg = new SolveGreedy(grafo);
         permutacion = sg.solve();
-        Optimizacion op = new Optimizacion();
+        /*Optimizacion op = new Optimizacion();
         op.inicializa(permutacion, nombres, grafo, costeRuta);
         boolean cambio = op.randSwap();
         if(cambio){
             permutacion = op.getSolucion();
             costeRuta = op.getComparador();
-        }
+        }*/
         distanciaRuta();
     }
     
@@ -197,11 +197,10 @@ public class Ruta implements Serializable {
             }
             permutacion = aux2;
             Optimizacion op = new Optimizacion();
-            op.inicializa(permutacion, nombres, grafo, costeRuta);
-            boolean cambio = op.randSwap();
-            if(cambio){
-                permutacion = op.getSolucion();
-            }
+            op.setM(grafo);
+            op.setPermutacion(permutacion);
+            op.RandSwap(permutacion.length*2);
+            permutacion = op.getPermutacion();
         }
         else {
             SolveGreedy sg = new SolveGreedy(grafo);
@@ -210,6 +209,11 @@ public class Ruta implements Serializable {
     }
     
     public void distanciaRuta() {
+        System.out.println("la primera permu es");
+        for(int i = 0; i < permutacion.length; ++i) {
+            System.out.print(permutacion[i] + " ");
+        }
+        System.out.println("");
         float suma = 0;
         for (int i = 0; i < permutacion.length; ++i) {
             if (i + 1 < permutacion.length) {
@@ -254,6 +258,13 @@ public class Ruta implements Serializable {
             for (int j = 0; j < paquetesSeleccionados.size(); ++j){
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
+        }
+        System.out.println("Imprimir el grafo");
+        for (int i = 0; i < grafo.length; ++i) {
+            for (int j = 0; j < grafo.length;++j) {
+                System.out.print(grafo[i][j] + " ");
+            }
+            System.out.println();
         }
     }
     

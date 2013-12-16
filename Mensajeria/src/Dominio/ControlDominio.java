@@ -112,8 +112,9 @@ public class ControlDominio {
         r.setTurno(turno);
         r.setTipo(tipo);
         r.setListaPaquetesRuta(paquetesSeleccionados);
-        String nombreRuta = fecha + "-" + turno + "-" + tipo + "-Coste-" + Float.toString(r.getCosteRuta());
-        cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
+        String nombreRuta = fecha + "-" + turno + "-";
+        String coste = tipo + "-Coste-" + Float.toString(r.getCosteRuta());
+        cp.guardarRuta(r, nombreRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     
     public void paquetesEnviados(String nombreRuta){
@@ -371,8 +372,9 @@ public class ControlDominio {
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad){
         Ruta rval = (Ruta) cp.leerRuta(ruta);
         rval.acceptarRuta();
-        String nombreRuta = fecha + "-" + rval.getTipo() + "-Coste-" + Float.toString(rval.getCosteRuta());
-        cp.guardarRuta(rval, nombreRuta, rval.isVerificada(), nombreCiudad);
+        String nombreRuta = fecha + "-";
+        String coste = rval.getTipo()+ "-Coste-" + Float.toString(rval.getCosteRuta());
+        cp.guardarRuta(rval, nombreRuta, coste, rval.isVerificada(), nombreCiudad);
     }
 
     public void eliminarRuta(String ruta) {
@@ -524,8 +526,9 @@ public class ControlDominio {
                     }
                     r.setNombres(nombreRutaS);
                     r.crearGrafoMod(map);
-                    String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
-                    cp.guardarRuta(r, nombresRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
+                    String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-";
+                    String coste = r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
+                    cp.guardarRuta(r, nombresRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad());
                     return true;
                 }
                 else return false;
