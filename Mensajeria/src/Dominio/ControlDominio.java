@@ -487,8 +487,14 @@ public class ControlDominio {
         cp.guardarMapas(m, nomCiudad);
     }
        
-    public void eliminarCiudad(String nombreCiudad){
+    public void eliminarCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
         cp.eliminarCiudad(nombreCiudad);
+        ArrayList<String> rutas = this.getRutas(nombreCiudad);
+        for (int i = 0; i < rutas.size(); i++) {
+            this.lp.eliminarPaquetesDeCiudad(nombreCiudad);
+            cp.eliminarRuta(rutas.get(i));
+        }
+        // Eliminar todas las rutas de la ciudad.
     }
     
     public void renombrarPunto(String nombre1, String nombre2) throws IOException, IOException, ClassNotFoundException{

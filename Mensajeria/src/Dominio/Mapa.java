@@ -93,12 +93,12 @@ public class Mapa implements Serializable {
         ciudad = new ArrayList();
         min = -1f;
         max = 1f;
-        nombres = new ArrayList<String>();
+        nombres = new ArrayList();
         if(ciudad != null){
             for (int i = 0; i < tamCiudad; i++) {
                 ciudad.add(i, new ArrayList());
                 for (int j = 0; j < tamCiudad; j++) {
-                    ((ArrayList)ciudad.get(i)).add(-1f);
+                    ((ArrayList)ciudad.get(i)).add(0f);
                 }
             }
         }
@@ -248,19 +248,44 @@ public class Mapa implements Serializable {
     
     public boolean setDistancias(float[] distancias){
         if (tamCiudad == 0 || distancias == null || distancias.length == 0 || ciudad == null) return false;
-        for (int i = 0; i < distancias.length; i++) System.out.println(distancias[i]);
+        int idx = 0;
+//        for (int i = 0; i < distancias.length; i++) System.out.println(distancias[i]);
+//        for (int i = 0; i < distancias.length; i++) {
+//            setD(i,i,0.0f);
+//            for (int j = i+1; j < distancias.length; j++) {
+//                if(getD(i,j) == -1.0f){
+//                    System.out.println("idx: " + idx );
+//                    float distancia = distancias[idx];
+////                    System.out.print("")
+//                    setD(i,j,distancia);
+//                    setD(j,i,distancia);
+//                    idx+=1;
+//                }                
+//            }
+//        }
+        int idxi = 0;
+        int idxj = 1;
         for (int i = 0; i < distancias.length; i++) {
-            setD(i,i,0.0f);
-            for (int j = i+1; j < distancias.length; j++) {
-                if(getD(i,j) == -1.0f){
-                    float distancia = distancias[i];
-                    setD(i,j,distancia);
-                    setD(j,i,distancia);
-                }                
+//            System.out.println(idxi + ", " + idxj);
+            setD(idxi,idxi,0f);
+            setD(idxi,idxj,distancias[i]);
+            setD(idxj,idxi,distancias[i]);
+            idxj+=1;
+            if (idxj==tamCiudad){
+                idxi += 1;
+                idxj = idxi+1;
             }
         }
-//        for (int i = 0; i < distancias.length; i++) {
-//            for (int f = 0; f < distancias.length; f++) {
+//        distancias[i] = auxDistancia;
+//                nodoB += 1;
+//                if (nodoB==nNodos){
+//                    nodoA += 1;
+//                    nodoB = nodoA+1;
+//                }
+        
+        
+//        for (int i = 0; i < tamCiudad; i++) {
+//            for (int f = 0; f < tamCiudad; f++) {
 //                System.out.print(getD(i,f) + " ");
 //            }
 //            System.out.print("\n");

@@ -289,8 +289,13 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         // Eliminar una ciudad de la lista.
         int idx = listaCiudades.getSelectedIndex();
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
+        if(!ctrlp.getRutas(nombreCiudad).isEmpty()) JOptionPane.showMessageDialog(rootPane, "Borrar una ciudad implica borrar todas las rutas que transcurren por ella!");
         ctrlp.eliminarCiudad(nombreCiudad);
-        actualizarListaCiudades();       
+        actualizarListaCiudades();
+        ctrlp.actualizarRutasOperador();
+        if(nombreCiudad == ctrlp.getCiudad()){
+            ctrlp.setCiudad(null);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed

@@ -242,6 +242,7 @@ public class CtrlPresentacion {
                 
             case "verDibujoCiudad":
                 if (dibujoCiudad == null) dibujoCiudad = new VistaCiudad(this);
+                dibujoCiudad.reset();
                 ventanaSecundaria = dibujoCiudad;
                 ventanaSecundaria.setTitle(ciudad);
             break;
@@ -457,7 +458,7 @@ public class CtrlPresentacion {
     public Float getDistancias(String a ,String b) throws FileNotFoundException, IOException, ClassNotFoundException {
 //        return ctrld.pesosAristas(ciudad);
         return ctrld.getDistancia(ciudad,a,b);
-    }
+    }// </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void modificarCiudadFichero(String ciudad)"> 
     /**
@@ -495,7 +496,7 @@ public class CtrlPresentacion {
      * Elimina una ciudad según su nombre
      * @param nombreCiudad nombre de la ciudad.
      */
-    public void eliminarCiudad(String nombreCiudad){
+    public void eliminarCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
         ctrld.eliminarCiudad(nombreCiudad);
     } // </editor-fold>
     

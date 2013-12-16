@@ -39,6 +39,10 @@ public class VistaCiudad extends javax.swing.JFrame {
     
     public void setCiudad(String nombreCiudad){
         this.nombreCiudad = nombreCiudad;
+        reset();
+    }
+    
+    public void reset(){
         pintado=false;
     }
     
@@ -120,39 +124,46 @@ public class VistaCiudad extends javax.swing.JFrame {
                 double radio = diametro / 2;
                 int centrox = Math.round(factor*0.1f+factor*0.4f) - 5;
                 int centroy = Math.round(factor*0.15f+factor*0.4f) - 5;
-
-                System.out.println("angulo:" + angulo);
-                ArrayList<int[]> puntos = new ArrayList();
-                double auxAngulo = 0.0f;
-                for(int i = 0; i < n; i++){
-                    double xcos = Math.cos(Math.toRadians(auxAngulo));
-                    double ysin = Math.sin(Math.toRadians(auxAngulo));
-                    int p1x = (int) (xcos*radio);
-                    int p1y = (int) (ysin*radio);
-                    int psx = (int) (xcos*(radio*1.065)) + centrox-1;
-                    int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
-                    p1y *= -1;
-
-                    int auxx = p1x + centrox;
-                    int auxy = p1y + centroy;
-                    int[] auxPair = {auxx, auxy};
-                    puntos.add(auxPair);
-
-                    g.setColor (Color.black);
-                    g.drawString(nombresCiudad.get(i),psx,psy);
-
-                    g.fillOval(auxx,auxy,10,10);
+                if (n == 1){
+                    g.fillOval(centrox,centroy,10,10);
                     g.setColor (Color.blue);
-                    g.fillOval(auxx+2,auxy+2,6,6);
-                    auxAngulo += angulo;
+                    g.fillOval(centrox+2,centroy+2,6,6);
+                    g.setColor (Color.black);
+                    g.drawString(nombresCiudad.get(0),centrox,centroy);
                 }
-                for (int i = 0; i < puntos.size(); ++i) {
-                    for (int j = i+1; j < puntos.size(); ++j) {
-                        int[] auxi = puntos.get(i);
-                        int[] auxj = puntos.get(j);
-                        float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
-                        g.setColor(ctrlp.getColorDistancia(fcolor));
-                        g.drawLine(auxi[0]+3, auxi[1]+3, auxj[0]+3, auxj[1]+3);
+                else{
+                    ArrayList<int[]> puntos = new ArrayList();
+                    double auxAngulo = 0.0f;
+                    for(int i = 0; i < n; i++){
+                        double xcos = Math.cos(Math.toRadians(auxAngulo));
+                        double ysin = Math.sin(Math.toRadians(auxAngulo));
+                        int p1x = (int) (xcos*radio);
+                        int p1y = (int) (ysin*radio);
+                        int psx = (int) (xcos*(radio*1.065)) + centrox-1;
+                        int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
+                        p1y *= -1;
+
+                        int auxx = p1x + centrox;
+                        int auxy = p1y + centroy;
+                        int[] auxPair = {auxx, auxy};
+                        puntos.add(auxPair);
+
+                        g.setColor (Color.black);
+                        g.drawString(nombresCiudad.get(i),psx,psy);
+
+                        g.fillOval(auxx,auxy,10,10);
+                        g.setColor (Color.blue);
+                        g.fillOval(auxx+2,auxy+2,6,6);
+                        auxAngulo += angulo;
+                    }
+                    for (int i = 0; i < puntos.size(); ++i) {
+                        for (int j = i+1; j < puntos.size(); ++j) {
+                            int[] auxi = puntos.get(i);
+                            int[] auxj = puntos.get(j);
+                            float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                            g.setColor(ctrlp.getColorDistancia(fcolor));
+                            g.drawLine(auxi[0]+3, auxi[1]+3, auxj[0]+3, auxj[1]+3);
+                        }
                     }
                 }
             } catch (IOException ex) {

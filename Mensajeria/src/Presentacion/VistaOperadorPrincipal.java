@@ -876,7 +876,8 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="public void actualizarCiudad(String nombreCiudad) ">  
     public void actualizarCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
-        labelCiudad.setText(nombreCiudad);
+        if (nombreCiudad == null) labelCiudad.setText("---");
+        else labelCiudad.setText(nombreCiudad);
         actualizarRutas();
         mostrarPaquetesTurno();
     }
