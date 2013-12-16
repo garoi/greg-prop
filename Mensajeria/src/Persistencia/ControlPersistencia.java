@@ -1,6 +1,5 @@
 package Persistencia;
 
-import Presentacion.VistaOperadorPrincipal;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,33 +29,45 @@ public class ControlPersistencia {
         pr = new PersistenciaRutas();
     }
     
-    private void guardarListaPaquetes(Object lp) throws IOException {
+    private void guardarListaPaquetes(Object lp){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaPaquetes/ListaPaquetes.txt"))) {
             oos.writeObject(lp);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public Object leerListaPaquetes() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Object leerListaPaquetes() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaPaquetes/ListaPaquetes.txt"))) {
             Object lp = ois.readObject();
             return lp;
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
-    public void guardarListaClientes(Object lc) throws IOException {
+    public void guardarListaClientes(Object lc){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/ListaClientes/ListaClientes.txt"))) {
             oos.writeObject(lc);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public Object leerListaClientes() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Object leerListaClientes(){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaClientes/ListaClientes.txt"))) {
             Object lc = ois.readObject();
             return lc;
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
-    public void guardarOperador(Object oper) throws IOException {
+    public void guardarOperador(Object oper){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
             oos.writeObject(oper);
         }
@@ -64,7 +75,7 @@ public class ControlPersistencia {
         }
     }
     
-    public Object leerOperador() throws IOException, ClassNotFoundException {
+    public Object leerOperador(){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Operador.txt"))) {
             Object oper = ois.readObject();
             return oper;
@@ -74,14 +85,14 @@ public class ControlPersistencia {
         }
     }
     
-    public void guardarMapas(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
+    public void guardarMapas(Object x, String nombreCiudad) {
         pm.guardarMapa(x, nombreCiudad);
     }
     
     public ArrayList<String> listarCiudades() {
         return pm.listarCiudades();
     }
-    public Object leerCiudad(String nombre) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Object leerCiudad(String nombre){
         return pm.leerCiudad(nombre);
     }
     
@@ -93,15 +104,15 @@ public class ControlPersistencia {
         return pr.listarRutasVerificadas(nombreCiudad);
     }
     
-    public Object leerRuta(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public Object leerRuta(String nombre){
         return pr.leerRuta(nombre);
     }
     
-    public void guardarRuta(Object x, String data, boolean verificada, String nombreCiudad) throws IOException {
+    public void guardarRuta(Object x, String data, boolean verificada, String nombreCiudad){
         pr.guardarRuta(x, data, verificada, nombreCiudad);
     }
     
-    public void guardadoGeneral(Object lc, Object lp, Object oper) throws IOException {
+    public void guardadoGeneral(Object lc, Object lp, Object oper){
         guardarListaClientes(lc);
         guardarListaPaquetes(lp);
         guardarOperador(oper);
@@ -120,15 +131,11 @@ public class ControlPersistencia {
         if(!folderRutas.exists()) folderRutas.mkdirs();
     }
     
-    public Object getPuntosMapa(String nombre) throws IOException, FileNotFoundException {
-        try{
+    public Object getPuntosMapa(String nombre){
             ArrayList<String> ciudades = listarCiudades();
             for(int i = 0; i < ciudades.size(); ++i)
                 if(ciudades.get(i).equals(nombre))
                     return leerCiudad(nombre);
-        }
-        catch(Exception e){
-        }
         return null;
     }
 
@@ -170,7 +177,7 @@ public class ControlPersistencia {
         }
     }
     
-    public void abrirFichero(String nomFichero) throws IOException{
+    public void abrirFichero(String nomFichero){
         try{
             File file = new File("Data/Mapas/" + nomFichero);
             Desktop.getDesktop().open(file);
@@ -180,7 +187,7 @@ public class ControlPersistencia {
         }
     }
     
-    public void crearFichero(String nomFichero) throws IOException{
+    public void crearFichero(String nomFichero){
         try{
             File file = new File("Data/Mapas/" + nomFichero + "-mapa.txt");
             if(file.createNewFile()) System.out.print("Fichero creado correctamente");

@@ -154,4 +154,12 @@ public class ListaPaquetes implements Serializable {
         }
         return paquetes;
     }
+
+    void eliminarPaquetesDeCiudad(String nombreCiudad) {
+        ArrayList<Paquete> paquetes = getListaPaquetes();
+        for (int i = 0; i < paquetes.size(); i++) {
+            if (paquetes.get(i).getCiudad()==nombreCiudad)
+            this.eliminarPaquete(paquetes.get(i).getIdPaquete());
+        }
+    }
 }

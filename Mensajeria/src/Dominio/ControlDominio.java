@@ -5,6 +5,8 @@ import java.util.*;
 import Persistencia.ControlPersistencia;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Albert Gili Zaragoza
@@ -19,15 +21,13 @@ public class ControlDominio {
     private ControlUsuario cu;
     private boolean existeOper = true;
     private Mapa map;
+    private String nombreCiudad;
+    private Mapa provisional;
     
     /**
      * Inicializa el controlador de dominio
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
-     * 
      */
-    public void iniControlDominio() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void iniControlDominio() {
         cu = new ControlUsuario();
         cp = new ControlPersistencia();
         cp.crearDirectorios();
@@ -46,10 +46,8 @@ public class ControlDominio {
     /**
      * Registramos o logeamos al cliente o al operador
      * @return retorna si se registra o se loguea
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public boolean registroCliente(String usuario, String password) throws IOException{
+    public boolean registroCliente(String usuario, String password){
         cl = new Cliente();
         cl.setNombre(usuario);
         cl.setPassword(password);
@@ -73,7 +71,7 @@ public class ControlDominio {
         }
     }
     
-    public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+    public boolean registroOperador(String usuario, String password){
         boolean reg = false;
         if (!existeOper) {
             oper = new Operador();
@@ -87,7 +85,7 @@ public class ControlDominio {
         else return false;
     }
     
-    public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+    public boolean loginOperador(String usuario, String password){
         return cu.loginOperador(usuario, password, oper);
     }
 
@@ -96,9 +94,8 @@ public class ControlDominio {
      * @param paquetesSeleccionados
      * @param fecha
      * @param r
-     * @throws IOException 
      */
-    private void calculaRuta(ArrayList<Paquete> copia, String fecha, String turno, Ruta r, String tipo, ArrayList<Paquete> paquetesSeleccionados) throws IOException {
+    private void calculaRuta(ArrayList<Paquete> copia, String fecha, String turno, Ruta r, String tipo, ArrayList<Paquete> paquetesSeleccionados) {
         r.crearGrafo(copia, map);
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
@@ -119,7 +116,7 @@ public class ControlDominio {
         cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
     
-    public void paquetesEnviados(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void paquetesEnviados(String nombreRuta){
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
         oper.cambiarEstadoPaquetes(paquetesEnviados);
@@ -140,7 +137,7 @@ public class ControlDominio {
         return cities;
     }
     
-    public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
+    public String[] getDestinosCiudad(String nombreCiudad) {
         Mapa prov = new Mapa();
         prov = (Mapa) cp.getPuntosMapa(nombreCiudad);
         ArrayList <String> destinos = new ArrayList <String>();
@@ -155,61 +152,31 @@ public class ControlDominio {
     /**
      * Lee una lista de paquetes
      * @returnListaPaquetes
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    private Object leerListaPaquetes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        try {
-            return lp = (ListaPaquetes) cp.leerListaPaquetes();
-        }
-        catch (FileNotFoundException e) {
-            return lp = null;
-        }
-        catch (IOException e) {
-            return lp = null;
-        }
+    private Object leerListaPaquetes(){
+        return lp = (ListaPaquetes) cp.leerListaPaquetes();
     }
     
     /**
      * Lee una lista de clientes
      * @return ListaClientes
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    private Object leerListaClientes() throws IOException, FileNotFoundException, ClassNotFoundException {
-        try {
-            return lc = (ListaClientes) cp.leerListaClientes();
-        }
-        catch (FileNotFoundException e) {
-            return lc = null;
-        }
-        catch (IOException e) {
-            return lc = null;
-        }
+    private Object leerListaClientes() {
+        return lc = (ListaClientes) cp.leerListaClientes();
     }
     
     /**
      * Lee un operador
      * @return Operador
-     * @throws IOException
-     * @throws ClassNotFoundException 
      */
-    private Object leerOperador() throws IOException, ClassNotFoundException {
-        try {
-            return cp.leerOperador();
-        }
-        catch (IOException e) {
-            return oper = null;
-        }
+    private Object leerOperador() {
+        return cp.leerOperador();
     }
     
     /**
      * Guarda los clientes, los paquetes y el operador
-     * @throws IOException 
      */
-    private void guardadoGeneral() throws IOException {
+    private void guardadoGeneral() {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
@@ -222,23 +189,16 @@ public class ControlDominio {
     
     /**
      * Anade una ciudad al sistema
-     * @throws ClassNotFoundException
-     * @throws IOException 
      */
-    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException{
+    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) {
         map = new Mapa();
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
-        System.out.println("[ctrlD anadirCiudad]");
-        for (int i = 0; i < distanciasNodos.length; i++) {
-            System.out.print(distanciasNodos[i] + ", ");
-        }
-        System.out.print("\n");
         map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
-    public void anadirPunto(String nombre, float[] distanciasNodos) throws IOException, ClassNotFoundException{
+    public void anadirPunto(String nombre, float[] distanciasNodos) {
         if (map != null){
             map.anadirPunto(nombre, distanciasNodos);
             cp.guardarMapas(map, map.getNombreCiudad());
@@ -249,16 +209,20 @@ public class ControlDominio {
     
     /**
      * El cliente añade un paquete para enviar
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
+   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno, boolean lock) {
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
-       Mapa provisional = new Mapa();
-       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
-       ArrayList <String> destinos = new ArrayList <String> ();
+       // código antiguo
+//       Mapa provisional = new Mapa();
+//       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
+       // Para no tener que instanciar de nuevo la matriz de distancias si ya está instanciada previamente
+       if (provisional == null || !this.nombreCiudad.equals(nombreCiudad)){
+           if (provisional == null) provisional = new Mapa();
+           provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
+           this.nombreCiudad = nombreCiudad;
+       }
+       ArrayList <String> destinos = new ArrayList();
        destinos = provisional.getNombres();
        int idDestino = destinos.indexOf(destino);
        if(idDestino != -1){
@@ -266,15 +230,14 @@ public class ControlDominio {
             lp.anadirPaquete(p);
             lc.anadirPaquete(p, idCliente);
             oper.anadirPaquete(p);
-            ArrayList <String> puntosCiudad = new ArrayList <String>();
        }
-       cp.guardadoGeneral(lc, lp, oper);
+       if (lock) cp.guardadoGeneral(lc, lp, oper);
     }
     
     /**
      * El cliente cancela un paquete que aun no se ha enviado
      */
-    public boolean cancelarPaquete(int idPaquete) throws IOException{
+    public boolean cancelarPaquete(int idPaquete) {
         boolean cancelado = cl.cancelarPaquete(idPaquete);
         if(cancelado){
             lp.cancelarPaquete(idPaquete);
@@ -285,7 +248,7 @@ public class ControlDominio {
         else return false;
     }
     
-    public boolean eliminarPaquete(int idPaquete) throws IOException{
+    public boolean eliminarPaquete(int idPaquete) {
         boolean eliminado = cl.eliminarPaquete(idPaquete);
         if(eliminado){
             lp.eliminarPaquete(idPaquete);
@@ -345,7 +308,7 @@ public class ControlDominio {
         return rutasNoVerificadas;
     }
 
-    public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public ArrayList<String> getPaquetesRuta(String nombreRuta){
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
 
         ArrayList<Paquete> listaPaquetesRuta = new ArrayList<>();
@@ -378,7 +341,7 @@ public class ControlDominio {
         return result;
     }
 
-    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo){
         Ruta r = new Ruta();
         String turno = saberTurno(fecha);
         String fecha2 = fecha.substring(0,fecha.length()-2);
@@ -405,7 +368,7 @@ public class ControlDominio {
         calculaRuta(copia, fecha2, turno, r, tipo, paquetesSeleccionados);
     }
 
-    public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void acceptarRuta(String ruta, String fecha, String nombreCiudad){
         Ruta rval = (Ruta) cp.leerRuta(ruta);
         rval.acceptarRuta();
         String nombreRuta = fecha + "-" + rval.getTipo() + "-Coste-" + Float.toString(rval.getCosteRuta());
@@ -416,33 +379,27 @@ public class ControlDominio {
         cp.eliminarRuta(ruta);
     }
     
-    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public ArrayList<String> getNombresCiudad(String nombreCiudad) {
         map = (Mapa) cp.leerCiudad(nombreCiudad);
         return map.getNombres();
     }
     
-//    public ArrayList<ArrayList<Float>> pesosAristas(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
-//        map = (Mapa) cp.leerCiudad(nombreCiudad);
-//        return map.getCiudad();
-//    }
-    public Float getDistancia(String ciudad, String a, String b) throws FileNotFoundException, IOException, ClassNotFoundException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Float getDistancia(String ciudad, String a, String b) {
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
-        else System.out.println("[getDistancia] " + map.getDistancia(a,b));
         if (map != null) return map.getDistancia(a,b);
         return 1f;
     }
     
-    public Float getMax(String ciudad) throws FileNotFoundException, IOException, ClassNotFoundException{
-        System.out.println("ciudad: " + map);
+    public Float getMax(String ciudad) {
+//        System.out.println("ciudad: " + map);
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
-        System.out.println("[getMax] max" + map.getMax());
+//        System.out.println("[getMax] max" + map.getMax());
         if (map != null) return map.getMax();
         return 1f;
     }
-    public Float getMin(String ciudad) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Float getMin(String ciudad) {
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
-        System.out.println("[getMin] min" + map.getMin());
+//        System.out.println("[getMin] min" + map.getMin());
         if (map != null) return map.getMin();
         return 1f;
     }
@@ -451,11 +408,11 @@ public class ControlDominio {
         return cp.leerRutasComparadas(fecha, nombreCiudad);
     }
     
-    private Integer[] getRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    private Integer[] getRuta(String nombreRuta) {
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         return r.getPermutacion();
     }
-    private String[] getNombresRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    private String[] getNombresRuta(String nombreRuta) {
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         return r.getNombres();
     }
@@ -464,19 +421,19 @@ public class ControlDominio {
         cp.eliminarRutaComp(inicioRuta, nombreRuta);
     }
     
-    public void crearFichero(String nombreFichero) throws IOException{
+    public void crearFichero(String nombreFichero) {
         cp.crearFichero(nombreFichero);
     }
     
-     public Object leerCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
-       return cp.leerCiudad(nombreCiudad);
+     public Object leerCiudad(String nombreCiudad){
+        return cp.leerCiudad(nombreCiudad);
     }
     
     public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){      
         cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
     }
     
-    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
         Mapa m = new Mapa();
         Fecha f = new Fecha();
         m.setFechaMod(f.fechaDeHoy());
@@ -489,30 +446,37 @@ public class ControlDominio {
        
     public void eliminarCiudad(String nombreCiudad){
         cp.eliminarCiudad(nombreCiudad);
+        ArrayList<String> rutas = this.getRutas(nombreCiudad);
+        for (int i = 0; i < rutas.size(); i++) {
+            this.lp.eliminarPaquetesDeCiudad(nombreCiudad);
+            cp.eliminarRuta(rutas.get(i));
+        }
+        // Eliminar todas las rutas de la ciudad.
+        guardadoGeneral();
     }
     
-    public void renombrarPunto(String nombre1, String nombre2) throws IOException, IOException, ClassNotFoundException{
+    public void renombrarPunto(String nombre1, String nombre2){
         map.renombrarPunto(nombre1, nombre2);
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
-    public void modificaDistancia(String nombre1, String nombre2, float dist) throws IOException, ClassNotFoundException{
+    public void modificaDistancia(String nombre1, String nombre2, float dist){
         map.setDistancia(nombre1, nombre2, dist);
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
-    public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
+    public void eliminarPunto(String nombre1){
         map.eliminarPunto(nombre1);
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
     }
 
-    public String getDestinosRuta(String ruta) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public String getDestinosRuta(String ruta){
         Ruta r = (Ruta) cp.leerRuta(ruta);
         String[] nombres = r.getNombres();
         Integer[] permutacion = r.getPermutacion();
@@ -528,7 +492,7 @@ public class ControlDominio {
         return rutaNombres;
     }
     
-    public void modificarCiudad(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException { 
+    public void modificarCiudad(String ciudad){ 
         Mapa m = (Mapa) cp.leerCiudad(ciudad); 
         String nombreFichero = m.getNombreCiudad() + "-mapa.txt"; 
         String nombreCiudad = m.getNombreCiudad(); 
@@ -539,7 +503,7 @@ public class ControlDominio {
         cp.abrirFichero(nombreFichero); 
     }
 
-    public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public boolean modificarRuta(String ruta, String res) {
         Ruta r = (Ruta) cp.leerRuta(ruta);
         String[] fechaMod = map.getFechaMod();
         String fecha = r.getFecha();

@@ -13,6 +13,8 @@ import java.io.ObjectOutputStream;
 import java.io.*;
 import java.util.ArrayList;
 import java.lang.String;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,13 +23,15 @@ import java.lang.String;
  */
 public class PersistenciaMapas {
     
-    public void guardarMapa(Object x, String nombreCiudad) throws IOException, ClassNotFoundException {
+    public void guardarMapa(Object x, String nombreCiudad) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Mapas/"+nombreCiudad+"-mapa.txt"))) {
             oos.writeObject(x);
+        } catch (IOException ex) {
+            Logger.getLogger(PersistenciaMapas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public Object leerCiudad(String nombreCiudad) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Object leerCiudad(String nombreCiudad) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/Mapas/"+nombreCiudad+"-mapa.txt"))) {
             Object m2 = ois.readObject();
             return m2;

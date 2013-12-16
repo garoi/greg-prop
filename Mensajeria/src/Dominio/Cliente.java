@@ -76,10 +76,9 @@ public class Cliente implements Serializable {
      */
     private void leerCliente(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Anadir el nombre del client"
-                + "e");
+//        System.out.println("Anadir el nombre del cliente");
         nombreCliente = sc.next();
-        System.out.println("Anadir el password del cliente");
+//        System.out.println("Anadir el password del cliente");
         password = sc.next();
     }
     
@@ -88,7 +87,7 @@ public class Cliente implements Serializable {
      * @param p Paquete
      */
     public void anadirPaquete(Paquete p){
-        System.out.println("ANADIR PAK: " + listaPaquetes.size());
+//        System.out.println("ANADIR PAK: " + listaPaquetes.size());
         listaPaquetes.add(p);
         
     }

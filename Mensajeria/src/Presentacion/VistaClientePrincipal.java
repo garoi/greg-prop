@@ -1,8 +1,5 @@
 package Presentacion;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +26,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = enviados;
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
         
@@ -37,7 +36,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         
         listaEspera.setModel(new javax.swing.AbstractListModel() {
             String[] strings = espera;
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
     }
@@ -242,13 +243,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
-        try {
-            ctrlp.setVentanaSecundaria("añadirPaquete");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrlp.setVentanaSecundaria("añadirPaquete");
     }//GEN-LAST:event_botonAnadirActionPerformed
 
     /**
@@ -260,7 +255,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         // Limpiamos la lista de paquetes enviados
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {};
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
         // eliminar paquetes enviados del cliente
@@ -278,14 +275,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         String name = (String) listaEspera.getSelectedValue();
         if(name != null){
             String idPaquete = name.substring(name.lastIndexOf('-') + 1);
-            try {
-                ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
-            } catch (IOException ex) {
-                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            actualizarlista();
+            boolean cancelarPaquete = ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
+            if (cancelarPaquete) actualizarlista();
         }
-
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void botonEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar1ActionPerformed
@@ -294,28 +286,20 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
     private void botonEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminar1MouseClicked
         String[] listaPendientes = ctrlp.getPaquetesEspera();
+        boolean cancelarPaquete = false;
         for (int i = 0; i < listaPendientes.length; ++i) {
             String idPaquete = listaPendientes[i].substring(listaPendientes[i].lastIndexOf('-') + 1);
-            try {
-                ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
-            } catch (IOException ex) {
-                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            cancelarPaquete = ctrlp.cancelarPaquete(Integer.parseInt(idPaquete));
         }
-        actualizarlista();
+        if (cancelarPaquete) actualizarlista();
     }//GEN-LAST:event_botonEliminar1MouseClicked
 
     private void botonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminar2ActionPerformed
-        int idx = listaEnviados.getSelectedIndex();      
         String name = (String) listaEnviados.getSelectedValue();
         if(name != null){
             String idPaquete = name.substring(name.lastIndexOf('-') + 1);
-            try {
-                ctrlp.eliminarPaquete(Integer.parseInt(idPaquete));
-            } catch (IOException ex) {
-                Logger.getLogger(VistaClientePrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            actualizarListaEnviados();
+            if (ctrlp.eliminarPaquete(Integer.parseInt(idPaquete)))
+                actualizarListaEnviados();
         }
     }//GEN-LAST:event_botonEliminar2ActionPerformed
 
@@ -326,6 +310,7 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 VistaClientePrincipal v = new VistaClientePrincipal();
                 v.setLocationRelativeTo(null);
@@ -353,7 +338,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     void actualizarlista() {
         listaEspera.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ctrlp.getPaquetesEspera();
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
     }
@@ -361,7 +348,9 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
     private void actualizarListaEnviados() {
         listaEnviados.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ctrlp.getPaquetesEnviados();
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
     }

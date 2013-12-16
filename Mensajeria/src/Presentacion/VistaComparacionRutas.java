@@ -171,13 +171,7 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
         else{
             ctrlp.setRuta(ruta);
-            try {
-                ctrlp.setVentanaSecundaria("vistaModificarRuta");
-            } catch (IOException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ctrlp.setVentanaSecundaria("vistaModificarRuta");
         }
     }//GEN-LAST:event_btnVerMouseClicked
     

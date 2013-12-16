@@ -162,25 +162,9 @@ public class VistaLogin extends javax.swing.JFrame {
             String contrasena = new String(fieldContrasena.getPassword());
             
             // if campos validos switch modo
-            if(tipoUsuario=="Cliente"){
-                try {
-                    ctrlp.registroCliente(usuario, contrasena);
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else if(tipoUsuario=="Operador"){
-                try {
-                    ctrlp.registroOperador(usuario, contrasena);
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else{
-                System.out.println("Invalid class init call");
-            }
+            if(tipoUsuario=="Cliente") ctrlp.registroCliente(usuario, contrasena);
+            else if(tipoUsuario=="Operador")ctrlp.registroOperador(usuario, contrasena);
+            else System.out.println("Invalid class init call");
             this.cambiarModo();
             // else formatear campos y volver a probar
         }
@@ -196,37 +180,12 @@ public class VistaLogin extends javax.swing.JFrame {
         String usuario = fieldUsuario.getText();
         String contrasena = new String(fieldContrasena.getPassword());
         
-        if(tipoUsuario == "Cliente"){
-            try {
-                if (ctrlp.loginCliente(usuario, contrasena)) {
-                    try {
-                        ctrlp.setVentanaPrincipal("vistaCliente");
-                    } catch (IOException ex) {
-                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        if(tipoUsuario == "Cliente" && ctrlp.loginCliente(usuario, contrasena))
+            ctrlp.setVentanaPrincipal("vistaCliente");
         else{
-            try {
-                if (ctrlp.loginOperador(usuario, contrasena)) {
-                    ctrlp.setVentanaPrincipal("vistaOperador");
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            if (ctrlp.loginOperador(usuario, contrasena)) 
+            ctrlp.setVentanaPrincipal("vistaOperador");
         }
-//        else{
-//            fieldUsuario.setText("Invalid user or password");
-//            fieldContrasena.setText("");
-//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

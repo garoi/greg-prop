@@ -135,25 +135,13 @@ public class VistaInicial extends javax.swing.JFrame {
 
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
         ctrlp.setTipoUsuario("Cliente");
-        try {
-            ctrlp.setVentanaPrincipal("vistaLogin");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrlp.setVentanaPrincipal("vistaLogin");
     }//GEN-LAST:event_botonClienteActionPerformed
 
     private void botonOperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOperadorActionPerformed
         // TODO add your handling code here:
         ctrlp.setTipoUsuario("Operador");
-        try {
-            ctrlp.setVentanaPrincipal("vistaLogin");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrlp.setVentanaPrincipal("vistaLogin");
     }//GEN-LAST:event_botonOperadorActionPerformed
 
     /**

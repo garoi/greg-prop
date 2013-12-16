@@ -1,9 +1,6 @@
 package Presentacion;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +34,9 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ciudades = ctrlp.getNombresCiudades();
         listaCiudades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ciudades;
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
     }
@@ -220,79 +219,79 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             String nombreCiudad = (String) listaCiudades.getSelectedValue();
             if(nombreCiudad != null){
                 ctrlp.setCiudad(nombreCiudad);
-                try {
-                    ctrlp.setVentanaSecundaria("vistaModificarCiudad");
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                ctrlp.setVentanaSecundaria("vistaModificarCiudad");
             }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         ArrayList<String> nombreNodos = new ArrayList();
         String nombreCiudad = JOptionPane.showInputDialog("Introduce el nombre de la ciudad:");
+        while(nombreCiudad.isEmpty() || nombreCiudad.contains(" "))nombreCiudad = JOptionPane.showInputDialog("¡Introduce un nombre de la ciudad válido!");
         nombreCiudad = nombreCiudad;
         String strnNodos = JOptionPane.showInputDialog("Introduce el número de puntos:");
-        int nNodos = Integer.parseInt(strnNodos);
-        int auxdistancias = (nNodos*(nNodos-1))/2;
-        float[] distancias = new float[auxdistancias];
-        for(int i = 0; i < nNodos; i++){
-            String mensaje = String.format("Introduce el nombre del punto %d (%d restantes):", i+1, nNodos - i - 1);
-            String nombreNodo = JOptionPane.showInputDialog(mensaje);
-            while(nombreNodos.contains(nombreNodo) || nombreNodo == ""){
-                nombreNodo = JOptionPane.showInputDialog("Introduce un nombre que no hayas introducido:");
+        while(strnNodos.isEmpty() || strnNodos.contains(" ")) strnNodos = JOptionPane.showInputDialog("¡Introduce un número válido!");
+        int nNodos = 1;
+        try{
+            nNodos = Integer.parseInt(strnNodos);
+            int auxdistancias = (nNodos*(nNodos-1))/2;
+            float[] distancias = new float[auxdistancias];
+            for(int i = 0; i < nNodos; i++){
+                String mensaje = String.format("Introduce el nombre del punto %d (%d restantes):", i+1, nNodos - i - 1);
+                String nombreNodo = JOptionPane.showInputDialog(mensaje);
+                while(nombreNodos.contains(nombreNodo) || nombreNodo == "")nombreNodo = JOptionPane.showInputDialog("Introduce un nombre que no hayas introducido:");
+                nombreNodos.add(nombreNodo);
             }
-            nombreNodos.add(nombreNodo);
-        }
-        for (int i = 0; i < auxdistancias; i++) {
-            String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", "pene", "pene"));
-            float auxDistancia = Float.parseFloat(distanciaEntreNodos);
-            while(auxDistancia <= 0.0f){
-                distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
-                auxDistancia = Float.parseFloat(distanciaEntreNodos);
+            int nodoA = 0;
+            int nodoB = 1;
+            for (int i = 0; i < auxdistancias; i++) {
+                String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", nombreNodos.get(nodoA), nombreNodos.get(nodoB)));
+                while(distanciaEntreNodos.isEmpty() || distanciaEntreNodos.contains(" ")) distanciaEntreNodos = JOptionPane.showInputDialog("Por favor, introduce un natural.");
+                float auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                while(auxDistancia <= 0.0f){
+                    distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
+                    auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                }
+                distancias[i] = auxDistancia;
+                nodoB += 1;
+                if (nodoB==nNodos){
+                    nodoA += 1;
+                    nodoB = nodoA+1;
+                }
             }
-            distancias[i] = auxDistancia;
-        }
-        try {
             ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            ctrlp.actualizarVistaSelCiudades();
+            ctrlp.actualizarVentanaSecundaria();
         }
-        ctrlp.actualizarVistaSelCiudades();
-        ctrlp.actualizarVentanaSecundaria();
+        catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(rootPane, "Has introducido un formato inválido. Tiene que ser un natural.");
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // Eliminar una ciudad de la lista.
         int idx = listaCiudades.getSelectedIndex();
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
+        if(!ctrlp.getRutas(nombreCiudad).isEmpty()) JOptionPane.showMessageDialog(rootPane, "Borrar una ciudad implica borrar todas las rutas que transcurren por ella!");
         ctrlp.eliminarCiudad(nombreCiudad);
-        actualizarListaCiudades();       
+        actualizarListaCiudades();
+        ctrlp.actualizarRutasOperador();
+        if(nombreCiudad == ctrlp.getCiudad()) ctrlp.setCiudad(null);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
         nombreCiudad = JOptionPane.showInputDialog("Introduce un nombre para la ciudad:");
-        try {
-            ctrlp.crearFichero(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrlp.crearFichero(nombreCiudad);
         String accep = JOptionPane.showInputDialog("Has terminado de guardar la ciudad? si/no:");
         if (accep.equals("si")) {
             ciudadAnadidaFichero();
         }
-        else {
-            ctrlp.eliminarCiudad(nombreCiudad);
-        }
+        else ctrlp.eliminarCiudad(nombreCiudad);
     }//GEN-LAST:event_btnFicheroActionPerformed
 
     private void listaCiudadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCiudadesMouseClicked
@@ -323,22 +322,8 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
         ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
-        try {
-            ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            ctrlp.leerCiudad(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
+        ctrlp.leerCiudad(nombreCiudad);
         actualizarListaCiudades();
     }
 

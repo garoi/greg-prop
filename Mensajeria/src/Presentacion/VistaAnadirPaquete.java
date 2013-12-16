@@ -57,21 +57,17 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         // Cogemos las ciudades del sistema
         String [] ciudades = ctrlp.getNombresCiudades();
         if (ciudades.length >0){
-            try {
-                ciudad = ciudades[0];
-                // inicializamos el combobox de ciudad con la primera ciudad (por defecto)
-                comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(ciudades));
-                
-                // Cogemos los nombres de los destinos de la ciudad
-                String[] destinos = ctrlp.getDestinosCiudad(ciudad);
-                // inicializamos el combobox de destino con los destinos
-                comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-                    destinos
-                ));
-                destino = destinos[0];
-            } catch (IOException ex) {
-                Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ciudad = ciudades[0];
+            // inicializamos el combobox de ciudad con la primera ciudad (por defecto)
+            comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(ciudades));
+
+            // Cogemos los nombres de los destinos de la ciudad
+            String[] destinos = ctrlp.getDestinosCiudad(ciudad);
+            // inicializamos el combobox de destino con los destinos
+            comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
+                destinos
+            ));
+            destino = destinos[0];
         }
     }
 
@@ -389,23 +385,13 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
      */
     private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
         String[] destinoss = null;
-        try {
-            destinoss = ctrlp.getDestinosCiudad(ciudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        destinoss = ctrlp.getDestinosCiudad(ciudad);
         System.out.println("EL TAMANYO ES " + destinoss.length);
         Object selectedItem = comboCiudad.getSelectedItem();
         if (selectedItem != null) ciudad = selectedItem.toString();
-        try {
-            String[] destinos = ctrlp.getDestinosCiudad(ciudad);
-            comboDestino.setModel(new javax.swing.DefaultComboBoxModel(
-                destinos
-            ));
-            destino = destinos[0];
-        } catch (IOException ex) {
-            Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String[] destinos = ctrlp.getDestinosCiudad(ciudad);
+        comboDestino.setModel(new javax.swing.DefaultComboBoxModel(destinos));
+        destino = destinos[0];
     }//GEN-LAST:event_comboCiudadActionPerformed
     
     /**
@@ -452,12 +438,8 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
             }
             else ano1 = Integer.toString(ano);
             String fecha = dia1 + '.' + mes + '.' + ano;
-            try {
-                System.out.println("Voy a añadir un pak");
-                ctrlp.anadirPaquete(ciudad, destino, fecha, turno);
-            } catch (IOException ex) {
-                Logger.getLogger(VistaAnadirPaquete.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            System.out.println("Voy a añadir un pak");
+            ctrlp.anadirPaquete(ciudad, destino, fecha, turno);
         }
         this.setVisible(false);
         ctrlp.actualizarVistaCliente();

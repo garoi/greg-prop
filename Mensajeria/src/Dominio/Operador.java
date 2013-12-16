@@ -70,7 +70,7 @@ public class Operador implements Serializable {
      * @see Paquete
      */
     public void anadirPaquete(Paquete p) {
-        System.out.println("AÑADO EL PAQUETE" + p.getEstado());
+//        System.out.println("AÑADO EL PAQUETE" + p.getEstado());
         listaPaquetesParaEntregar.add(p);
     }
     
@@ -115,9 +115,9 @@ public class Operador implements Serializable {
      */
     private void leerOperador() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Anadir el nombre del operador");
+//        System.out.println("Anadir el nombre del operador");
         nombreOperador = sc.next();
-        System.out.println("Anadir el password del operador");
+//        System.out.println("Anadir el password del operador");
         password = sc.next();
     }
     
