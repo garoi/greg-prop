@@ -320,11 +320,11 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     
     public void ciudadAnadidaFichero() {
         ArrayList<String> nombres = new ArrayList<>();
-        ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
-        float max = (float) 0.0;
-        float min = (float) 0.0;
-        ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad,max,min);
-        ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
+        ArrayList<Float> ciudadDist = new ArrayList<>();
+        ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudadDist);
+        float c[] = new float[ciudadDist.size()];
+        for(int i = 0; i < ciudadDist.size(); ++i) c[i] = ciudadDist.get(i);
+        ctrlp.pasarAObjeto(nombreCiudad, nombres, c);
         ctrlp.leerCiudad(nombreCiudad);
         actualizarListaCiudades();
     }

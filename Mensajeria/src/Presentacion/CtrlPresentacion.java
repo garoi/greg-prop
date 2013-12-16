@@ -541,8 +541,8 @@ public class CtrlPresentacion {
      * @param nombres nombres de los destinos
      * @param ciudad distancias entre los nodos
      */
-    public void leerMapaFichero(String nomFichero, String nombreCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad, float max, float min) {
-        ctrld.leerMapaFichero(nomFichero,nombreCiudad,nombres,ciudad,max,min);
+    public void leerMapaFichero(String nomFichero, String nombreCiudad, ArrayList<String> nombres, ArrayList<Float> ciudad) {
+        ctrld.leerMapaFichero(nomFichero,nombreCiudad,nombres,ciudad);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad)"> 
@@ -552,7 +552,7 @@ public class CtrlPresentacion {
      * @param nombres nombre de los nodos
      * @param ciudad distancias entre los nodos
      */
-    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, float[] ciudad){
         ctrld.pasarAObjeto(nomCiudad, nombres, ciudad);
     } // </editor-fold>
     

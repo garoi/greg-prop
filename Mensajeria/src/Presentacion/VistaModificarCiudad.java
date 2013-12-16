@@ -226,12 +226,12 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
 
     public void ciudadAnadidaFichero() {
         ArrayList<String> nombres = new ArrayList<>();
-        ArrayList<ArrayList<Float>> ciudadDist = new ArrayList<>();
-        float max = (float) 0.0;
-        float min = (float) 0.0;
-        ctrlp.leerMapaFichero(ciudad+"-mapa.txt", ciudad, nombres, ciudadDist, max, min);
+        ArrayList<Float> ciudadDist = new ArrayList<>();
+        ctrlp.leerMapaFichero(ciudad+"-mapa.txt", ciudad, nombres, ciudadDist);
         ctrlp.leerCiudad(ciudad);
-        ctrlp.pasarAObjeto(ciudad, nombres, ciudadDist);
+        float[] c = new float[ciudadDist.size()];
+        for(int i = 0; i < ciudadDist.size(); ++i) c[i] = ciudadDist.get(i);
+        ctrlp.pasarAObjeto(ciudad, nombres, c);
     }
     
     
