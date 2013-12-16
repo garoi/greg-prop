@@ -62,15 +62,13 @@ public class ControlPersistencia {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Data/ListaClientes/ListaClientes.txt"))) {
             Object lc = ois.readObject();
             return lc;
-        } catch (IOException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
-    public void guardarOperador(Object oper) throws IOException {
+    public void guardarOperador(Object oper){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Data/Operador.txt"))) {
             oos.writeObject(oper);
         }
@@ -89,25 +87,14 @@ public class ControlPersistencia {
     }
     
     public void guardarMapas(Object x, String nombreCiudad) {
-        try {
-            pm.guardarMapa(x, nombreCiudad);
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        pm.guardarMapa(x, nombreCiudad);
     }
     
     public ArrayList<String> listarCiudades() {
         return pm.listarCiudades();
     }
     public Object leerCiudad(String nombre){
-        try {
-            return pm.leerCiudad(nombre);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return pm.leerCiudad(nombre);
     }
     
     public ArrayList<String> listarRutasNoVerificadas(String nombreCiudad) {
@@ -127,13 +114,9 @@ public class ControlPersistencia {
     }
     
     public void guardadoGeneral(Object lc, Object lp, Object oper){
-        try {
-            guardarListaClientes(lc);
-            guardarListaPaquetes(lp);
-            guardarOperador(oper);
-        } catch (IOException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        guardarListaClientes(lc);
+        guardarListaPaquetes(lp);
+        guardarOperador(oper);
     }
     
     public void crearDirectorios(){

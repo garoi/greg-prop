@@ -49,13 +49,7 @@ public class CtrlPresentacion {
      */
     public CtrlPresentacion(){
         ctrld = new ControlDominio();
-        try {
-            ctrld.iniControlDominio();
-        } catch (IOException ex) {
-            Logger.getLogger(CtrlPresentacion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CtrlPresentacion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrld.iniControlDominio();
         if (ventanaPrimaria == null){
             vistaInicial = new VistaInicial(this);
             ventanaPrimaria = vistaInicial;
@@ -158,7 +152,7 @@ public class CtrlPresentacion {
      * Permite el flujo del programa entre vistas.
      * @param nombre el nombre de la ventana que queremos activar. \nPuede ser: vistaLogin, vistaCliente, etc.
      */
-    public void setVentanaPrincipal(String nombre) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void setVentanaPrincipal(String nombre){
         switch(nombre){
             case "vistaLogin":
                 if (vistaLogin == null) vistaLogin = new VistaLogin(this, tipoUsuario);
@@ -387,22 +381,22 @@ public class CtrlPresentacion {
     // SESIÓN
     
     // <editor-fold defaultstate="collapsed" desc="public boolean registroCliente(String usuario, String password)"> 
-    public boolean registroCliente(String usuario, String password) throws IOException{
+    public boolean registroCliente(String usuario, String password){
         return ctrld.registroCliente(usuario, password);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public boolean registroOperador(String usuario, String password)"> 
-    public boolean registroOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+    public boolean registroOperador(String usuario, String password){
         return ctrld.registroOperador(usuario, password);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public boolean loginCliente(String usuario, String password)"> 
-    public boolean loginCliente(String usuario, String password) throws IOException{
+    public boolean loginCliente(String usuario, String password){
         return ctrld.loginCliente(usuario, password);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public boolean loginOperador(String usuario, String password)"> 
-    public boolean loginOperador(String usuario, String password) throws IOException, ClassNotFoundException{
+    public boolean loginOperador(String usuario, String password){
         return ctrld.loginOperador(usuario, password);
     } // </editor-fold>
     
@@ -428,9 +422,8 @@ public class CtrlPresentacion {
      * Devuelve los destinos de la ciudad
      * @param nombreCiudad el nombre de la ciudad
      * @return los destinos disponibles para la ciudad
-     * @throws IOException 
      */
-    public String[] getDestinosCiudad(String nombreCiudad) throws IOException{
+    public String[] getDestinosCiudad(String nombreCiudad){
         return ctrld.getDestinosCiudad(nombreCiudad);
     } // </editor-fold>
     
@@ -439,24 +432,17 @@ public class CtrlPresentacion {
      * Devuelve los destinos de la ciudad
      * @param nombreCiudad ciudad seleccionada.
      * @return
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
      */
-    public ArrayList<String> getNombresCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException, IOException, IOException, IOException, IOException, IOException, IOException, IOException{
+    public ArrayList<String> getNombresCiudad(String nombreCiudad){
         return ctrld.getNombresCiudad(nombreCiudad);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public ArrayList<ArrayList<Float>> getDistancias(String nombreCiudad)"> 
     /**
-     * Devuelve 
+     * Devuelve la distancia entre el punto a y el b.
      * @return
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    public Float getDistancias(String a ,String b) throws FileNotFoundException, IOException, ClassNotFoundException {
-//        return ctrld.pesosAristas(ciudad);
+    public Float getDistancias(String a ,String b){
         return ctrld.getDistancia(ciudad,a,b);
     }// </editor-fold>
     
@@ -464,11 +450,8 @@ public class CtrlPresentacion {
     /**
      * Modifica una ciudad desde fichero
      * @param ciudad ciudad que se desea modificar
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    public void modificarCiudadFichero(String ciudad) throws IOException, FileNotFoundException, ClassNotFoundException { 
+    public void modificarCiudadFichero(String ciudad){ 
         ctrld.modificarCiudad(ciudad);
     } // </editor-fold>
     
@@ -479,10 +462,8 @@ public class CtrlPresentacion {
      * @param n número de nodos que componen la ciudad.
      * @param nombreNodos nombre de los nodos de la ciudad.
      * @param distanciasNodos distancias entre los nodos.
-     * @throws ClassNotFoundException
-     * @throws IOException 
      */
-    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) throws ClassNotFoundException, IOException {
+    public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos){
         System.out.println("[anadirCiudad]");
         for (int i = 0; i < distanciasNodos.length; i++) {
             System.out.print(distanciasNodos[i] + ", ");
@@ -506,8 +487,7 @@ public class CtrlPresentacion {
      * @param nombre nombre que se le ha asignado al punto
      * @param distancias distancias desde el punto al resto de puntos
      */
-    public void anadirPunto(String nombre, float[] distancias) throws IOException, ClassNotFoundException {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void anadirPunto(String nombre, float[] distancias){
         ctrld.anadirPunto(nombre, distancias);
     } // </editor-fold>
     
@@ -516,10 +496,8 @@ public class CtrlPresentacion {
      * Renombra un punto
      * @param nombre1 nombre que se quiere renombrar
      * @param nombre2 nombre que se le da al punto
-     * @throws IOException
-     * @throws ClassNotFoundException 
      */
-    public void renombrarPunto(String nombre1, String nombre2) throws IOException, ClassNotFoundException {
+    public void renombrarPunto(String nombre1, String nombre2){
         ctrld.renombrarPunto(nombre1, nombre2);
     } // </editor-fold>
     
@@ -529,10 +507,8 @@ public class CtrlPresentacion {
      * @param nombre1 punto A
      * @param nombre2 punto B
      * @param dist distancia nueva que se le asigna
-     * @throws IOException
-     * @throws ClassNotFoundException 
      */
-    public void modificaDistancia(String nombre1, String nombre2, String dist) throws IOException, ClassNotFoundException{
+    public void modificaDistancia(String nombre1, String nombre2, String dist) {
        float dist2 =  Float.parseFloat(dist);
        if (dist2 >= 0f)
            ctrld.modificaDistancia(nombre1, nombre2, dist2);
@@ -542,10 +518,8 @@ public class CtrlPresentacion {
     /**
      * Elimina un punto de la ciudad seleccionada por el operador según su nombre
      * @param nombre1
-     * @throws IOException
-     * @throws ClassNotFoundException 
      */
-    public void eliminarPunto(String nombre1) throws IOException, ClassNotFoundException{
+    public void eliminarPunto(String nombre1){
         ctrld.eliminarPunto(nombre1);
     } // </editor-fold>
     
@@ -553,11 +527,8 @@ public class CtrlPresentacion {
     /**
      * Lee una ciudad
      * @param nombreCiudad nombre de la ciudad que se quiere leer
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    public void leerCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void leerCiudad(String nombreCiudad) {
         ctrld.leerCiudad(nombreCiudad);
     } // </editor-fold>
 
@@ -579,10 +550,8 @@ public class CtrlPresentacion {
      * @param nomCiudad nombre de la ciudad
      * @param nombres nombre de los nodos
      * @param ciudad distancias entre los nodos
-     * @throws IOException
-     * @throws ClassNotFoundException 
      */
-    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad) throws IOException, ClassNotFoundException{
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
         ctrld.pasarAObjeto(nomCiudad, nombres, ciudad);
     } // </editor-fold>
     
@@ -609,9 +578,6 @@ public class CtrlPresentacion {
     /**
      * Indica que se han enviado los paquetes pendientes para una ruta
      * @param nombreRuta nombre de la ruta
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
     public void paquetesEnviados(String nombreRuta){
         ctrld.paquetesEnviados(nombreRuta);
@@ -624,9 +590,8 @@ public class CtrlPresentacion {
      * @param destino a donde va el paquete
      * @param fecha el día que se desea enviar el paquete
      * @param turno
-     * @throws IOException 
      */
-    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
+    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno){
         ctrld.anadirPaquete(nombreCiudad, destino, fecha, turno, true);
     } // </editor-fold>
     
@@ -667,9 +632,8 @@ public class CtrlPresentacion {
      * Cancela un paquete según su id
      * @param idPaquete la id del paquete
      * @return true si se ha podido cancelar
-     * @throws IOException 
      */
-    public boolean cancelarPaquete(int idPaquete) throws IOException{
+    public boolean cancelarPaquete(int idPaquete) {
         return ctrld.cancelarPaquete(idPaquete);
     } // </editor-fold>
     
@@ -678,9 +642,8 @@ public class CtrlPresentacion {
      * Elimina un paquete según su id
      * @param idPaquete id del paquete
      * @return true si se ha podido eliminar
-     * @throws IOException 
      */
-    public boolean eliminarPaquete(int idPaquete) throws IOException{
+    public boolean eliminarPaquete(int idPaquete) {
         return ctrld.eliminarPaquete(idPaquete);
     } // </editor-fold>
 
@@ -703,9 +666,6 @@ public class CtrlPresentacion {
      * @param ruta nombre de la ruta
      * @param fecha fecha y turno
      * @param nombreCiudad nombre de la ciudad sobre la que opera la ruta
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
     public void aceptarRuta(String ruta, String fecha, String nombreCiudad){
         ctrld.acceptarRuta(ruta, fecha, nombreCiudad);
@@ -718,9 +678,6 @@ public class CtrlPresentacion {
      * @param fecha fecha del turno
      * @param nombreCiudad ciudad de la ruta
      * @param tipo de ruta que se desea calcular
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
     public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo){
         ctrld.calcularRuta(listaEnRutaS, fecha, nombreCiudad, tipo);
@@ -730,9 +687,6 @@ public class CtrlPresentacion {
     /**
      * Devuelve los destinos de la ruta seleccionada por el operador
      * @return
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
     public String getDestinosRuta(){
         return ctrld.getDestinosRuta(ruta);
@@ -743,11 +697,8 @@ public class CtrlPresentacion {
      * Modifica una ruta
      * @param ruta el nombre de la ruta que se quiere modificar
      * @param res los destinos por los que pasa la ruta
-     * @throws IOException
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
      */
-    public boolean modificarRuta(String ruta, String res) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public boolean modificarRuta(String ruta, String res) {
         return ctrld.modificarRuta(ruta, res);
     } // </editor-fold>
     
@@ -795,7 +746,7 @@ public class CtrlPresentacion {
      * @param d la distancia de la cual se quiere obtener el color
      * @return el color proporcional
      */
-    public Color getColorDistancia(float d) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public Color getColorDistancia(float d) {
         max = ctrld.getMax(ciudad);
         min = ctrld.getMin(ciudad);
 //        System.out.println("\nmax " + max);
@@ -826,9 +777,8 @@ public class CtrlPresentacion {
     /**
      * Crea un fichero
      * @param nombreFichero nombre del fichero que se va a crear.
-     * @throws IOException 
      */
-    public void crearFichero(String nombreFichero) throws IOException{
+    public void crearFichero(String nombreFichero){
         ctrld.crearFichero(nombreFichero);
     } // </editor-fold>
     

@@ -18,7 +18,7 @@ public class CreaMapas {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
+    public static void main(String[] args) {
         ControlDominio cd = new ControlDominio();
         cd.iniControlDominio();
          System.out.println("vamos a crear una ciudad");

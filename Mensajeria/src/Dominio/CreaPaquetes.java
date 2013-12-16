@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Luis
  */
 public class CreaPaquetes {
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
+    public static void main(String[] args){
         ControlDominio cd = new ControlDominio();
         cd.iniControlDominio();
         cd.registroCliente("robot", "robot");
