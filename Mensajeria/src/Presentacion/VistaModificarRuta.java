@@ -22,6 +22,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     private String nombreCiudad;
     private String label;
     private String ruta;
+    private boolean pintado;
     /**
      * Creates new form VistaModificarRuta
      */
@@ -36,6 +37,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         this.ruta = ctrlp.getRuta();
         label = ctrlp.getDestinosRuta();
         fieldRuta.setText(label);
+        pintado = false;
+    }
+    
+    public void reset(){
+        pintado = false;
     }
 
     /**
@@ -54,8 +60,6 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelDibujoRuta.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Visualización de la ruta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -230,108 +234,112 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
     public void paint (Graphics g) {
-        long ta = System.currentTimeMillis();
-        ArrayList<String> nombresCiudad = null;
-        String[] destinos = null;
-        int n = 0;
-        try {
-            nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
-            n = nombresCiudad.size();
-            String label = ctrlp.getDestinosRuta();
-            destinos = label.split(" ");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        super.paint(g);
-        g.setColor(Color.red);
-        int maxWidth = this.panelDibujoRuta.getWidth();
-        int maxHeight = this.panelDibujoRuta.getHeight();
-
-        g.setColor (Color.black);
-        float factor = maxWidth;
-        float diametro = factor*0.8f;
-        if(maxWidth<maxHeight) factor = maxHeight;
-        int origx = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
-        int origy = Math.round(factor*0.15f) - 5 + this.panelDibujoRuta.getY();
-
-        double angulo = 360f / n;
-        double radio = diametro / 2;
-        int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
-        int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) + this.panelDibujoRuta.getY();
-        
-        if (n == 1){
-            g.fillOval(centrox,centroy,10,10);
-            g.setColor (Color.blue);
-            g.fillOval(centrox+2,centroy+2,6,6);
-            g.setColor (Color.black);
-            g.drawString(nombresCiudad.get(0), centrox, centroy);
-        }
-        else{
-        
-            ArrayList<int[]> puntos = new ArrayList();
-            double auxAngulo = 0.0f;
-            for(int i = 0; i < n; i++){
-                double xcos = Math.cos(Math.toRadians(auxAngulo));
-                double ysin = Math.sin(Math.toRadians(auxAngulo));
-                int p1x = (int) (xcos*radio);
-                int p1y = (int) (ysin*radio);
-                int psx = (int) (xcos*(radio*1.065)) + centrox-1;
-                int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
-                p1y *= -1;
-
-                int auxx = p1x + centrox;
-                int auxy = p1y + centroy;
-                int[] auxPair = {auxx, auxy};
-                puntos.add(auxPair);
-
-                g.setColor (Color.black);
-                g.drawString(nombresCiudad.get(i),psx,psy);
-
-                g.fillOval(auxx,auxy,10,10);
-                g.setColor (Color.blue);
-                g.fillOval(auxx+2,auxy+2,6,6);
-                auxAngulo += angulo;
+        if (!pintado){
+            long ta = System.currentTimeMillis();
+            ArrayList<String> nombresCiudad = null;
+            String[] destinos = null;
+            int n = 0;
+            try {
+                nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
+                n = nombresCiudad.size();
+                String label = ctrlp.getDestinosRuta();
+                destinos = label.split(" ");
+            } catch (IOException ex) {
+                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            g.setColor(Color.black);
-            int idx1 = 0;
-            int idx2 = 1;
-            for (int i = 0; i < puntos.size(); ++i) {
-                for (int j = i+1; j < puntos.size(); ++j) {
-                    try {
-                        float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
-                        if(destinos != null) System.out.println("destinos" + destinos);
-                        if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
-                            String a = "a";
-                            String b = "b";
-                            if (a.equals(b))
-                            System.out.println("Entra");
-                            g.setColor(ctrlp.getColorDistancia(fcolor));
-                        }
-                        int[] auxi = puntos.get(i);
-                        int xi = auxi[0]+2;
-                        int yi = auxi[1]+2;
-                        int[] auxj = puntos.get(j);
-                        int xj = auxj[0]+2;
-                        int yj = auxj[1]+2;
+            super.paint(g);
+            g.setColor(Color.red);
+            int maxWidth = this.panelDibujoRuta.getWidth();
+            int maxHeight = this.panelDibujoRuta.getHeight();
 
-                        g.drawLine(xi, yi, xj, yj);
-                        g.setColor(Color.black);
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+            g.setColor (Color.black);
+            float factor = maxWidth;
+            float diametro = factor*0.8f;
+            if(maxWidth<maxHeight) factor = maxHeight;
+            int origx = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
+            int origy = Math.round(factor*0.15f) - 5 + this.panelDibujoRuta.getY();
+
+            double angulo = 360f / n;
+            double radio = diametro / 2;
+            int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
+            int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) + this.panelDibujoRuta.getY();
+
+            if (n == 1){
+                g.fillOval(centrox,centroy,10,10);
+                g.setColor (Color.blue);
+                g.fillOval(centrox+2,centroy+2,6,6);
+                g.setColor (Color.black);
+                g.drawString(nombresCiudad.get(0), centrox, centroy);
+            }
+            else{
+
+                ArrayList<int[]> puntos = new ArrayList();
+                double auxAngulo = 0.0f;
+                for(int i = 0; i < n; i++){
+                    double xcos = Math.cos(Math.toRadians(auxAngulo));
+                    double ysin = Math.sin(Math.toRadians(auxAngulo));
+                    int p1x = (int) (xcos*radio);
+                    int p1y = (int) (ysin*radio);
+                    int psx = (int) (xcos*(radio*1.065)) + centrox-1;
+                    int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
+                    p1y *= -1;
+
+                    int auxx = p1x + centrox;
+                    int auxy = p1y + centroy;
+                    int[] auxPair = {auxx, auxy};
+                    puntos.add(auxPair);
+
+                    g.setColor (Color.black);
+                    g.drawString(nombresCiudad.get(i),psx,psy);
+
+                    g.fillOval(auxx,auxy,10,10);
+                    g.setColor (Color.blue);
+                    g.fillOval(auxx+2,auxy+2,6,6);
+                    auxAngulo += angulo;
+                }
+
+                g.setColor(Color.black);
+                int idx1 = 0;
+                int idx2 = 1;
+                for (int i = 0; i < puntos.size(); ++i) {
+                    for (int j = i+1; j < puntos.size(); ++j) {
+                        try {
+                            float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+//                            if(destinos != null) System.out.println("destinos" + destinos);
+                            if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
+                                String a = "a";
+                                String b = "b";
+                                if (a.equals(b))
+                                System.out.println("Entra");
+                                g.setColor(ctrlp.getColorDistancia(fcolor));
+                            }
+                            int[] auxi = puntos.get(i);
+                            int xi = auxi[0]+2;
+                            int yi = auxi[1]+2;
+                            int[] auxj = puntos.get(j);
+                            int xj = auxj[0]+2;
+                            int yj = auxj[1]+2;
+
+                            g.drawLine(xi, yi, xj, yj);
+                            g.setColor(Color.black);
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
+            long tb = System.currentTimeMillis()-ta;
+            System.out.println("Tiempo de dibujo: " + tb);
         }
-        long tb = System.currentTimeMillis()-ta;
-        System.out.println("Tiempo de dibujo: " + tb);
+        this.setVisible(true);
+        pintado = true;
     }
     // </editor-fold>  
     

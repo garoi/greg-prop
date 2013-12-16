@@ -19,6 +19,8 @@ public class ControlDominio {
     private ControlUsuario cu;
     private boolean existeOper = true;
     private Mapa map;
+    private String nombreCiudad;
+    private Mapa provisional;
     
     /**
      * Inicializa el controlador de dominio
@@ -229,11 +231,6 @@ public class ControlDominio {
         map = new Mapa();
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
-        System.out.println("[ctrlD anadirCiudad]");
-        for (int i = 0; i < distanciasNodos.length; i++) {
-            System.out.print(distanciasNodos[i] + ", ");
-        }
-        System.out.print("\n");
         map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
@@ -253,12 +250,19 @@ public class ControlDominio {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
+   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno, boolean lock) throws IOException{
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
-       Mapa provisional = new Mapa();
-       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
-       ArrayList <String> destinos = new ArrayList <String> ();
+       // código antiguo
+//       Mapa provisional = new Mapa();
+//       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
+       // Para no tener que instanciar de nuevo la matriz de distancias si ya está instanciada previamente
+       if (provisional == null || !this.nombreCiudad.equals(nombreCiudad)){
+           if (provisional == null) provisional = new Mapa();
+           provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
+           this.nombreCiudad = nombreCiudad;
+       }
+       ArrayList <String> destinos = new ArrayList();
        destinos = provisional.getNombres();
        int idDestino = destinos.indexOf(destino);
        if(idDestino != -1){
@@ -266,9 +270,8 @@ public class ControlDominio {
             lp.anadirPaquete(p);
             lc.anadirPaquete(p, idCliente);
             oper.anadirPaquete(p);
-            ArrayList <String> puntosCiudad = new ArrayList <String>();
        }
-       cp.guardadoGeneral(lc, lp, oper);
+       if (lock) cp.guardadoGeneral(lc, lp, oper);
     }
     
     /**
