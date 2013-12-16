@@ -209,7 +209,7 @@ public class CtrlPresentacion {
      * Permite mostrar una ventana secundaria.
      * @param nuevaVentana el selector de la ventana secundaria que se va a abrir.
      */
-    public void setVentanaSecundaria(String nuevaVentana) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void setVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
                 if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
@@ -220,7 +220,7 @@ public class CtrlPresentacion {
                 
             case "vistaModificarRuta":
 //                if(vistaModificarRuta != null) vistaModificarRuta = new VistaModificarRuta(this, getDestinosRuta());
-                ventanaSecundaria = new VistaModificarRuta(this);
+                if (ventanaSecundaria == null) ventanaSecundaria = new VistaModificarRuta(this);
                 vistaModificarRuta = null;
                 ventanaSecundaria.setTitle("Ver / Editar Ruta");
                 
@@ -496,7 +496,7 @@ public class CtrlPresentacion {
      * Elimina una ciudad según su nombre
      * @param nombreCiudad nombre de la ciudad.
      */
-    public void eliminarCiudad(String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void eliminarCiudad(String nombreCiudad){
         ctrld.eliminarCiudad(nombreCiudad);
     } // </editor-fold>
     
@@ -601,7 +601,7 @@ public class CtrlPresentacion {
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public ArrayList<String> getPaquetesRuta(String nombreRuta)"> 
-    public ArrayList<String> getPaquetesRuta(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public ArrayList<String> getPaquetesRuta(String nombreRuta){
         return ctrld.getPaquetesRuta(nombreRuta);
     } // </editor-fold>
     
@@ -613,7 +613,7 @@ public class CtrlPresentacion {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public void paquetesEnviados(String nombreRuta) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void paquetesEnviados(String nombreRuta){
         ctrld.paquetesEnviados(nombreRuta);
     } // </editor-fold>
     
@@ -707,7 +707,7 @@ public class CtrlPresentacion {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public void aceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void aceptarRuta(String ruta, String fecha, String nombreCiudad){
         ctrld.acceptarRuta(ruta, fecha, nombreCiudad);
     } // </editor-fold>
 
@@ -722,7 +722,7 @@ public class CtrlPresentacion {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo){
         ctrld.calcularRuta(listaEnRutaS, fecha, nombreCiudad, tipo);
     } // </editor-fold>
     
@@ -734,7 +734,7 @@ public class CtrlPresentacion {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException 
      */
-    public String getDestinosRuta() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public String getDestinosRuta(){
         return ctrld.getDestinosRuta(ruta);
     } // </editor-fold>
 

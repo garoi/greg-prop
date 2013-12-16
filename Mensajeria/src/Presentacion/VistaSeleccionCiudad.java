@@ -1,5 +1,6 @@
 package Presentacion;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -220,13 +221,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
             String nombreCiudad = (String) listaCiudades.getSelectedValue();
             if(nombreCiudad != null){
                 ctrlp.setCiudad(nombreCiudad);
-                try {
-                    ctrlp.setVentanaSecundaria("vistaModificarCiudad");
-                } catch (IOException ex) {
-                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                ctrlp.setVentanaSecundaria("vistaModificarCiudad");
             }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -293,9 +288,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ctrlp.eliminarCiudad(nombreCiudad);
         actualizarListaCiudades();
         ctrlp.actualizarRutasOperador();
-        if(nombreCiudad == ctrlp.getCiudad()){
-            ctrlp.setCiudad(null);
-        }
+        if(nombreCiudad == ctrlp.getCiudad()) ctrlp.setCiudad(null);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -314,9 +307,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         if (accep.equals("si")) {
             ciudadAnadidaFichero();
         }
-        else {
-            ctrlp.eliminarCiudad(nombreCiudad);
-        }
+        else ctrlp.eliminarCiudad(nombreCiudad);
     }//GEN-LAST:event_btnFicheroActionPerformed
 
     private void listaCiudadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCiudadesMouseClicked

@@ -30,7 +30,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         initComponents();
     }
     
-    public VistaModificarRuta(CtrlPresentacion ctrlp) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public VistaModificarRuta(CtrlPresentacion ctrlp){
         this.ctrlp = ctrlp;
         nombreCiudad = ctrlp.getCiudad();
         initComponents();

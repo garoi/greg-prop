@@ -20,9 +20,7 @@ public class ControlUsuario {
     
     
     public boolean loginOperador(String usuario, String password, Operador oper){
-        System.out.println("CU oper1");
         if(oper != null){
-            System.out.println("CU oper2");
             if(oper.getNombreOperador().equals(usuario) && oper.getPassword().equals(password)) return true;
             else return false;
         }
