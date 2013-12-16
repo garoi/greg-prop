@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Representa la clase que controla toda la parte de la capa de vistas del programa.
@@ -159,35 +160,20 @@ public class CtrlPresentacion {
                 setContenidoVentanaPrimaria(vistaLogin.getContentPane());
                 setTamanoVentanaPrimaria(20,10);
                 ventanaPrimaria.setTitle("Mensajeria | Login | " + tipoUsuario);
-//                Dimension d0 = new Dimension(vistaLogin.getPreferredSize());
-//                d0.setSize(d0.getWidth()-6, d0.getHeight()+10);
-//                ventanaPrimaria.setResizable(false);
-//                ventanaPrimaria.pack();
-//                ventanaPrimaria.setSize(d0);
                 vistaInicial = null;
                 break;
             case "vistaCliente":
                 if (vistaCliente == null) vistaCliente = new VistaClientePrincipal(this);
                 setContenidoVentanaPrimaria(vistaCliente.getContentPane());
-//                setTamanoVentanaPrimaria(-8, 15);
-                setTamanoVentanaPrimaria(0,0);
+                setTamanoVentanaPrimaria(10,25);
                 ventanaPrimaria.setTitle("Mensajeria | Cliente");
-//                Dimension d = new Dimension(vistaCliente.getPreferredSize());
-//                d.setSize(d.getWidth()-5, d.getHeight()+15);
-//                ventanaPrimaria.setResizable(false);
-//                ventanaPrimaria.setSize(d);
                 vistaLogin.dispose();
                 break;
             case "vistaOperador":
                 if (vistaOperador == null)vistaOperador = new VistaOperadorPrincipal(this);
                 setContenidoVentanaPrimaria(vistaOperador.getContentPane());
-//                setTamanoVentanaPrimaria(-8, 15);
                 setTamanoVentanaPrimaria(-90,40);
                 ventanaPrimaria.setTitle("Mensajeria | Operador");
-//                Dimension d2 = new Dimension(vistaOperador.getPreferredSize());
-//                d2.setSize(d2.getWidth()-6, d2.getHeight()-12);
-//                ventanaPrimaria.setResizable(false);
-//                ventanaPrimaria.setSize(d2);
                 vistaLogin.dispose();
                 break;
             default:
@@ -206,10 +192,16 @@ public class CtrlPresentacion {
     public void setVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
-                if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
-                ventanaSecundaria = new VistaAnadirPaquete(this);
-                vistaAnadirPaquete = null;
-                ventanaSecundaria.setTitle("Añadir Paquete");
+                if (ciudad == null){
+                    JOptionPane.showMessageDialog(null, "No hay ciudades creadas, por favor contacta con el operador.");
+                    setCiudad(null);
+                }
+                else{
+                    if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
+                    ventanaSecundaria = new VistaAnadirPaquete(this);
+                    vistaAnadirPaquete = null;
+                    ventanaSecundaria.setTitle("Añadir Paquete");
+                }
             break;
                 
             case "vistaModificarRuta":
@@ -274,13 +266,15 @@ public class CtrlPresentacion {
                 ventanaSecundaria.setTitle("Mapa de la ciudad");
             break;
         }
-        setTamanoVentanaSecundaria(0, 0);
-        ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/icono.png"));
-        ventanaSecundaria.setIconImage(img.getImage());
-        ventanaSecundaria.setLocationRelativeTo(null);
-        ventanaSecundaria.setVisible(true);
-        ventanaSecundaria.setResizable(false);
-        ventanaSecundaria.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        if (ventanaSecundaria != null){
+            setTamanoVentanaSecundaria(0, 0);
+            ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/icono.png"));
+            ventanaSecundaria.setIconImage(img.getImage());
+            ventanaSecundaria.setLocationRelativeTo(null);
+            ventanaSecundaria.setVisible(true);
+            ventanaSecundaria.setResizable(false);
+            ventanaSecundaria.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        }
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public void setTamanoVentanaPrimaria(int w, int h)"> 
