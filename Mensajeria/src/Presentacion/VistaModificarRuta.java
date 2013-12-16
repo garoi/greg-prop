@@ -6,11 +6,7 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -184,17 +180,10 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         if (label.length() == res.length()) JOptionPane.showMessageDialog(rootPane, "!No has hecho ningun cambio!");
         if (label.length() > res.length()) JOptionPane.showMessageDialog(rootPane, "!No puedes quitar paquetes de una ruta");
         if (label.length() < res.length()) {
-            try {
-                if(!ctrlp.modificarRuta(ruta, res)) {
-                    JOptionPane.showMessageDialog(rootPane, "No puedes modificar una ciudad si antes has modificado la ciudad");
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+            if(!ctrlp.modificarRuta(ruta, res)) {
+                JOptionPane.showMessageDialog(rootPane, "No puedes modificar una ciudad si antes has modificado la ciudad");
             }
-        }
-        
+        }        
         this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -226,6 +215,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VistaModificarRuta().setVisible(true);
             }
@@ -233,22 +223,14 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     }
     
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
+    @Override
     public void paint (Graphics g) {
         if (!pintado){
             long ta = System.currentTimeMillis();
-            ArrayList<String> nombresCiudad = null;
-            String[] destinos = null;
-            int n = 0;
-            try {
-                nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
-                n = nombresCiudad.size();
-                String label = ctrlp.getDestinosRuta();
-                destinos = label.split(" ");
-            } catch (IOException ex) {
-                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ArrayList<String> nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
+            String pasosRuta = ctrlp.getDestinosRuta();
+            String[] destinos = pasosRuta.split(" ");
+            int n = nombresCiudad.size();
 
             super.paint(g);
             g.setColor(Color.red);
@@ -306,32 +288,24 @@ public class VistaModificarRuta extends javax.swing.JFrame {
                 int idx2 = 1;
                 for (int i = 0; i < puntos.size(); ++i) {
                     for (int j = i+1; j < puntos.size(); ++j) {
-                        try {
-                            float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                        float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
 //                            if(destinos != null) System.out.println("destinos" + destinos);
-                            if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
-                                String a = "a";
-                                String b = "b";
-                                if (a.equals(b))
-                                System.out.println("Entra");
-                                g.setColor(ctrlp.getColorDistancia(fcolor));
-                            }
-                            int[] auxi = puntos.get(i);
-                            int xi = auxi[0]+2;
-                            int yi = auxi[1]+2;
-                            int[] auxj = puntos.get(j);
-                            int xj = auxj[0]+2;
-                            int yj = auxj[1]+2;
-
-                            g.drawLine(xi, yi, xj, yj);
-                            g.setColor(Color.black);
-                        } catch (FileNotFoundException ex) {
-                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (IOException ex) {
-                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                        if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
+                            String a = "a";
+                            String b = "b";
+                            if (a.equals(b))
+                            System.out.println("Entra");
+                            g.setColor(ctrlp.getColorDistancia(fcolor));
                         }
+                        int[] auxi = puntos.get(i);
+                        int xi = auxi[0]+2;
+                        int yi = auxi[1]+2;
+                        int[] auxj = puntos.get(j);
+                        int xj = auxj[0]+2;
+                        int yj = auxj[1]+2;
+
+                        g.drawLine(xi, yi, xj, yj);
+                        g.setColor(Color.black);
                     }
                 }
             }

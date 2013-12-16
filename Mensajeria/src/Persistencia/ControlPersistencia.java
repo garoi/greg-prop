@@ -1,6 +1,5 @@
 package Persistencia;
 
-import Presentacion.VistaOperadorPrincipal;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;

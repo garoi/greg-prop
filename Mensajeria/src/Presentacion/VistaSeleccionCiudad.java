@@ -1,10 +1,6 @@
 package Presentacion;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +34,9 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ciudades = ctrlp.getNombresCiudades();
         listaCiudades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = ciudades;
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public Object getElementAt(int i) { return strings[i]; }
         });
     }
@@ -260,18 +258,9 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
                     nodoB = nodoA+1;
                 }
             }
-            try {
-                ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
-                ctrlp.actualizarVistaSelCiudades();
-                ctrlp.actualizarVentanaSecundaria();
-            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-//                JOptionPane.showMessageDialog(rootPane, "Error en btnAnadirActionPerformed [VistaSeleccionCiudad].");
-                this.dispose();
-            } catch (IOException ex) {
-//                Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-                this.dispose();
-            }
+            ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
+            ctrlp.actualizarVistaSelCiudades();
+            ctrlp.actualizarVentanaSecundaria();
         }
         catch (NumberFormatException ex){
             JOptionPane.showMessageDialog(rootPane, "Has introducido un formato inválido. Tiene que ser un natural.");
@@ -292,17 +281,12 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnFicheroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFicheroActionPerformed
         nombreCiudad = JOptionPane.showInputDialog("Introduce un nombre para la ciudad:");
-        try {
-            ctrlp.crearFichero(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ctrlp.crearFichero(nombreCiudad);
         String accep = JOptionPane.showInputDialog("Has terminado de guardar la ciudad? si/no:");
         if (accep.equals("si")) {
             ciudadAnadidaFichero();
@@ -338,22 +322,8 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
         ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
-        try {
-            ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            ctrlp.leerCiudad(nombreCiudad);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
+        ctrlp.leerCiudad(nombreCiudad);
         actualizarListaCiudades();
     }
 
