@@ -274,43 +274,41 @@ public class VistaModificarRuta extends javax.swing.JFrame {
 
                 g2.setColor (Color.black);
                 g2.drawString(nombresCiudad.get(i),psx,psy);
-
-                g2.fillOval(auxx,auxy,10,10);
-                g2.setColor (Color.blue);
-                g2.fillOval(auxx+2,auxy+2,6,6);
+                if (destinos[0].equals(nombresCiudad.get(i))){
+                    g2.fillOval(auxx-2,auxy-2,14,14);
+                    g2.setColor (Color.white);
+                    g2.fillOval(auxx+1,auxy+1,8,8);
+                }
+                else{
+                    g2.fillOval(auxx,auxy,10,10);
+                    g2.setColor (Color.blue);
+                    g2.fillOval(auxx+2,auxy+2,6,6);
+                }
                 auxAngulo += angulo;
             }
-
             g2.setColor(Color.black);
-            int idxa = 0;
-            int idxb = 1;
             for (int i = 0; i < puntos.size(); ++i) {
                 for (int j = i+1; j < puntos.size(); ++j) {
-//                            if(destinos != null) System.out.println("destinos" + destinos);
                     g2.setColor(Color.black);
                     g2.setStroke(new java.awt.BasicStroke(1));
-                    if(destinos != null && destinos.length >=2 && idxb < destinos.length){
-                        String a = destinos[idxa]; // primer destino
-                        String b = destinos[idxb]; // segundo destino
-                        if ((nombresCiudad.get(i).equals(a) && nombresCiudad.get(j).equals(b)) || (nombresCiudad.get(i).equals(b) && nombresCiudad.get(j).equals(a))){
-                            float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
-                            g2.setStroke(new java.awt.BasicStroke(2));
-                            g2.setColor(ctrlp.getColorDistancia(fcolor));                            
-                            idxa = idxb;
-                            idxb = idxa+1;
-                        }
-//                        g2.setColor(Color.black);
-                    }
                     int[] auxi = puntos.get(i);
-                    int xi = auxi[0]+2;
-                    int yi = auxi[1]+2;
                     int[] auxj = puntos.get(j);
-                    int xj = auxj[0]+2;
-                    int yj = auxj[1]+2;
-
                     g2.drawLine(auxi[0]+2, auxi[1]+2, auxj[0]+2, auxj[1]+2);
-                    
                 }
+            }
+            for (int i = 1; i < destinos.length; i++) {
+                    g2.setStroke(new java.awt.BasicStroke(2));
+                    String a = destinos[i-1]; // primer destino
+                    String b = destinos[i]; // segundo destino
+                    int idxa = nombresCiudad.indexOf(a);
+                    int idxb = nombresCiudad.indexOf(b);
+                    int [] auxa = puntos.get(idxa);
+                    int [] auxb = puntos.get(idxb);
+                    float fcolor = ctrlp.getDistancias(a, b);
+                    g2.setStroke(new java.awt.BasicStroke(2));
+                    g2.setColor(ctrlp.getColorDistancia(fcolor));                            
+                    System.out.println(idxa + ", " + idxb);
+                    g2.drawLine(auxa[0]+2, auxa[1]+2, auxb[0]+2, auxb[1]+2);
             }
         }
         long tb = System.currentTimeMillis()-ta;
