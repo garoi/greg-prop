@@ -104,6 +104,7 @@ public class VistaCiudad extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
     public void paint (Graphics g) {
+        long ta = System.currentTimeMillis();
         if (!pintado){
             ArrayList<String> nombresCiudad = null;
             int n = 0;
@@ -173,6 +174,8 @@ public class VistaCiudad extends javax.swing.JFrame {
             }
         }
         pintado = true;
+        long tb = System.currentTimeMillis()-ta;
+        System.out.println("TD: " + tb );
     }
     // </editor-fold>  
     

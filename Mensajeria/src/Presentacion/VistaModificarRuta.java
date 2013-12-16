@@ -230,6 +230,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
     public void paint (Graphics g) {
+        long ta = System.currentTimeMillis();
         ArrayList<String> nombresCiudad = null;
         String[] destinos = null;
         int n = 0;
@@ -329,6 +330,8 @@ public class VistaModificarRuta extends javax.swing.JFrame {
                 }
             }
         }
+        long tb = System.currentTimeMillis()-ta;
+        System.out.println("Tiempo de dibujo: " + tb);
     }
     // </editor-fold>  
     
