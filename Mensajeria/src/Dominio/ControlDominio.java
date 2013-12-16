@@ -431,18 +431,30 @@ public class ControlDominio {
         return cp.leerCiudad(nombreCiudad);
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){      
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<Float> ciudad){      
         cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
     }
     
-    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+//    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+//        Mapa m = new Mapa();
+//        Fecha f = new Fecha();
+//        m.setFechaMod(f.fechaDeHoy());
+//        m.setTamCiudad(nombres.size());
+//        m.setNombreCiudad(nomCiudad);
+//        m.setNombrePuntos(nombres);
+//        m.setCiudad(ciudad);
+//        cp.guardarMapas(m, nomCiudad);
+//    }
+    
+    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, float[] ciudad){
         Mapa m = new Mapa();
         Fecha f = new Fecha();
+        m.ctrlCrearCiudad(nomCiudad, nombres.size(), nombres, ciudad);
         m.setFechaMod(f.fechaDeHoy());
-        m.setTamCiudad(nombres.size());
-        m.setNombreCiudad(nomCiudad);
-        m.setNombrePuntos(nombres);
-        m.setCiudad(ciudad);
+//        m.setTamCiudad(nombres.size());
+//        m.setNombreCiudad(nomCiudad);
+//        m.setNombrePuntos(nombres);
+//        m.setCiudad(ciudad);
         cp.guardarMapas(m, nomCiudad);
     }
        

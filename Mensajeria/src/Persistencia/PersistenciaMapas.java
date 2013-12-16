@@ -54,7 +54,8 @@ public class PersistenciaMapas {
         return ficheros;
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<Float> ciudad){
+        
         InputStream is = null;
 	BufferedReader br = null;
         String[] temp;
@@ -71,23 +72,16 @@ public class PersistenciaMapas {
                 temp = s.split(delimiter);
                 for(int i = 0; i < temp.length; ++i) nombres.add(temp[i]);
             }
-
-            float num = (float) 0.0;
-            for(int i = 0; i < nombres.size(); ++i){
-                ciudad.add(i, new ArrayList<Float>());
-                for(int j = 0; j < nombres.size(); ++j){
-                    ((ArrayList)ciudad.get(i)).add(num);
-                }
-            }   
+            
             while((s = br.readLine()) != null){
                 temp = s.split(delimiter);
                 if(temp.length == 3){
                     try{
                         int origen = nombres.indexOf(temp[0]);
                         int destino = nombres.indexOf(temp[1]);
-                        Float dist = (float) Float.parseFloat(temp[2]);
-                        ciudad.get(origen).set(destino, dist);
-                        ciudad.get(destino).set(origen, dist);
+                        float dist = (float) Float.parseFloat(temp[2]);
+                        //ciudad[i] = dist;
+                        ciudad.add(dist);
                     }
                     catch(Exception e){
                     }

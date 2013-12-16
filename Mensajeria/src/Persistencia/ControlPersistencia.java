@@ -206,7 +206,7 @@ public class ControlPersistencia {
         pr.eliminarRutaComp(inicioRuta, nombreRuta);
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombre, ArrayList<ArrayList<Float>> ciudad) {
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombre, ArrayList<Float> ciudad) {
         pm.leerMapaFichero(nomFichero, nomCiudad, nombre, ciudad);
     }
     
