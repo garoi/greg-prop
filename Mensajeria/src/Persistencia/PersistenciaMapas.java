@@ -54,7 +54,12 @@ public class PersistenciaMapas {
         return ficheros;
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad, float max, float min){
+        
+        max = (float) 0.0;
+        min = (float) 0.0;
+        boolean first = true;
+        
         InputStream is = null;
 	BufferedReader br = null;
         String[] temp;
@@ -86,6 +91,14 @@ public class PersistenciaMapas {
                         int origen = nombres.indexOf(temp[0]);
                         int destino = nombres.indexOf(temp[1]);
                         Float dist = (float) Float.parseFloat(temp[2]);
+                        if(first){
+                            min = dist;
+                            max = dist;
+                        }
+                        else{
+                            if(dist > max) max = dist;
+                            if(dist < min) min = dist;
+                        }
                         ciudad.get(origen).set(destino, dist);
                         ciudad.get(destino).set(origen, dist);
                     }

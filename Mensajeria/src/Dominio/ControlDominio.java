@@ -429,8 +429,8 @@ public class ControlDominio {
         return cp.leerCiudad(nombreCiudad);
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){      
-        cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad, float max, float min){      
+        cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad, max, min);
     }
     
     public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
