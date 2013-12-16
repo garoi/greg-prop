@@ -674,8 +674,8 @@ public class CtrlPresentacion {
      * @param nombreCiudad ciudad de la ruta
      * @param tipo de ruta que se desea calcular
      */
-    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo){
-        ctrld.calcularRuta(listaEnRutaS, fecha, nombreCiudad, tipo);
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo, boolean compara){
+        ctrld.calcularRuta(listaEnRutaS, fecha, nombreCiudad, tipo, compara);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public String getDestinosRuta()"> 

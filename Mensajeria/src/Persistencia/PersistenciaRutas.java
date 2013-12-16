@@ -59,7 +59,7 @@ public class PersistenciaRutas {
         return null;
     }
     
-    public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad) {
+    public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad, boolean compara) {
          File directorio = new File ("Data/Rutas/");
          System.out.println("LLEGO");
         File[] nombres = directorio.listFiles();
@@ -72,8 +72,10 @@ public class PersistenciaRutas {
             boolean borrar = nombreFichero.startsWith(nombreCiudad + "-" + data);
             boolean borrar2 = nombreFichero.endsWith("-NO_verificada-ruta.txt");
             System.out.println("PASO POR AQUI");
-            if (borrar && borrar2) {
-                file.delete();
+            if (!compara) {
+                if (borrar && borrar2) {
+                    file.delete();
+                }
             }
         }
         if (verificada) {

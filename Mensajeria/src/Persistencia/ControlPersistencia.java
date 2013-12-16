@@ -108,8 +108,8 @@ public class ControlPersistencia {
         return pr.leerRuta(nombre);
     }
     
-    public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad){
-        pr.guardarRuta(x, data, coste, verificada, nombreCiudad);
+    public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad, boolean compara){
+        pr.guardarRuta(x, data, coste, verificada, nombreCiudad, compara);
     }
     
     public void guardadoGeneral(Object lc, Object lp, Object oper){

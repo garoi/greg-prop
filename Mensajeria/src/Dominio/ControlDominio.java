@@ -95,7 +95,7 @@ public class ControlDominio {
      * @param fecha
      * @param r
      */
-    private void calculaRuta(ArrayList<Paquete> copia, String fecha, String turno, Ruta r, String tipo, ArrayList<Paquete> paquetesSeleccionados) {
+    private void calculaRuta(ArrayList<Paquete> copia, String fecha, String turno, Ruta r, String tipo, ArrayList<Paquete> paquetesSeleccionados, boolean compara) {
         r.crearGrafo(copia, map);
         if (tipo.equals("rapidamente")) {
             r.calcularRapida();
@@ -114,7 +114,7 @@ public class ControlDominio {
         r.setListaPaquetesRuta(paquetesSeleccionados);
         String nombreRuta = fecha + "-" + turno + "-";
         String coste = tipo + "-Coste-" + Float.toString(r.getCosteRuta());
-        cp.guardarRuta(r, nombreRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad());
+        cp.guardarRuta(r, nombreRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad(), compara);
     }
     
     public void paquetesEnviados(String nombreRuta){
@@ -342,7 +342,7 @@ public class ControlDominio {
         return result;
     }
 
-    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo){
+    public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo, boolean compara){
         Ruta r = new Ruta();
         String turno = saberTurno(fecha);
         String fecha2 = fecha.substring(0,fecha.length()-2);
@@ -366,7 +366,7 @@ public class ControlDominio {
                 nom = paquetesSeleccionados.get(i).getDestino();
             }
         }
-        calculaRuta(copia, fecha2, turno, r, tipo, paquetesSeleccionados);
+        calculaRuta(copia, fecha2, turno, r, tipo, paquetesSeleccionados, compara);
     }
 
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad){
@@ -374,7 +374,7 @@ public class ControlDominio {
         rval.acceptarRuta();
         String nombreRuta = fecha + "-";
         String coste = rval.getTipo()+ "-Coste-" + Float.toString(rval.getCosteRuta());
-        cp.guardarRuta(rval, nombreRuta, coste, rval.isVerificada(), nombreCiudad);
+        cp.guardarRuta(rval, nombreRuta, coste, rval.isVerificada(), nombreCiudad, false);
     }
 
     public void eliminarRuta(String ruta) {
@@ -540,7 +540,7 @@ public class ControlDominio {
                     r.crearGrafoMod(map);
                     String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-";
                     String coste = r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
-                    cp.guardarRuta(r, nombresRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad());
+                    cp.guardarRuta(r, nombresRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad(), false);
                     return true;
                 }
                 else return false;

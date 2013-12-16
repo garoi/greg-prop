@@ -157,14 +157,14 @@ public class Ruta implements Serializable {
     public void rapidaOptimizada(){
         SolveGreedy sg = new SolveGreedy(grafo);
         permutacion = sg.solve();
-        /*Optimizacion op = new Optimizacion();
-        op.inicializa(permutacion, nombres, grafo, costeRuta);
-        boolean cambio = op.randSwap();
-        if(cambio){
-            permutacion = op.getSolucion();
-            costeRuta = op.getComparador();
-        }*/
         distanciaRuta();
+        Optimizacion op = new Optimizacion();
+        op.setGrafo(grafo);
+        op.setPermutacion(permutacion);
+        op.setCoste(costeRuta);
+        op.randSwap(permutacion.length*2);
+        permutacion = op.getPermutacion();
+        costeRuta = op.getCoste();
     }
     
     /**
@@ -197,10 +197,13 @@ public class Ruta implements Serializable {
             }
             permutacion = aux2;
             Optimizacion op = new Optimizacion();
-            op.setM(grafo);
+            distanciaRuta();
+            op.setGrafo(grafo);
             op.setPermutacion(permutacion);
-            op.RandSwap(permutacion.length*2);
+            op.setCoste(costeRuta);
+            op.randSwap(permutacion.length*2500);
             permutacion = op.getPermutacion();
+            costeRuta = op.getCoste();
         }
         else {
             SolveGreedy sg = new SolveGreedy(grafo);

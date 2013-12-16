@@ -657,7 +657,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnRutaRapidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapidaActionPerformed
         if (!listaEnRutas.isEmpty()) {
             //ctrlp.eliminarRutaComp(nombreRuta, null);
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente");
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente", false);
             actualizarRutas();
         }
     }//GEN-LAST:event_btnRutaRapidaActionPerformed
@@ -703,7 +703,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnRutaOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaOptimaActionPerformed
         if (!listaEnRutas.isEmpty()) {
             //ctrlp.eliminarRutaComp(nombreRuta, null);
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente");
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente", false);
             actualizarRutas();
         }
     }//GEN-LAST:event_btnRutaOptimaActionPerformed
@@ -713,7 +713,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnRutaRapOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaRapOptimaActionPerformed
         if (!listaEnRutas.isEmpty()) {
             //ctrlp.eliminarRutaComp(nombreRuta, null);
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima");
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima", false);
             actualizarRutas();
         }
     }//GEN-LAST:event_btnRutaRapOptimaActionPerformed
@@ -725,9 +725,10 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
         if (!listaEnRutas.isEmpty()) {
             actualizarListaPendientes();
             ctrlp.eliminarRutaComp(nombreRuta, null);
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente");
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente");
-            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima");
+            boolean compara = true;
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente", compara);
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente", compara);
+            ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima", compara);
             ctrlp.setVentanaSecundaria("vistaCompararRutas");
             actualizarListaEnRuta();
         }
