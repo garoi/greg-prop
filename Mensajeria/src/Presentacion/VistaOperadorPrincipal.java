@@ -798,13 +798,11 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt)">  
     private void btnCompararRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararRutasActionPerformed
         listaPendientesS = ctrlp.getPaquetesPendientes(nombreCiudad, fechaCD);
-        System.out.println("AMSDJGSEGRJASDH");
         if (!listaEnRutas.isEmpty()) {
             actualizarListaPendientes();
             ctrlp.eliminarRutaComp(nombreRuta, null);
             try {
                 ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "lentamente");
-                System.out.println("lenta");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -812,7 +810,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
             try {
                 ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidamente");
-                System.out.println("rapida");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -820,7 +817,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
             }
             try {
                 ctrlp.calcularRuta(listaEnRutas, fechaCD, nombreCiudad, "rapidaOptima");
-                System.out.println("rapopt");
             } catch (IOException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

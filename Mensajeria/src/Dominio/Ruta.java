@@ -164,6 +164,7 @@ public class Ruta implements Serializable {
             permutacion = op.getSolucion();
             costeRuta = op.getComparador();
         }
+        distanciaRuta();
     }
     
     /**
@@ -183,7 +184,6 @@ public class Ruta implements Serializable {
      * @param
      */
     public void calcularChristofides() {
-        System.out.println("entro a crhis");
         if (nombres.length > 3) {
             Christofides ch = new Christofides();
             ch.setGrafo(grafo);
@@ -207,18 +207,6 @@ public class Ruta implements Serializable {
             SolveGreedy sg = new SolveGreedy(grafo);
             permutacion = sg.solve();
         }
-    }
-    
-    /**
-     * Muestra los puntos del mapa por donde pasara la ruta
-     * @param
-     */
-    public void mostrarRuta() {
-        System.out.println("La ruta pasara por los siguientes puntos del mapa:");
-        for (int i = 0; i < permutacion.length; ++i) {
-            System.out.print(" " + nombres[permutacion[i]]);
-        }
-        System.out.println();
     }
     
     public void distanciaRuta() {
@@ -259,9 +247,7 @@ public class Ruta implements Serializable {
         grafo = new float[paquetesSeleccionados.size()][paquetesSeleccionados.size()];
         if (nombres != null) nombres = null;
         nombres = new String[paquetesSeleccionados.size()];
-        System.out.println("CREAR GRAFO "+ nombres.length);
         ArrayList<ArrayList<Float>> ciudads = mapa.getCiudad();
-        System.out.println("CREAR GRAFO");
         for (int i = 0; i < paquetesSeleccionados.size(); ++i) {
             nombres[i] = paquetesSeleccionados.get(i).getDestino();
             listaPaquetesRuta.add(paquetesSeleccionados.get(i));

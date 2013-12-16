@@ -153,6 +153,7 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
         ArrayList<String> listaEnRutaS = new ArrayList<>();
         ctrlp.setListaEnRutaS(listaEnRutaS);
         ctrlp.actualizarListaEnRuta();
+        ctrlp.actualizarRutasOperador();
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
@@ -165,7 +166,7 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnVerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerMouseClicked
-        /*String ruta = (String) listRutas.getSelectedValue();
+        String ruta = (String) listRutas.getSelectedValue();
         if(ruta == null)
             JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ruta!");
         else{
@@ -177,7 +178,7 @@ public class VistaComparacionRutas extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(VistaOperadorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }*/
+        }
     }//GEN-LAST:event_btnVerMouseClicked
     
     

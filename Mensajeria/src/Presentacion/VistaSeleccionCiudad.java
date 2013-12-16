@@ -313,7 +313,6 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<ArrayList<Float>> ciudad = new ArrayList<>();
         ctrlp.leerMapaFichero(nombreCiudad+"-mapa.txt", nombreCiudad,nombres,ciudad);
-        
         try {
             ctrlp.pasarAObjeto(nombreCiudad, nombres, ciudad);
         } catch (IOException ex) {

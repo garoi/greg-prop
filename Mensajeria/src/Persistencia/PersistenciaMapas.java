@@ -67,27 +67,21 @@ public class PersistenciaMapas {
                 temp = s.split(delimiter);
                 for(int i = 0; i < temp.length; ++i) nombres.add(temp[i]);
             }
-            
-            /*ArrayList<Float> ll = new ArrayList<Float>();
-            Float zero = new Float("0.0");
-            
-            for(int i = 0; i < nombres.size(); ++i) ll.add(zero);
-            for(int i = 0; i < nombres.size(); ++i) ciudad.add(ll);*/
-            
+
+            float num = (float) 0.0;
             for(int i = 0; i < nombres.size(); ++i){
                 ciudad.add(i, new ArrayList<Float>());
                 for(int j = 0; j < nombres.size(); ++j){
-                    ((ArrayList)ciudad.get(i)).add(0.0);
+                    ((ArrayList)ciudad.get(i)).add(num);
                 }
-            }
-            
+            }   
             while((s = br.readLine()) != null){
                 temp = s.split(delimiter);
                 if(temp.length == 3){
                     try{
                         int origen = nombres.indexOf(temp[0]);
                         int destino = nombres.indexOf(temp[1]);
-                        Float dist = new Float(temp[2]);
+                        Float dist = (float) Float.parseFloat(temp[2]);
                         ciudad.get(origen).set(destino, dist);
                         ciudad.get(destino).set(origen, dist);
                     }
@@ -95,7 +89,6 @@ public class PersistenciaMapas {
                     }
                 }
             }
-            //for(int i = 0; i < nombres.size(); ++i) ciudad.get(i).set(i,zero);
         }
         catch(Exception e){
         }    

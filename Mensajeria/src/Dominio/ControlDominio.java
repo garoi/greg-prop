@@ -62,7 +62,6 @@ public class ControlDominio {
     }
     
     public boolean loginCliente(String usuario, String password){
-        //HA DE RETORNAR UN CLIENT
         int login =  cu.loginCliente(usuario, password, lc, cl);
         if(login == -1){
             return false;
@@ -99,10 +98,9 @@ public class ControlDominio {
      * @param r
      * @throws IOException 
      */
-    private void calculaRuta(ArrayList<Paquete> paquetesSeleccionados, String fecha, String turno, Ruta r, String tipo) throws IOException {
-        r.crearGrafo(paquetesSeleccionados, map);
+    private void calculaRuta(ArrayList<Paquete> copia, String fecha, String turno, Ruta r, String tipo, ArrayList<Paquete> paquetesSeleccionados) throws IOException {
+        r.crearGrafo(copia, map);
         if (tipo.equals("rapidamente")) {
-            System.out.println("entro al id fe control de dominio");
             r.calcularRapida();
         }
         else if (tipo.equals("rapidaOptima")) {
@@ -116,6 +114,7 @@ public class ControlDominio {
         r.setFecha(fecha);
         r.setTurno(turno);
         r.setTipo(tipo);
+        r.setListaPaquetesRuta(paquetesSeleccionados);
         String nombreRuta = fecha + "-" + turno + "-" + tipo + "-Coste-" + Float.toString(r.getCosteRuta());
         cp.guardarRuta(r, nombreRuta, r.isVerificada(), r.getMapa().getNombreCiudad());
     }
@@ -386,7 +385,17 @@ public class ControlDominio {
             p = oper.buscarPaquete(idPaquete);
             paquetesSeleccionados.add(p);
         }
-        calculaRuta(paquetesSeleccionados, fecha2, turno, r, tipo);
+        Collections.sort(paquetesSeleccionados, new Paquete.DestinoComparator());
+        ArrayList<Paquete> copia = new ArrayList<>();
+        String nom = paquetesSeleccionados.get(0).getDestino();
+        copia.add(paquetesSeleccionados.get(0));
+        for (int i = 1; i < paquetesSeleccionados.size(); ++i) {
+            if(!paquetesSeleccionados.get(i).getDestino().equals(nom)){
+                copia.add(paquetesSeleccionados.get(i));
+                nom = paquetesSeleccionados.get(i).getDestino();
+            }
+        }
+        calculaRuta(copia, fecha2, turno, r, tipo, paquetesSeleccionados);
     }
 
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -440,7 +449,7 @@ public class ControlDominio {
        return cp.leerCiudad(nombreCiudad);
     }
     
-    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
+    public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){      
         cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
     }
     
@@ -468,7 +477,6 @@ public class ControlDominio {
     
     public void modificaDistancia(String nombre1, String nombre2, float dist) throws IOException, ClassNotFoundException{
         map.setDistancia(nombre1, nombre2, dist);
-        System.out.println("oink oink");
         Fecha f = new Fecha();
         map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());

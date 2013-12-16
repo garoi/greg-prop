@@ -120,15 +120,12 @@ public class CtrlPresentacion {
         ciudad = nombreCiudad;
         if (vistaOperador != null) {
             vistaOperador.actualizarCiudad(ciudad);
-            System.out.println("vistaOperador.actualizarCiudad(ciudad);");
         }
         if (vistaModificarCiudad != null){
             vistaModificarCiudad.setCiudad(ciudad);
-            System.out.println("vistaModificarCiudad.setCiudad(ciudad)");
         }
         if (dibujoCiudad != null) {
             dibujoCiudad.setCiudad(ciudad);
-            System.out.println("dibujoCiudad.setCiudad(ciudad)");
         }
     } // </editor-fold>
     
@@ -760,7 +757,9 @@ public class CtrlPresentacion {
      */
     public void eliminarRuta(String ruta){
         ctrld.eliminarRuta(ruta);
-        if (this.ruta == ruta) this.ruta = null;
+        if (this.ruta == ruta) {
+            this.ruta = null;
+        }
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad)"> 
