@@ -15,7 +15,7 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;
     private String nombreCiudad;
     private String[] ciudades;
-
+    int idx;
     
     /**
      * Creates new form VistaSeleccionarCiudad
@@ -204,8 +204,10 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         int idx = listaCiudades.getSelectedIndex();      
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
-        this.setVisible(false);
-        ctrlp.setCiudad(nombreCiudad);
+        if(nombreCiudad != null){
+            this.setVisible(false);
+            ctrlp.setCiudad(nombreCiudad);
+        }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
@@ -214,16 +216,18 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
      * @param evt el evento de click sobre el botón.
      */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        try {
-            ctrlp.setVentanaSecundaria("vistaModificarCiudad");
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int idx = listaCiudades.getSelectedIndex();      
-        String nombreCiudad = (String) listaCiudades.getSelectedValue();
-        ctrlp.setCiudad(nombreCiudad);
+            int idx = listaCiudades.getSelectedIndex();   
+            String nombreCiudad = (String) listaCiudades.getSelectedValue();
+            if(nombreCiudad != null){
+                ctrlp.setCiudad(nombreCiudad);
+                try {
+                    ctrlp.setVentanaSecundaria("vistaModificarCiudad");
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
@@ -266,7 +270,6 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
         // Eliminar una ciudad de la lista.
         int idx = listaCiudades.getSelectedIndex();
         String nombreCiudad = (String) listaCiudades.getSelectedValue();
-        System.out.println("nombreeeee : " + nombreCiudad);
         ctrlp.eliminarCiudad(nombreCiudad);
         actualizarListaCiudades();       
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -294,6 +297,13 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
 
     private void listaCiudadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCiudadesMouseClicked
         // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int idx = listaCiudades.getSelectedIndex();      
+            String nombreCiudad = (String) listaCiudades.getSelectedValue();
+            this.setVisible(false);
+            ctrlp.setCiudad(nombreCiudad);
+        }
+        //idx = ciudades.getSelectedIndex();
     }//GEN-LAST:event_listaCiudadesMouseClicked
 
     /**

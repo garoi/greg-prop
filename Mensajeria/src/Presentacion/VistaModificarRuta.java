@@ -231,10 +231,13 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
     public void paint (Graphics g) {
         ArrayList<String> nombresCiudad = null;
+        String[] destinos = null;
         int n = 0;
         try {
             nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
             n = nombresCiudad.size();
+            String label = ctrlp.getDestinosRuta();
+            destinos = label.split(" ");
         } catch (IOException ex) {
             Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -264,7 +267,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
             int p1x = (int) (Math.cos(Math.toRadians(auxAngulo))*radio);
             int p1y = (int) (Math.sin(Math.toRadians(auxAngulo))*radio);
 
-            if(auxAngulo > 240){
+            if(auxAngulo > 270){
                 p1x *= -1;
                 p1x *= -1;
             }
@@ -286,15 +289,36 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         }
 
         g.setColor(Color.black);
+        int idx1 = 0;
+        int idx2 = 1;
         for (int i = 0; i < puntos.size(); ++i) {
             for (int j = i+1; j < puntos.size(); ++j) {
-                int[] auxi = puntos.get(i);
-                int xi = auxi[0]+3;
-                int yi = auxi[1]+3;
-                int[] auxj = puntos.get(j);
-                int xj = auxj[0]+3;
-                int yj = auxj[1]+3;
-                g.drawLine(xi, yi, xj, yj);
+                try {
+                    float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                    if(destinos != null) System.out.println("destinos" + destinos);
+                    if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
+                        String a = "a";
+                        String b = "b";
+                        if (a.equals(b))
+                        System.out.println("Entra");
+                        g.setColor(ctrlp.getColorDistancia(fcolor));
+                    }
+                    int[] auxi = puntos.get(i);
+                    int xi = auxi[0]+4;
+                    int yi = auxi[1]+4;
+                    int[] auxj = puntos.get(j);
+                    int xj = auxj[0]+4;
+                    int yj = auxj[1]+4;
+                    
+                    g.drawLine(xi, yi, xj, yj);
+                    g.setColor(Color.black);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(VistaModificarRuta.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

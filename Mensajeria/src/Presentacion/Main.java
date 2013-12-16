@@ -1,5 +1,5 @@
 package Presentacion;
-import Dominio.Mensajeria;
+import Dominio.ControlDominio;
 /**
  *
  * @author Luis García Estrades https://github.com/lgarest

@@ -222,20 +222,4 @@ public class Operador implements Serializable {
             }
         }
     }
-
-//    /**
-//     * Modifica la ciudad del operador.
-//     * @param map ciudad
-//     */
-//    public void modificarCiudad(Mapa map) {
-//        map.modificarCiudad();
-//    }
-    
-    /**
-     * Muestra la ciudad del operador
-     * @param map ciudad.
-     */
-    private void verCiudad(Mapa map) {
-        map.imprimirCiudad();
-    }
 }

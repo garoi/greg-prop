@@ -213,7 +213,7 @@
                   <Component id="botonEliminar" linkSize="2" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="btnAyuda" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="212" max="32767" attributes="0"/>
+                  <EmptySpace pref="224" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
