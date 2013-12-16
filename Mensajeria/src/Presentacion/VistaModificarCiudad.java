@@ -250,9 +250,9 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
 
             ctrlp.anadirPunto(nombre, distancias);
         } catch (IOException ex) {
-            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         }
     }//GEN-LAST:event_btnAnadirActionPerformed
 
@@ -260,17 +260,13 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         try {
             ctrlp.modificarCiudadFichero(ciudad); 
         } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaModificarCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
+        } catch (ClassNotFoundException ex){
+            this.dispose();
         }
         String accep = JOptionPane.showInputDialog("Has terminado de guardar la ciudad? si/no:");
-        if (accep.equals("si")) {
-            ciudadAnadidaFichero();
-        }
-        else {
-            ctrlp.eliminarCiudad(ciudad);
-        }
+        if (accep.equals("si")) ciudadAnadidaFichero();
+        else ctrlp.eliminarCiudad(ciudad);
     }//GEN-LAST:event_btnFicheroActionPerformed
 
     public void ciudadAnadidaFichero() {
@@ -280,16 +276,16 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         try {
             ctrlp.leerCiudad(ciudad);
         } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         }
         try {
             ctrlp.pasarAObjeto(ciudad, nombres, ciudadDist);
         } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            this.dispose();
         }
     }
     

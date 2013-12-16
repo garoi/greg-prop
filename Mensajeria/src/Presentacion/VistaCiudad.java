@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class VistaCiudad extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;
     private String nombreCiudad;
+    private boolean pintado;
     
     /**
      * Creates new form Mierdas
@@ -32,11 +33,13 @@ public class VistaCiudad extends javax.swing.JFrame {
         nombreCiudad = ctrlp.getCiudad();
         System.out.println(nombreCiudad);
         initComponents();
+        pintado = false;
     }
     // </editor-fold> 
     
     public void setCiudad(String nombreCiudad){
         this.nombreCiudad = nombreCiudad;
+        pintado=false;
     }
     
     /**
@@ -52,7 +55,6 @@ public class VistaCiudad extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 600));
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -98,73 +100,68 @@ public class VistaCiudad extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="public void paint (Graphics g)"> 
     public void paint (Graphics g) {
-        ArrayList<String> nombresCiudad = null;
-        int n = 0;
-        try {
-            nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
-            n = nombresCiudad.size();
-            super.paint(g);
-            g.setColor(Color.red);
-            int maxWidth = this.getWidth();
-            int maxHeight = this.getHeight();
-
-            g.setColor (Color.black);
-            float factor = maxWidth;
-            float diametro = factor*0.8f;
-            if(maxWidth<maxHeight) factor = maxHeight;
-
-            double angulo = 360 / n;
-            double radio = diametro / 2;
-            int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5;
-            int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) - 5;
-
-            ArrayList<int[]> puntos = new ArrayList();
-            double auxAngulo = 0.0f;
-            for(int i = 0; i < n; i++){
-                int p1x = (int) (Math.cos(Math.toRadians(auxAngulo))*radio);
-                int p1y = (int) (Math.sin(Math.toRadians(auxAngulo))*radio);
-                
-                
-                if(auxAngulo > 270){
-                    p1x *= -1;
-                    p1x *= -1;
-                }
-                else if(auxAngulo > 180) p1y *= -1;
-                else if(auxAngulo >= 90) p1y *= -1;
-
-                int auxx = p1x + centrox;
-                int auxy = p1y + centroy;
-                int[] auxPair = {auxx, auxy};
-                puntos.add(auxPair);
+        if (!pintado){
+            ArrayList<String> nombresCiudad = null;
+            int n = 0;
+            try {
+                nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
+                n = nombresCiudad.size();
+                super.paint(g);
+                g.setColor(Color.red);
+                int maxWidth = this.getWidth();
+                int maxHeight = this.getHeight();
 
                 g.setColor (Color.black);
-                g.drawString(nombresCiudad.get(i), auxx -5, auxy-5);
+                float factor = maxWidth;
+                float diametro = factor*0.8f;
+                if(maxWidth<maxHeight) factor = maxHeight;
 
-                g.fillOval(auxx,auxy,10,10);
-                g.setColor (Color.blue);
-                g.fillOval(auxx+2,auxy+2,6,6);
-                auxAngulo += angulo;
-            }
+                double angulo = 360f / n;
+                double radio = diametro / 2;
+                int centrox = Math.round(factor*0.1f+factor*0.4f) - 5;
+                int centroy = Math.round(factor*0.15f+factor*0.4f) - 5;
 
-            g.setColor(Color.black);
-            for (int i = 0; i < puntos.size(); ++i) {
-                for (int j = i+1; j < puntos.size(); ++j) {
-                    int[] auxi = puntos.get(i);
-                    int xi = auxi[0]+3;
-                    int yi = auxi[1]+3;
-                    int[] auxj = puntos.get(j);
-                    int xj = auxj[0]+3;
-                    int yj = auxj[1]+3;
-                    float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
-                    g.setColor(ctrlp.getColorDistancia(fcolor));
-                    g.drawLine(xi, yi, xj, yj);
+                System.out.println("angulo:" + angulo);
+                ArrayList<int[]> puntos = new ArrayList();
+                double auxAngulo = 0.0f;
+                for(int i = 0; i < n; i++){
+                    double xcos = Math.cos(Math.toRadians(auxAngulo));
+                    double ysin = Math.sin(Math.toRadians(auxAngulo));
+                    int p1x = (int) (xcos*radio);
+                    int p1y = (int) (ysin*radio);
+                    int psx = (int) (xcos*(radio*1.065)) + centrox-1;
+                    int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
+                    p1y *= -1;
+
+                    int auxx = p1x + centrox;
+                    int auxy = p1y + centroy;
+                    int[] auxPair = {auxx, auxy};
+                    puntos.add(auxPair);
+
+                    g.setColor (Color.black);
+                    g.drawString(nombresCiudad.get(i),psx,psy);
+
+                    g.fillOval(auxx,auxy,10,10);
+                    g.setColor (Color.blue);
+                    g.fillOval(auxx+2,auxy+2,6,6);
+                    auxAngulo += angulo;
                 }
+                for (int i = 0; i < puntos.size(); ++i) {
+                    for (int j = i+1; j < puntos.size(); ++j) {
+                        int[] auxi = puntos.get(i);
+                        int[] auxj = puntos.get(j);
+                        float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                        g.setColor(ctrlp.getColorDistancia(fcolor));
+                        g.drawLine(auxi[0]+3, auxi[1]+3, auxj[0]+3, auxj[1]+3);
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaCiudad.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pintado = true;
     }
     // </editor-fold>  
     

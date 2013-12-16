@@ -256,7 +256,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         int origx = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
         int origy = Math.round(factor*0.15f) - 5 + this.panelDibujoRuta.getY();
 
-        double angulo = 360 / n;
+        double angulo = 360f / n;
         double radio = diametro / 2;
         int centrox = Math.round(factor*0.1f) + Math.round(factor*0.4f) - 5 + this.panelDibujoRuta.getX();
         int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) + this.panelDibujoRuta.getY();
@@ -264,24 +264,22 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         ArrayList<int[]> puntos = new ArrayList();
         double auxAngulo = 0.0f;
         for(int i = 0; i < n; i++){
-            int p1x = (int) (Math.cos(Math.toRadians(auxAngulo))*radio);
-            int p1y = (int) (Math.sin(Math.toRadians(auxAngulo))*radio);
-
-            if(auxAngulo > 270){
-                p1x *= -1;
-                p1x *= -1;
-            }
-            else if(auxAngulo > 180) p1y *= -1;
-            else if(auxAngulo > 90) p1y *= -1;
+            double xcos = Math.cos(Math.toRadians(auxAngulo));
+            double ysin = Math.sin(Math.toRadians(auxAngulo));
+            int p1x = (int) (xcos*radio);
+            int p1y = (int) (ysin*radio);
+            int psx = (int) (xcos*(radio*1.065)) + centrox-1;
+            int psy = (int) (-ysin*(radio*1.065)) + centroy+8;
+            p1y *= -1;
 
             int auxx = p1x + centrox;
             int auxy = p1y + centroy;
             int[] auxPair = {auxx, auxy};
             puntos.add(auxPair);
-            
+
             g.setColor (Color.black);
-            g.drawString(nombresCiudad.get(i), auxx -5, auxy-5);
-            
+            g.drawString(nombresCiudad.get(i),psx,psy);
+
             g.fillOval(auxx,auxy,10,10);
             g.setColor (Color.blue);
             g.fillOval(auxx+2,auxy+2,6,6);

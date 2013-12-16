@@ -800,7 +800,7 @@ public class CtrlPresentacion {
 //        System.out.println("\nmax " + max);
 //        System.out.println("min " + min);
 //        System.out.println("d " + d);
-        float proporcion = (d-min)*100f/(max-min);
+        float proporcion = ((d-min)*100f)/(max-min);
 //        System.out.println("proporcion " + proporcion);
 	float rd = 1f;
 	float gd = 1f;

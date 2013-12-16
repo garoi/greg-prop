@@ -233,37 +233,56 @@ public class VistaSeleccionCiudad extends javax.swing.JFrame {
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         ArrayList<String> nombreNodos = new ArrayList();
         String nombreCiudad = JOptionPane.showInputDialog("Introduce el nombre de la ciudad:");
+        while(nombreCiudad.isEmpty() || nombreCiudad.contains(" "))nombreCiudad = JOptionPane.showInputDialog("¡Introduce un nombre de la ciudad válido!");
         nombreCiudad = nombreCiudad;
         String strnNodos = JOptionPane.showInputDialog("Introduce el número de puntos:");
-        int nNodos = Integer.parseInt(strnNodos);
-        int auxdistancias = (nNodos*(nNodos-1))/2;
-        float[] distancias = new float[auxdistancias];
-        for(int i = 0; i < nNodos; i++){
-            String mensaje = String.format("Introduce el nombre del punto %d (%d restantes):", i+1, nNodos - i - 1);
-            String nombreNodo = JOptionPane.showInputDialog(mensaje);
-            while(nombreNodos.contains(nombreNodo) || nombreNodo == ""){
-                nombreNodo = JOptionPane.showInputDialog("Introduce un nombre que no hayas introducido:");
+        while(strnNodos.isEmpty() || strnNodos.contains(" ")) strnNodos = JOptionPane.showInputDialog("¡Introduce un número válido!");
+        int nNodos = 1;
+        try{
+            nNodos = Integer.parseInt(strnNodos);
+            int auxdistancias = (nNodos*(nNodos-1))/2;
+            float[] distancias = new float[auxdistancias];
+            for(int i = 0; i < nNodos; i++){
+                String mensaje = String.format("Introduce el nombre del punto %d (%d restantes):", i+1, nNodos - i - 1);
+                String nombreNodo = JOptionPane.showInputDialog(mensaje);
+                while(nombreNodos.contains(nombreNodo) || nombreNodo == "")nombreNodo = JOptionPane.showInputDialog("Introduce un nombre que no hayas introducido:");
+                nombreNodos.add(nombreNodo);
             }
-            nombreNodos.add(nombreNodo);
-        }
-        for (int i = 0; i < auxdistancias; i++) {
-            String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", "pene", "pene"));
-            float auxDistancia = Float.parseFloat(distanciaEntreNodos);
-            while(auxDistancia <= 0.0f){
-                distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
-                auxDistancia = Float.parseFloat(distanciaEntreNodos);
+            int nodoA = 0;
+            int nodoB = 1;
+            for (int i = 0; i < auxdistancias; i++) {
+                String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", nombreNodos.get(nodoA), nombreNodos.get(nodoB)));
+                while(distanciaEntreNodos.isEmpty() || distanciaEntreNodos.contains(" ")) distanciaEntreNodos = JOptionPane.showInputDialog("Por favor, introduce un natural.");
+                float auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                while(auxDistancia <= 0.0f){
+                    distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
+                    auxDistancia = Float.parseFloat(distanciaEntreNodos);
+                }
+                distancias[i] = auxDistancia;
+                nodoB += 1;
+                if (nodoB==nNodos){
+                    nodoA += 1;
+                    nodoB = nodoA+1;
+                }
             }
-            distancias[i] = auxDistancia;
+            try {
+                ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
+                ctrlp.actualizarVistaSelCiudades();
+                ctrlp.actualizarVentanaSecundaria();
+            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+//                JOptionPane.showMessageDialog(rootPane, "Error en btnAnadirActionPerformed [VistaSeleccionCiudad].");
+                this.dispose();
+            } catch (IOException ex) {
+//                Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+                this.dispose();
+            }
         }
-        try {
-            ctrlp.anadirCiudad(nombreCiudad, nNodos, nombreNodos, distancias);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(VistaSeleccionCiudad.class.getName()).log(Level.SEVERE, null, ex);
+        catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(rootPane, "Has introducido un formato inválido. Tiene que ser un natural.");
+            this.dispose();
         }
-        ctrlp.actualizarVistaSelCiudades();
-        ctrlp.actualizarVentanaSecundaria();
+        
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
