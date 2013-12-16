@@ -6,6 +6,7 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -223,6 +224,7 @@ public class VistaModificarRuta extends javax.swing.JFrame {
     @Override
     public void paint (Graphics g) {
         long ta = System.currentTimeMillis();
+        Graphics2D g2 = (Graphics2D) g;
         ArrayList<String> nombresCiudad = ctrlp.getNombresCiudad(nombreCiudad);
         String pasosRuta = ctrlp.getDestinosRuta();
         String[] destinos = pasosRuta.split(" ");
@@ -246,11 +248,11 @@ public class VistaModificarRuta extends javax.swing.JFrame {
         int centroy = Math.round(factor*0.15f) + Math.round(factor*0.4f) + this.panelDibujoRuta.getY();
 
         if (n == 1){
-            g.fillOval(centrox,centroy,10,10);
-            g.setColor (Color.blue);
-            g.fillOval(centrox+2,centroy+2,6,6);
-            g.setColor (Color.black);
-            g.drawString(nombresCiudad.get(0), centrox, centroy);
+            g2.fillOval(centrox,centroy,10,10);
+            g2.setColor (Color.blue);
+            g2.fillOval(centrox+2,centroy+2,6,6);
+            g2.setColor (Color.black);
+            g2.drawString(nombresCiudad.get(0), centrox, centroy);
         }
         else{
 
@@ -270,28 +272,34 @@ public class VistaModificarRuta extends javax.swing.JFrame {
                 int[] auxPair = {auxx, auxy};
                 puntos.add(auxPair);
 
-                g.setColor (Color.black);
-                g.drawString(nombresCiudad.get(i),psx,psy);
+                g2.setColor (Color.black);
+                g2.drawString(nombresCiudad.get(i),psx,psy);
 
-                g.fillOval(auxx,auxy,10,10);
-                g.setColor (Color.blue);
-                g.fillOval(auxx+2,auxy+2,6,6);
+                g2.fillOval(auxx,auxy,10,10);
+                g2.setColor (Color.blue);
+                g2.fillOval(auxx+2,auxy+2,6,6);
                 auxAngulo += angulo;
             }
 
-            g.setColor(Color.black);
-            int idx1 = 0;
-            int idx2 = 1;
+            g2.setColor(Color.black);
+            int idxa = 0;
+            int idxb = 1;
             for (int i = 0; i < puntos.size(); ++i) {
                 for (int j = i+1; j < puntos.size(); ++j) {
-                    float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
 //                            if(destinos != null) System.out.println("destinos" + destinos);
-                    if(destinos != null && destinos.length >=2 && nombresCiudad.get(i).equals(destinos[idx1]) && nombresCiudad.get(j).equals(destinos[idx2])){
-                        String a = "a";
-                        String b = "b";
-                        if (a.equals(b))
-                        System.out.println("Entra");
-                        g.setColor(ctrlp.getColorDistancia(fcolor));
+                    g2.setColor(Color.black);
+                    g2.setStroke(new java.awt.BasicStroke(1));
+                    if(destinos != null && destinos.length >=2 && idxb < destinos.length){
+                        String a = destinos[idxa]; // primer destino
+                        String b = destinos[idxb]; // segundo destino
+                        if ((nombresCiudad.get(i).equals(a) && nombresCiudad.get(j).equals(b)) || (nombresCiudad.get(i).equals(b) && nombresCiudad.get(j).equals(a))){
+                            float fcolor = ctrlp.getDistancias(nombresCiudad.get(i), nombresCiudad.get(j));
+                            g2.setStroke(new java.awt.BasicStroke(2));
+                            g2.setColor(ctrlp.getColorDistancia(fcolor));                            
+                            idxa = idxb;
+                            idxb = idxa+1;
+                        }
+//                        g2.setColor(Color.black);
                     }
                     int[] auxi = puntos.get(i);
                     int xi = auxi[0]+2;
@@ -300,8 +308,8 @@ public class VistaModificarRuta extends javax.swing.JFrame {
                     int xj = auxj[0]+2;
                     int yj = auxj[1]+2;
 
-                    g.drawLine(xi, yi, xj, yj);
-                    g.setColor(Color.black);
+                    g2.drawLine(auxi[0]+2, auxi[1]+2, auxj[0]+2, auxj[1]+2);
+                    
                 }
             }
         }
