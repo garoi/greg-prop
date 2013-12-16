@@ -627,7 +627,7 @@ public class CtrlPresentacion {
      * @throws IOException 
      */
     public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno) throws IOException{
-        ctrld.anadirPaquete(nombreCiudad, destino, fecha, turno);
+        ctrld.anadirPaquete(nombreCiudad, destino, fecha, turno, true);
     } // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="public String[] getPaquetesEnviados()"> 
