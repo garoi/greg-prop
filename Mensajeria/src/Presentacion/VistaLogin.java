@@ -189,9 +189,7 @@ public class VistaLogin extends javax.swing.JFrame {
         // TODO loguear para operador o para usuario
         
         String usuario = fieldUsuario.getText();
-        while(usuario.isEmpty() || usuario.contains(" ")) usuario = fieldUsuario.getText();
         String contrasena = new String(fieldContrasena.getPassword());
-        while(contrasena.isEmpty()) contrasena = new String(fieldContrasena.getPassword());
         if(tipoUsuario == "Cliente" && ctrlp.loginCliente(usuario, contrasena))
             ctrlp.setVentanaPrincipal("vistaCliente");
         else{
