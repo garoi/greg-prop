@@ -73,7 +73,13 @@ public class ControlPersistencia {
             Object lc = ois.readObject();
             return lc;
         } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            File f = new File("Data/ListaClientes/ListaClientes.txt");
+            try{
+                f.createNewFile();
+            }catch (IOException ex1) {
+                System.out.println("No se ha podido crear el fichero ListaPaquetes.txt en DAta/ListaPaquetes");
+            }
+            //Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
