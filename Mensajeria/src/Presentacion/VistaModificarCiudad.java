@@ -198,14 +198,15 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
         String nombre = JOptionPane.showInputDialog("Introduce el nombre del punto que desea añadir:");
         ArrayList<String> nombres;
         nombres = ctrlp.getNombresCiudad(ciudad);
-        int auxdistancias = (nombres.size()*(nombres.size()-1))/2;
 
-        float[] distancias = new float[auxdistancias];
+        float[] distancias = new float[nombres.size()];
         while(nombres.contains(nombre) || nombre==null || nombre.isEmpty()){
             nombre = JOptionPane.showInputDialog("Introduce un nombre que no esté en la ciudad");
         }
-        for (int i = 0; i < auxdistancias; i++) {
-            String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", "pene", "pene"));
+//        nombres.get(nodoA), nombres.get(nodoB)
+        System.out.println("distancias " + distancias.length);
+        for (int i = 0; i < distancias.length; i++) {
+            String distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce la distancia entre el punto %s y el punto %s:", nombres.get(i), nombre));
             float auxDistancia = Float.parseFloat(distanciaEntreNodos);
             while(auxDistancia <= 0.0f){
                 distanciaEntreNodos = JOptionPane.showInputDialog(String.format("Introduce una distancia válida:"));
@@ -213,7 +214,10 @@ public class VistaModificarCiudad extends javax.swing.JFrame {
             }
             distancias[i] = auxDistancia;
         }
-
+        for (int i = 0; i < distancias.length; i++) {
+            System.out.print(distancias[i] + " ");
+        }
+        System.out.println();
         ctrlp.anadirPunto(nombre, distancias);
     }//GEN-LAST:event_btnAnadirActionPerformed
 
