@@ -7,6 +7,7 @@ import Dominio.Operador;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -151,7 +152,7 @@ public class VistaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldContrasenaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_fieldContrasenaActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
@@ -159,8 +160,18 @@ public class VistaLogin extends javax.swing.JFrame {
         System.out.println(modo);
         if (modo=="registro"){
             String usuario = fieldUsuario.getText();
+            boolean correcto = true;
+            if(usuario.isEmpty() || usuario.contains(" ")){
+                fieldUsuario.setText("Por favor introduce un nombre válido");
+                correcto = false;
+            }
+            usuario = fieldUsuario.getText();
             String contrasena = new String(fieldContrasena.getPassword());
-            
+            if(contrasena.isEmpty()){
+                fieldContrasena.setText("Por favor introduce una contraseña válida");
+                correcto = false;
+            }
+            contrasena = new String(fieldContrasena.getPassword());
             // if campos validos switch modo
             if(tipoUsuario=="Cliente") ctrlp.registroCliente(usuario, contrasena);
             else if(tipoUsuario=="Operador")ctrlp.registroOperador(usuario, contrasena);
@@ -178,8 +189,9 @@ public class VistaLogin extends javax.swing.JFrame {
         // TODO loguear para operador o para usuario
         
         String usuario = fieldUsuario.getText();
+        while(usuario.isEmpty() || usuario.contains(" ")) usuario = fieldUsuario.getText();
         String contrasena = new String(fieldContrasena.getPassword());
-        
+        while(contrasena.isEmpty()) contrasena = new String(fieldContrasena.getPassword());
         if(tipoUsuario == "Cliente" && ctrlp.loginCliente(usuario, contrasena))
             ctrlp.setVentanaPrincipal("vistaCliente");
         else{

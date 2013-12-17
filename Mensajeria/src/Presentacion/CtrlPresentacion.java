@@ -192,10 +192,8 @@ public class CtrlPresentacion {
     public void setVentanaSecundaria(String nuevaVentana){
         switch(nuevaVentana){
             case "añadirPaquete":
-                if (ciudad == null){
+                if (this.getNombresCiudades() == null || this.getNombresCiudades().length == 0)
                     JOptionPane.showMessageDialog(null, "No hay ciudades creadas, por favor contacta con el operador.");
-                    setCiudad(null);
-                }
                 else{
                     if(vistaAnadirPaquete == null) vistaAnadirPaquete = new VistaAnadirPaquete(this);
                     ventanaSecundaria = new VistaAnadirPaquete(this);

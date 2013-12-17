@@ -38,13 +38,10 @@ public class ControlUsuario {
     }
     
     public int loginCliente(String usuario, String password,ListaClientes lc, Cliente cl2){
-        System.out.println("LOGIN1");
         int idCliente;
         idCliente = lc.compruebaCliente(usuario);
-        System.out.println("LOGIN2");
-        if(idCliente == -1) {System.out.println("LOGIN3");return -1;}
+        if(idCliente == -1) return -1;
         else{
-            System.out.println("LOGIN4");
             cl2 = lc.getCliente(idCliente);
             if(cl2.getPassword().equals(password) && cl2.getNombreCliente().equals(usuario)) return idCliente;
             else return -11;

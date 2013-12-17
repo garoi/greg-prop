@@ -58,6 +58,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
         String [] ciudades = ctrlp.getNombresCiudades();
         if (ciudades.length >0){
             ciudad = ciudades[0];
+            ctrlp.setCiudad(ciudad);
             // inicializamos el combobox de ciudad con la primera ciudad (por defecto)
             comboCiudad.setModel(new javax.swing.DefaultComboBoxModel(ciudades));
 
@@ -380,7 +381,6 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
     private void comboCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCiudadActionPerformed
         String[] destinoss = null;
         destinoss = ctrlp.getDestinosCiudad(ciudad);
-        System.out.println("EL TAMANYO ES " + destinoss.length);
         Object selectedItem = comboCiudad.getSelectedItem();
         if (selectedItem != null) ciudad = selectedItem.toString();
         String[] destinos = ctrlp.getDestinosCiudad(ciudad);
@@ -394,7 +394,6 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
      * @param evt el evento de click sobre el combox.
      */
     private void comboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDestinoActionPerformed
-        System.out.println("NO");
         Object selectedItem = comboDestino.getSelectedItem();
         if (selectedItem != null) destino = selectedItem.toString();
     }//GEN-LAST:event_comboDestinoActionPerformed
@@ -433,7 +432,6 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
             }
             else ano1 = Integer.toString(ano);
             String fecha = dia1 + '.' + mes + '.' + ano;
-            System.out.println("Voy a añadir un pak");
             ctrlp.anadirPaquete(ciudad, destino, fecha, turno);
         }
         this.setVisible(false);
@@ -522,7 +520,7 @@ public class VistaAnadirPaquete extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnVerMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMapaActionPerformed
-        ctrlp.setVentanaSecundaria("dibujoMapa");
+        ctrlp.setVentanaSecundaria("verDibujoCiudad");
     }//GEN-LAST:event_btnVerMapaActionPerformed
 
     /**
