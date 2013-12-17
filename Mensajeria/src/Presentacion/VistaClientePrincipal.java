@@ -169,6 +169,11 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
         btnAyuda.setBackground(new java.awt.Color(75, 75, 75));
         btnAyuda.setForeground(new java.awt.Color(220, 220, 220));
         btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -301,6 +306,10 @@ public class VistaClientePrincipal extends javax.swing.JFrame {
                 actualizarListaEnviados();
         }
     }//GEN-LAST:event_botonEliminar2ActionPerformed
+
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+        ctrlp.setVentanaSecundaria("vistaAyuda");
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
     /**
      * @param args the command line arguments

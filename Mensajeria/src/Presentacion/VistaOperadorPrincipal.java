@@ -752,7 +752,7 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerMapaActionPerformed
 
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
-        // TODO add your handling code here:
+        ctrlp.setVentanaSecundaria("vistaAyuda");
     }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void listaRutasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaRutasAncestorAdded

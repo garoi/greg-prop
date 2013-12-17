@@ -32,6 +32,7 @@ public class CtrlPresentacion {
     private VistaSeleccionCiudad vistaCiudad;
     private VistaModificarRuta vistaModificarRuta;
     private Advertencia vistaAdvertencia;
+    private VistaAyuda vistaAyuda;
     
     private javax.swing.JFrame ventanaPrimaria;
     private javax.swing.JFrame ventanaSecundaria;
@@ -255,6 +256,13 @@ public class CtrlPresentacion {
                 if (vistaAdvertencia == null) vistaAdvertencia = new Advertencia(this);
                 ventanaSecundaria = vistaAdvertencia;
                 ventanaSecundaria.setTitle("Error");
+                setTamanoVentanaSecundaria(0, 0);
+            break;
+                
+            case "vistaAyuda":
+                if (vistaAyuda == null) vistaAyuda = new VistaAyuda(this);
+                ventanaSecundaria = vistaAyuda;
+                ventanaSecundaria.setTitle("Manual del usuario");
                 setTamanoVentanaSecundaria(0, 0);
             break;
                 
