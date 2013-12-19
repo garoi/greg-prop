@@ -9,3 +9,5 @@ PROP - PROBEMA DE TSP en un camion de Mensajeria
 
 Representa un sistema de gestión de la logística de una empresa de mensajería de una ciudad.
 
+
+![Screenshot of PROP](screenshot.png "Screenshot of PROP")
