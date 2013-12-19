@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Luis García Estrades https://github.com/lgarest
+ * @author Angel Rierola Mora
  */
 public class VistaAnadirPaquete extends javax.swing.JFrame {
     CtrlPresentacion ctrlp;

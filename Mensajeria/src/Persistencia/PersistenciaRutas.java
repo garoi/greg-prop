@@ -60,18 +60,14 @@ public class PersistenciaRutas {
     }
     
     public void guardarRuta(Object x, String data, String coste, boolean verificada, String nombreCiudad, boolean compara) {
-         File directorio = new File ("Data/Rutas/");
-         System.out.println("LLEGO");
+        File directorio = new File ("Data/Rutas/");
         File[] nombres = directorio.listFiles();
         String nombreFichero;
-        System.out.println("Fitxer que hi han " + nombres.length);
         for(File file:nombres) {
-            System.out.println("entro al for");
             nombreFichero = file.getName();
             //a data estem tenim en compte el cost, i no l'hem de tenir en compte
             boolean borrar = nombreFichero.startsWith(nombreCiudad + "-" + data);
             boolean borrar2 = nombreFichero.endsWith("-NO_verificada-ruta.txt");
-            System.out.println("PASO POR AQUI");
             if (!compara) {
                 if (borrar && borrar2) {
                     file.delete();
@@ -140,6 +136,19 @@ public class PersistenciaRutas {
                 else if (!nombreRuta.equals(nombreFichero)) {
                     file.delete();
                 }
+            }
+        }
+    }
+
+    void eliminarRutaCiudad(String nombreCiudad) {
+        File directorio = new File ("Data/Rutas/");
+        File[] nombres = directorio.listFiles();
+        String nombreFichero;
+        for(File file:nombres) {
+            nombreFichero = file.getName();
+            boolean nombre2 = nombreFichero.startsWith(nombreCiudad);
+            if (nombre2) {
+                file.delete();
             }
         }
     }

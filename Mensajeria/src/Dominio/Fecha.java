@@ -76,6 +76,10 @@ public class Fecha {
         return true;
     }
     
+    /**
+     *
+     * @return devuelve la fecha actual.
+     */
     public String[] fechaDeHoy() {
         String[] fechaTurno = new String[4];
         fechaTurno[0] = normalizarDia();

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Luis García Estrades https://github.com/lgarest
+ * @author Albert Gili Zaragoza
  */
 public class VistaVerPaquetes extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;

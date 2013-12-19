@@ -61,6 +61,12 @@ public class Optimizacion {
             coste = test;
         }
     }
+    /**
+     *  busca solciones mejores dada una permutacion de puntos mediante
+     * cambios aleatorios, en caso que encuentre una mejor esta permutacion
+     * pasa a ser la mejor solucion
+     * @param numIteraciones
+     */
     public void randSwap(int numIteraciones){
         for(int i= 0; i < numIteraciones; ++i){
             int num = 0 + (int)(Math.random() * (((permutacion.length-1) - 0) + 1));

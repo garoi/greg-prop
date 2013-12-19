@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Luis
+ * @author Marc Garcia Roig
  */
 public class VistaComparacionRutas extends javax.swing.JFrame {
     private CtrlPresentacion ctrlp;

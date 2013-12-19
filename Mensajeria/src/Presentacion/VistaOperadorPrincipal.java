@@ -1,12 +1,17 @@
 package Presentacion;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -747,7 +752,6 @@ public class VistaOperadorPrincipal extends javax.swing.JFrame {
     private void btnVerMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMapaActionPerformed
         if (this.getCiudad()!=null)
             ctrlp.setVentanaSecundaria("verDibujoCiudad");
-//            ventanaSecundaria.setTitle("Dibujo de " + ciudad);
         else JOptionPane.showMessageDialog(rootPane, "!No se ha seleccionado la ciudad!");
     }//GEN-LAST:event_btnVerMapaActionPerformed
 

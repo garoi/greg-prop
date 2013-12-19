@@ -59,6 +59,13 @@ public class ControlDominio {
         else return false;
     }
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @return retorna true en caso de que el username y el password coincidan, 
+     * false en el caso de que no.
+     */
     public boolean loginCliente(String usuario, String password){
         int login =  cu.loginCliente(usuario, password, lc, cl);
         if(login == -1){
@@ -71,6 +78,13 @@ public class ControlDominio {
         }
     }
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @return Registra un operador, en el caso de que el operador no exista se 
+     * registra y retorna true, en el caso de que ya exista returna false
+     */
     public boolean registroOperador(String usuario, String password){
         boolean reg = false;
         if (!existeOper) {
@@ -85,6 +99,13 @@ public class ControlDominio {
         else return false;
     }
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @return llamada a la funcion del control de usuario para ver si el 
+     * operador es valido, si es valido retornara true, si no retornara false
+     */
     public boolean loginOperador(String usuario, String password){
         return cu.loginOperador(usuario, password, oper);
     }
@@ -117,6 +138,11 @@ public class ControlDominio {
         cp.guardarRuta(r, nombreRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad(), compara);
     }
     
+    /**
+     *  Cambia el estado de los paquetes de una ruta una vez esta esta 
+     * verificada
+     * @param nombreRuta
+     */
     public void paquetesEnviados(String nombreRuta){
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
         ArrayList<Paquete> paquetesEnviados = r.getListaPaquetesRuta();
@@ -128,6 +154,11 @@ public class ControlDominio {
         }
     }
     
+    /**
+     *
+     * @return devuelve un array de Strings con todos los nombres de las 
+     * ciudades entradaes en sistema.
+     */
     public String[] getNombresCiudades(){
         ArrayList<String> ciudades = new ArrayList <String>();
         ciudades = cp.listarCiudades();
@@ -138,6 +169,12 @@ public class ControlDominio {
         return cities;
     }
     
+    /**
+     *
+     * @param nombreCiudad
+     * @return retorna todos los nombres de los destinos de la ciudad con 
+     * nombre nombreCiudad
+     */
     public String[] getDestinosCiudad(String nombreCiudad) {
         Mapa prov = new Mapa();
         prov = (Mapa) cp.getPuntosMapa(nombreCiudad);
@@ -174,31 +211,39 @@ public class ControlDominio {
         return cp.leerOperador();
     }
     
-    /**
-     * Guarda los clientes, los paquetes y el operador
-     */
+
     private void guardadoGeneral() {
         cp.guardadoGeneral(lc, lp, oper);
     }
     
     /**
      * Muestra los paquetes disponibles del operador
+     * @param orden
+     * @return
      */
     public ArrayList<String> verPaquetesOperador(String orden){
         return lp.verPaquetes(orden);
     }
     
+
     /**
      * Anade una ciudad al sistema
+     * @param nombre
+     * @param n
+     * @param nombreNodos
+     * @param distanciasNodos
      */
     public void anadirCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos) {
         map = new Mapa();
-        Fecha f = new Fecha();
-        map.setFechaMod(f.fechaDeHoy());
         map.ctrlCrearCiudad(nombre, n, nombreNodos, distanciasNodos);
         cp.guardarMapas(map, map.getNombreCiudad());
     }
     
+    /**
+     *  Añade un punto a la ciudad con nombre nombre.
+     * @param nombre
+     * @param distanciasNodos
+     */
     public void anadirPunto(String nombre, float[] distanciasNodos) {
         if (map != null){
             map.anadirPunto(nombre, distanciasNodos);
@@ -207,17 +252,17 @@ public class ControlDominio {
     }
     
    
-    
     /**
      * El cliente añade un paquete para enviar
+     * @param nombreCiudad
+     * @param destino
+     * @param fecha
+     * @param turno
+     * @param lock
      */
-   public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno, boolean lock) {
+    public void anadirPaquete(String nombreCiudad, String destino, String fecha, String turno, boolean lock) {
        Paquete p = new Paquete();
        int idCliente = cl.getIdCliente();
-       // código antiguo
-//       Mapa provisional = new Mapa();
-//       provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
-       // Para no tener que instanciar de nuevo la matriz de distancias si ya está instanciada previamente
        if (provisional == null || !this.nombreCiudad.equals(nombreCiudad)){
            if (provisional == null) provisional = new Mapa();
            provisional = (Mapa) cp.getPuntosMapa(nombreCiudad);
@@ -235,8 +280,11 @@ public class ControlDominio {
        if (lock) cp.guardadoGeneral(lc, lp, oper);
     }
     
+    
     /**
-     * El cliente cancela un paquete que aun no se ha enviado
+     *
+     * @param idPaquete
+     * @return El cliente cancela un paquete que aun no se ha enviado
      */
     public boolean cancelarPaquete(int idPaquete) {
         boolean cancelado = cl.cancelarPaquete(idPaquete);
@@ -249,6 +297,14 @@ public class ControlDominio {
         else return false;
     }
     
+    /**
+     *
+     * @param idPaquete
+     * @return elimina un paquete con el numero de identificador idPaquete
+     * del cliente al que pertenece, de la lista de paquetes y de la lista
+     * de paquetes del operador
+     * si lo elimina devuelve true, si no puede eliminarlo devuelve false
+     */
     public boolean eliminarPaquete(int idPaquete) {
         boolean eliminado = cl.eliminarPaquete(idPaquete);
         if(eliminado){
@@ -260,8 +316,9 @@ public class ControlDominio {
         else return false;
     }
     
+
     /**
-     * El cliente elimina todos los paquetes que ya se han enviado
+     *  El cliente elimina todos los paquetes que ya se han enviado
      */
     public void eliminarPaquetes(){
         cl.eliminarPaquetes();
@@ -296,12 +353,17 @@ public class ControlDominio {
         return lc.getPaquetesEnviados(idCliente);
     }
     
+    /**
+     *
+     * @param nombreCiudad
+     * @return ArrayList con todos los nombres de las rutas de una ciudad
+     * con nombre nombreCiudad
+     */
     public ArrayList<String> getRutas(String nombreCiudad) {
         ArrayList<String> rutasNoVerificadas = new ArrayList<>();
         rutasNoVerificadas = cp.listarRutasNoVerificadas(nombreCiudad);
         ArrayList<String> rutasVerificadas = new ArrayList<>();
         rutasVerificadas = cp.listarRutasVerificadas(nombreCiudad);
-        //ORDENAR ELS VECTORS DE STRING
         Collections.sort(rutasNoVerificadas);
         Collections.sort(rutasVerificadas);
 
@@ -309,6 +371,12 @@ public class ControlDominio {
         return rutasNoVerificadas;
     }
 
+    /**
+     *
+     * @param nombreRuta
+     * @return ArayList de strings con todos los paquetes de la ruta con nombre
+     * nombreRuta
+     */
     public ArrayList<String> getPaquetesRuta(String nombreRuta){
         Ruta r = (Ruta) cp.leerRuta(nombreRuta);
 
@@ -330,6 +398,13 @@ public class ControlDominio {
         return turno;
     }
     
+    /**
+     *
+     * @param nombreCiudad
+     * @param fecha
+     * @return retorna un ArrayList de strings con todos los paquetes que hay 
+     * pendientes para entregar en una ciudad
+     */
     public ArrayList<String> getPaquetesPendientes(String nombreCiudad, String fecha) {
         ArrayList<Paquete> paquetesPendientes = new ArrayList<Paquete>();
         String turno = saberTurno(fecha);
@@ -342,6 +417,14 @@ public class ControlDominio {
         return result;
     }
 
+    /**
+     *  Calcula una ruta para una ciudad t una fecha indicados.
+     * @param listaEnRutaS
+     * @param fecha
+     * @param nombreCiudad
+     * @param tipo
+     * @param compara
+     */
     public void calcularRuta(ArrayList<String> listaEnRutaS, String fecha, String nombreCiudad, String tipo, boolean compara){
         Ruta r = new Ruta();
         String turno = saberTurno(fecha);
@@ -369,6 +452,12 @@ public class ControlDominio {
         calculaRuta(copia, fecha2, turno, r, tipo, paquetesSeleccionados, compara);
     }
 
+    /**
+     *  Verifica una ruta que esta en el sistema
+     * @param ruta
+     * @param fecha
+     * @param nombreCiudad
+     */
     public void acceptarRuta(String ruta, String fecha, String nombreCiudad){
         Ruta rval = (Ruta) cp.leerRuta(ruta);
         rval.acceptarRuta();
@@ -377,35 +466,67 @@ public class ControlDominio {
         cp.guardarRuta(rval, nombreRuta, coste, rval.isVerificada(), nombreCiudad, false);
     }
 
+    /**
+     * Elimina una ruta que esta en el sistema
+     * @param ruta
+     */
     public void eliminarRuta(String ruta) {
         cp.eliminarRuta(ruta);
     }
     
+    /**
+     * Obtiene todos los nombres de los puntos de una ciudad con un nombre
+     * determinado
+     * @param nombreCiudad
+     * @return
+     */
     public ArrayList<String> getNombresCiudad(String nombreCiudad) {
         map = (Mapa) cp.leerCiudad(nombreCiudad);
         return map.getNombres();
     }
     
+    /**
+     *
+     * @param ciudad
+     * @param a
+     * @param b
+     * @return retorna la distancia entre dos puntos de un mapa con nombre
+     * ciudad
+     */
     public Float getDistancia(String ciudad, String a, String b) {
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
         if (map != null) return map.getDistancia(a,b);
         return 1f;
     }
     
+    /**
+     *
+     * @param ciudad
+     * @return Float
+     */
     public Float getMax(String ciudad) {
-//        System.out.println("ciudad: " + map);
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
-//        System.out.println("[getMax] max" + map.getMax());
         if (map != null) return map.getMax();
         return 1f;
     }
+    /**
+     *
+     * @param ciudad
+     * @return Float
+     */
     public Float getMin(String ciudad) {
         if (map == null) map = (Mapa) cp.leerCiudad(ciudad);
-//        System.out.println("[getMin] min" + map.getMin());
         if (map != null) return map.getMin();
         return 1f;
     }
 
+    /**
+     *
+     * @param fecha
+     * @param nombreCiudad
+     * @return retorna el nombre de las rutas comparadas con los distintos 
+     * tipos de algoritmos que hay
+     */
     public ArrayList<String> rutasComparadas(String fecha, String nombreCiudad) {
         return cp.leerRutasComparadas(fecha, nombreCiudad);
     }
@@ -419,45 +540,59 @@ public class ControlDominio {
         return r.getNombres();
     }
 
+    /**
+     * Elimina rutas comparadas
+     * @param inicioRuta
+     * @param nombreRuta
+     */
     public void eliminarRutaComp(String inicioRuta, String nombreRuta) {
         cp.eliminarRutaComp(inicioRuta, nombreRuta);
     }
     
+    /**
+     * Crea un fichero
+     * @param nombreFichero
+     */
     public void crearFichero(String nombreFichero) {
         cp.crearFichero(nombreFichero);
     }
     
-     public Object leerCiudad(String nombreCiudad){
+     /**
+     * carga la ciudad con el nombre de nombreCiudad
+     * @param nombreCiudad
+     * @return
+     */
+    public Object leerCiudad(String nombreCiudad){
         return cp.leerCiudad(nombreCiudad);
     }
     
+    /**
+     *
+     * @param nomFichero
+     * @param nomCiudad
+     * @param nombres
+     * @param ciudad
+     */
     public void leerMapaFichero(String nomFichero, String nomCiudad, ArrayList<String> nombres, ArrayList<Float> ciudad){      
         cp.leerMapaFichero(nomFichero, nomCiudad, nombres, ciudad);
     }
-    
-//    public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, ArrayList<ArrayList<Float>> ciudad){
-//        Mapa m = new Mapa();
-//        Fecha f = new Fecha();
-//        m.setFechaMod(f.fechaDeHoy());
-//        m.setTamCiudad(nombres.size());
-//        m.setNombreCiudad(nomCiudad);
-//        m.setNombrePuntos(nombres);
-//        m.setCiudad(ciudad);
-//        cp.guardarMapas(m, nomCiudad);
-//    }
-    
+       
+    /**
+     *
+     * @param nomCiudad
+     * @param nombres
+     * @param ciudad
+     */
     public void pasarAObjeto(String nomCiudad, ArrayList<String> nombres, float[] ciudad){
         Mapa m = new Mapa();
-        Fecha f = new Fecha();
         m.ctrlCrearCiudad(nomCiudad, nombres.size(), nombres, ciudad);
-        m.setFechaMod(f.fechaDeHoy());
-//        m.setTamCiudad(nombres.size());
-//        m.setNombreCiudad(nomCiudad);
-//        m.setNombrePuntos(nombres);
-//        m.setCiudad(ciudad);
         cp.guardarMapas(m, nomCiudad);
     }
        
+    /**
+     * Elimina una ciudad del mapa
+     * @param nombreCiudad
+     */
     public void eliminarCiudad(String nombreCiudad){
         cp.eliminarCiudad(nombreCiudad);
         ArrayList<String> rutas = this.getRutas(nombreCiudad);
@@ -465,31 +600,48 @@ public class ControlDominio {
             this.lp.eliminarPaquetesDeCiudad(nombreCiudad);
             cp.eliminarRuta(rutas.get(i));
         }
-        // Eliminar todas las rutas de la ciudad.
+        cp.eliminarRutar(nombreCiudad);
         guardadoGeneral();
     }
     
+    /**
+     * Renombra un punto del parametro implícito
+     * @param nombre1
+     * @param nombre2
+     */
     public void renombrarPunto(String nombre1, String nombre2){
         map.renombrarPunto(nombre1, nombre2);
-        Fecha f = new Fecha();
-        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
+        cp.eliminarRutar(map.getNombreCiudad());
     }
     
+    /**
+     *
+     * @param nombre1
+     * @param nombre2
+     * @param dist
+     */
     public void modificaDistancia(String nombre1, String nombre2, float dist){
         map.setDistancia(nombre1, nombre2, dist);
-        Fecha f = new Fecha();
-        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
+        cp.eliminarRutar(map.getNombreCiudad());
     }
     
+    /**
+     * elimina un punto.
+     * @param nombre1
+     */
     public void eliminarPunto(String nombre1){
         map.eliminarPunto(nombre1);
-        Fecha f = new Fecha();
-        map.setFechaMod(f.fechaDeHoy());
         cp.guardarMapas(map, map.getNombreCiudad());
+        cp.eliminarRutar(map.getNombreCiudad());
     }
 
+    /**
+     * 
+     * @param ruta
+     * @return
+     */
     public String getDestinosRuta(String ruta){
         Ruta r = (Ruta) cp.leerRuta(ruta);
         String[] nombres = r.getNombres();
@@ -506,6 +658,10 @@ public class ControlDominio {
         return rutaNombres;
     }
     
+    /**
+     * modifica una ciudad con el nombre de la ciudad igual a ciudad.
+     * @param ciudad
+     */
     public void modificarCiudad(String ciudad){ 
         Mapa m = (Mapa) cp.leerCiudad(ciudad); 
         String nombreFichero = m.getNombreCiudad() + "-mapa.txt"; 
@@ -515,38 +671,33 @@ public class ControlDominio {
         int tamany = m.getTamCiudad(); 
         cp.pasarAFichero(nombreFichero, nombreCiudad, nombres, city); 
         cp.abrirFichero(nombreFichero); 
+        cp.eliminarRutar(m.getNombreCiudad());
     }
 
+    /**
+     *
+     * @param ruta
+     * @param res
+     * @return si la urta ha sido modificada retorna true, si no retorna false
+     */
     public boolean modificarRuta(String ruta, String res) {
         Ruta r = (Ruta) cp.leerRuta(ruta);
-        String[] fechaMod = map.getFechaMod();
-        String fecha = r.getFecha();
-        String ano = fecha.substring(6,fecha.length());
-        String mes = fecha.substring(3, fecha.length()-3);
-        String dia = fecha.substring(0, fecha.length()-6);
-        if (Integer.parseInt(fechaMod[2]) >= Integer.parseInt(ano)) {
-            if (Integer.parseInt(fechaMod[1]) >= Integer.parseInt(mes)) {
-                if (Integer.parseInt(fechaMod[0]) > Integer.parseInt(dia)) {
-                    ArrayList<String> nombreRuta = new ArrayList<>();
-                    StringTokenizer tokens = new StringTokenizer(res);
-                    for (int i = 0; tokens.hasMoreTokens(); ++i) {
-                        nombreRuta.add(tokens.nextToken());
-                    }
-                    String[]nombreRutaS = new String[nombreRuta.size()];
-                    for (int i = 0; i < nombreRuta.size(); ++i) {
-                        nombreRutaS[i] = nombreRuta.get(i);
-                    }
-                    r.setNombres(nombreRutaS);
-                    r.crearGrafoMod(map);
-                    String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-";
-                    String coste = r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
-                    cp.guardarRuta(r, nombresRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad(), false);
-                    return true;
-                }
-                else return false;
-            }
-            else return false;
+        String nombreRutaAnterior = r.getFecha() + "-" + r.getTurno() + "-" + r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
+        ArrayList<String> nombreRuta = new ArrayList<>();
+        StringTokenizer tokens = new StringTokenizer(res);
+        for (int i = 0; tokens.hasMoreTokens(); ++i) {
+            nombreRuta.add(tokens.nextToken());
         }
-        else return false;
+        String[]nombreRutaS = new String[nombreRuta.size()];
+        for (int i = 0; i < nombreRuta.size(); ++i) {
+            nombreRutaS[i] = nombreRuta.get(i);
+        }
+        r.setNombres(nombreRutaS);
+        r.crearGrafoMod(map);
+        String nombresRuta = r.getFecha() + "-" + r.getTurno() + "-";
+        String coste = r.getTipo() + "-Coste-" + Float.toString(r.getCosteRuta());
+        cp.guardarRuta(r, nombresRuta, coste, r.isVerificada(), r.getMapa().getNombreCiudad(), false);
+        cp.eliminarRuta(nombreRutaAnterior+"-ruta.txt");
+        return true;
     }
 }

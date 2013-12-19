@@ -115,9 +115,7 @@ public class Operador implements Serializable {
      */
     private void leerOperador() {
         Scanner sc = new Scanner(System.in);
-//        System.out.println("Anadir el nombre del operador");
         nombreOperador = sc.next();
-//        System.out.println("Anadir el password del operador");
         password = sc.next();
     }
     
@@ -157,8 +155,6 @@ public class Operador implements Serializable {
      * 
      */
     private void buscayElimina(ArrayList<Paquete> paquetes, int idpaquete){
-        
-        //HAURIA DE SER UNA BINARY SEARCH PRO NECESSITEM EL VECTOR ORDENAT
         for(int i = 0; i < paquetes.size(); ++i){
             if(idpaquete == paquetes.get(i).getIdPaquete()){
                 paquetes.remove(i);
@@ -187,19 +183,13 @@ public class Operador implements Serializable {
      * @return ArrayList<Paquete>
      */
     private ArrayList<Paquete> modificaListaPaquetes(ArrayList<Paquete> paquetes) {
-        System.out.println("cuantos paquetes quiere eliminar de la lista?");
         Scanner sc = new Scanner(System.in);
-
         int numeliminados = sc.nextInt();
-        System.out.println("Indique los ID de los paquetes que desea eliminar");
-        //ordenaPaquetes(paquetes);
         for(int i = 0; i < numeliminados; ++i){
             int idpaquete = sc.nextInt();
             buscayElimina(paquetes, idpaquete);
         }
-        System.out.println("cuantos paquetes quiere agregar de la lista?");
         int numagregados = sc.nextInt();
-        System.out.println("Indique los ID de los paquetes que desea agregar");
         for(int i = 0; i < numagregados; ++i){
             int idagregado = sc.nextInt();
             buscayAgrega(paquetes, idagregado);

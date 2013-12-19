@@ -42,6 +42,10 @@ public class Cliente implements Serializable {
         nombreCliente = nombre;
     }
     
+    /**
+     * 
+     * @param password
+     */
     public void setPassword(String password){
         this.password = password;
     }
@@ -87,7 +91,6 @@ public class Cliente implements Serializable {
      * @param p Paquete
      */
     public void anadirPaquete(Paquete p){
-//        System.out.println("ANADIR PAK: " + listaPaquetes.size());
         listaPaquetes.add(p);
         
     }

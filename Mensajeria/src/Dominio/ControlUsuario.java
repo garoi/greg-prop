@@ -9,6 +9,14 @@ import java.util.*;
 public class ControlUsuario {
     
  
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @param oper
+     * @return retorna true si el operador ha sido registrado con exito
+     * false si ya esta registrado
+     */
     public boolean registroOperado(String usuario, String password, Operador oper){
         if (oper != null) {
             oper.setNombreOperador(usuario);
@@ -19,6 +27,14 @@ public class ControlUsuario {
     }
     
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @param oper
+     * @return retorna true si el usuario y el password coinciden con operador
+     * si no retorna false
+     */
     public boolean loginOperador(String usuario, String password, Operador oper){
         if(oper != null){
             if(oper.getNombreOperador().equals(usuario) && oper.getPassword().equals(password)) return true;
@@ -27,6 +43,15 @@ public class ControlUsuario {
         else return false;
     }
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @param cl
+     * @param lc
+     * @return true si el cliente no exisitia, se crea, false en el caso de que
+     * ya exista en el sistema
+     */
     public boolean registroCliente(String usuario, String password, Cliente cl, ListaClientes lc){
         if(lc.comprueba(usuario)){
             return false;
@@ -37,6 +62,15 @@ public class ControlUsuario {
         }
     }
     
+    /**
+     *
+     * @param usuario
+     * @param password
+     * @param lc
+     * @param cl2
+     * @return true si el password y el usuario coinciden con el cliente, false
+     * si no coinciden.
+     */
     public int loginCliente(String usuario, String password,ListaClientes lc, Cliente cl2){
         int idCliente;
         idCliente = lc.compruebaCliente(usuario);

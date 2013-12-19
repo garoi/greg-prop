@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -229,5 +230,9 @@ public class ControlPersistencia {
     
     public void eliminarCiudad(String nombreCiudad){
         pm.eliminarCiudad(nombreCiudad);
+    }
+    
+    public void eliminarRutar(String nombreCiudad) {
+        pr.eliminarRutaCiudad(nombreCiudad);
     }
 }

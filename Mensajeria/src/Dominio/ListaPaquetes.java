@@ -75,6 +75,11 @@ public class ListaPaquetes implements Serializable {
         listaPaquetes.get(idPaquete).setEstado("cancelado");
     }
     
+    /**
+     * un paquete con el identificador idPaquete es cambiado de estado a 
+     * eliminado
+     * @param idPaquete
+     */
     public void eliminarPaquete(int idPaquete){
         listaPaquetes.get(idPaquete).setEstado("eliminado");
     }
@@ -124,8 +129,11 @@ public class ListaPaquetes implements Serializable {
         Collections.sort(listaPaquetes, new Paquete.EstadoComparator());
     }
     
-     /**
-     * Muestra los paquetes por pantalla segun el criterio que se pida.
+
+    /**
+     *
+     * @param orden
+     * @return Muestra los paquetes por pantalla segun el criterio que se pida.
      */
     public ArrayList<String> verPaquetes(String orden) {
         if (orden.equals("idPaquete")) {
@@ -155,7 +163,11 @@ public class ListaPaquetes implements Serializable {
         return paquetes;
     }
 
-    void eliminarPaquetesDeCiudad(String nombreCiudad) {
+    /**
+     * Elimina los paquetes de una ciudad con nombre = nombreCiudad
+     * @param nombreCiudad
+     */
+    public void eliminarPaquetesDeCiudad(String nombreCiudad) {
         ArrayList<Paquete> paquetes = getListaPaquetes();
         for (int i = 0; i < paquetes.size(); i++) {
             if (paquetes.get(i).getCiudad()==nombreCiudad)

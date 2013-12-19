@@ -154,6 +154,10 @@ public class Ruta implements Serializable {
         permutacion = sg.solve();
     }
     
+    /**
+     *calcula la ruta mediante el algoritmo solvegreedy y luego le implementamos
+     * una optimizacion
+     */
     public void rapidaOptimizada(){
         SolveGreedy sg = new SolveGreedy(grafo);
         permutacion = sg.solve();
@@ -211,6 +215,9 @@ public class Ruta implements Serializable {
         }
     }
     
+    /**
+     *  calcula la distancia total de una ruta
+     */
     public void distanciaRuta() {
         System.out.println("la primera permu es");
         for(int i = 0; i < permutacion.length; ++i) {
@@ -262,15 +269,12 @@ public class Ruta implements Serializable {
                 grafo[i][j] = mapa.getD(paquetesSeleccionados.get(i).getIdDestino(), paquetesSeleccionados.get(j).getIdDestino());
             }
         }
-        System.out.println("Imprimir el grafo");
-        for (int i = 0; i < grafo.length; ++i) {
-            for (int j = 0; j < grafo.length;++j) {
-                System.out.print(grafo[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
     
+    /**
+     * crea un subgrafo modificado a partir del mapa que se nos esta dando
+     * @param map
+     */
     public void crearGrafoMod(Mapa map) {
         mapa = map; 
         Integer[] idNombres = encontrarIdNombres();

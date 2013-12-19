@@ -12,7 +12,6 @@ public class Mapa implements Serializable {
     private ArrayList<String> nombres;
     private ArrayList<ArrayList<Float>> ciudad;
     private int tamCiudad;
-    private String[] fechaMod;
     private float max;
     private float min;
     
@@ -24,9 +23,6 @@ public class Mapa implements Serializable {
         return tamCiudad;
     }
     
-    public String[] getFechaMod() {
-        return fechaMod;
-    }
     public float getMax(){
         return max;
     }
@@ -40,10 +36,6 @@ public class Mapa implements Serializable {
     }
     private void setMin(float f){
         if(f >= 1f) min = f;
-    }
-
-    public void setFechaMod(String[] fechaMod) {
-        this.fechaMod = fechaMod;
     }
     
     public void setCiudad(ArrayList<ArrayList<Float>> ciudad) {
@@ -165,9 +157,11 @@ public class Mapa implements Serializable {
                         encontrado2 = true;
                     }
                 }
+                ciudad.get(punto1_idx).set(punto2_idx, distancia);
+                ciudad.get(punto2_idx).set(punto1_idx, distancia);
                 // y les asignamos la distancia nueva
-                setD(punto1_idx,punto2_idx,distancia);
-                setD(punto2_idx,punto1_idx,distancia);
+                //setD(punto1_idx,punto2_idx,distancia);
+                //setD(punto2_idx,punto1_idx,distancia);
             }
         }
     }
@@ -216,6 +210,15 @@ public class Mapa implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @param nombre
+     * @param n
+     * @param nombreNodos
+     * @param distanciasNodos
+     * @return retorna true en el caso de que la ciudad se haya creado 
+     * correctamente
+     */
     public boolean ctrlCrearCiudad(String nombre, int n, ArrayList<String> nombreNodos, float[] distanciasNodos){
         if (!crearCiudad(nombre, n)) return false;
         if (!setNombrePuntos(nombreNodos)) return false;
@@ -240,6 +243,11 @@ public class Mapa implements Serializable {
         else return false;
     }
     
+    /**
+     *
+     * @param nombresparam
+     * @return assigna los nombres de los puntos al mapa.
+     */
     public boolean setNombrePuntos(ArrayList<String> nombresparam){
         if (tamCiudad == 0 || nombresparam == null || nombresparam.size() == 0) return false;
         for (int i=0; i<tamCiudad; i++) nombres.add(nombresparam.get(i));
@@ -249,24 +257,9 @@ public class Mapa implements Serializable {
     public boolean setDistancias(float[] distancias){
         if (tamCiudad == 0 || distancias == null || distancias.length == 0 || ciudad == null) return false;
         int idx = 0;
-//        for (int i = 0; i < distancias.length; i++) System.out.println(distancias[i]);
-//        for (int i = 0; i < distancias.length; i++) {
-//            setD(i,i,0.0f);
-//            for (int j = i+1; j < distancias.length; j++) {
-//                if(getD(i,j) == -1.0f){
-//                    System.out.println("idx: " + idx );
-//                    float distancia = distancias[idx];
-////                    System.out.print("")
-//                    setD(i,j,distancia);
-//                    setD(j,i,distancia);
-//                    idx+=1;
-//                }                
-//            }
-//        }
         int idxi = 0;
         int idxj = 1;
         for (int i = 0; i < distancias.length; i++) {
-//            System.out.println(idxi + ", " + idxj);
             setD(idxi,idxi,0f);
             setD(idxi,idxj,distancias[i]);
             setD(idxj,idxi,distancias[i]);
@@ -276,20 +269,6 @@ public class Mapa implements Serializable {
                 idxj = idxi+1;
             }
         }
-//        distancias[i] = auxDistancia;
-//                nodoB += 1;
-//                if (nodoB==nNodos){
-//                    nodoA += 1;
-//                    nodoB = nodoA+1;
-//                }
-        
-        
-//        for (int i = 0; i < tamCiudad; i++) {
-//            for (int f = 0; f < tamCiudad; f++) {
-//                System.out.print(getD(i,f) + " ");
-//            }
-//            System.out.print("\n");
-//        }
         return true;
     }
     
